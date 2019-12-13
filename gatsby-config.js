@@ -1,5 +1,9 @@
 const path = require("path")
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -16,6 +20,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+
     {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
@@ -25,6 +30,13 @@ module.exports = {
           assets: path.resolve(__dirname, "src/assets"),
           pages: path.resolve(__dirname, "src/pages"),
         },
+      },
+    },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
     {

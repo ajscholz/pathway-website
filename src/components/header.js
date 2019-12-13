@@ -1,21 +1,28 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import PropTypes from "prop-types"
 
-const Header = ({ siteTitle }) => {
+import Image from "gatsby-image"
+
+const Header = props => {
+  const { title, subtitle, background } = props
+
   return (
     <>
       <div
         className="page-header"
         style={{
-          backgroundImage: "url(" + require("assets/img/cover.jpg") + ")",
+          backgroundImage: `${!background &&
+            "url(" + require("assets/img/cover.jpg") + ")"}`,
         }}
       >
+        {background && (
+          <Image fluid={background.fluid} style={{ position: "unset" }} />
+        )}
         <div className="filter" />
         <div className="content-center">
           <div className="motto">
-            <h1 className="text-center">Paper Kit PRO React</h1>
-            <h3 className="text-center">Components</h3>
+            <h1 className="text-center">{title}</h1>
+            <h3 className="text-center">{subtitle}</h3>
           </div>
         </div>
       </div>
@@ -24,11 +31,13 @@ const Header = ({ siteTitle }) => {
 }
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  background: PropTypes.object,
 }
 
 Header.defaultProps = {
-  siteTitle: ``,
+  title: `Page Title Here`,
 }
 
 export default Header
