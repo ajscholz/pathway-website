@@ -28,11 +28,15 @@
       line-height: 1.6;
       margin: $navbar-margin-a;
       padding: $navbar-padding-a;
-      opacity: 0.8;
-      font-size: $font-size-small;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: $default-color;
+      opacity: 0.9;
+      font-size: $font-size-medium;
+      text-transform: capitalize;
+      font-weight: 400;
+      color: $white-color;
+      &[aria-current="page"] {
+        color: $primary-states-color !important;
+        text-decoration: underline;
+      }
     }
     .nav-item .nav-link.btn {
       margin: $navbar-margin-a-btn;
@@ -107,9 +111,7 @@
   .caret {
     @include center-item();
   }
-  &.navbar-transparent {
-    padding-top: 25px;
-  }
+
   .logo-container {
     margin-top: 5px;
     .logo {

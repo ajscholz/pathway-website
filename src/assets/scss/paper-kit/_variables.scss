@@ -1,13 +1,9 @@
-$font-color: #66615b !default;
-$fill-font-color: rgba(255, 255, 255, 0.9);
-$font-family-sans-serif: "Source Sans Pro", "Helvetica", Arial, sans-serif;
-
 $none: 0 !default;
 $border-thin: 1px !default;
 $border-thick: 2px !default;
 
-$white-color: #ffffff !default;
-$white-bg: #ffffff !default;
+$white-color: #f8f8ff !default;
+$white-bg: #f8f8ff !default;
 $white-states-color: rgba($white-color, 0.8);
 
 $smoke-bg: #f5f5f5 !default;
@@ -17,14 +13,19 @@ $medium-pale-bg: #f1eae0 !default;
 $table-line-color: #ccc !default;
 $muted-color: #a49e93 !default;
 
-$black-bg: rgba(30, 30, 30, 0.97) !default;
+$black-color: #262428 !default;
+$black-hr: lighten($black-color, 50%) !default;
 
-$black-color: #333333 !default;
-$black-hr: #444444 !default;
+// $black-bg: rgba(30, 30, 30, 0.97) !default;
+$black-bg: $black-color !default;
+
+$font-color: lighten($black-color, 20%) !default;
+$fill-font-color: rgba(255, 255, 255, 0.9);
+$font-family-sans-serif: "Source Sans Pro", "Helvetica", Arial, sans-serif;
 
 $light-gray: #e3e3e3 !default;
 $medium-gray: #dddddd !default;
-$dark-gray: #9a9a9a !default;
+$dark-gray: #6e716b !default;
 
 $placeholder-gray: rgba(210, 210, 210, 1) !default;
 
@@ -38,7 +39,7 @@ $default-color: #66615b !default;
 $default-bg: #66615b !default;
 $default-states-color: #403d39 !default;
 
-$primary-color: #51cbce !default;
+$primary-color: #94cc4c !default;
 $primary-states-color: darken($primary-color, 10%) !default;
 
 $success-color: #6bd098 !default;
@@ -47,10 +48,10 @@ $success-states-color: darken($success-color, 10%) !default;
 $info-color: #51bcda !default;
 $info-states-color: darken($info-color, 10%) !default;
 
-$warning-color: #fbc658 !default;
+$warning-color: #f2e434 !default;
 $warning-states-color: darken($warning-color, 10%) !default;
 
-$danger-color: #f5593d !default;
+$danger-color: tomato !default;
 $danger-states-color: darken($danger-color, 8%) !default;
 
 $link-disabled-color: #666666 !default;

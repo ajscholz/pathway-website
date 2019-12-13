@@ -59,18 +59,15 @@ const Navigation = () => {
     }
   `)
 
+  const closeNav = () => {
+    document.documentElement.classList.toggle("nav-open")
+    setBodyClick(false)
+    setCollapseOpen(false)
+  }
+
   return (
     <>
-      {bodyClick ? (
-        <div
-          id="bodyClick"
-          onClick={() => {
-            document.documentElement.classList.toggle("nav-open")
-            setBodyClick(false)
-            setCollapseOpen(false)
-          }}
-        />
-      ) : null}
+      {bodyClick ? <div id="bodyClick" onClick={() => closeNav()} /> : null}
       <Navbar
         color="black-color"
         className={classnames("fixed-top", navbarColor)}
@@ -108,25 +105,45 @@ const Navigation = () => {
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink className="nav-link" to="/about" tag={Link}>
+                <NavLink
+                  className="nav-link"
+                  to="/about"
+                  tag={Link}
+                  onClick={() => closeNav()}
+                >
                   About
                 </NavLink>
               </NavItem>
 
               <NavItem>
-                <NavLink className="nav-link" to="/messages" tag={Link}>
+                <NavLink
+                  className="nav-link"
+                  to="/messages"
+                  tag={Link}
+                  onClick={() => closeNav()}
+                >
                   Messages
                 </NavLink>
               </NavItem>
 
               <NavItem>
-                <NavLink className="nav-link" to="/events" tag={Link}>
+                <NavLink
+                  className="nav-link"
+                  to="/events"
+                  tag={Link}
+                  onClick={() => closeNav()}
+                >
                   Events
                 </NavLink>
               </NavItem>
 
               <NavItem>
-                <NavLink className="nav-link" to="/start" tag={Link}>
+                <NavLink
+                  className="nav-link"
+                  to="/start"
+                  tag={Link}
+                  onClick={() => closeNav()}
+                >
                   Start
                 </NavLink>
               </NavItem>

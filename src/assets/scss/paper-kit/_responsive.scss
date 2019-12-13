@@ -455,9 +455,9 @@
     background-color: #999;
     overflow-y: visible;
     border-top: none;
-    text-align: left;
+    text-align: right;
     border-left: 1px solid #ccc5b9;
-    padding-right: 0px;
+    padding-right: 40px;
     padding-left: 40px;
     padding-top: 15px;
 
@@ -467,7 +467,8 @@
       position: relative;
       z-index: 3;
       // overflow-y:scroll;
-      height: 95%;
+      //   height: 95%;
+      width: 100%;
     }
     .navbar-nav > .nav-item {
       // border-bottom: 1px solid;
@@ -476,10 +477,10 @@
       }
       & > .nav-link {
         margin: 0px 0px;
-        color: $dark-gray !important;
-        text-transform: uppercase;
-        font-weight: 600;
-        font-size: $font-size-small;
+        color: $black-color !important;
+        text-transform: capitalize;
+        font-weight: 400;
+        font-size: $font-size-medium;
         line-height: $line-height-general;
         padding: 15px 0;
         &:hover,

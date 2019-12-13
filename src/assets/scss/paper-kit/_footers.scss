@@ -25,7 +25,7 @@
   text-align: center;
 }
 .footer nav > ul a:not(.btn) {
-  color: #777777;
+  color: $white-color;
   display: block;
   margin-bottom: 3px;
   line-height: 1.6;
@@ -36,19 +36,19 @@
 }
 .footer nav > ul a:not(.btn):hover,
 .footer nav > ul a:not(.btn):focus {
-  color: #777777;
+  color: $white-color;
   opacity: 1;
 }
 .footer .copyright {
-  color: #777777;
+  color: $white-color;
   padding: 10px 0px;
-  font-size: 14px;
+  font-size: 16px;
   margin: 15px 3px;
   line-height: 20px;
   text-align: center;
 }
 .footer .heart {
-  color: #eb5e28;
+  color: tomato;
 }
 .footer {
   background-color: $white-color;
@@ -122,8 +122,8 @@
     margin-bottom: 5px;
   }
   .copyright {
-    color: $brown-font-color;
-    font-size: 0.9em;
+    color: $white-color;
+    font-size: 1em;
     ul > li {
       padding-right: 0px;
     }
@@ -136,7 +136,7 @@
 .footer-black,
 .footer-transparent {
   background-color: $black-footer-bg;
-  color: $medium-gray;
+  color: $white-color;
 
   .links ul {
     a:not(.btn) {
@@ -153,6 +153,13 @@
       a:not(.btn) {
         color: $brown-font-color;
       }
+    }
+  }
+
+  a:not(.btn) {
+    color: $primary-color;
+    &:hover {
+      color: $primary-states-color;
     }
   }
 
