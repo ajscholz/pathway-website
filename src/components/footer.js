@@ -1,6 +1,8 @@
 /*eslint-disable*/
 import React from "react"
 
+import { Link } from "gatsby"
+
 // reactstrap components
 import { Container, Row } from "reactstrap"
 
@@ -15,37 +17,21 @@ const Footer = () => {
             <nav className="footer-nav">
               <ul>
                 <li>
-                  <a
-                    href="https://www.creative-tim.com?ref=pkpr-black-footer"
-                    target="_blank"
-                    className="mr-1"
-                  >
-                    Creative Tim
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="http://blog.creative-tim.com/?ref=pkpr-black-footer"
-                    target="_blank"
-                    className="mr-1"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.creative-tim.com/license?ref=pkpr-black-footer"
-                    target="_blank"
-                  >
-                    Licenses
-                  </a>
+                  <Link to="/">Pathway Community Church</Link>
                 </li>
               </ul>
             </nav>
             <div className="credits ml-auto">
               <span className="copyright">
                 © {new Date().getFullYear()}
-                , made with <i className="fa fa-heart heart" /> by Creative Tim
+                , made with <i className="fa fa-heart heart" /> by{" "}
+                <a
+                  href="https://ajsolutions.netlify.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  AJSolutions
+                </a>
               </span>
             </div>
           </Row>
