@@ -13,6 +13,11 @@ import Header from "./header"
 import Footer from "./footer"
 import Navigation from "./navbar"
 
+import "assets/css/bootstrap.min.css"
+import "assets/scss/paper-kit.scss"
+import "assets/demo/demo.css"
+import "assets/demo/react-demo.css"
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {

@@ -4,20 +4,16 @@ import PropTypes from "prop-types"
 import Image from "gatsby-image"
 
 const Header = props => {
-  const { title, subtitle, background } = props
+  const { title, subtitle, background, full } = props
 
   return (
     <>
-      <div
-        className="page-header"
-        style={{
-          backgroundImage: `${!background &&
-            "url(" + require("assets/img/cover.jpg") + ")"}`,
-        }}
-      >
-        {background && (
-          <Image fluid={background.fluid} style={{ position: "unset" }} />
-        )}
+      <div className={full ? "page-header" : "page-header page-header-small"}>
+        <Image
+          fluid={background.fluid}
+          className={full ? "page-header" : "page-header page-header-small"}
+        />
+
         <div className="filter" />
         <div className="content-center">
           <div className="motto">
@@ -33,7 +29,7 @@ const Header = props => {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
-  background: PropTypes.object,
+  background: PropTypes.object.isRequired,
 }
 
 Header.defaultProps = {

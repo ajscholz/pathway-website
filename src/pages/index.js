@@ -9,12 +9,15 @@ const IndexPage = props => {
   const { data } = props
   const { heading, subHeading, image } = data.page.banner
 
-  console.log(data.page.banner)
-
   return (
     <>
       <SEO title="Home" />
-      <Header title={heading} subtitle={subHeading} background={image} />
+      <Header
+        title={heading}
+        subtitle={subHeading}
+        background={image}
+        full={true}
+      />
       <h1>Hi people</h1>
       <p>Welcome to your new Gatsby site.</p>
       <p>Now go build something great.</p>
@@ -27,7 +30,7 @@ const IndexPage = props => {
 }
 
 export const data = graphql`
-  query pageData {
+  {
     page: contentfulPages(title: { eq: "Index" }) {
       banner {
         heading

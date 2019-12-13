@@ -5,8 +5,3 @@
  */
 
 // You can delete this file if you're not using it
-
-import "assets/css/bootstrap.min.css"
-import "assets/scss/paper-kit.scss"
-import "assets/demo/demo.css"
-import "assets/demo/react-demo.css"
