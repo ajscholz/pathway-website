@@ -5,23 +5,29 @@ import { Link } from "gatsby"
 
 // reactstrap components
 import { Container, Row } from "reactstrap"
+import SocialButtons from "src/components/buttons/social"
+import ContactButton from "./buttons/contact"
 
 // core components
 
 const Footer = () => {
   return (
     <>
-      <footer className="footer footer-black footer-white">
+      <footer className="footer footer-black footer-white pt-4">
         <Container>
-          <Row>
+          <Row className="flex-column flex-md-row align-items-center justify-content-md-between">
             <nav className="footer-nav">
               <ul>
-                <li>
+                <li className="mb-0">
                   <Link to="/">Pathway Community Church</Link>
                 </li>
               </ul>
             </nav>
-            <div className="credits ml-auto">
+            <ContactButton color="primary" className="m-3" />
+            <SocialButtons className="m-3 align-self-center " />
+          </Row>
+          <Row>
+            <div className="credits m-auto">
               <span className="copyright">
                 © {new Date().getFullYear()}
                 , made with <i className="fa fa-heart heart" /> by{" "}
