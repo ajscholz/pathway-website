@@ -10,6 +10,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import Footer from "./footer"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -37,7 +38,8 @@ const Layout = ({ children }) => {
           {children}
         </main>
       </div>
-      <footer>
+      <Footer />
+      {/* <footer>
         <div
           style={{
             margin: `0 auto`,
@@ -49,7 +51,7 @@ const Layout = ({ children }) => {
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </div>
-      </footer>
+      </footer> */}
     </>
   )
 }
