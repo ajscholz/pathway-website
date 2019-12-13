@@ -54,8 +54,6 @@ const SocialButtons = props => {
     }
   `)
 
-  console.log(links)
-
   return (
     <div className={props.className} style={props.style}>
       <FacebookButton link={links.fb} />

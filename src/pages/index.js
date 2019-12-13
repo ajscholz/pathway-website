@@ -1,13 +1,18 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
-import Image from "components/image"
 import SEO from "components/seo"
 import Header from "components/header"
+import ButtonCard from "../components/cards/button-card"
+
+import { Container, Row, Col } from "reactstrap"
 
 const IndexPage = props => {
   const { data } = props
-  const { heading, subHeading, image } = data.page.banner
+  const { banner, sections } = data.page
+  const { heading, subHeading, image } = banner
+
+  console.log("sections: ", sections)
 
   return (
     <>
@@ -18,13 +23,21 @@ const IndexPage = props => {
         background={image}
         full={true}
       />
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
-      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <Image />
+      <div className="section">
+        <Container>
+          <Row>
+            <Col md="6">
+              <ButtonCard sectionData={sections[0]} />
+            </Col>
+            <Col md="6">
+              <ButtonCard sectionData={sections[1]} />
+            </Col>
+            <Col>
+              <ButtonCard sectionData={sections[2]} />
+            </Col>
+          </Row>
+        </Container>
       </div>
-      <Link to="/page-2/">Go to page 2</Link>
     </>
   )
 }
@@ -38,6 +51,22 @@ export const data = graphql`
         image {
           fluid(resizingBehavior: FILL) {
             ...GatsbyContentfulFluid
+          }
+        }
+      }
+      sections {
+        ... on ContentfulInformationSection {
+          title
+          subtitle
+          description
+          button: callToAction {
+            text
+            link
+          }
+          background {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
           }
         }
       }
