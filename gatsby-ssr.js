@@ -5,3 +5,14 @@
  */
 
 // You can delete this file if you're not using it
+
+const React = require("react")
+
+exports.onRenderBody = ({ setHeadComponents }) => {
+  setHeadComponents([
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+      rel="stylesheet"
+    />,
+  ])
+}
