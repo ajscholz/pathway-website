@@ -4,14 +4,53 @@ import { graphql } from "gatsby"
 import SEO from "components/seo"
 import Header from "components/header"
 
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardImg,
+  CardTitle,
+  NavItem,
+  NavLink,
+  Nav,
+  TabContent,
+  TabPane,
+  Container,
+  Row,
+  Col,
+} from "reactstrap"
+import SeriesCard from "../components/cards/series-card"
+
 const MessagesPage = props => {
   const { data } = props
-  const { heading, subHeading, image } = data.page.banner
+  const { page, messageSeries } = data
+  const { heading, subHeading, image } = page.banner
+
+  console.log(messageSeries.all)
 
   return (
     <>
       <SEO title="Messages" />
       <Header title={heading} subtitle={subHeading} background={image} />
+      <div className="section section-project cd-section" id="projects">
+        <Container>
+          <Row>
+            <Col className="ml-auto mr-auto text-center" md="8">
+              <h2 className="title mb-4">Recent Message Series</h2>
+            </Col>
+          </Row>
+          <Row className="mt-4">
+            {messageSeries.all.map(({ series }) => {
+              return (
+                <Col md="6" lg="4" key={series.id}>
+                  <SeriesCard seriesData={series} className="border-1" />
+                </Col>
+              )
+            })}
+          </Row>
+        </Container>
+      </div>
     </>
   )
 }
@@ -25,6 +64,31 @@ export const data = graphql`
         image {
           fluid(resizingBehavior: FILL) {
             ...GatsbyContentfulFluid
+          }
+        }
+      }
+    }
+    messageSeries: allContentfulMessageSeries(
+      limit: 6
+      sort: { fields: seriesStartDate, order: DESC }
+    ) {
+      all: edges {
+        series: node {
+          id
+          title: seriesTitle
+          desc: seriesDescription {
+            desc: seriesDescription
+          }
+          start: seriesStartDate(formatString: "MMMM")
+          end: seriesEndDate(formatString: "MMMM")
+          year: seriesStartDate(formatString: "YYYY")
+          graphic: seriesGraphic {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
+          }
+          fields {
+            slug
           }
         }
       }
