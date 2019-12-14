@@ -31,11 +31,13 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
+    <div
+      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+    >
       <Navigation />
-      <main>{children}</main>
-      <Footer />
-    </>
+      <main style={{ flexGrow: 1 }}>{children}</main>
+      <Footer style={{ marginTop: "auto", flexGrow: 0 }} />
+    </div>
   )
 }
 

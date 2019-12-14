@@ -59,7 +59,6 @@ SeriesCard.propTypes = {
       slug: PropTypes.string.isRequired,
     }).isRequired,
   }),
-  link: PropTypes.string.isRequired,
 }
 
 export default SeriesCard
