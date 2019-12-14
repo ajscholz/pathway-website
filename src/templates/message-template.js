@@ -1,8 +1,16 @@
 import React from "react"
 
 import { graphql, Link } from "gatsby"
+import Header from "components/header"
 
-import { Button, Container, Row, Col } from "reactstrap"
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Breadcrumb,
+  BreadcrumbItem,
+} from "reactstrap"
 import YouTubePlayer from "react-player/lib/players/YouTube"
 
 const MessageTemplate = props => {
@@ -11,9 +19,22 @@ const MessageTemplate = props => {
 
   return (
     <>
-      <div style={{ height: "131.22px" }} className="bg-dark" />
-      <div className="section secion-blog cd-section">
+      <Header background={series.graphic} xs={true} />
+      <div className="section">
         <Container>
+          {/* <Row>
+            <Breadcrumb style={{ background: "none" }}>
+              <BreadcrumbItem>
+                <Link to="/messages">Message Series</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                <Link to={`/messages/series${series.fields.slug}`}>
+                  {series.title}
+                </Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>{message.title}</BreadcrumbItem>
+            </Breadcrumb>
+          </Row> */}
           <Row
             className="justify-content-md-center"
             style={{ marginBottom: "40px" }}
@@ -85,6 +106,11 @@ export const data = graphql`
       length
       fields {
         slug
+      }
+      graphic: seriesGraphic {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
       }
     }
   }

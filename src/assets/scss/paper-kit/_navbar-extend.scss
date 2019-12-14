@@ -4,7 +4,7 @@
 [class*="bg"] {
   .navbar-brand {
     color: $white-color;
-    @include opacity(0.9);
+    // @include opacity(0.9);
 
     &:focus,
     &:hover {

@@ -490,6 +490,11 @@
   &[data-color="orange"] {
     background: $bg-danger;
   }
+
+  &[data-color="dark"] {
+    background: $black-color;
+    color: $white-color;
+  }
 }
 
 .btn-center {

@@ -19,7 +19,7 @@ const SeriesCard = props => {
   const date = start === end ? `${start} ${year}` : `${start}-${end} ${year}`
 
   return (
-    <Link to={fields.slug}>
+    <Link to={`/messages/series${fields.slug}`}>
       <Card
         className={className}
         style={{
