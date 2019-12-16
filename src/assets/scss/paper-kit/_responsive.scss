@@ -292,7 +292,7 @@
     margin-bottom: 40px !important;
   }
   .btn-wd {
-    min-width: 280px;
+    min-width: 250px;
   }
   .presentation-page .title-brand .type {
     font-size: 16px;
@@ -445,10 +445,13 @@
 @media screen and (max-width: 991px) {
   .navbar-collapse {
     position: fixed;
-    display: block !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-end;
+
     top: 0;
     height: 100%;
-    width: 230px;
+    width: 250px;
     right: 0;
     z-index: 1032;
     visibility: visible;
@@ -457,11 +460,11 @@
     border-top: none;
     text-align: right;
     border-left: 1px solid #ccc5b9;
-    padding-right: 40px;
-    padding-left: 40px;
+    padding-right: 30px;
+    padding-left: 30px;
     padding-top: 15px;
 
-    @include transform-translate-x(230px);
+    @include transform-translate-x(250px);
     @include transition(0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
     ul {
       position: relative;
@@ -480,7 +483,7 @@
         color: $black-color !important;
         text-transform: capitalize;
         font-weight: 400;
-        font-size: $font-size-medium;
+        font-size: $font-size-large;
         line-height: $line-height-general;
         padding: 15px 0;
         &:hover,
@@ -517,10 +520,10 @@
     }
     & .wrapper {
       left: 0;
-      @include transform-translate-x(-230px);
+      @include transform-translate-x(-250px);
     }
     & .navbar-translate {
-      @include transform-translate-x(-230px);
+      @include transform-translate-x(-250px);
     }
   }
   .wrapper .navbar-collapse {
@@ -593,7 +596,7 @@
     opacity: 0;
     top: 0;
     left: auto;
-    right: 230px;
+    right: 250px;
     content: "";
     z-index: 1029;
     overflow-x: hidden;
@@ -660,7 +663,7 @@
       display: block;
       top: 0;
       height: 100%;
-      width: 230px;
+      width: 250px;
       right: 0px;
       z-index: 1032;
       visibility: visible;
@@ -672,7 +675,7 @@
       padding-right: 0px;
       padding-left: 40px;
       padding-top: 15px;
-      @include transform-translate-x(230px);
+      @include transform-translate-x(250px);
       @include transition(0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
       .navbar-nav .nav-item {
@@ -759,10 +762,10 @@
       }
       .wrapper {
         left: 0;
-        @include transform-translate-x(-230px);
+        @include transform-translate-x(-250px);
       }
       .navbar-translate {
-        @include transform-translate-x(-230px);
+        @include transform-translate-x(-250px);
       }
     }
 
@@ -862,7 +865,7 @@
 }
 @media (max-width: 500px) {
   .presentation-page .section-header .card {
-    min-height: 230px;
+    min-height: 250px;
   }
   #cards {
     .card-profile {

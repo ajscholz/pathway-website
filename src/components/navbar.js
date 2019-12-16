@@ -14,7 +14,7 @@ import {
   NavLink,
   Nav,
   Container,
-  UncontrolledTooltip,
+  Button,
 } from "reactstrap"
 
 const Navigation = () => {
@@ -60,7 +60,7 @@ const Navigation = () => {
   `)
 
   const closeNav = () => {
-    document.documentElement.classList.toggle("nav-open")
+    document.documentElement.classList.remove("nav-open")
     setBodyClick(false)
     setCollapseOpen(false)
   }
@@ -70,7 +70,7 @@ const Navigation = () => {
       {bodyClick ? <div id="bodyClick" onClick={() => closeNav()} /> : null}
       <Navbar
         color="black-color"
-        className={classnames("fixed-top", navbarColor)}
+        className={classnames("fixed-top px-3", navbarColor)}
         expand="lg"
         id="navbar-main"
       >
@@ -80,7 +80,9 @@ const Navigation = () => {
               id="navbar-brand"
               to="/"
               tag={Link}
-              style={{ width: "180px" }}
+              style={{
+                width: "180px",
+              }}
             >
               <Image fluid={logo.fluid} alt="Pathway Community Church" />
             </NavbarBrand>
@@ -96,6 +98,7 @@ const Navigation = () => {
                 setBodyClick(true)
                 setCollapseOpen(true)
               }}
+              style={{ paddingRight: "15px" }}
             >
               <span className="navbar-toggler-bar bar1" />
               <span className="navbar-toggler-bar bar2" />
@@ -103,8 +106,31 @@ const Navigation = () => {
             </button>
           </div>
           <Collapse navbar isOpen={collapseOpen}>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
+            <button
+              color="black"
+              className="text-muted pr-0 d-lg-none mb-3"
+              style={{
+                zIndex: "3",
+                marginRight: "-5px",
+                border: "none",
+                background: "transparent",
+              }}
+            >
+              <i className="fa fa-times" aria-label="close menu" />
+            </button>
+            <Nav navbar className="mx-0 ml-auto">
+              <NavItem className="pr-0 ">
+                <NavLink
+                  className="nav-link"
+                  to="/start"
+                  tag={Link}
+                  onClick={() => closeNav()}
+                >
+                  Start
+                </NavLink>
+              </NavItem>
+
+              <NavItem className="pr-0">
                 <NavLink
                   className="nav-link"
                   to="/about"
@@ -115,7 +141,7 @@ const Navigation = () => {
                 </NavLink>
               </NavItem>
 
-              <NavItem>
+              <NavItem className="pr-0">
                 <NavLink
                   className="nav-link"
                   to="/messages"
@@ -126,25 +152,26 @@ const Navigation = () => {
                 </NavLink>
               </NavItem>
 
-              <NavItem>
+              <hr style={{ width: "100%" }} className="d-lg-none" />
+
+              <NavItem className="pr-0 d-lg-none">
                 <NavLink
                   className="nav-link"
-                  to="/events"
+                  to="/about/events"
                   tag={Link}
                   onClick={() => closeNav()}
                 >
-                  Events
+                  View Events
                 </NavLink>
               </NavItem>
 
-              <NavItem>
+              <NavItem className="pr-0 d-lg-none">
                 <NavLink
                   className="nav-link"
-                  to="/start"
-                  tag={Link}
+                  href="https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
                   onClick={() => closeNav()}
                 >
-                  Start
+                  Give Now
                 </NavLink>
               </NavItem>
 
@@ -159,6 +186,19 @@ const Navigation = () => {
                 </Button>
               </NavItem> */}
             </Nav>
+            <div
+              className="d-lg-none mt-auto"
+              style={{
+                zIndex: "3",
+                position: "relative",
+                paddingBottom: "30px",
+                width: "100%",
+              }}
+            >
+              <Button color="primary" type="button" className="m-0 ml-auto">
+                Download App
+              </Button>
+            </div>
           </Collapse>
         </Container>
       </Navbar>

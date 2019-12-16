@@ -10,8 +10,8 @@ import "../assets/scss/main.scss"
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import Helmet from "react-helmet"
 
-import Header from "./header"
 import Footer from "./footer"
 import Navigation from "./navbar"
 
@@ -27,13 +27,18 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div
-      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
-    >
-      <Navigation />
-      <main style={{ flexGrow: 1 }}>{children}</main>
-      <Footer style={{ marginTop: "auto", flexGrow: 0 }} />
-    </div>
+    <>
+      <Helmet>
+        <script src="https://js.churchcenter.com/modal/v1" />
+      </Helmet>
+      <div
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      >
+        <Navigation />
+        <main style={{ flexGrow: 1 }}>{children}</main>
+        <Footer style={{ marginTop: "auto", flexGrow: 0 }} />
+      </div>
+    </>
   )
 }
 
