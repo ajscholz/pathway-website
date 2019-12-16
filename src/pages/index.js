@@ -28,7 +28,11 @@ const IndexPage = props => {
         <Container fluid style={{ padding: "0", margin: "0" }}>
           <Row>
             <Col>
-              <ButtonCard sectionData={sections[0]} className="mb-0" />
+              <ButtonCard
+                sectionData={sections[0]}
+                className="mb-0"
+                button="solid"
+              />
             </Col>
           </Row>
           <div className="row no-gutters">

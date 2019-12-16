@@ -46,7 +46,10 @@ const Footer = () => {
               </p>
             </Col>
             <Col md="4" className="d-flex justify-content-center my-4 my-md-0">
-              <ContactButton color="primary" className="m-3" />
+              <ContactButton
+                color="primary"
+                className="btn-outline-primary m-3"
+              />
             </Col>
             <Col
               md="4"

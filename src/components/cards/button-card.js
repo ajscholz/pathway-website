@@ -61,7 +61,9 @@ const ButtonCard = props => {
         </p>
         <CardFooter>
           <Button
-            className="btn-outline-primary mt-2"
+            className={`${
+              props.button === "solid" ? "btn" : "btn-outline-primary"
+            } mt-2`}
             color="primary"
             {...buttonProps}
           >
