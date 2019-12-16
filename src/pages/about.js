@@ -1,8 +1,9 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import SEO from "components/seo"
 import Header from "components/header"
+import { Button, Container } from "reactstrap"
 
 const AboutPage = props => {
   const { data } = props
@@ -12,6 +13,11 @@ const AboutPage = props => {
     <>
       <SEO title="About" />
       <Header title={heading} subtitle={subHeading} background={image} />
+      <Container>
+        <Button tag={Link} to="/about/events">
+          Go to events
+        </Button>
+      </Container>
     </>
   )
 }
