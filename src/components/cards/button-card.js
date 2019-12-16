@@ -21,14 +21,26 @@ const ButtonCard = props => {
           rel: "noopener noreferrer",
         }
 
+  const cardProps =
+    background === "" || !background
+      ? {
+          style: { background: "transparent" },
+          className: `no-border card-plain text-center py-5 ${
+            props.className ? props.className : ""
+          }`,
+        }
+      : {
+          "data-background": "image",
+          style: {
+            background: "transparent",
+          },
+          className: `no-border card-plain ${
+            props.className ? props.className : ""
+          }`,
+        }
+
   return (
-    <Card
-      data-background="image"
-      style={{
-        background: "rgba(0,0,0,.7)",
-      }}
-      className="no-border"
-    >
+    <Card {...cardProps}>
       {background && (
         <Image
           fluid={background.fluid}

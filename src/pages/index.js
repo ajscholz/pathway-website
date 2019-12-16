@@ -5,14 +5,15 @@ import SEO from "components/seo"
 import Header from "components/header"
 import ButtonCard from "../components/cards/button-card"
 
-import { Container, Row, Col } from "reactstrap"
+import { Container, Row, Col, Jumbotron } from "reactstrap"
 
 const IndexPage = props => {
   const { data } = props
   const { banner, sections } = data.page
   const { heading, subHeading, image } = banner
 
-  console.log("sections: ", sections)
+  let whiteSection = sections[0]
+  whiteSection.background = ""
 
   return (
     <>
@@ -23,21 +24,23 @@ const IndexPage = props => {
         background={image}
         full={true}
       />
-      <div className="section">
-        <Container>
+      <section>
+        <Container fluid style={{ padding: "0", margin: "0" }}>
           <Row>
-            <Col md="6">
-              <ButtonCard sectionData={sections[0]} />
-            </Col>
-            <Col md="6">
-              <ButtonCard sectionData={sections[1]} />
-            </Col>
             <Col>
-              <ButtonCard sectionData={sections[2]} />
+              <ButtonCard sectionData={sections[0]} className="mb-0" />
             </Col>
           </Row>
+          <div className="row no-gutters">
+            <Col md="6">
+              <ButtonCard sectionData={sections[1]} className="mb-0" />
+            </Col>
+            <Col md="6">
+              <ButtonCard sectionData={sections[2]} className="mb-0" />
+            </Col>
+          </div>
         </Container>
-      </div>
+      </section>
     </>
   )
 }
