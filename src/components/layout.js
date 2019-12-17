@@ -7,13 +7,14 @@
 
 import "../assets/scss/main.scss"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Helmet from "react-helmet"
 
 import Footer from "./footer"
 import Navigation from "./navbar"
+import PopupModal from "./popup-modal"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,8 +27,17 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const [modalState, setModalState] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setModalState(true)
+    }, 5000)
+  })
+
   return (
     <>
+      <PopupModal modalState={modalState} setModalState={setModalState} />
       <Helmet>
         <script src="https://js.churchcenter.com/modal/v1" />
       </Helmet>
