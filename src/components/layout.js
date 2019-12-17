@@ -27,13 +27,13 @@ const Layout = ({ children }) => {
     }
   `)
 
-  const [modalState, setModalState] = useState(false)
+  const [modalState, setModalState] = useState()
 
   useEffect(() => {
     setTimeout(() => {
       setModalState(true)
     }, 5000)
-  })
+  }, [])
 
   return (
     <>
