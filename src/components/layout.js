@@ -16,13 +16,36 @@ import Navigation from "./navbar"
 import PopupModal from "./popup-modal"
 import NotificationBar from "./notification-bar"
 
+// Checks to see if they're on the pwa
+// const isPwa = () => {
+//   if (typeof "window" !== undefined) {
+//     if (
+//       window.matchMedia("(display-mode: standalone)").matches ||
+//       window.navigator.standalone ||
+//       document.referrer.includes("android-app://")
+//     )
+//       return true
+//     else return false
+//   }
+// }
+// console.log("Is this the PWA version? ", isPwa())
+
 const Layout = ({ children }) => {
-  const [modalState, setModalState] = useState()
+  const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => {
-      setModalState(true)
-    }, 5000)
+    const visited = localStorage["visitedDate"]
+
+    const now = new Date()
+    let threeDaysAgo = new Date(now)
+    threeDaysAgo.setDate(now.getDate() - 3)
+
+    if (visited === undefined || new Date(visited) < threeDaysAgo) {
+      localStorage.visitedDate = new Date()
+      setTimeout(() => {
+        setModalState(true)
+      }, 5000)
+    }
   }, [])
 
   return (
