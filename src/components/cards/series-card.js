@@ -22,10 +22,12 @@ const SeriesCard = props => {
     <Link to={`/messages/series${fields.slug}`}>
       <Card
         className={className}
-        style={{
-          border: `1px solid #e3e3e3`,
-          borderRadius: 0,
-        }}
+        style={
+          {
+            // border: `1px solid #e3e3e3`,
+            // borderRadius: 0
+          }
+        }
       >
         <CardImg top tag="div">
           <Image fluid={graphic.fluid} />

@@ -58,7 +58,9 @@ const NotificationBar = () => {
             }}
             onClick={() => setShowNotificationBar(false)}
           >
-            <i className="fa fa-times" aria-label="close menu" />
+            <span aria-hidden="true">
+              <i className="fa fa-times" aria-label="close menu" />
+            </span>
           </button>
         </Container>
       </Alert>

@@ -13,15 +13,11 @@ const EventCard = props => {
   const { event } = props
 
   return (
-    <Card>
-      <div className="card-image">
-        <a href="#pablo" onClick={e => e.preventDefault()}>
-          <img
-            alt="..."
-            className="img"
-            src={`https:${event.image.file.url}`}
-          />
-        </a>
+    <Card className="no-transition">
+      <div className="card-image ">
+        {/* <a href="#pablo" onClick={e => e.preventDefault()}> */}
+        <img alt="..." className="img" src={`https:${event.image.file.url}`} />
+        {/* </a> */}
       </div>
       <CardBody>
         {/* <Badge color="warning" pill>
