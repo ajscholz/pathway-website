@@ -3,18 +3,19 @@
   background-position: center center;
   background-size: cover;
   min-height: 100vh;
-  max-height: 999px;
+  max-height: 100vh;
   overflow: hidden;
   position: relative;
   width: 100%;
   z-index: 1;
 
   &.page-header-small {
-    min-height: 65vh !important;
-    max-height: 700px;
+    min-height: 60vh !important;
+    max-height: 650px;
   }
   &.page-header-xs {
     min-height: 40vh !important;
+    max-height: 500px;
   }
 
   .page-header-image {
