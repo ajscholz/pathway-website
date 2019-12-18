@@ -13,7 +13,7 @@ const path = require(`path`)
 const slugify = string =>
   `/${string
     .replace(/ /g, "-")
-    .replace(/'/g, "")
+    .replace(/[\#\?\'\"\&\*\$]+/g, "")
     .toLowerCase()}`
 
 exports.onCreateNode = ({ node, actions }) => {
