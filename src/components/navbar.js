@@ -196,9 +196,9 @@ const Navigation = () => {
                 width: "100%",
               }}
             >
-              <Button color="primary" type="button" className="m-0 ml-auto">
+              {/* <Button color="primary" type="button" className="m-0 ml-auto">
                 Download App
-              </Button>
+              </Button> */}
             </div>
           </Collapse>
         </Container>
