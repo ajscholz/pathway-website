@@ -1,6 +1,6 @@
 import React from "react"
 // reactstrap components
-import { Modal, Button } from "reactstrap"
+import { Modal } from "reactstrap"
 
 const PopupModal = props => {
   // const [] = React.useState(false)

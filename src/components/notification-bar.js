@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useRef } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { Alert, Container } from "reactstrap"

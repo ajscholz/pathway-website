@@ -4,30 +4,13 @@ import { graphql } from "gatsby"
 import SEO from "components/seo"
 import Header from "components/header"
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardImg,
-  CardTitle,
-  NavItem,
-  NavLink,
-  Nav,
-  TabContent,
-  TabPane,
-  Container,
-  Row,
-  Col,
-} from "reactstrap"
+import { Container, Row, Col } from "reactstrap"
 import SeriesCard from "../components/cards/series-card"
 
 const MessagesPage = props => {
   const { data } = props
   const { page, messageSeries } = data
   const { heading, subHeading, image } = page.banner
-
-  console.log(messageSeries.all)
 
   return (
     <>

@@ -1,13 +1,6 @@
 import React from "react"
 
-import {
-  Card,
-  CardBody,
-  Badge,
-  CardTitle,
-  CardFooter,
-  CardText,
-} from "reactstrap"
+import { Card, CardBody, CardTitle, CardFooter, CardText } from "reactstrap"
 
 const EventCard = props => {
   const { event } = props

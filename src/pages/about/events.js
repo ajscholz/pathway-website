@@ -9,7 +9,7 @@ import EventCard from "../../components/cards/event-card"
 const EventsPage = props => {
   const { data } = props
   const { page, events } = data
-  const { heading, subHeading, image } = page.banner
+  const { heading, image } = page.banner
 
   return (
     <>

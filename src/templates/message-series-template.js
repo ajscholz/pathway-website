@@ -2,7 +2,7 @@ import React from "react"
 
 import { graphql, Link } from "gatsby"
 
-import { Container, Row, Col, Button, Card, CardBody } from "reactstrap"
+import { Container, Row, Col, Card, CardBody } from "reactstrap"
 import Header from "../components/header"
 
 const MessageSeriesTemplate = props => {

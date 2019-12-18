@@ -5,7 +5,7 @@ import SEO from "components/seo"
 import Header from "components/header"
 import ButtonCard from "../components/cards/button-card"
 
-import { Container, Row, Col, Jumbotron } from "reactstrap"
+import { Container, Col } from "reactstrap"
 
 const IndexPage = props => {
   const { data } = props
