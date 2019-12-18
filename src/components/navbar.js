@@ -70,7 +70,7 @@ const Navigation = () => {
       {bodyClick ? <div id="bodyClick" onClick={() => closeNav()} /> : null}
       <Navbar
         color="black-color"
-        className={classnames("fixed-top px-3", navbarColor)}
+        className={classnames("fixed-top px-3 position-sticky", navbarColor)}
         expand="lg"
         id="navbar-main"
       >
@@ -115,6 +115,7 @@ const Navigation = () => {
                 border: "none",
                 background: "transparent",
               }}
+              onClick={() => closeNav()}
             >
               <i className="fa fa-times" aria-label="close menu" />
             </button>

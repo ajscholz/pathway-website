@@ -6,6 +6,8 @@ import Image from "gatsby-image"
 const Header = props => {
   const { title, subtitle, background, full, xs } = props
 
+  console.log(props)
+
   return (
     <>
       <div
@@ -45,7 +47,7 @@ const Header = props => {
 Header.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
-  background: PropTypes.object.isRequired,
+  // background: PropTypes.object.isRequired,
 }
 
 export default Header
