@@ -20,26 +20,26 @@ exports.handler = async event => {
   const accessToken = oauth2Client.getAccessToken() // Original article had deprecated access token method
   // ------------- End Google OAuth2 authorization -------------
 
-  // const transporter = nodemailer.createTransport({
-  //   service: "gmail",
-  //   auth: {
-  //     type: "OAuth2",
-  //     user: "andrew@citynorth.church",
-  //     clientId: process.env.GMAIL_CLIENT_ID,
-  //     clientSecret: process.env.GMAIL_CLIENT_SECRET,
-  //     refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-  //     accessToken: accessToken,
-  //   },
-  // })
-
   const transporter = nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
+    service: "gmail",
     auth: {
-      user: "a949c930869b32",
-      pass: "00f4db531864a8",
+      type: "OAuth2",
+      user: "andrew@citynorth.church",
+      clientId: process.env.GMAIL_CLIENT_ID,
+      clientSecret: process.env.GMAIL_CLIENT_SECRET,
+      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+      accessToken: accessToken,
     },
   })
+
+  // const transporter = nodemailer.createTransport({
+  //   host: "smtp.mailtrap.io",
+  //   port: 2525,
+  //   auth: {
+  //     user: "a949c930869b32",
+  //     pass: "00f4db531864a8",
+  //   },
+  // })
 
   const message = {
     from: {
