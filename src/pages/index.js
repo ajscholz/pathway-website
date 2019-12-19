@@ -32,6 +32,7 @@ const IndexPage = props => {
                 sectionData={sections[0]}
                 className="mb-0"
                 button="solid"
+                buttonSize="lg"
               />
             </Col>
           </div>

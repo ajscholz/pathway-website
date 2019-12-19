@@ -6,7 +6,14 @@ import Image from "gatsby-image"
 import { Card, CardBody, CardTitle, CardFooter, Button } from "reactstrap"
 
 const ButtonCard = props => {
-  const { title, subtitle, description, button, background } = props.sectionData
+  const {
+    title,
+    subtitle,
+    description,
+    button,
+    buttonSize,
+    background,
+  } = props.sectionData
 
   // set button props for a Gatsby link or a normal a link
   const buttonProps =
@@ -65,6 +72,7 @@ const ButtonCard = props => {
               props.button === "solid" ? "btn" : "btn-outline-primary"
             } mt-2`}
             color="primary"
+            size={props.buttonSize}
             {...buttonProps}
           >
             {/* <i className="fa fa-plus mr-1" /> */}
