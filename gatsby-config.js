@@ -1,5 +1,5 @@
 const path = require("path")
-
+const proxy = require("http-proxy-middleware")
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
@@ -11,9 +11,33 @@ module.exports = {
     author: `@pathwaychurch`,
     siteUrl: `https://www.pathwaymarietta.com`,
   },
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      })
+    )
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
+    `gatsby-plugin-netlify-cache`,
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
+        allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
+        mergeSecurityHeaders: true, // boolean to turn off the default security headers
+        mergeLinkHeaders: true, // boolean to turn off the default gatsby js headers
+        mergeCachingHeaders: true, // boolean to turn off the default caching headers
+        transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
+        generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

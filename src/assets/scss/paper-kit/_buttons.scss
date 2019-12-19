@@ -154,6 +154,18 @@
     @include opacity(0.5);
   }
 }
+
+.btn-primary {
+  &:disabled,
+  &[disabled],
+  &.disabled {
+    color: $black-color;
+    &:hover {
+      cursor: default;
+    }
+  }
+}
+
 .btn-link {
   border-color: transparent !important;
   padding: $padding-base-vertical $padding-base-horizontal;
