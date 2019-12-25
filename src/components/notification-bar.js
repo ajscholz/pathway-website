@@ -19,6 +19,13 @@ const NotificationBar = () => {
     }
   `)
 
+  const now = new Date()
+
+  const barToShow = notificationBars.all.filter(bar => bar.autoOff < now)
+
+  console.log(notificationBars.all)
+  console.log(now)
+
   const [showNotificationBar, setShowNotificationBar] = useState(
     notificationBars.all.length !== 0
   )
