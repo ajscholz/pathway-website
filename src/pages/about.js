@@ -1,18 +1,65 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import SEO from "components/seo"
 import Header from "components/header"
-import { Button, Container } from "reactstrap"
+import { Button, Container, Row, Col } from "reactstrap"
+import TeamMemberCard from "../components/cards/team-member-card"
 
 const AboutPage = props => {
   const { data } = props
-  const { heading, subHeading, image } = data.page.banner
+  const { page, storyData, teamData } = data
+  const { heading, subHeading, image } = page.banner
+
+  console.log(storyData)
 
   return (
     <>
       <SEO title="About" />
       <Header title={heading} subtitle={subHeading} background={image} />
+
+      {/* ********* OUR STORY SECTION ********* */}
+      <section className="team-1">
+        <Container>
+          <Row>
+            <Col className="ml-auto mr-auto" md="8">
+              <h2 className="title text-center">{storyData.title}</h2>
+              <MDXRenderer className="text-left">
+                {storyData.description.childMdx.body}
+              </MDXRenderer>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      {/* ********* END OUR STORY SECTION ********* */}
+
+      {/* ********* OUR TEAM SECTION ********* */}
+      <section className="team-1 bg-dark ">
+        <Container>
+          <Row>
+            <Col className="ml-auto mr-auto text-center" md="8">
+              <h2 className="title text-light">{teamData.title}</h2>
+              {/* <h5 className="description">
+                This is the paragraph where you can write more details about
+                your team. Keep you user engaged by providing meaningful
+                information.
+              </h5> */}
+            </Col>
+          </Row>
+          <Row>
+            {teamData.linkedContent.map(person => {
+              return (
+                <Col md="6" lg="4">
+                  <TeamMemberCard person={person} />
+                </Col>
+              )
+            })}
+          </Row>
+        </Container>
+      </section>
+      {/* ********* END OUR TEAM SECTION ********* */}
+
       <Container>
         <Button tag={Link} to="/about/events">
           Go to events
@@ -31,6 +78,38 @@ export const data = graphql`
         image {
           fluid(resizingBehavior: FILL) {
             ...GatsbyContentfulFluid
+          }
+        }
+      }
+    }
+    storyData: contentfulPageSection(
+      contentful_id: { eq: "3bYmAhy0IIJkCYusWEinxG" }
+    ) {
+      title
+      description {
+        childMdx {
+          body
+        }
+      }
+    }
+    teamData: contentfulPageSection(
+      contentful_id: { eq: "5VExuaOKaFyomQTxqYjsex" }
+    ) {
+      title
+      linkedContent {
+        ... on ContentfulTeamMember {
+          id: contentful_id
+          name
+          position
+          profile {
+            profile
+          }
+          email
+          picture {
+            title
+            fixed(width: 112) {
+              ...GatsbyContentfulFixed
+            }
           }
         }
       }
