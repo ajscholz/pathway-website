@@ -6,13 +6,12 @@ import SEO from "components/seo"
 import Header from "components/header"
 import { Button, Container, Row, Col } from "reactstrap"
 import TeamMemberCard from "../components/cards/team-member-card"
+import MissionSection from "../views/about/mission"
 
 const AboutPage = props => {
   const { data } = props
   const { page, storyData, teamData } = data
   const { heading, subHeading, image } = page.banner
-
-  console.log(storyData)
 
   return (
     <>
@@ -33,6 +32,8 @@ const AboutPage = props => {
         </Container>
       </section>
       {/* ********* END OUR STORY SECTION ********* */}
+
+      <MissionSection />
 
       {/* ********* OUR TEAM SECTION ********* */}
       <section className="team-1 bg-dark ">
@@ -60,11 +61,11 @@ const AboutPage = props => {
       </section>
       {/* ********* END OUR TEAM SECTION ********* */}
 
-      <Container>
-        <Button tag={Link} to="/about/events">
-          Go to events
-        </Button>
-      </Container>
+      {/* ********* ADD EVENTS SECTION -- SHOW NEXT 3 THINGS AND LINK TO MORE EVENTS ********* */}
+
+      {/* ********* ADD CONTACT SECTION ********* */}
+
+      
     </>
   )
 }
@@ -92,6 +93,7 @@ export const data = graphql`
         }
       }
     }
+
     teamData: contentfulPageSection(
       contentful_id: { eq: "5VExuaOKaFyomQTxqYjsex" }
     ) {
