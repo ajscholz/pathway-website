@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react"
-import {useStaticQuery, graphql} from 'gatsby'
+import React, { useState, useEffect } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 // reactstrap components
 import { Modal } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -7,7 +7,10 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 const PopupModal = props => {
   const { popups } = useStaticQuery(graphql`
     {
-      popups: allContentfulPopupBanner(filter: {active: {eq: true}}, sort: {fields: autoOff, order: DESC}) {
+      popups: allContentfulPopupBanner(
+        filter: { active: { eq: true } }
+        sort: { fields: autoOff, order: DESC }
+      ) {
         nodes {
           heading
           bodyText {
@@ -15,9 +18,9 @@ const PopupModal = props => {
               body
             }
           }
-        autoOff
+          autoOff
         }
-      } 
+      }
     }
   `)
 
@@ -25,11 +28,9 @@ const PopupModal = props => {
 
   const activePopup = popups.nodes.find(popup => popup.autoOff > now)
 
-  const [modalState, setModalState] = React.useState(
-    activePopup === undefined ? false : true
-  )
+  const [modalState, setModalState] = React.useState(false)
 
-    useEffect(() => {
+  useEffect(() => {
     const visited = localStorage["visitedDate"]
 
     const now = new Date()
@@ -38,13 +39,16 @@ const PopupModal = props => {
 
     if (visited === undefined || new Date(visited) < threeDaysAgo) {
       localStorage.visitedDate = new Date()
-      setTimeout(() => {
-        setModalState(true)
-      }, 5000)
+
+      if (activePopup !== undefined) {
+        setTimeout(() => {
+          setModalState(true)
+        }, 5000)
+      }
     }
   }, [])
 
-  return (
+  return activePopup === undefined ? null : (
     <>
       {/* <Button color="primary" type="button" onClick={() => setLiveDemo(true)}>
         Launch demo modal
