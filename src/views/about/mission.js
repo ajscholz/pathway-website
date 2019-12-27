@@ -5,6 +5,9 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import { Container, Row, Col } from "reactstrap"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCross, faUserFriends, faCubes } from '@fortawesome/free-solid-svg-icons'
+
 const MissionSection = () => {
   const { data } = useStaticQuery(graphql`
     {
@@ -55,7 +58,7 @@ const MissionSection = () => {
           <Col className="ml-auto" sm="6" md="5">
             <div className="info">
               <div className="icon">
-                <i aria-hidden={true} className="nc-icon nc-atom" />
+                <FontAwesomeIcon icon={faCross} />
               </div>
               <h4 className="title">{data.linkedContent[0].headline}</h4>
               <MDXRenderer>
@@ -66,7 +69,9 @@ const MissionSection = () => {
           <Col className="mr-auto" sm="6" md="5">
             <div className="info">
               <div className="icon">
-                <i aria-hidden={true} className="nc-icon nc-ruler-pencil" />
+                {/* <i className="fa fa-book mr-1" /> */}
+                <FontAwesomeIcon icon={faUserFriends} />
+                {/* <i aria-hidden={true} className="nc-icon nc-ruler-pencil" /> */}
               </div>
               <h4 className="title">{data.linkedContent[1].headline}</h4>
               <MDXRenderer>
@@ -79,7 +84,7 @@ const MissionSection = () => {
           <Col className="mx-auto" sm="8">
             <div className="info">
               <div className="icon">
-                <i aria-hidden={true} className="nc-icon nc-paper" />
+                <FontAwesomeIcon icon={faCubes} />
               </div>
               <h4 className="title">{data.linkedContent[2].headline}</h4>
               <MDXRenderer>
