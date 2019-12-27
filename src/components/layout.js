@@ -75,7 +75,7 @@ const Layout = ({ children }) => {
       </Helmet>
 
       <PopupModal modalState={modalState} setModalState={setModalState} />
-      {/* <NotificationBar /> */}
+      <NotificationBar />
       <div
         className="position-relative"
         style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
