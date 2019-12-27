@@ -1,10 +1,48 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
+import {useStaticQuery, graphql} from 'gatsby'
 // reactstrap components
 import { Modal } from "reactstrap"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 const PopupModal = props => {
-  // const [] = React.useState(false)
-  const { modalState, setModalState } = props
+  const { popups } = useStaticQuery(graphql`
+    {
+      popups: allContentfulPopupBanner(filter: {active: {eq: true}}, sort: {fields: autoOff, order: DESC}) {
+        nodes {
+          heading
+          bodyText {
+            childMdx {
+              body
+            }
+          }
+        autoOff
+        }
+      } 
+    }
+  `)
+
+  const now = new Date().toISOString()
+
+  const activePopup = popups.nodes.find(popup => popup.autoOff > now)
+
+  const [modalState, setModalState] = React.useState(
+    activePopup === undefined ? false : true
+  )
+
+    useEffect(() => {
+    const visited = localStorage["visitedDate"]
+
+    const now = new Date()
+    let threeDaysAgo = new Date(now)
+    threeDaysAgo.setDate(now.getDate() - 3)
+
+    if (visited === undefined || new Date(visited) < threeDaysAgo) {
+      localStorage.visitedDate = new Date()
+      setTimeout(() => {
+        setModalState(true)
+      }, 5000)
+    }
+  }, [])
 
   return (
     <>
@@ -13,8 +51,8 @@ const PopupModal = props => {
       </Button> */}
       <Modal isOpen={modalState} toggle={() => setModalState(false)}>
         <div className="modal-header">
-          <h3>Pardon The Mess</h3>
-          <h6>We're Renovating</h6>
+          <h3>{activePopup.heading}</h3>
+          {activePopup.subHeading && <h6>We're Renovating</h6>}
           <button
             aria-label="Close"
             className="close"
@@ -31,22 +69,7 @@ const PopupModal = props => {
           </button>
         </div>
         <div className="modal-body">
-          <p>
-            Over the next few weeks we're completely overhauling
-            pathwaymarietta.com. So for now, you'll notice there's not much
-            here.
-          </p>
-          <p>
-            While we're getting all settled in check out our{" "}
-            <a
-              href="https://www.facebook.com/pathwaymarietta/"
-              target="blank"
-              rel="noopener noreferrer"
-            >
-              Facebook page
-            </a>
-            , and be sure to check back soon to see our new site!
-          </p>
+          <MDXRenderer>{activePopup.bodyText.childMdx.body}</MDXRenderer>
         </div>
       </Modal>
     </>

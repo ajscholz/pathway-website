@@ -31,22 +31,9 @@ import NotificationBar from "./notification-bar"
 // console.log("Is this the PWA version? ", isPwa())
 
 const Layout = ({ children }) => {
-  const [modalState, setModalState] = useState(false)
+  // const [modalState, setModalState] = useState(false)
 
-  useEffect(() => {
-    const visited = localStorage["visitedDate"]
 
-    const now = new Date()
-    let threeDaysAgo = new Date(now)
-    threeDaysAgo.setDate(now.getDate() - 3)
-
-    if (visited === undefined || new Date(visited) < threeDaysAgo) {
-      localStorage.visitedDate = new Date()
-      setTimeout(() => {
-        setModalState(true)
-      }, 5000)
-    }
-  }, [])
 
   return (
     <>
@@ -74,7 +61,7 @@ const Layout = ({ children }) => {
         </noscript>
       </Helmet>
 
-      <PopupModal modalState={modalState} setModalState={setModalState} />
+      <PopupModal />
       <NotificationBar />
       <div
         className="position-relative"
