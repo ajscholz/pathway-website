@@ -2,3 +2,15 @@
 functions = ".netlify/functions"
 command = "yarn run build"
 publish = "public/"
+
+[[redirects]]
+  from = "https://events.pathwaymarietta.com"
+  to = "https://pathwaymarietta.com/about/events"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://give.pathwaymarietta.com"
+  to = "https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
+  status = 302
+  force = true
