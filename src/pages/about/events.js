@@ -5,11 +5,19 @@ import SEO from "components/seo"
 import Header from "components/header"
 import { Container, Row, Col } from "reactstrap"
 import EventCard from "../../components/cards/event-card"
+import {
+  useCenterColumns,
+  useRemovePastItems,
+} from "../../utils/scripts/custom-hooks"
 
 const EventsPage = props => {
   const { data } = props
   const { page, events } = data
   const { heading, image } = page.banner
+
+  const activeItems = useRemovePastItems(events.all)
+
+  const colSizes = useCenterColumns(activeItems)
 
   return (
     <>
@@ -18,18 +26,11 @@ const EventsPage = props => {
       <div className="section">
         <Container>
           <Row>
-            {events.all.map(({ event }) => {
-              // only display the event if it's today or later
-              const now = new Date()
-              let eventDate = new Date(event.start)
-              eventDate.setDate(eventDate.getDate() + 1)
-
-              return eventDate > now ? (
-                <Col md="6" key={event.id}>
-                  <EventCard event={event} />
-                </Col>
-              ) : null
-            })}
+            {activeItems.map((event, index) => (
+              <Col {...colSizes[index]} key={event.id}>
+                <EventCard event={event} />
+              </Col>
+            ))}
           </Row>
         </Container>
       </div>
@@ -51,27 +52,25 @@ export const data = graphql`
       }
     }
     events: allContentfulEvent(sort: { fields: start, order: ASC }) {
-      all: edges {
-        event: node {
-          id: contentful_id
-          title: eventName
-          start(formatString: "dddd MMMM D, YYYY")
-          end
-          image {
-            file {
-              url
-            }
-            fluid {
-              ...GatsbyContentfulFluid
-            }
+      all: nodes {
+        id: contentful_id
+        title: eventName
+        start(formatString: "dddd MMMM D, YYYY")
+        end
+        image {
+          file {
+            url
           }
-          description {
-            description
+          fluid {
+            ...GatsbyContentfulFluid
           }
-          callToActionButton {
-            link
-            text
-          }
+        }
+        description {
+          description
+        }
+        callToActionButton {
+          link
+          text
         }
       }
     }

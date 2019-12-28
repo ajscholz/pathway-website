@@ -1,4 +1,5 @@
 import React from "react"
+import Image from "gatsby-image"
 
 import { Card, CardBody, CardTitle, CardFooter, CardText } from "reactstrap"
 
@@ -9,7 +10,7 @@ const EventCard = props => {
     <Card className="no-transition">
       <div className="card-image ">
         {/* <a href="#pablo" onClick={e => e.preventDefault()}> */}
-        <img alt="..." className="img" src={`https:${event.image.file.url}`} />
+        <Image imgClass="img" fluid={event.image.fluid} />
         {/* </a> */}
       </div>
       <CardBody>

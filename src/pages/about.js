@@ -1,32 +1,18 @@
-import React, { useLayoutEffect } from "react"
+import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import SEO from "components/seo"
 import Header from "components/header"
 import { Container, Row, Col } from "reactstrap"
-import TeamMemberCard from "../components/cards/team-member-card"
 import MissionSection from "../views/about/mission"
+import OurTeam from "../views/about/our-team"
+import UpcomingEventsSection from "../views/about/upcoming-events"
 
 const AboutPage = props => {
   const { data } = props
-  const { page, storyData, teamData } = data
+  const { page, storyData } = data
   const { heading, subHeading, image } = page.banner
-
-  {
-    /* ********* set props to center team member cards ********* */
-  }
-  const colSizes = teamData.linkedContent.map(() => ({ md: "6", lg: "4" }))
-  if (colSizes.length % 2 === 1 || colSizes.length === 7) {
-    colSizes.pop()
-    colSizes.push({ md: { size: 6, offset: 3 }, lg: { size: 4, offset: 0 } })
-  }
-  if (colSizes.length === 5) {
-    colSizes[3] = { md: "6", lg: { size: 4, offset: 2 } }
-  }
-  {
-    /* ********* END set props to center odd number of team members ********* */
-  }
 
   return (
     <>
@@ -50,32 +36,9 @@ const AboutPage = props => {
 
       <MissionSection />
 
-      {/* ********* OUR TEAM SECTION ********* */}
-      <section className="team-1 bg-dark ">
-        <Container>
-          <Row>
-            <Col className="ml-auto mr-auto text-center" md="8">
-              <h2 className="title text-light">{teamData.title}</h2>
-              {/* <h5 className="description">
-                This is the paragraph where you can write more details about
-                your team. Keep you user engaged by providing meaningful
-                information.
-              </h5> */}
-            </Col>
-          </Row>
-          <Row>
-            {teamData.linkedContent.map((person, i) => (
-              <Col {...colSizes[i]} key={person.id}>
-                <TeamMemberCard person={person} />
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </section>
-      {/* ********* END OUR TEAM SECTION ********* */}
+      <OurTeam />
 
-      {/* ********* ADD EVENTS SECTION -- SHOW NEXT 3 THINGS AND LINK TO MORE EVENTS ********* */}
-
+      <UpcomingEventsSection />
       {/* ********* ADD CONTACT SECTION ********* */}
     </>
   )
@@ -101,29 +64,6 @@ export const data = graphql`
       description {
         childMdx {
           body
-        }
-      }
-    }
-
-    teamData: contentfulPageSection(
-      contentful_id: { eq: "5VExuaOKaFyomQTxqYjsex" }
-    ) {
-      title
-      linkedContent {
-        ... on ContentfulTeamMember {
-          id: contentful_id
-          name
-          position
-          profile {
-            profile
-          }
-          email
-          picture {
-            title
-            fixed(width: 112) {
-              ...GatsbyContentfulFixed
-            }
-          }
         }
       }
     }
