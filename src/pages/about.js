@@ -1,10 +1,10 @@
-import React from "react"
-import { graphql, Link } from "gatsby"
+import React, { useLayoutEffect } from "react"
+import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import SEO from "components/seo"
 import Header from "components/header"
-import { Button, Container, Row, Col } from "reactstrap"
+import { Container, Row, Col } from "reactstrap"
 import TeamMemberCard from "../components/cards/team-member-card"
 import MissionSection from "../views/about/mission"
 
@@ -12,6 +12,21 @@ const AboutPage = props => {
   const { data } = props
   const { page, storyData, teamData } = data
   const { heading, subHeading, image } = page.banner
+
+  {
+    /* ********* set props to center team member cards ********* */
+  }
+  const colSizes = teamData.linkedContent.map(() => ({ md: "6", lg: "4" }))
+  if (colSizes.length % 2 === 1 || colSizes.length === 7) {
+    colSizes.pop()
+    colSizes.push({ md: { size: 6, offset: 3 }, lg: { size: 4, offset: 0 } })
+  }
+  if (colSizes.length === 5) {
+    colSizes[3] = { md: "6", lg: { size: 4, offset: 2 } }
+  }
+  {
+    /* ********* END set props to center odd number of team members ********* */
+  }
 
   return (
     <>
@@ -49,13 +64,11 @@ const AboutPage = props => {
             </Col>
           </Row>
           <Row>
-            {teamData.linkedContent.map(person => {
-              return (
-                <Col md="6" lg="4">
-                  <TeamMemberCard person={person} />
-                </Col>
-              )
-            })}
+            {teamData.linkedContent.map((person, i) => (
+              <Col {...colSizes[i]} key={person.id}>
+                <TeamMemberCard person={person} />
+              </Col>
+            ))}
           </Row>
         </Container>
       </section>
@@ -64,8 +77,6 @@ const AboutPage = props => {
       {/* ********* ADD EVENTS SECTION -- SHOW NEXT 3 THINGS AND LINK TO MORE EVENTS ********* */}
 
       {/* ********* ADD CONTACT SECTION ********* */}
-
-      
     </>
   )
 }

@@ -5,8 +5,12 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import { Container, Row, Col } from "reactstrap"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCross, faUserFriends, faCubes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faCross,
+  faUserFriends,
+  faCubes,
+} from "@fortawesome/free-solid-svg-icons"
 
 const MissionSection = () => {
   const { data } = useStaticQuery(graphql`
@@ -33,7 +37,7 @@ const MissionSection = () => {
         }
         backgroundImage {
           fluid {
-            src
+            ...GatsbyContentfulFluid
           }
         }
       }
@@ -41,10 +45,13 @@ const MissionSection = () => {
   `)
 
   return (
-    <div
-      className="features-5 section-image"
-    >
-      <Image fluid={data.backgroundImage.fluid} className="position-absolute" style={{top:0, width:'100%', height:'100%', background: 'black'}} imgStyle={{opacity: '.4'}} />
+    <div className="features-5 section-image">
+      <Image
+        fluid={data.backgroundImage.fluid}
+        className="position-absolute"
+        style={{ top: 0, width: "100%", height: "100%", background: "black" }}
+        imgStyle={{ opacity: ".4" }}
+      />
       <Container>
         <Row>
           <div className="ml-auto mr-auto">

@@ -6,14 +6,7 @@ import Image from "gatsby-image"
 import { Card, CardBody, CardTitle, CardFooter, Button } from "reactstrap"
 
 const ButtonCard = props => {
-  const {
-    title,
-    subtitle,
-    description,
-    button,
-    buttonSize,
-    background,
-  } = props.sectionData
+  const { title, subtitle, description, button, background } = props.sectionData
 
   // set button props for a Gatsby link or a normal a link
   const buttonProps =
@@ -90,7 +83,8 @@ ButtonCard.propTypes = {
     subtitle: PropTypes.string,
     description: PropTypes.string.isRequired,
     button: PropTypes.object.isRequired,
-    background: PropTypes.object.isRequired,
+    background: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+      .isRequired,
   }).isRequired,
 }
 

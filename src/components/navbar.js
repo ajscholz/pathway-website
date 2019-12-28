@@ -66,7 +66,13 @@ const Navigation = () => {
 
   return (
     <>
-      {bodyClick ? <div id="bodyClick" onClick={() => closeNav()} /> : null}
+      {bodyClick ? (
+        <button
+          className="btn-plain"
+          id="bodyClick"
+          onClick={() => closeNav()}
+        />
+      ) : null}
       <Navbar
         color="black-color"
         className={classnames("fixed-top px-3 position-sticky", navbarColor)}

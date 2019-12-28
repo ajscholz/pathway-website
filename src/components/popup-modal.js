@@ -28,7 +28,7 @@ const PopupModal = props => {
 
   const activePopup = popups.nodes.find(popup => popup.autoOff > now)
 
-  const [modalState, setModalState] = React.useState(false)
+  const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
     const visited = localStorage["visitedDate"]
@@ -46,7 +46,7 @@ const PopupModal = props => {
         }, 5000)
       }
     }
-  }, [])
+  }, [activePopup])
 
   return activePopup === undefined ? null : (
     <>

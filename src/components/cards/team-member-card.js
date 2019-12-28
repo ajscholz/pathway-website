@@ -7,7 +7,7 @@ const TeamMemberCard = props => {
   const { person } = props
 
   return (
-    <Card className="card-profile" style={{ marginTop: "80px" }}>
+    <Card className="card-profile no-transition" style={{ marginTop: "80px" }}>
       <div className="card-avatar border-white">
         <Image alt={person.picture.title} fixed={person.picture.fixed} />
       </div>

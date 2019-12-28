@@ -25,7 +25,7 @@ const EventsPage = props => {
               eventDate.setDate(eventDate.getDate() + 1)
 
               return eventDate > now ? (
-                <Col md="6">
+                <Col md="6" key={event.id}>
                   <EventCard event={event} />
                 </Col>
               ) : null

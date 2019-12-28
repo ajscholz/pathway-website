@@ -6,8 +6,6 @@ import Image from "gatsby-image"
 const Header = props => {
   const { title, subtitle, background, full, xs } = props
 
-  console.log(props)
-
   return (
     <>
       <div
