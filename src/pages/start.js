@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import SEO from "components/seo"
 import Header from "components/header"
+import FirstStepsSection from "../views/about/start/first-steps-section"
 
 const StartPage = props => {
   const { data } = props
@@ -12,6 +13,7 @@ const StartPage = props => {
     <>
       <SEO title="Start" />
       <Header title={heading} subtitle={subHeading} background={image} />
+      <FirstStepsSection />
     </>
   )
 }

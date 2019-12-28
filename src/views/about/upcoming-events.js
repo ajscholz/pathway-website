@@ -7,7 +7,7 @@ import { useRemovePastItems } from "../../utils/scripts/custom-hooks"
 import EventCard from "../../components/cards/event-card"
 
 const UpcomingEventsSection = () => {
-  const { events } = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     {
       section: contentfulPageSection(title: { eq: "Upcoming Events" }) {
         title
@@ -43,6 +43,8 @@ const UpcomingEventsSection = () => {
       }
     }
   `)
+
+  const { events, section } = data
 
   const activeItems = useRemovePastItems(events.all)
 
