@@ -96,7 +96,7 @@ const ExploreOurMinistriesSection = () => {
                   <CardTitle tag="h4">{students.title}</CardTitle>
                   <br />
                   <h6 className="card-category text-muted">
-                    {students.ageRange}
+                    {students.references[0].ageRange}
                   </h6>
                   <div className="card-description">
                     <MDXRenderer>
@@ -129,7 +129,9 @@ const ExploreOurMinistriesSection = () => {
                 <CardBody>
                   <CardTitle tag="h4">{kids.title}</CardTitle>
                   <br />
-                  <h6 className="card-category text-muted">{kids.ageRange}</h6>
+                  <h6 className="card-category text-muted">
+                    {kids.references[0].ageRange}
+                  </h6>
                   <div className="card-description">
                     <MDXRenderer>{kids.description.childMdx.body}</MDXRenderer>
                   </div>
@@ -166,7 +168,7 @@ const ExploreOurMinistriesSection = () => {
                   <CardTitle tag="h4">{groups.title}</CardTitle>
                   <br />
                   <h6 className="card-category text-muted">
-                    {groups.ageRange}
+                    {groups.references[0].ageRange}
                   </h6>
                   <div className="card-description">
                     <MDXRenderer>
