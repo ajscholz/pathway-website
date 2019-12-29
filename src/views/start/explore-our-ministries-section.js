@@ -55,7 +55,6 @@ const ExploreOurMinistriesSection = () => {
   const students = section.linkedContent[0]
   const kids = section.linkedContent[1]
   const groups = section.linkedContent[2]
-  console.log(groups)
   return (
     <section className="section section-project cd-section">
       <div className="projects-2 section section-dark">

@@ -17,7 +17,7 @@ const StartPage = props => {
       <Header title={heading} subtitle={subHeading} background={image} />
       <FirstStepsSection />
       <ExploreOurMinistriesSection />
-      {/* <AttendThePathSection /> */}
+      <AttendThePathSection />
     </>
   )
 }

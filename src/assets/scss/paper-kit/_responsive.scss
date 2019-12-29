@@ -282,28 +282,6 @@
     padding-left: 100px !important;
   }
 
-  .projects-1 {
-    & .project-pills {
-      & .nav.nav-pills {
-        display: block !important;
-        .nav-item {
-          &:first-child .nav-link {
-            border-radius: 12px 12px 0 0 !important;
-            margin-left: -1px;
-          }
-          &.active:first-child .nav-link {
-            border-radius: 12px 12px 0 0 !important;
-            margin-left: -1px;
-          }
-
-          &:last-child .nav-link {
-            border-radius: 0 0 12px 12px !important;
-            margin-left: -1px;
-          }
-        }
-      }
-    }
-  }
   .testimonials-2,
   .section-testimonials {
     .testimonials-people {
@@ -1022,6 +1000,32 @@
       .image-container {
         .area-img {
           max-width: 170px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .projects-1 {
+    & .project-pills {
+      & .nav.nav-pills {
+        display: block !important;
+        background: transparent !important;
+        .nav-item {
+          &:first-child .nav-link {
+            border-radius: 12px 12px 0 0 !important;
+            margin-left: -1px;
+          }
+          &.active:first-child .nav-link {
+            border-radius: 12px 12px 0 0 !important;
+            margin-left: -1px;
+          }
+
+          &:last-child .nav-link {
+            border-radius: 0 0 12px 12px !important;
+            margin-left: -1px;
+          }
         }
       }
     }

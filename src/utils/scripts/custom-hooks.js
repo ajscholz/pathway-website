@@ -66,3 +66,10 @@ export const useSetLinkType = (link, props) => {
     )
   }
 }
+
+export const useObjectPosition = (imageSize, focusPoint) => {
+  const x = (focusPoint.x / imageSize.width) * 100
+  const y = (focusPoint.y / imageSize.height) * 100
+
+  return { x: x, y: y }
+}
