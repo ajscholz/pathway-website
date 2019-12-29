@@ -37,7 +37,6 @@ export const useRemovePastItems = arr => {
 }
 
 export const useSetLinkType = link => {
-  console.log(link)
   if (link === null) {
     return
   }

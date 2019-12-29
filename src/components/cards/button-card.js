@@ -83,18 +83,11 @@ ButtonCard.propTypes = {
   sectionData: PropTypes.shape({
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.object.isRequired,
     button: PropTypes.object.isRequired,
     background: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
       .isRequired,
   }).isRequired,
-}
-
-ButtonCard.defaultProps = {
-  sectionData: {
-    title: "Title",
-    description: "description here",
-  },
 }
 
 export default ButtonCard

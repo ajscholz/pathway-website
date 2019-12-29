@@ -10,8 +10,6 @@ const EventCard = props => {
 
   const Link = useSetLinkType(event.callToActionButton)
 
-  console.log(Link)
-
   return (
     <Card className="no-transition">
       <div className="card-image ">
