@@ -56,6 +56,7 @@ export const data = graphql`
         id: contentful_id
         title: eventName
         start(formatString: "dddd MMMM D, YYYY")
+        displayStart: start(formatString: "dddd, MMM DD")
         end
         image {
           file {

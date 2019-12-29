@@ -37,14 +37,14 @@ const PopupModal = props => {
     let threeDaysAgo = new Date(now)
     threeDaysAgo.setDate(now.getDate() - 3)
 
-    if (visited === undefined || new Date(visited) < threeDaysAgo) {
-      localStorage.visitedDate = new Date()
+    // if (visited === undefined || new Date(visited) < threeDaysAgo) {
+    //   localStorage.visitedDate = new Date()
 
-      if (activePopup !== undefined) {
-        setTimeout(() => {
-          setModalState(true)
-        }, 5000)
-      }
+    if (activePopup !== undefined) {
+      setTimeout(() => {
+        setModalState(true)
+      }, 5000)
+      // }
     }
   }, [activePopup])
 

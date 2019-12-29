@@ -3,6 +3,9 @@ import Image from "gatsby-image"
 
 import { Card, CardBody, CardTitle, CardFooter, CardText } from "reactstrap"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
+
 const EventCard = props => {
   const { event } = props
 
@@ -23,11 +26,11 @@ const EventCard = props => {
         <CardText>{event.description.description}</CardText>
         <hr />
         <CardFooter>
-          <div className="author">{event.start}</div>
-          {/* <div className="stats">
-            <i className="fa fa-heart mr-1" />
-            5.3k
-          </div> */}
+          <div className="author">{event.displayStart}</div>
+          <button className=" btn btn-link stats p-0 m-0 h6 text-primary border-0">
+            <FontAwesomeIcon icon={faExternalLinkAlt} className="mr-1" />
+            Register
+          </button>
         </CardFooter>
       </CardBody>
     </Card>
