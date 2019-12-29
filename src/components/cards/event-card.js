@@ -8,7 +8,10 @@ import { useSetLinkType } from "../../utils/scripts/custom-hooks"
 const EventCard = props => {
   const { event } = props
 
-  const Link = useSetLinkType(event.callToActionButton)
+  const Link = useSetLinkType(event.callToActionButton, {
+    className: "btn-link stats p-0 m-0 h6 border-0 text-primary",
+    color: "primary",
+  })
 
   return (
     <Card className="no-transition">

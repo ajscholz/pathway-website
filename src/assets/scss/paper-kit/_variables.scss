@@ -47,6 +47,7 @@ $success-states-color: darken($success-color, 10%) !default;
 
 $info-color: #51bcda !default;
 $info-states-color: darken($info-color, 10%) !default;
+$info-light-color: lighten($info-color, 20%) !default;
 
 $warning-color: #f2e434 !default;
 $warning-states-color: darken($warning-color, 10%) !default;

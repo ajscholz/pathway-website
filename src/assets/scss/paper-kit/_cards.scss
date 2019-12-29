@@ -46,6 +46,7 @@
       color: $black-color;
     }
   }
+
   .card-description {
     color: $dark-gray;
     margin-bottom: 5px;
@@ -562,4 +563,13 @@
   // display: flex;
   // align-items: center;
   // justify-content: center;
+}
+
+.section-dark .card a:not(.btn) {
+  color: $info-light-color;
+
+  &:hover,
+  &:focus {
+    color: $info-color;
+  }
 }
