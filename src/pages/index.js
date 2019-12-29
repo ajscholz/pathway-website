@@ -66,7 +66,11 @@ export const data = graphql`
         ... on ContentfulInformationSection {
           title
           subtitle
-          description
+          description {
+            childMdx {
+              body
+            }
+          }
           button: callToAction {
             text
             link

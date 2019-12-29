@@ -31,7 +31,7 @@ const PopupModal = props => {
   const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
-    const visited = localStorage["visitedDate"]
+    // const visited = localStorage["visitedDate"]
 
     const now = new Date()
     let threeDaysAgo = new Date(now)

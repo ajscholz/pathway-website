@@ -1,3 +1,8 @@
+import React from "react"
+import { Link } from "gatsby"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
+
 export const useCenterColumns = arr => {
   const length = arr.length
   const colSizes = arr.map(() => ({ md: "6", lg: "4" }))
@@ -29,4 +34,35 @@ export const useRemovePastItems = arr => {
   })
 
   return activeItems
+}
+
+export const useSetLinkType = link => {
+  console.log(link)
+  if (link === null) {
+    return
+  }
+
+  const url = new URL(link.link)
+  const linkClassName = "btn btn-link stats p-0 m-0 h6 text-primary border-0"
+
+  if (url.host === "pathwaymarietta.com") {
+    return (
+      <Link to={url.pathname} className={linkClassName}>
+        {link.text}
+      </Link>
+    )
+  } else {
+    return (
+      <a
+        href={`${url.href}${url.host === "pathwaymarietta.churchcenter.com" &&
+          "?open-in-church-center-modal=true"}`}
+        rel="noopener noreferrer"
+        target="_blank"
+        className={linkClassName}
+      >
+        <FontAwesomeIcon icon={faExternalLinkAlt} className="mr-1" />
+        {link.text}
+      </a>
+    )
+  }
 }

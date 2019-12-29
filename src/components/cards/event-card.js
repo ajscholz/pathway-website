@@ -3,11 +3,14 @@ import Image from "gatsby-image"
 
 import { Card, CardBody, CardTitle, CardFooter, CardText } from "reactstrap"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
+import { useSetLinkType } from "../../utils/scripts/custom-hooks"
 
 const EventCard = props => {
   const { event } = props
+
+  const Link = useSetLinkType(event.callToActionButton)
+
+  console.log(Link)
 
   return (
     <Card className="no-transition">
@@ -27,10 +30,7 @@ const EventCard = props => {
         <hr />
         <CardFooter>
           <div className="author">{event.displayStart}</div>
-          <button className=" btn btn-link stats p-0 m-0 h6 text-primary border-0">
-            <FontAwesomeIcon icon={faExternalLinkAlt} className="mr-1" />
-            Register
-          </button>
+          {event.callToActionButton && Link}
         </CardFooter>
       </CardBody>
     </Card>

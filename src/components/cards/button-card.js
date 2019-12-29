@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import Image from "gatsby-image"
 
+import { MDXRenderer } from "gatsby-plugin-mdx"
+
 import { Card, CardBody, CardTitle, CardFooter, Button } from "reactstrap"
 
 const ButtonCard = props => {
@@ -54,11 +56,11 @@ const ButtonCard = props => {
                       <i className="nc-icon nc-world-2" />
                     </div> */}
         {subtitle && <p className="card-description">{subtitle}</p>}
-        <p
+        <div
           className={`card-description ${subtitle && "font-weight-bold mt-0"}`}
         >
-          {description}
-        </p>
+          <MDXRenderer>{description.childMdx.body}</MDXRenderer>
+        </div>
         <CardFooter>
           <Button
             className={`${
