@@ -47,7 +47,33 @@ module.exports = {
     },
     `gatsby-plugin-mdx`,
     `gatsby-plugin-catch-links`,
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank",
+              rel: "noopener noreferrer",
+            },
+          },
+          {
+            resolve: `gatsby-remark-absolute-link-catch`,
+            options: {
+              absoluteUrls: [
+                //Here I am using pretty much every protocol combination you could expect for a www... site
+                "https://pathwaymarietta.com",
+                "https://www.pathwaymarietta.com",
+                "http://pathwaymarietta.com",
+                "http://www.pathwaymarietta.com",
+              ],
+              developmentLocation: `http://localhost:8000`, //optional, defaults to http://localhost:8000
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
