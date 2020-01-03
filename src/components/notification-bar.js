@@ -5,6 +5,7 @@ import { Alert, Container } from "reactstrap"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import { useGetLinkProps } from "../utils/scripts/custom-hooks"
 
 const NotificationBar = () => {
   const { notificationBars } = useStaticQuery(graphql`
@@ -17,6 +18,7 @@ const NotificationBar = () => {
           title
           text
           autoOff
+          clickthroughLink
         }
       }
     }
@@ -29,6 +31,10 @@ const NotificationBar = () => {
   const [showNotificationBar, setShowNotificationBar] = useState(
     activeBar === undefined ? false : true
   )
+
+  const linkProps = useGetLinkProps(activeBar.clickthroughLink)
+
+  console.log(linkProps)
 
   // const alertRef = useRef()
 
@@ -47,35 +53,41 @@ const NotificationBar = () => {
 
   return showNotificationBar === false ? null : (
     // <div  >
-    <Alert
-      color="info"
-      className="mb-0  position-relative"
-      fade={false}
-      style={{ textAlign: "center" }}
-    >
-      <Container style={{ padding: "0 24px" }}>
+    <div className="position-relative d-flex">
+      <Alert
+        {...linkProps}
+        color="info"
+        className="notification-bar mb-0 position-relative"
+        fade={false}
+        style={{ textAlign: "center", width: "100%" }}
+      >
+        {/* <Container style={{ padding: "0 24px" }}> */}
         {/* <span style={{ textDecoration: "underline", fontWeight: "bold" }}>
             {activeBar.title}
           </span> */}
         {/* <br /> */}
         <span style={{ fontWeight: 400 }}>{activeBar.text}</span>
 
-        <button
-          className="text-muted p-0 m-0 position-absolute d-flex align-items-center justify-content-center bg-info"
-          style={{
-            border: "none",
-            right: "0px",
-            top: "0px",
-            height: "100%",
-            width: "40px",
-          }}
-          onClick={() => setShowNotificationBar(false)}
-        >
-          <FontAwesomeIcon icon={faTimes} color="white" />
-        </button>
-      </Container>
-    </Alert>
-    // </div>
+        {/* </Container> */}
+      </Alert>
+      <button
+        className="text-muted p-0 m-0 position-absolute d-flex align-items-center justify-content-center bg-info"
+        style={{
+          border: "none",
+          right: "0px",
+          top: "0px",
+          height: "100%",
+          width: "40px",
+        }}
+        alt="Close notification bar"
+        onClick={e => {
+          e.preventDefault()
+          setShowNotificationBar(false)
+        }}
+      >
+        <FontAwesomeIcon icon={faTimes} color="white" />
+      </button>
+    </div>
   )
 }
 

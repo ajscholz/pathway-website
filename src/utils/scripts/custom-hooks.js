@@ -39,7 +39,7 @@ export const useRemovePastItems = arr => {
 
 export const useSetLinkType = (link, props) => {
   if (link === null) {
-    return
+    return null
   }
 
   const url = new URL(link.link)
@@ -60,11 +60,31 @@ export const useSetLinkType = (link, props) => {
         target="_blank"
         {...props}
       >
-        <FontAwesomeIcon icon={faExternalLinkAlt} className="mr-1" />
+        {/* <FontAwesomeIcon icon={faExternalLinkAlt} className="mr-1" /> */}
         {link.text}
       </Button>
     )
   }
+}
+
+export const useGetLinkProps = (link, props) => {
+  if (link === null) {
+    return null
+  }
+
+  const url = new URL(link)
+
+  if (url.host === "pathwaymarietta.com") {
+    return { tag: Link, to: url.pathname, ...props }
+  } else
+    return {
+      tag: "a",
+      href: `${url.href}${url.host === "pathwaymarietta.churchcenter.com" &&
+        "?open-in-church-center-modal=true"}`,
+      // rel: "noopener noreferrer",
+      // target: "_blank",
+      ...props,
+    }
 }
 
 export const useObjectPosition = (imageSize, focusPoint) => {
