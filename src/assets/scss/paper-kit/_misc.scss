@@ -15,6 +15,7 @@ a {
   }
 
   &.notification-bar {
+    // font-weight: 400 !important;
     &:hover {
       background-color: #117a8b;
       color: $white-color;

@@ -34,8 +34,6 @@ const NotificationBar = () => {
 
   const linkProps = useGetLinkProps(activeBar.clickthroughLink)
 
-  console.log(linkProps)
-
   // const alertRef = useRef()
 
   // useEffect(() => {
@@ -57,26 +55,27 @@ const NotificationBar = () => {
       <Alert
         {...linkProps}
         color="info"
-        className="notification-bar mb-0 position-relative"
+        className="notification-bar mb-0 flex-grow-1"
         fade={false}
-        style={{ textAlign: "center", width: "100%" }}
+        style={{ textAlign: "center" }}
       >
         {/* <Container style={{ padding: "0 24px" }}> */}
         {/* <span style={{ textDecoration: "underline", fontWeight: "bold" }}>
             {activeBar.title}
           </span> */}
         {/* <br /> */}
-        <span style={{ fontWeight: 400 }}>{activeBar.text}</span>
+        <span style={{ fontWeight: 700 }}>{activeBar.text}</span>
 
         {/* </Container> */}
       </Alert>
       <button
-        className="text-muted p-0 m-0 position-absolute d-flex align-items-center justify-content-center bg-info"
+        className="text-muted p-0 m-0 position-relative d-flex align-items-center justify-content-center bg-info"
         style={{
           border: "none",
           right: "0px",
           top: "0px",
-          height: "100%",
+          botton: "0",
+          minHeight: "100%",
           width: "40px",
         }}
         alt="Close notification bar"
