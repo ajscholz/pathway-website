@@ -149,7 +149,9 @@ const ExploreOurMinistriesSection = () => {
                   top
                   tag="div"
                   className="bg-white img-rounded"
-                  style={{ maxHeight: "210px" }}
+                  style={{
+                    maxHeight: "210px",
+                  }}
                 >
                   <Image
                     style={{

@@ -164,3 +164,15 @@ exports.createSchemaCustomization = ({ actions }) => {
     },
   })
 }
+
+exports.sourceNodes = ({ actions }) => {
+  const { createTypes } = actions
+  createTypes([
+    `type ContentfulNotificationBar implements Node {
+          title: String
+          text: String
+          autoOff: String
+          clickthroughLink: String
+        }`,
+  ])
+}
