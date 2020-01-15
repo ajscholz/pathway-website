@@ -26,13 +26,17 @@ const NotificationBar = () => {
 
   const now = new Date().toISOString()
 
-  const activeBar = notificationBars.all.find(bar => bar.autoOff > now)
+  let activeBar = notificationBars.all.find(bar => bar.autoOff > now)
 
   const [showNotificationBar, setShowNotificationBar] = useState(
     activeBar === undefined ? false : true
   )
 
-  const linkProps = useGetLinkProps(activeBar.clickthroughLink)
+  console.log(showNotificationBar)
+
+  const linkProps = useGetLinkProps(
+    setShowNotificationBar === false ? null : activeBar.clickthroughLink
+  )
 
   // const alertRef = useRef()
 

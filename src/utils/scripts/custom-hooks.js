@@ -68,7 +68,7 @@ export const useSetLinkType = (link, props) => {
 }
 
 export const useGetLinkProps = (link, props) => {
-  if (link === null) {
+  if (link === null || link === undefined) {
     return null
   }
 

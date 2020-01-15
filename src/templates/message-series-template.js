@@ -8,7 +8,28 @@ import Header from "../components/header"
 const MessageSeriesTemplate = props => {
   const { data } = props
   const { messages, series } = data
-  const { title, start, end, length, year, desc, graphic } = series
+  let { title, start, end, length, year, desc, graphic } = series
+
+  if (start === null || start === undefined) {
+    start = new Date().getMonth()
+  }
+  if (end === null || end === undefined) {
+    end = new Date().getMonth()
+  }
+  if (length === null || length === undefined) {
+    length = 4
+  }
+  if (year === null || year === undefined) {
+    year = new Date().getFullYear()
+  }
+  if (desc === null || desc === undefined) {
+    desc = { desc: "Here's some placeholder text" }
+  }
+  if (graphic === null || graphic === undefined) {
+    graphic = { fluid: {} }
+  }
+
+  console.log("desc = ", desc)
 
   const date = start === end ? `${start} ${year}` : `${start}-${end} ${year}`
 

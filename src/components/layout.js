@@ -60,7 +60,7 @@ const Layout = ({ children }) => {
       </Helmet>
 
       <PopupModal />
-      <NotificationBar />
+      {/* <NotificationBar /> */}
       <div
         className="position-relative"
         style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}

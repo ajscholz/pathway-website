@@ -18,13 +18,21 @@ const slugify = string =>
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === "ContentfulMessageSeries") {
+  if (
+    node.internal.type === "ContentfulMessageSeries" &&
+    node.seriesTitle !== null &&
+    node.seriesTitle !== undefined
+  ) {
     createNodeField({
       node,
       name: `slug`,
       value: slugify(node.seriesTitle),
     })
-  } else if (node.internal.type === "ContentfulMessage") {
+  } else if (
+    node.internal.type === "ContentfulMessage" &&
+    node.messageTitle !== null &&
+    node.messageTitle !== undefined
+  ) {
     createNodeField({
       node,
       name: `slug`,
@@ -40,7 +48,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Query for markdown nodes to use in creating pages.
   const result = await graphql(`
     {
-      series: allContentfulMessageSeries {
+      series: allContentfulMessageSeries(
+        filter: { seriesTitle: { ne: null } }
+      ) {
         all: edges {
           node {
             fields {
@@ -49,7 +59,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      messages: allContentfulMessage {
+      messages: allContentfulMessage(
+        filter: {
+          messageSeries: { seriesTitle: { ne: null } }
+          messageTitle: { ne: null }
+        }
+      ) {
         all: edges {
           node {
             fields {
@@ -121,4 +136,31 @@ exports.onCreatePage = ({ page, actions }) => {
     deletePage(oldPage)
     createPage(page)
   }
+}
+
+// Generate default values for Contentful fields
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createFieldExtension } = actions
+  createFieldExtension({
+    name: "motivate",
+    args: {
+      caffeine: "Int",
+    },
+    extend(options, prevFieldConfig) {
+      return {
+        type: "String",
+        args: {
+          sunshine: {
+            type: "Int",
+            defaultValue: 0,
+          },
+        },
+        resolve(source, args, context, info) {
+          const motivation = (options.caffeine || 0) - args.sunshine
+          if (motivation > 5) return "Work! Work! Work!"
+          return "Maybe tomorrow."
+        },
+      }
+    },
+  })
 }
