@@ -176,7 +176,12 @@ const ExploreOurMinistriesSection = () => {
                       {groups.description.childMdx.body}
                     </MDXRenderer>
                   </div>
-                  {/* <LinkButton button={groups.callToAction} /> */}
+                  <LinkButton
+                    button={groups.callToAction}
+                    color="primary"
+                    className="mt-3"
+                    outline
+                  />
                 </CardBody>
               </Card>
             </Col>
