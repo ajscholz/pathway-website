@@ -29,7 +29,7 @@ export const useRemovePastItems = arr => {
   let activeItems = []
 
   arr.forEach(event => {
-    let itemDate = new Date(event.start)
+    let itemDate = new Date(event.end || event.start)
     itemDate.setDate(itemDate.getDate() + 1)
     if (itemDate > now) activeItems.push(event)
   })

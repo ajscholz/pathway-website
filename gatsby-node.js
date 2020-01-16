@@ -18,6 +18,9 @@ const slugify = string =>
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
+  if (node.internal.type === "ContentfulEvent") {
+    console.log(node.image___NODE)
+  }
   if (
     node.internal.type === "ContentfulMessageSeries" &&
     node.seriesTitle !== null &&
