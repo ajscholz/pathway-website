@@ -44,6 +44,15 @@ const IndexPage = props => {
               <ButtonCard sectionData={sections[2]} className="mb-0" />
             </Col>
           </div>
+          <div className="row no-gutters">
+            <Col md={8} className="mx-auto">
+              <ButtonCard
+                sectionData={sections[3]}
+                className="mb-0"
+                button="solid"
+              />
+            </Col>
+          </div>
         </Container>
       </section>
     </>
