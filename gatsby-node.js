@@ -32,7 +32,7 @@ exports.onCreateNode = ({ node, actions }) => {
     let slug = slugify(node.seriesTitle)
     if (slug === undefined) {
       unnamedSeriesCounter++
-      slug = `unnamed-series-${unnamedSeriesCounter}`
+      slug = `/unnamed-series-${unnamedSeriesCounter}`
     }
     createNodeField({
       node,
@@ -46,7 +46,7 @@ exports.onCreateNode = ({ node, actions }) => {
     let slug = slugify(node.messageTitle)
     if (slug === undefined) {
       unnamedMessageCounter++
-      slug = `unnamed-message-${unnamedMessageCounter}`
+      slug = `/unnamed-message-${unnamedMessageCounter}`
     }
     createNodeField({
       node,
