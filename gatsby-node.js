@@ -41,7 +41,6 @@ exports.onCreateNode = ({ node, actions }) => {
     })
     // console.log(node.fields.slug)
   } else if (node.internal.type === "ContentfulMessage") {
-    console.log(node)
     // console.log("in onCreateNode")
     let slug = slugify(node.messageTitle)
     if (slug === undefined) {
@@ -64,9 +63,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Query for markdown nodes to use in creating pages.
   const result = await graphql(`
     {
-      series: allContentfulMessageSeries(
-        filter: { seriesTitle: { ne: null } }
-      ) {
+      series: allContentfulMessageSeries {
         all: edges {
           node {
             fields {
@@ -75,12 +72,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      messages: allContentfulMessage(
-        filter: {
-          messageSeries: { seriesTitle: { ne: null } }
-          messageTitle: { ne: null }
-        }
-      ) {
+      messages: allContentfulMessage {
         all: edges {
           node {
             fields {
