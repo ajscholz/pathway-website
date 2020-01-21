@@ -57,7 +57,7 @@ export const data = graphql`
     ) {
       all: edges {
         series: node {
-          id
+          id: contentful_id
           title: seriesTitle
           desc: seriesDescription {
             desc: seriesDescription

@@ -10,37 +10,50 @@
 
 const path = require(`path`)
 
-const slugify = string =>
-  `/${string
+const slugify = title => {
+  if (title === null || title === undefined) {
+    return undefined
+  }
+
+  return `/${title
     .replace(/ /g, "-")
     .replace(/[\#\?\'\"\&\*\$]+/g, "")
     .toLowerCase()}`
+}
+
+// create counters to increment for unnamed slugs in onCreateNode
+let unnamedSeriesCounter = 0
+let unnamedMessageCounter = 0
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === "ContentfulEvent") {
-    console.log(node.image___NODE)
-  }
-  if (
-    node.internal.type === "ContentfulMessageSeries" &&
-    node.seriesTitle !== null &&
-    node.seriesTitle !== undefined
-  ) {
+
+  if (node.internal.type === "ContentfulMessageSeries") {
+    let slug = slugify(node.seriesTitle)
+    if (slug === undefined) {
+      unnamedSeriesCounter++
+      slug = `unnamed-series-${unnamedSeriesCounter}`
+    }
     createNodeField({
       node,
       name: `slug`,
-      value: slugify(node.seriesTitle),
+      value: slug,
     })
-  } else if (
-    node.internal.type === "ContentfulMessage" &&
-    node.messageTitle !== null &&
-    node.messageTitle !== undefined
-  ) {
+    // console.log(node.fields.slug)
+  } else if (node.internal.type === "ContentfulMessage") {
+    console.log(node)
+    // console.log("in onCreateNode")
+    let slug = slugify(node.messageTitle)
+    if (slug === undefined) {
+      unnamedMessageCounter++
+      slug = `unnamed-message-${unnamedMessageCounter}`
+    }
     createNodeField({
       node,
       name: `slug`,
-      value: slugify(node.messageTitle),
+      value: slug,
     })
+    // console.log(node.fields.slug)
   }
 }
 
@@ -141,41 +154,33 @@ exports.onCreatePage = ({ page, actions }) => {
   }
 }
 
-// Generate default values for Contentful fields
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createFieldExtension } = actions
-  createFieldExtension({
-    name: "motivate",
-    args: {
-      caffeine: "Int",
-    },
-    extend(options, prevFieldConfig) {
-      return {
-        type: "String",
-        args: {
-          sunshine: {
-            type: "Int",
-            defaultValue: 0,
-          },
-        },
-        resolve(source, args, context, info) {
-          const motivation = (options.caffeine || 0) - args.sunshine
-          if (motivation > 5) return "Work! Work! Work!"
-          return "Maybe tomorrow."
-        },
-      }
-    },
-  })
-}
-
-exports.sourceNodes = ({ actions }) => {
-  const { createTypes } = actions
-  createTypes([
-    `type ContentfulNotificationBar implements Node {
-          title: String
-          text: String
-          autoOff: String
-          clickthroughLink: String
-        }`,
-  ])
-}
+// exports.createSchemaCustomization = ({ actions, schema }) => {
+//   const { createTypes } = actions
+//   const typeDefs = [
+//     schema.buildObjectType({
+//       name: "ContentfulMessage",
+//       fields: {
+//         messageTitle: {
+//           type: "String",
+//           resolve(source, info) {
+//             if (source.messageTitle === undefined) {
+//               return `Undefined Message`
+//             }
+//             return source.messageTitle
+//           },
+//         },
+//         // messageDate: {
+//         //   type: "String",
+//         //   resolve(source) {
+//         //     if (source.messageDate === undefined) {
+//         //       return "1776-07-04"
+//         //     }
+//         //     return source.messageDate
+//         //   },
+//         // },
+//       },
+//       interfaces: ["Node"],
+//     }),
+//   ]
+//   createTypes(typeDefs)
+// }

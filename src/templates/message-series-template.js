@@ -29,8 +29,6 @@ const MessageSeriesTemplate = props => {
     graphic = { fluid: {} }
   }
 
-  console.log("desc = ", desc)
-
   const date = start === end ? `${start} ${year}` : `${start}-${end} ${year}`
 
   return (

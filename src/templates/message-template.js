@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 
 import { graphql, Link } from "gatsby"
 import Header from "components/header"
@@ -90,6 +91,22 @@ const MessageTemplate = props => {
       </div>
     </>
   )
+}
+
+MessageTemplate.propTypes = {
+  data: {
+    message: {
+      date: PropTypes.string,
+    },
+  },
+}
+
+MessageTemplate.defaultProps = {
+  data: {
+    message: {
+      date: "1776-07-04",
+    },
+  },
 }
 
 export const data = graphql`
