@@ -1,19 +1,12 @@
 import React from "react"
 import Image from "gatsby-image"
+import { graphql } from "gatsby"
 
 import { Card, CardBody, CardTitle, CardFooter, CardText } from "reactstrap"
-
-import { useSetLinkType } from "../../utils/scripts/custom-hooks"
 
 const EventCard = props => {
   const { event } = props
 
-  let Link
-  // const Link = useSetLinkType(event.callToActionButton, {
-  //   className: "btn-link stats p-0 m-0 h6 border-0 text-primary",
-  //   color: "primary",
-  // })
-  console.log(event)
   return (
     <Card className="no-transition">
       <div className="card-image ">
@@ -40,3 +33,28 @@ const EventCard = props => {
 }
 
 export default EventCard
+
+export const query = graphql`
+  fragment EventCardFragment on ContentfulEvent {
+    id: contentful_id
+    title: eventName
+    start(formatString: "dddd MMMM D, YYYY")
+    displayStart: start(formatString: "dddd, MMM DD")
+    end
+    image {
+      file {
+        url
+      }
+      fluid {
+        ...GatsbyContentfulFluid
+      }
+    }
+    description {
+      description
+    }
+    callToActionButton {
+      link
+      text
+    }
+  }
+`

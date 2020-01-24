@@ -15,8 +15,6 @@ const EventsPage = props => {
   const { page, events } = data
   const { heading, image } = page.banner
 
-  console.log(events)
-
   const activeItems = useRemovePastItems(events.all)
 
   const colSizes = useCenterColumns(activeItems)

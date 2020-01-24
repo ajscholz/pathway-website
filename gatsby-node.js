@@ -112,6 +112,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         slug: node.fields.slug,
       },
     })
+    console.log(node)
   })
 
   // Create pages for each message.
@@ -127,6 +128,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         seriesId: node.messageSeries.contentful_id,
       },
     })
+    console.log(node)
   })
 }
 

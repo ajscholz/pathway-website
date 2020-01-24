@@ -20,26 +20,7 @@ const UpcomingEventsSection = () => {
       }
       events: allContentfulEvent(sort: { fields: start, order: ASC }) {
         all: nodes {
-          id: contentful_id
-          title: eventName
-          start(formatString: "dddd MMMM D, YYYY")
-          displayStart: start(formatString: "dddd, MMM DD")
-          end
-          image {
-            file {
-              url
-            }
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-          description {
-            description
-          }
-          callToActionButton {
-            link
-            text
-          }
+          ...EventCardFragment
         }
       }
     }
@@ -57,16 +38,12 @@ const UpcomingEventsSection = () => {
             <h2 className="title text-center">{section.title}</h2>
           </Col>
         </Row>
-        <Row>
-          <Col md="6" lg="4">
-            <EventCard event={activeItems[0]} />
-          </Col>
-          <Col md="6" lg="4">
-            <EventCard event={activeItems[1]} />
-          </Col>
-          <Col className="d-md-none d-lg-block" lg="4">
-            <EventCard event={activeItems[2]} />
-          </Col>
+        <Row className="d-fluid justify-content-center">
+          {activeItems.map(event => (
+            <Col md="6" lg="4" key={event.id}>
+              <EventCard event={event} />
+            </Col>
+          ))}
         </Row>
         <Row>
           <Link

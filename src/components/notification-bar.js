@@ -1,38 +1,37 @@
-import React, { useState } from "react"
-import { useStaticQuery, graphql } from "gatsby"
+// import React, { useState } from "react"
+// import { useStaticQuery } from "gatsby"
 
-import { Alert, Container } from "reactstrap"
+// import { Alert, Container } from "reactstrap"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
-import { useGetLinkProps } from "../utils/scripts/custom-hooks"
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+// import { faTimes } from "@fortawesome/free-solid-svg-icons"
+// import { useGetLinkProps } from "../utils/scripts/custom-hooks"
 
 const NotificationBar = () => {
-  const { notificationBars } = useStaticQuery(graphql`
-    {
-      notificationBars: allContentfulNotificationBar(
-        filter: { showBar: { eq: true } }
-        sort: { fields: updatedAt, order: DESC }
-      ) {
-        all: nodes {
-          title
-          text
-          autoOff
-          clickthroughLink
-        }
-      }
-    }
-  `)
+  // const { notificationBars } = useStaticQuery(graphql`
+  //   {
+  //     notificationBars: allContentfulNotificationBar(
+  //       filter: { showBar: { eq: true } }
+  //       sort: { fields: updatedAt, order: DESC }
+  //     ) {
+  //       all: nodes {
+  //         title
+  //         text
+  //         autoOff
+  //         clickthroughLink
+  //       }
+  //     }
+  //   }
+  // `)
 
-  console.log(notificationBars)
   // const now = new Date().toISOString()
 
   // let activeBar = notificationBars.all.find(bar => bar.autoOff > now)
 
-  const [showNotificationBar, setShowNotificationBar] = useState(
-    // activeBar === undefined ? false : true
-    false
-  )
+  // const [showNotificationBar, setShowNotificationBar] = useState(
+  // activeBar === undefined ? false : true
+  //   false
+  // )
 
   // console.log(showNotificationBar)
 
