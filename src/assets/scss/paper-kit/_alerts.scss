@@ -7,7 +7,8 @@
 
   & .close {
     font-size: $font-size-large;
-    color: $white-color;
+    color: inherit;
+    height: 100%;
   }
 
   .container & {
@@ -54,7 +55,37 @@
 }
 .alert-warning {
   background-color: $bg-warning;
+  color: $black-color;
 }
 .alert-danger {
   background-color: $bg-danger;
+}
+
+.alert-banner {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 12px;
+}
+
+.alert-banner-close {
+  border: none;
+  right: 0px;
+  top: 0px;
+  height: 40px;
+  width: 40px;
+}
+
+@media (min-width: 576px) {
+  .alert-banner {
+    width: calc(100% - 100px);
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  .alert-banner-close {
+    bottom: 0;
+    height: 100%;
+    width: 60px;
+  }
 }

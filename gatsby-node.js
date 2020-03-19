@@ -112,7 +112,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         slug: node.fields.slug,
       },
     })
-    console.log(node)
   })
 
   // Create pages for each message.
@@ -128,7 +127,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         seriesId: node.messageSeries.contentful_id,
       },
     })
-    console.log(node)
   })
 }
 
@@ -148,33 +146,36 @@ exports.onCreatePage = ({ page, actions }) => {
   }
 }
 
-// exports.createSchemaCustomization = ({ actions, schema }) => {
-//   const { createTypes } = actions
-//   const typeDefs = [
-//     schema.buildObjectType({
-//       name: "ContentfulMessage",
-//       fields: {
-//         messageTitle: {
-//           type: "String",
-//           resolve(source, info) {
-//             if (source.messageTitle === undefined) {
-//               return `Undefined Message`
-//             }
-//             return source.messageTitle
-//           },
-//         },
-//         // messageDate: {
-//         //   type: "String",
-//         //   resolve(source) {
-//         //     if (source.messageDate === undefined) {
-//         //       return "1776-07-04"
-//         //     }
-//         //     return source.messageDate
-//         //   },
-//         // },
+// Define the "Event" type
+exports.createSchemaCustomization = ({ actions }) => {
+  actions.createTypes(`
+		type ContentfulNotificationBar implements Node {
+      title: String
+      showBar: Boolean
+			text: String
+			autoOff: Date @dateformat
+      clickthroughLink: String
+      updatedAt: Date
+    }
+	`)
+}
+
+// // Define resolvers for custom fields
+// exports.createResolvers = ({ createResolvers }, options) => {
+//   const basePath = options.basePath || "/"
+//   // Quick-and-dirty helper to convert strings into URL-friendly slugs
+//   const slugify = str => {
+//     const slug = str
+//       .toLowerCase()
+//       .replace(/[^a-z0-9]+/g, "-")
+//       .replace(/(^-|-$)+/g, "")
+//     return `/${basePath}/${slug}`.replace(/\/\/+/g, "/")
+//   }
+//   createResolvers({
+//     Event: {
+//       slug: {
+//         resolve: source => slugify(source.name),
 //       },
-//       interfaces: ["Node"],
-//     }),
-//   ]
-//   createTypes(typeDefs)
+//     },
+//   })
 // }
