@@ -45,8 +45,8 @@ export const data = graphql`
         heading
         subHeading
         image {
-          fluid(resizingBehavior: FILL) {
-            ...GatsbyContentfulFluid
+          fluid(maxWidth: 2000, quality: 80) {
+            ...GatsbyContentfulFluid_withWebp
           }
         }
       }
