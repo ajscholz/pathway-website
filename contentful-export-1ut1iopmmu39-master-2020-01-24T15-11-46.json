@@ -1,0 +1,137 @@
+{
+  "contentTypes": [
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "1ut1iopmmu39"
+          }
+        },
+        "id": "event",
+        "type": "ContentType",
+        "createdAt": "2019-11-20T21:30:24.020Z",
+        "updatedAt": "2020-01-21T22:09:27.430Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 29,
+        "publishedAt": "2020-01-21T22:09:27.430Z",
+        "firstPublishedAt": "2019-11-20T21:30:24.350Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4dRQLkZNxmUS6Qj1aWgQFs"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "5EKQQe1N494XHg8UFXmz0I"
+          }
+        },
+        "publishedCounter": 15,
+        "version": 30,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "5EKQQe1N494XHg8UFXmz0I"
+          }
+        }
+      },
+      "displayField": "eventName",
+      "name": "Event",
+      "description": "",
+      "fields": [
+        {
+          "id": "eventName",
+          "name": "Event Name",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "image",
+          "name": "Image",
+          "type": "Link",
+          "localized": false,
+          "required": true,
+          "validations": [
+            {
+              "linkMimetypeGroup": ["image"]
+            }
+          ],
+          "disabled": false,
+          "omitted": false,
+          "linkType": "Asset"
+        },
+        {
+          "id": "description",
+          "name": "Description",
+          "type": "Text",
+          "localized": false,
+          "required": true,
+          "validations": [],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "start",
+          "name": "Start",
+          "type": "Date",
+          "localized": false,
+          "required": true,
+          "validations": [],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "end",
+          "name": "End",
+          "type": "Date",
+          "localized": false,
+          "required": false,
+          "validations": [],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "location",
+          "name": "Location",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "callToActionButton",
+          "name": "Call To Action Button",
+          "type": "Link",
+          "localized": false,
+          "required": false,
+          "validations": [
+            {
+              "linkContentType": ["button"]
+            }
+          ],
+          "disabled": false,
+          "omitted": false,
+          "linkType": "Entry"
+        }
+      ]
+    }
+  ]
+}
