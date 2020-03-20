@@ -70,7 +70,7 @@ const Countdown = () => {
   //   findNextSunday()
   // }
 
-  let nextStream = new Date(2020, 2, 20, 10, 30)
+  let nextStream = new Date(2020, 2, 22, 10, 30)
 
   // initialize state to number of seconds left before next Sunday at 10:30am
   const [timeLeft, setTimeLeft] = useState(
@@ -137,7 +137,7 @@ const Countdown = () => {
             <Button
               color="primary"
               size="lg"
-              href={`https://www.facebook.com/pathwaymarietta/videos/503812663636183/`}
+              href={`https://www.facebook.com/watch/live/?v=503812663636183`}
               rel="noopener noreferrer"
               target="_blank"
               className="mt-5"
