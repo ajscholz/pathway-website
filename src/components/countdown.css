@@ -12,13 +12,14 @@
   display: grid;
   grid-gap: 0.25rem;
   grid-template-columns: repeat(7, min-content);
-  grid-template-rows: repeat(2, auto);
+  grid-template-rows: repeat(3, auto);
   grid-template-areas:
     "header header header header header header header"
-    "day . hour . minute . seconds";
+    "day . hour . minute . seconds"
+    "button button button button button button button";
 }
 
-.title {
+.streamingTitle {
   font-size: 1.35em;
   grid-area: header;
   margin: 0;
@@ -34,6 +35,10 @@
   text-transform: uppercase;
   font-size: 0.2em;
   font-weight: 600;
+}
+
+.lastStreamButton {
+  grid-area: button;
 }
 
 @media (min-width: 375px) {
@@ -61,7 +66,7 @@
   .liveContainer {
     font-size: 1.4em;
   }
-  .title {
+  .streamingTitle {
     font-size: 0.8em;
   }
   .label {
@@ -75,4 +80,8 @@
   .liveContainer {
     font-size: 1.5em;
   }
+}
+
+.colon::after {
+  content: ":";
 }
