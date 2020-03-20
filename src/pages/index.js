@@ -23,6 +23,7 @@ const IndexPage = props => {
         subtitle={subHeading}
         background={image}
         full={true}
+        countdown={true}
       />
       <section>
         <Container fluid style={{ padding: "0", margin: "0" }}>

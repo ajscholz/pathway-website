@@ -2,9 +2,10 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import Image from "gatsby-image"
+import Countdown from "./countdown"
 
 const Header = props => {
-  const { title, subtitle, background, full, xs } = props
+  const { title, subtitle, background, full, xs, countdown } = props
 
   return (
     <>
@@ -31,10 +32,14 @@ const Header = props => {
         <div className="filter" />
         {title && (
           <div className="content-center">
-            <div className="motto">
-              <h1 className="text-center">{title}</h1>
-              <h3 className="text-center">{subtitle}</h3>
-            </div>
+            {countdown === true ? (
+              <Countdown />
+            ) : (
+              <div className="motto">
+                <h1 className="text-center">{title}</h1>
+                <h3 className="text-center">{subtitle}</h3>
+              </div>
+            )}
           </div>
         )}
       </div>

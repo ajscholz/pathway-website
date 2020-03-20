@@ -1,0 +1,78 @@
+.countdownContainer {
+  font-size: 1em;
+}
+
+/* .liveContainer {
+  font-size: 1em;
+} */
+
+.countdownGrid {
+  margin: 0 auto;
+  font-size: inherit;
+  display: grid;
+  grid-gap: 0.25rem;
+  grid-template-columns: repeat(7, min-content);
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+    "header header header header header header header"
+    "day . hour . minute . seconds";
+}
+
+.title {
+  font-size: 1.35em;
+  grid-area: header;
+  margin: 0;
+}
+
+.timer {
+  font-size: 3.5em;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.2em;
+  font-weight: 600;
+}
+
+@media (min-width: 375px) {
+  .countdownGrid {
+    font-size: 1.05em;
+  }
+  .liveContainer {
+    font-size: 1.3em;
+  }
+}
+
+@media (min-width: 576px) {
+  .countdownGrid {
+    font-size: 1.5em;
+  }
+  .liveContainer {
+    font-size: 1.35em;
+  }
+}
+
+@media (min-width: 768px) {
+  .countdownGrid {
+    font-size: 1.8em;
+  }
+  .liveContainer {
+    font-size: 1.4em;
+  }
+  .title {
+    font-size: 0.8em;
+  }
+  .label {
+    font-size: 0.15em;
+  }
+}
+@media (min-width: 991px) {
+  .countdownGrid {
+    font-size: 2.25em;
+  }
+  .liveContainer {
+    font-size: 1.5em;
+  }
+}
