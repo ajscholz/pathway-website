@@ -146,7 +146,7 @@ exports.onCreatePage = ({ page, actions }) => {
   }
 }
 
-// Define the "Event" type
+// Define graphql types
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
 		type ContentfulNotificationBar implements Node {
@@ -156,6 +156,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 			autoOff: Date @dateformat
       clickthroughLink: String
       updatedAt: Date
+    }
+    type ContentfulStreamingVideo implements Node {
+      videoId: String!
+      dateTime: Date! @dateformat
     }
 	`)
 }

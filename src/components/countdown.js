@@ -5,23 +5,6 @@ import { graphql, useStaticQuery } from "gatsby"
 import "./countdown.css"
 
 const Countdown = () => {
-  const data = useStaticQuery(graphql`
-    {
-      message: contentfulMessage {
-        fields {
-          slug
-        }
-        series: messageSeries {
-          fields {
-            slug
-          }
-        }
-      }
-    }
-  `)
-
-  let nextStream = new Date()
-
   const setNextSunday = d => {
     d.setDate(d.getDate() + ((5 + 7 - d.getDay()) % 7))
     return d
@@ -40,15 +23,55 @@ const Countdown = () => {
   }
 
   // if it's after Sunday at 11:30a set to next Sunday
-  if (nextStream.getDay() !== 5) {
-    nextStream = setNextSunday(nextStream)
-  } else if (nextStream.getHours() === 11 && nextStream.getMinutes() >= 30) {
-    nextStream = setNextSundayFromSunday(nextStream)
-  } else if (nextStream.getHours() > 11) {
-    nextStream = setNextSundayFromSunday(nextStream)
+  const findNextSunday = () => {
+    if (nextStream.getDay() !== 5) {
+      nextStream = setNextSunday(nextStream)
+    } else if (nextStream.getHours() === 11 && nextStream.getMinutes() >= 30) {
+      nextStream = setNextSundayFromSunday(nextStream)
+    } else if (nextStream.getHours() > 11) {
+      nextStream = setNextSundayFromSunday(nextStream)
+    }
+    // now that the date is right, set the time to 10:30am
+    nextStream = setTime(nextStream)
   }
-  // now that the date is right, set the time to 10:30am
-  nextStream = setTime(nextStream)
+
+  const data = useStaticQuery(graphql`
+    {
+      streams: allContentfulStreamingVideo(
+        sort: { fields: dateTime, order: ASC }
+      ) {
+        all: nodes {
+          videoId
+          dateTime
+        }
+      }
+      message: contentfulMessage {
+        fields {
+          slug
+        }
+        series: messageSeries {
+          fields {
+            slug
+          }
+        }
+      }
+    }
+  `)
+
+  const now = new Date()
+  let streamData = data.streams.all.find(stream => {
+    const d = new Date(stream.dateTime)
+    return d > now
+  })
+
+  let nextStream = new Date(streamData.dateTime)
+
+  if (typeof streamData === "undefined") {
+    findNextSunday()
+  }
+
+  console.log("now", Date.now())
+  console.log("nextStream", nextStream)
 
   // initialize state to number of seconds left before next Sunday at 10:30am
   const [timeLeft, setTimeLeft] = useState(
@@ -115,7 +138,7 @@ const Countdown = () => {
             <Button
               color="primary"
               size="lg"
-              href={`https://google.com`}
+              href={`https://www.facebook.com/pathwaymarietta/videos/${streamData.videoId}/`}
               rel="noopener noreferrer"
               target="_blank"
               className="mt-5"
