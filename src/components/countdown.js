@@ -70,9 +70,6 @@ const Countdown = () => {
     findNextSunday()
   }
 
-  console.log("now", Date.now())
-  console.log("nextStream", nextStream)
-
   // initialize state to number of seconds left before next Sunday at 10:30am
   const [timeLeft, setTimeLeft] = useState(
     Math.floor(nextStream.getTime() - Date.now())
