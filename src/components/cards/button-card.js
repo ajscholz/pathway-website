@@ -85,8 +85,7 @@ ButtonCard.propTypes = {
     subtitle: PropTypes.string,
     description: PropTypes.object.isRequired,
     button: PropTypes.object.isRequired,
-    background: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
-      .isRequired,
+    background: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   }).isRequired,
 }
 

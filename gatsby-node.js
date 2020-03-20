@@ -160,6 +160,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type ContentfulStreamingVideo implements Node {
       videoId: String!
       dateTime: Date! @dateformat
+      length: Int!
     }
 	`)
 }
