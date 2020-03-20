@@ -58,17 +58,19 @@ const Countdown = () => {
     }
   `)
 
-  const now = new Date()
-  let streamData = data.streams.all.find(stream => {
-    const d = new Date(stream.dateTime)
-    return d > now
-  })
+  // const now = new Date()
+  // let streamData = data.streams.all.find(stream => {
+  //   const d = new Date(stream.dateTime)
+  //   return d > now
+  // })
 
-  let nextStream = new Date(streamData.dateTime)
+  // let nextStream = new Date(streamData.dateTime)
 
-  if (typeof streamData === "undefined") {
-    findNextSunday()
-  }
+  // if (typeof streamData === "undefined") {
+  //   findNextSunday()
+  // }
+
+  let nextStream = new Date(2020, 2, 20, 10, 30)
 
   // initialize state to number of seconds left before next Sunday at 10:30am
   const [timeLeft, setTimeLeft] = useState(
@@ -135,7 +137,7 @@ const Countdown = () => {
             <Button
               color="primary"
               size="lg"
-              href={`https://www.facebook.com/pathwaymarietta/videos/${streamData.videoId}/`}
+              href={`https://www.facebook.com/pathwaymarietta/videos/503812663636183/`}
               rel="noopener noreferrer"
               target="_blank"
               className="mt-5"
