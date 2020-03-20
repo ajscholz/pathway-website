@@ -28,7 +28,6 @@ const Countdown = () => {
       }
     }
   `)
-  const fakeLength = 1
   const [over, setOver] = useState(false)
   const now = new Date()
 
@@ -43,9 +42,8 @@ const Countdown = () => {
       : typeof window !== "undefined" && window.sessionStorage.nextSunday
   )
 
-  const length = typeof streamData === "undefined" ? 0 : fakeLength * 60000
-
-  nextSunday = new Date(2020, 2, 20, 18, 8)
+  // const length =
+  //   typeof streamData === "undefined" ? 0 : streamData.length * 60000
 
   if (over) {
     const nextDate = nextSunday.getDate() + 7
@@ -55,7 +53,6 @@ const Countdown = () => {
   let next = nextSunday.getTime()
 
   const [time, setTime] = useState(next - Date.now())
-  console.log(time)
 
   useEffect(() => {
     let shouldUpdate = true
@@ -67,11 +64,11 @@ const Countdown = () => {
     return () => (shouldUpdate = false)
   }, [time, next])
 
-  useEffect(() => {
-    if (over === false && time < -length) {
-      setOver(true)
-    }
-  })
+  // useEffect(() => {
+  //   if (over === false && time < -length) {
+  //     setOver(true)
+  //   }
+  // })
 
   return (
     <>
