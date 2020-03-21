@@ -5,8 +5,16 @@ import Image from "gatsby-image"
 import Countdown from "./countdown"
 
 const Header = props => {
-  const { title, subtitle, background, full, xs, countdown } = props
-
+  const {
+    title,
+    subtitle,
+    background,
+    full,
+    xs,
+    countdown,
+    override,
+    children,
+  } = props
   return (
     <>
       <div
@@ -35,12 +43,17 @@ const Header = props => {
             {/* {countdown === true ? ( */}
             {/* <Countdown /> */}
             {/* ) : ( */}
-            <div className="content-center">
-              <div className="motto">
-                <h1 className="text-center">{title}</h1>
-                <h3 className="text-center">{subtitle}</h3>
+
+            {override === true ? (
+              <>{children}</>
+            ) : (
+              <div className="content-center">
+                <div className="motto">
+                  <h1 className="text-center">{title}</h1>
+                  <h3 className="text-center">{subtitle}</h3>
+                </div>
               </div>
-            </div>
+            )}
             {/* )} */}
           </>
         )}

@@ -1,19 +1,37 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { graphql } from "gatsby"
 
 import SEO from "components/seo"
 import Header from "components/header"
 import ButtonCard from "../components/cards/button-card"
+import ReactPlayer from "react-player/lib/players/Vimeo"
 
-import { Container, Col } from "reactstrap"
+import { Container, Col, Row } from "reactstrap"
 
 const IndexPage = props => {
-  const { data } = props
+  let { data } = props
   const { banner, sections } = data.page
   const { heading, subHeading, image } = banner
 
+  const [day, setDay] = useState(new Date())
+
+  useEffect(() => {
+    setInterval(() => {
+      const now = new Date()
+      if (now.getDay() !== day.getDay()) {
+        setDay(now.getDay())
+      }
+    }, 300000)
+  })
   let whiteSection = sections[0]
   whiteSection.background = ""
+
+  // get the stream from graphql that is today
+  const index = data.streams.all.findIndex(stream => {
+    return new Date(stream.dateTime).getDay() === day.getDay() ? true : false
+  })
+
+  const stream = index === -1 ? {} : data.streams.all[index]
 
   return (
     <>
@@ -24,7 +42,48 @@ const IndexPage = props => {
         background={image}
         full={true}
         countdown={true}
-      />
+        override={day.getDay() === 6 && index !== -1}
+      >
+        <div
+          className="position-absolute h-100 w-100 d-flex justify-content-center align-items-center"
+          style={{
+            top: 0,
+            left: 0,
+            zIndex: 1000,
+            background: "rgba(0,0,0,0.6)",
+          }}
+        >
+          <Container>
+            <Row>
+              <Col lg={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
+                <h2 className="text-center mt-0">Worship online today</h2>
+                <div
+                  className="mt-5"
+                  style={{
+                    position: "relative",
+                    paddingTop: "56.25%",
+                    width: "100%",
+                  }}
+                >
+                  <ReactPlayer
+                    url={stream.videoUrl}
+                    style={{
+                      position: "absolute",
+                      // border: "6px solid rgba(256,256,256,.5",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                    }}
+                    controls={true}
+                    // light={true}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      </Header>
       <section>
         <Container fluid style={{ padding: "0", margin: "0" }}>
           <div className="row no-gutters">
@@ -91,6 +150,12 @@ export const data = graphql`
             }
           }
         }
+      }
+    }
+    streams: allContentfulStreamingVideo {
+      all: nodes {
+        videoUrl
+        dateTime
       }
     }
   }

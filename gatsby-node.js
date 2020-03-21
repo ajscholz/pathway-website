@@ -176,7 +176,8 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
         videoUrl: {
           type: "String!",
           resolve: source =>
-            `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${source.videoId}%2F&width=auto`,
+            // `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${source.videoId}%2F&width=auto`,
+            `https://vimeo.com/${source.videoId}`,
         },
       },
       interfaces: ["Node"],
