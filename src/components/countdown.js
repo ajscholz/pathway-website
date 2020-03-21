@@ -53,8 +53,6 @@ const Countdown = () => {
     shouldUpdate: true,
   })
 
-  let videoId
-
   useEffect(() => {
     if (state.first) {
       const { all } = data.streams
@@ -68,8 +66,6 @@ const Countdown = () => {
         let dateTime = new Date(stream.dateTime)
         end = dateTime.getTime() + stream.length * 60000
         end = new Date(end)
-        // console.log(end)
-        // const d = new Date(stream.dateTime)
         return end > Date.now()
       })
 
@@ -79,6 +75,10 @@ const Countdown = () => {
         streaming = next < Date.now() && next < end ? true : false
         vidRef.current = all[index].videoId
       }
+      // if (next  Date.now()) {
+      //   next.setDate(next.getDate() + 7)
+      //   next = new Date(next)
+      // }
 
       setState({
         ...state,
