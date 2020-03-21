@@ -23,7 +23,7 @@ const Countdown = () => {
         sort: { fields: dateTime, order: ASC }
       ) {
         all: nodes {
-          videoId
+          videoUrl
           dateTime
           length
         }
@@ -73,7 +73,7 @@ const Countdown = () => {
         length = all[index].length
         next = new Date(all[index].dateTime)
         streaming = next < Date.now() && next < end ? true : false
-        vidRef.current = all[index].videoId
+        vidRef.current = all[index].videoUrl
       }
       // if (next  Date.now()) {
       //   next.setDate(next.getDate() + 7)
@@ -186,7 +186,7 @@ const Countdown = () => {
                   >
                     <iframe
                       title="facebook-iframe"
-                      src={`https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${vidRef.current}%2F&width=auto`}
+                      src={vidRef.current}
                       // width="640"
                       // height="360"
                       style={{

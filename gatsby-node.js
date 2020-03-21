@@ -147,40 +147,40 @@ exports.onCreatePage = ({ page, actions }) => {
 }
 
 // Define graphql types
-exports.createSchemaCustomization = ({ actions }) => {
-  actions.createTypes(`
-		type ContentfulNotificationBar implements Node {
+exports.createSchemaCustomization = ({ actions, schema }) => {
+  const { createTypes } = actions
+  const typeDefs = [
+    `type ContentfulNotificationBar implements Node {
       title: String
       showBar: Boolean
 			text: String
 			autoOff: Date @dateformat
       clickthroughLink: String
       updatedAt: Date
-    }
-    type ContentfulStreamingVideo implements Node {
-      videoId: String!
-      dateTime: Date! @dateformat
-      length: Int!
-    }
-	`)
+    }`,
+    schema.buildObjectType({
+      name: "ContentfulStreamingVideo",
+      fields: {
+        videoId: {
+          type: "String!",
+          resolve: source => source.videoId || "503812663636183",
+        },
+        dateTime: {
+          type: "Date!",
+          resolve: source => source.dateTime || new Date(2000, 0, 1),
+        },
+        length: {
+          type: "Int!",
+          resolve: source => source.length || 1,
+        },
+        videoUrl: {
+          type: "String!",
+          resolve: source =>
+            `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${source.videoId}%2F&width=auto`,
+        },
+      },
+      interfaces: ["Node"],
+    }),
+  ]
+  createTypes(typeDefs)
 }
-
-// // Define resolvers for custom fields
-// exports.createResolvers = ({ createResolvers }, options) => {
-//   const basePath = options.basePath || "/"
-//   // Quick-and-dirty helper to convert strings into URL-friendly slugs
-//   const slugify = str => {
-//     const slug = str
-//       .toLowerCase()
-//       .replace(/[^a-z0-9]+/g, "-")
-//       .replace(/(^-|-$)+/g, "")
-//     return `/${basePath}/${slug}`.replace(/\/\/+/g, "/")
-//   }
-//   createResolvers({
-//     Event: {
-//       slug: {
-//         resolve: source => slugify(source.name),
-//       },
-//     },
-//   })
-// }
