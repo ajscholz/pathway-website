@@ -20,9 +20,9 @@ exports.onServiceWorkerUpdateReady = () => {
 
 exports.onClientEntry = () => {
   // starts on Sunday at 10:30a
-  const startDay = 0
-  const startHour = 10
-  const startMinute = 30
+  const startDay = 5
+  const startHour = 22
+  const startMinute = 35
 
   const setNextSunday = d => {
     d.setDate(d.getDate() + ((startDay + 7 - d.getDay()) % 7))

@@ -1,8 +1,20 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Button, Col, Row } from "reactstrap"
 import { graphql, useStaticQuery } from "gatsby"
 
 import "./countdown.css"
+
+const initialize = () => {
+  return {
+    first: true,
+    over: false,
+    time: null,
+    length: undefined,
+    next: undefined,
+    streaming: false,
+    shouldUpdate: true,
+  }
+}
 
 const Countdown = () => {
   const data = useStaticQuery(graphql`
@@ -28,60 +40,87 @@ const Countdown = () => {
       }
     }
   `)
-  const [over, setOver] = useState(false)
-  const now = new Date()
 
-  const streamData = data.streams.all.find(stream => {
-    const d = new Date(stream.dateTime)
-    return d > now
+  const vidRef = useRef()
+
+  const [state, setState] = useState({
+    first: true,
+    over: false,
+    time: null,
+    length: undefined,
+    next: undefined,
+    streaming: false,
+    shouldUpdate: true,
   })
 
-  let nextSunday = new Date(
-    typeof streamData !== "undefined"
-      ? streamData.dateTime
-      : typeof window !== "undefined" && window.sessionStorage.nextSunday
-  )
-
-  // const length =
-  //   typeof streamData === "undefined" ? 0 : streamData.length * 60000
-
-  if (over) {
-    const nextDate = nextSunday.getDate() + 7
-    nextSunday = new Date(nextSunday.setDate(nextDate))
-  }
-
-  let next = nextSunday.getTime()
-
-  const [time, setTime] = useState(next - Date.now())
+  let videoId
 
   useEffect(() => {
-    let shouldUpdate = true
-    if (shouldUpdate) {
+    if (state.first) {
+      const { all } = data.streams
+      let length = 0
+      let streaming = false
+      let end
+      let next = new Date(
+        typeof window !== "undefined" && window.sessionStorage.nextSunday
+      )
+      const index = data.streams.all.findIndex(stream => {
+        let dateTime = new Date(stream.dateTime)
+        end = dateTime.getTime() + stream.length * 60000
+        end = new Date(end)
+        // console.log(end)
+        // const d = new Date(stream.dateTime)
+        return end > Date.now()
+      })
+
+      if (index !== -1) {
+        length = all[index].length
+        next = new Date(all[index].dateTime)
+        streaming = next < Date.now() && next < end ? true : false
+        vidRef.current = all[index].videoId
+      }
+
+      setState({
+        ...state,
+        time: next - Date.now(),
+        next: next,
+        length: length * 60000,
+        first: false,
+        streaming: streaming,
+      })
+    } else if (state.shouldUpdate) {
       setTimeout(() => {
-        setTime(next - Date.now())
-      }, 1000)
+        const newTime = state.next - Date.now()
+        setState({
+          ...state,
+          time: newTime,
+          streaming: newTime > 0 || state.over === true ? false : true,
+          over: newTime < -state.length ? true : false,
+          shouldUpdate: state.over ? false : true,
+        })
+      }, 995)
     }
-    return () => (shouldUpdate = false)
-  }, [time, next])
 
-  // useEffect(() => {
-  //   if (over === false && time < -length) {
-  //     setOver(true)
-  //   }
-  // })
+    return () => ({ ...state, shouldUpdate: false })
+  }, [data.streams, state])
 
-  return (
+  useEffect(() => {
+    if (state.over) {
+      setState(initialize())
+    }
+  }, [state.shouldUpdate, state.over])
+  return state.time === null ? null : (
     <>
       <div
         className="content-center h-100 d-flex flex-column justify-content-center"
-        style={{ backgroundColor: time <= 0 && "rgba(0,0,0,.6)" }}
+        style={{ backgroundColor: state.streaming && "rgba(0,0,0,.6)" }}
       >
         <div className="countdownContainer mt-4 d-flex justify-content-center text-light">
-          {time > 0 || over ? (
+          {!state.streaming || vidRef.current === undefined ? (
             <div className="countdownGrid">
               <div className="h4 streamingTitle">{`streaming in`}</div>
               <div className="timer days">
-                {Math.floor(time / 86400000)
+                {Math.floor(state.time / 86400000)
                   .toString()
                   .padStart(2, "0")}
                 <div className="label" aria-label="days">
@@ -90,7 +129,7 @@ const Countdown = () => {
               </div>
               <span className="timer colon" />
               <div className="timer hours">
-                {Math.floor((time / 3600000) % 24)
+                {Math.floor((state.time / 3600000) % 24)
                   .toString()
                   .padStart(2, "0")}
                 <div className="label" aria-label="hours">
@@ -99,7 +138,7 @@ const Countdown = () => {
               </div>
               <span className="timer colon" />
               <div className="timer minutes">
-                {Math.floor((time / 60000) % 60)
+                {Math.floor((state.time / 60000) % 60)
                   .toString()
                   .padStart(2, "0")}
                 <div className="label" aria-label="minutes">
@@ -108,7 +147,7 @@ const Countdown = () => {
               </div>
               <span className="timer colon" />
               <div className="timer seconds">
-                {Math.floor((time / 1000) % 60)
+                {Math.floor((state.time / 1000) % 60)
                   .toString()
                   .padStart(2, "0")}
                 <div className="label" aria-label="seconds">
@@ -146,10 +185,8 @@ const Countdown = () => {
                     }}
                   >
                     <iframe
-                      id="fbook-live"
-                      src={`https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${
-                        streamData === undefined ? 1 : streamData.videoId
-                      }%2F&width=auto`}
+                      title="facebook-iframe"
+                      src={`https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${vidRef.current}%2F&width=auto`}
                       // width="640"
                       // height="360"
                       style={{
