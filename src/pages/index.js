@@ -20,7 +20,7 @@ const IndexPage = props => {
       <SEO title="Home" />
       <Header
         title={heading}
-        subtitle={subHeading}
+        subtitle={`Worship online with us every Sunday`}
         background={image}
         full={true}
         countdown={true}

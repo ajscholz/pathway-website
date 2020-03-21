@@ -32,16 +32,16 @@ const Header = props => {
         <div className="filter" />
         {title && (
           <>
-            {countdown === true ? (
-              <Countdown />
-            ) : (
-              <div className="content-center">
-                <div className="motto">
-                  <h1 className="text-center">{title}</h1>
-                  <h3 className="text-center">{subtitle}</h3>
-                </div>
+            {/* {countdown === true ? ( */}
+            {/* <Countdown /> */}
+            {/* ) : ( */}
+            <div className="content-center">
+              <div className="motto">
+                <h1 className="text-center">{title}</h1>
+                <h3 className="text-center">{subtitle}</h3>
               </div>
-            )}
+            </div>
+            {/* )} */}
           </>
         )}
       </div>

@@ -20,8 +20,8 @@ exports.onServiceWorkerUpdateReady = () => {
 
 exports.onClientEntry = () => {
   // starts on Sunday at 10:30a
-  const startDay = 0
-  const startHour = 10
+  const startDay = 6
+  const startHour = 12
   const startMinute = 30
 
   const setNextSunday = d => {
