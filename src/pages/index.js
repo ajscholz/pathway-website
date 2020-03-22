@@ -27,7 +27,6 @@ const IndexPage = props => {
 
   let whiteSection = sections[0]
   whiteSection.background = ""
-  console.log(day)
 
   // get the stream from graphql that is today
   const index = data.streams.all.findIndex(stream => {
