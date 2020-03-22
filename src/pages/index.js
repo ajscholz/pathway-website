@@ -16,15 +16,18 @@ const IndexPage = props => {
   const [day, setDay] = useState(new Date())
 
   useEffect(() => {
-    setInterval(() => {
-      const now = new Date()
-      if (now.getDay() !== day.getDay()) {
-        setDay(now.getDay())
-      }
-    }, 300000)
-  })
+    let shouldUpdate = true
+    if (shouldUpdate) {
+      setTimeout(() => {
+        setDay(new Date())
+      }, 1000)
+    }
+    return () => (shouldUpdate = false)
+  }, [day])
+
   let whiteSection = sections[0]
   whiteSection.background = ""
+  console.log(day)
 
   // get the stream from graphql that is today
   const index = data.streams.all.findIndex(stream => {
@@ -42,7 +45,12 @@ const IndexPage = props => {
         background={image}
         full={true}
         countdown={true}
-        override={day.getDay() === 0 && index !== -1}
+        override={
+          day.getDay() === 0 &&
+          day.getHours() >= 10 &&
+          day.getMinutes() >= 25 &&
+          index !== -1
+        }
       >
         <div
           className="position-absolute h-100 w-100 d-flex justify-content-center align-items-center"
