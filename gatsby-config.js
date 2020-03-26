@@ -4,6 +4,12 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    devtool: "eval-source-map",
+  })
+}
+
 module.exports = {
   siteMetadata: {
     title: `Pathway Community Church`,
