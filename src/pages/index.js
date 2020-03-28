@@ -18,11 +18,14 @@ const IndexPage = props => {
   // sets up an interval to minimize re-rendering
   useEffect(() => {
     // set start time to 10:30am in minutes
-    const minutesStart = 19 * 60 + 18
+    const minutesStart = 10 * 60 + 30
     const interval = setInterval(() => {
       let d = new Date()
       const minutesNow = d.getHours() * 60 + d.getMinutes()
-      if (d.getDay() === 6 && minutesNow >= minutesStart) {
+
+      // check if it's Sunday and after 10:30a
+      if (d.getDay() === 0 && minutesNow >= minutesStart) {
+        // if yes, update state and clear the interval
         setShowVideo(true)
         clearInterval(interval)
       }
@@ -32,18 +35,12 @@ const IndexPage = props => {
     }
   }, [])
 
-  // get the stream from graphql that is today
+  // get the stream from graphql that is today, or give me an empty object if there isn't one
   let index = -1
   if (showVideo === true) {
     const today = new Date().toDateString()
     index = data.streams.all.findIndex(stream =>
-      new Date(
-        new Date(stream.dateTime).setDate(
-          new Date(stream.dateTime).getDate() - 1
-        )
-      ).toDateString() === today
-        ? true
-        : false
+      new Date(stream.dateTime).toDateString() === today ? true : false
     )
   }
   const stream = index === -1 ? {} : data.streams.all[index]
