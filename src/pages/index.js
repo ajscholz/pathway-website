@@ -15,15 +15,14 @@ const IndexPage = props => {
 
   const [showVideo, setShowVideo] = useState(false)
 
-  // checks
+  // sets up an interval to minimize re-rendering
   useEffect(() => {
-    // const minutesStart = 10 * 60 + 25
-    const minutesStart = 19 * 60 + 30
+    // set start time to 10:30am in minutes
+    const minutesStart = 10 * 60 + 25
     const interval = setInterval(() => {
       let d = new Date()
       const minutesNow = d.getHours() * 60 + d.getMinutes()
-      if (d.getDay() === 6 && minutesNow >= minutesStart) {
-        // && index !== -1)
+      if (d.getDay() === 0 && minutesNow >= minutesStart) {
         setShowVideo(true)
         clearInterval(interval)
       }
@@ -39,9 +38,7 @@ const IndexPage = props => {
     const today = new Date().toDateString()
     index = data.streams.all.findIndex(stream =>
       new Date(
-        new Date(stream.dateTime).setDate(
-          new Date(stream.dateTime).getDate() - 1
-        )
+        new Date(stream.dateTime).setDate(new Date(stream.dateTime).getDate())
       ).toDateString() === today
         ? true
         : false
