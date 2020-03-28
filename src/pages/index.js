@@ -30,7 +30,9 @@ const IndexPage = props => {
 
   // get the stream from graphql that is today
   const index = data.streams.all.findIndex(stream => {
-    return new Date(stream.dateTime).getDay() === day.getDay() ? true : false
+    return new Date(stream.dateTime).getDay() - 1 === day.getDay()
+      ? true
+      : false
   })
 
   const stream = index === -1 ? {} : data.streams.all[index]
@@ -45,7 +47,7 @@ const IndexPage = props => {
         full={true}
         countdown={true}
         override={
-          day.getDay() === 0 &&
+          day.getDay() === 6 &&
           day.getHours() >= 10 &&
           day.getMinutes() >= 25 &&
           index !== -1
