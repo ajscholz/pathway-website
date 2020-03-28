@@ -11,18 +11,18 @@ import { Container, Col, Row } from "reactstrap"
 const IndexPage = props => {
   let { data } = props
   const { banner, sections } = data.page
-  const { heading, subHeading, image } = banner
+  const { heading, image } = banner
 
   const [showVideo, setShowVideo] = useState(false)
 
   // sets up an interval to minimize re-rendering
   useEffect(() => {
     // set start time to 10:30am in minutes
-    const minutesStart = 10 * 60 + 30
+    const minutesStart = 19 * 60 + 18
     const interval = setInterval(() => {
       let d = new Date()
       const minutesNow = d.getHours() * 60 + d.getMinutes()
-      if (d.getDay() === 0 && minutesNow >= minutesStart) {
+      if (d.getDay() === 6 && minutesNow >= minutesStart) {
         setShowVideo(true)
         clearInterval(interval)
       }
@@ -38,7 +38,9 @@ const IndexPage = props => {
     const today = new Date().toDateString()
     index = data.streams.all.findIndex(stream =>
       new Date(
-        new Date(stream.dateTime).setDate(new Date(stream.dateTime).getDate())
+        new Date(stream.dateTime).setDate(
+          new Date(stream.dateTime).getDate() - 1
+        )
       ).toDateString() === today
         ? true
         : false
