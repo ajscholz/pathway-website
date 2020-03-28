@@ -13,43 +13,45 @@ const IndexPage = props => {
   const { banner, sections } = data.page
   const { heading, subHeading, image } = banner
 
-  const [day, setDay] = useState(new Date())
+  const [showVideo, setShowVideo] = useState(false)
 
+  // checks
   useEffect(() => {
-    let shouldUpdate = true
-    if (shouldUpdate) {
-      setTimeout(() => {
-        setDay(new Date())
-      }, 1000)
+    // const minutesStart = 10 * 60 + 25
+    const minutesStart = 19 * 60 + 30
+    const interval = setInterval(() => {
+      let d = new Date()
+      const minutesNow = d.getHours() * 60 + d.getMinutes()
+      if (d.getDay() === 6 && minutesNow >= minutesStart) {
+        // && index !== -1)
+        setShowVideo(true)
+        clearInterval(interval)
+      }
+    }, 1000)
+    return () => {
+      clearInterval(interval)
     }
-    return () => (shouldUpdate = false)
-  }, [day])
-
-  let whiteSection = sections[0]
-  whiteSection.background = ""
+  }, [])
 
   // get the stream from graphql that is today
-  const index = data.streams.all.findIndex(stream => {
-    let d = new Date(day)
-    d.setDate(d.getDate() + 1)
-
-    return new Date(stream.dateTime).toDateString() === d.toDateString()
-      ? true
-      : false
-  })
-
+  let index = -1
+  if (showVideo === true) {
+    const today = new Date().toDateString()
+    index = data.streams.all.findIndex(stream =>
+      new Date(
+        new Date(stream.dateTime).setDate(
+          new Date(stream.dateTime).getDate() - 1
+        )
+      ).toDateString() === today
+        ? true
+        : false
+    )
+  }
   const stream = index === -1 ? {} : data.streams.all[index]
 
-  const override = () => {
-    const minutesStart = 10 * 60 + 25
-    const minutesNow = day.getHours() * 60 + day.getMinutes()
-    if (day.getDay() === 6 && minutesNow >= minutesStart && index !== -1)
-      return true
-    return false
-  }
-
-  console.log("override", override())
-  console.log(stream)
+  // set background of first section
+  let whiteSection = sections[0]
+  whiteSection.background = ""
 
   return (
     <>
@@ -60,7 +62,7 @@ const IndexPage = props => {
         background={image}
         full={true}
         countdown={true}
-        override={override()}
+        override={showVideo}
       >
         <div
           className="position-absolute h-100 w-100 d-flex justify-content-center align-items-center"
@@ -170,7 +172,9 @@ export const data = graphql`
         }
       }
     }
-    streams: allContentfulStreamingVideo {
+    streams: allContentfulStreamingVideo(
+      sort: { fields: dateTime, order: ASC }
+    ) {
       all: nodes {
         videoUrl
         dateTime
