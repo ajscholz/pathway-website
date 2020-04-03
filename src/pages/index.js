@@ -6,7 +6,7 @@ import Header from "components/header"
 import ButtonCard from "../components/cards/button-card"
 import ReactPlayer from "react-player/lib/players/Vimeo"
 
-import { Container, Col, Row } from "reactstrap"
+import { Container, Col, Row, Button } from "reactstrap"
 
 const IndexPage = props => {
   let { data } = props
@@ -18,13 +18,14 @@ const IndexPage = props => {
   // sets up an interval to minimize re-rendering
   useEffect(() => {
     // set start time to 10:30am in minutes
-    const minutesStart = 10 * 60 + 30
+    // const minutesStart = 10 * 60 + 25
+    const minutesStart = 7 * 60
     const interval = setInterval(() => {
       let d = new Date()
       const minutesNow = d.getHours() * 60 + d.getMinutes()
 
       // check if it's Sunday and after 10:30a
-      if (d.getDay() === 0 && minutesNow >= minutesStart) {
+      if (d.getDay() === 5 && minutesNow >= minutesStart) {
         // if yes, update state and clear the interval
         setShowVideo(true)
         clearInterval(interval)
@@ -71,7 +72,11 @@ const IndexPage = props => {
         >
           <Container>
             <Row>
-              <Col lg={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
+              <Col
+                lg={{ size: 8, offset: 2 }}
+                md={{ size: 10, offset: 1 }}
+                className="mt-4"
+              >
                 <h2 className="text-center mt-0">Worship online today</h2>
                 <div
                   className="mt-5"
@@ -94,6 +99,29 @@ const IndexPage = props => {
                     controls={true}
                     // light={true}
                   />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    marginTop: "2rem",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button
+                    size="lg"
+                    color="primary"
+                    href="https://pathwaymarietta.churchcenter.com/people/forms/112445?open-in-church-center-modal=true"
+                  >
+                    Connect Card
+                  </Button>
+                  <Button
+                    size="lg"
+                    color="primary"
+                    href="https://pathwaymarietta.churchcenter.com/people/forms/112445?open-in-church-center-modal=true"
+                    style={{ marginLeft: "1.25rem" }}
+                  >
+                    Give now
+                  </Button>
                 </div>
               </Col>
             </Row>
