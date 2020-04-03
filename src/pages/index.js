@@ -1,50 +1,16 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { graphql } from "gatsby"
 
 import SEO from "components/seo"
 import Header from "components/header"
 import ButtonCard from "../components/cards/button-card"
-import ReactPlayer from "react-player/lib/players/Vimeo"
 
-import { Container, Col, Row, Button } from "reactstrap"
+import { Container, Col } from "reactstrap"
 
 const IndexPage = props => {
   let { data } = props
   const { banner, sections } = data.page
   const { heading, image } = banner
-
-  const [showVideo, setShowVideo] = useState(false)
-
-  // sets up an interval to minimize re-rendering
-  useEffect(() => {
-    // set start time to 10:30am in minutes
-    // const minutesStart = 10 * 60 + 25
-    const minutesStart = 7 * 60
-    const interval = setInterval(() => {
-      let d = new Date()
-      const minutesNow = d.getHours() * 60 + d.getMinutes()
-
-      // check if it's Sunday and after 10:30a
-      if (d.getDay() === 5 && minutesNow >= minutesStart) {
-        // if yes, update state and clear the interval
-        setShowVideo(true)
-        clearInterval(interval)
-      }
-    }, 1000)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
-
-  // get the stream from graphql that is today, or give me an empty object if there isn't one
-  let index = -1
-  if (showVideo === true) {
-    const today = new Date().toDateString()
-    index = data.streams.all.findIndex(stream =>
-      new Date(stream.dateTime).toDateString() === today ? true : false
-    )
-  }
-  const stream = index === -1 ? {} : data.streams.all[index]
 
   // set background of first section
   let whiteSection = sections[0]
@@ -59,75 +25,7 @@ const IndexPage = props => {
         background={image}
         full={true}
         countdown={true}
-        override={showVideo}
-      >
-        <div
-          className="position-absolute h-100 w-100 d-flex justify-content-center align-items-center"
-          style={{
-            top: 0,
-            left: 0,
-            zIndex: 1000,
-            background: "rgba(0,0,0,0.6)",
-          }}
-        >
-          <Container>
-            <Row>
-              <Col
-                lg={{ size: 8, offset: 2 }}
-                md={{ size: 10, offset: 1 }}
-                className="mt-4"
-              >
-                <h2 className="text-center mt-0">Worship online today</h2>
-                <div
-                  className="mt-5"
-                  style={{
-                    position: "relative",
-                    paddingTop: "56.25%",
-                    width: "100%",
-                  }}
-                >
-                  <ReactPlayer
-                    url={stream.videoUrl}
-                    style={{
-                      position: "absolute",
-                      // border: "6px solid rgba(256,256,256,.5",
-                      top: 0,
-                      left: 0,
-                    }}
-                    width="100%"
-                    height="100%"
-                    controls={true}
-                    // light={true}
-                  />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: "2rem",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Button
-                    size="lg"
-                    color="primary"
-                    href="https://pathwaymarietta.churchcenter.com/people/forms/112445?open-in-church-center-modal=true"
-                  >
-                    Connect Card
-                  </Button>
-                  <Button
-                    size="lg"
-                    color="primary"
-                    href="https://pathwaymarietta.churchcenter.com/people/forms/112445?open-in-church-center-modal=true"
-                    style={{ marginLeft: "1.25rem" }}
-                  >
-                    Give now
-                  </Button>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      </Header>
+      />
       <section>
         <Container fluid style={{ padding: "0", margin: "0" }}>
           <div className="row no-gutters">
@@ -194,14 +92,6 @@ export const data = graphql`
             }
           }
         }
-      }
-    }
-    streams: allContentfulStreamingVideo(
-      sort: { fields: dateTime, order: ASC }
-    ) {
-      all: nodes {
-        videoUrl
-        dateTime
       }
     }
   }
