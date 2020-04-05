@@ -60,7 +60,7 @@ const SundayVideo = ({ stream }) => {
               <Button
                 size="lg"
                 color="primary"
-                href="https://pathwaymarietta.churchcenter.com/people/forms/112445?open-in-church-center-modal=true"
+                href="https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
                 style={{ marginLeft: "1.25rem" }}
               >
                 Give now
