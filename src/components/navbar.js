@@ -75,7 +75,10 @@ const Navigation = () => {
       ) : null}
       <Navbar
         color="black-color"
-        className={classnames("fixed-top px-3 position-sticky", navbarColor)}
+        className={classnames(
+          "fixed-top px-3 position-sticky border-0",
+          navbarColor
+        )}
         expand="lg"
         id="navbar-main"
       >
@@ -85,9 +88,9 @@ const Navigation = () => {
               id="navbar-brand"
               to="/"
               tag={Link}
-              style={{
-                width: "180px",
-              }}
+              // style={{
+              //   width: "180px",
+              // }}
             >
               <Image fluid={logo.fluid} alt="Pathway Community Church" />
             </NavbarBrand>

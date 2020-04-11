@@ -67,7 +67,7 @@ const Layout = ({ children }) => {
       >
         <Navigation />
         {/* negative margin is the height of the navbar due to it's position:sticky to account for the notification bar */}
-        <main style={{ flexGrow: 1, marginTop: "-132.22px" }}>{children}</main>
+        <main style={{ flexGrow: 1, marginTop: "-98.72px" }}>{children}</main>
         <Footer style={{ marginTop: "auto", flexGrow: 0 }} />
       </div>
     </>
