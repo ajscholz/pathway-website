@@ -60,7 +60,7 @@ const SundayVideo = ({ stream }) => {
                   className="col-sm mx-2 mt-3"
                   // size="lg"
                   color="primary"
-                  href="https://pathwaymarietta.churchcenter.com/people/forms/112445?open-in-church-center-modal=true"
+                  href="https://pathwaymarietta.churchcenter.com/people/forms/125762?open-in-church-center-modal=true"
                 >
                   Connect Card
                 </Button>
