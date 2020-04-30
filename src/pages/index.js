@@ -18,7 +18,11 @@ const IndexPage = props => {
 
   return (
     <>
-      <SEO title="Home" image={image.file.url} />
+      <SEO
+        title="Home"
+        image={image.file.url}
+        url="https://pathwaymarietta.com"
+      />
       <Header
         title={heading}
         subtitle={`Worship online beginning at 10:30am every Sunday`}

@@ -21,7 +21,11 @@ const EventsPage = props => {
 
   return (
     <>
-      <SEO title="Events" image={image.file.url} />
+      <SEO
+        title="Events"
+        image={image.file.url}
+        url="https://pathwaymarietta.com/about/events"
+      />
       <Header title={heading} background={image} xs={true} />
       <div className="section">
         <Container>

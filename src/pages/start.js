@@ -13,7 +13,11 @@ const StartPage = props => {
 
   return (
     <>
-      <SEO title="Start" image={image.file.url} />
+      <SEO
+        title="Start"
+        image={image.file.url}
+        url="https://pathwaymarietta.com/start"
+      />
       <Header title={heading} subtitle={subHeading} background={image} />
       <FirstStepsSection />
       <ExploreOurMinistriesSection />

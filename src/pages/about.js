@@ -16,7 +16,11 @@ const AboutPage = props => {
 
   return (
     <>
-      <SEO title="About" image={image.file.url} />
+      <SEO
+        title="About"
+        image={image.file.url}
+        url="https://pathwaymarietta.com/about"
+      />
       <Header title={heading} subtitle={subHeading} background={image} />
 
       {/* ********* OUR STORY SECTION ********* */}

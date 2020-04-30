@@ -14,7 +14,11 @@ const MessagesPage = props => {
 
   return (
     <>
-      <SEO title="Messages" image={image.file.url} />
+      <SEO
+        title="Messages"
+        image={image.file.url}
+        url="https://pathwaymarietta.com/messages"
+      />
       <Header title={heading} subtitle={subHeading} background={image} />
       <div className="section section-project cd-section" id="projects">
         <Container>
