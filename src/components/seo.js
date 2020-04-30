@@ -10,22 +10,22 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
+const SEO = ({ description, lang, meta, title, image, url, type }) => {
+  const { site } = useStaticQuery(graphql`
+    {
+      site {
+        seo: siteMetadata {
+          defaultTitle: title
+          defaultDescription: description
+          siteUrl: url
         }
       }
-    `
-  )
+    }
+  `)
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = description || site.seo.defaultDescription
+  const ogImage = image || undefined
+  const ogType = type || `website`
 
   return (
     <Helmet
@@ -33,7 +33,6 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
           name: `description`,
@@ -49,25 +48,18 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:type`,
-          content: `website`,
+          content: ogType,
         },
         {
-          name: `twitter:card`,
-          content: `summary`,
+          property: `og:image`,
+          content: ogImage,
         },
         {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
+          property: `og:url`,
+          content: url,
         },
       ].concat(meta)}
+      link={[{ rel: "canonical", href: url }]}
     />
   )
 }
@@ -75,7 +67,6 @@ function SEO({ description, lang, meta, title }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: ``,
 }
 
 SEO.propTypes = {

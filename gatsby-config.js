@@ -13,9 +13,9 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 module.exports = {
   siteMetadata: {
     title: `Pathway Community Church`,
-    description: `A church for you in Marietta, Ohio.`,
+    description: `A life-giving church in Marietta, Ohio. No matter where you've been you belong here.`,
     author: `@pathwaychurch`,
-    siteUrl: `https://www.pathwaymarietta.com`,
+    url: `https://pathwaymarietta.com`,
   },
   developMiddleware: app => {
     app.use(
