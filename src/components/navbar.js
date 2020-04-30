@@ -177,6 +177,18 @@ const Navigation = () => {
               <NavItem className="pr-0 d-lg-none">
                 <NavLink
                   className="nav-link"
+                  href="https://pathway-community-church.myshopify.com/collections/all"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => closeNav()}
+                >
+                  Buy Merch
+                </NavLink>
+              </NavItem>
+
+              <NavItem className="pr-0 d-lg-none">
+                <NavLink
+                  className="nav-link"
                   href="https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
                   onClick={() => closeNav()}
                 >
