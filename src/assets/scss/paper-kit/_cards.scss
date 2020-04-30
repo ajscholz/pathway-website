@@ -408,6 +408,9 @@
       background-color: rgba(0, 0, 0, 0.56);
       border-radius: 12px;
     }
+    &.card-plain:after {
+      border-radius: 0;
+    }
 
     .card-category {
       color: $white-color;
