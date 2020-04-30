@@ -108,3 +108,20 @@ Header.propTypes = {
 }
 
 export default Header
+
+export const query = graphql`
+  fragment HeaderFragment on ContentfulPages {
+    banner {
+      heading
+      subHeading
+      image {
+        fluid(maxWidth: 2000, quality: 80) {
+          ...GatsbyContentfulFluid_withWebp
+        }
+        file {
+          url
+        }
+      }
+    }
+  }
+`

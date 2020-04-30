@@ -18,7 +18,7 @@ const IndexPage = props => {
 
   return (
     <>
-      <SEO title="Home" />
+      <SEO title="Home" image={image.file.url} />
       <Header
         title={heading}
         subtitle={`Worship online beginning at 10:30am every Sunday`}
@@ -64,15 +64,7 @@ const IndexPage = props => {
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Index" }) {
-      banner {
-        heading
-        subHeading
-        image {
-          fluid(maxWidth: 2000, quality: 80) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-      }
+      ...HeaderFragment
       sections {
         ... on ContentfulInformationSection {
           title

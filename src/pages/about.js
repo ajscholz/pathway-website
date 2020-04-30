@@ -16,7 +16,7 @@ const AboutPage = props => {
 
   return (
     <>
-      <SEO title="About" />
+      <SEO title="About" image={image.file.url} />
       <Header title={heading} subtitle={subHeading} background={image} />
 
       {/* ********* OUR STORY SECTION ********* */}
@@ -47,15 +47,7 @@ const AboutPage = props => {
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "About" }) {
-      banner {
-        heading
-        subHeading
-        image {
-          fluid(maxWidth: 2000, quality: 80) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-      }
+      ...HeaderFragment
     }
     storyData: contentfulPageSection(
       contentful_id: { eq: "3bYmAhy0IIJkCYusWEinxG" }

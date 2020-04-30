@@ -14,7 +14,7 @@ const MessagesPage = props => {
 
   return (
     <>
-      <SEO title="Messages" />
+      <SEO title="Messages" image={image.file.url} />
       <Header title={heading} subtitle={subHeading} background={image} />
       <div className="section section-project cd-section" id="projects">
         <Container>
@@ -41,15 +41,7 @@ const MessagesPage = props => {
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Messages" }) {
-      banner {
-        heading
-        subHeading
-        image {
-          fluid(maxWidth: 2000, quality: 80) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-      }
+      ...HeaderFragment
     }
     messageSeries: allContentfulMessageSeries(
       limit: 6

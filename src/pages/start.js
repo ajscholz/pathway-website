@@ -1,8 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import SEO from "components/seo"
-import Header from "components/header"
+import SEO from "../components/seo"
+import Header from "../components/header"
 import FirstStepsSection from "../views/start/first-steps-section"
 import ExploreOurMinistriesSection from "../views/start/explore-our-ministries-section"
 import AttendThePathSection from "../views/start/attend-the-path-section"
@@ -13,7 +13,7 @@ const StartPage = props => {
 
   return (
     <>
-      <SEO title="Start" />
+      <SEO title="Start" image={image.file.url} />
       <Header title={heading} subtitle={subHeading} background={image} />
       <FirstStepsSection />
       <ExploreOurMinistriesSection />
@@ -25,15 +25,7 @@ const StartPage = props => {
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Start" }) {
-      banner {
-        heading
-        subHeading
-        image {
-          fluid(maxWidth: 2000, quality: 80) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-      }
+      ...HeaderFragment
     }
   }
 `

@@ -21,7 +21,7 @@ const EventsPage = props => {
 
   return (
     <>
-      <SEO title="Events" />
+      <SEO title="Events" image={image.file.url} />
       <Header title={heading} background={image} xs={true} />
       <div className="section">
         <Container>
@@ -41,15 +41,7 @@ const EventsPage = props => {
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Events" }) {
-      banner {
-        heading
-        subHeading
-        image {
-          fluid(maxWidth: 2000, quality: 80) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-      }
+      ...HeaderFragment
     }
     events: allContentfulEvent(sort: { fields: start, order: ASC }) {
       all: nodes {

@@ -11,7 +11,7 @@ import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 const SEO = ({ description, lang, meta, title, image, url, type }) => {
-  const { site } = useStaticQuery(graphql`
+  const { site, index } = useStaticQuery(graphql`
     {
       site {
         seo: siteMetadata {
@@ -20,11 +20,24 @@ const SEO = ({ description, lang, meta, title, image, url, type }) => {
           siteUrl: url
         }
       }
+      index: contentfulPages(title: { eq: "Index" }) {
+        banner {
+          image {
+            file {
+              url
+            }
+          }
+        }
+      }
     }
   `)
-
+  const imageUrl = image
+    ? image.startsWith("https:")
+      ? image
+      : "https:".concat(image)
+    : "https:".concat(index.banner.image.file.url)
   const metaDescription = description || site.seo.defaultDescription
-  const ogImage = image || undefined
+  const ogImage = imageUrl
   const ogType = type || `website`
 
   return (
@@ -74,6 +87,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 }
 
 export default SEO
