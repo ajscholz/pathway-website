@@ -3,13 +3,18 @@ import { graphql, useStaticQuery } from "gatsby"
 
 import { Button } from "reactstrap"
 
+const individualBtnProps = "btn-just-icon d-inline-flex"
+
 export const FacebookButton = props => (
   <Button
     href={`https://www.facebook.com/${props.link}`}
     target="_blank"
     rel="noopener noreferrer"
-    className={`btn-just-icon ${props.className}`}
+    className={individualBtnProps.concat(
+      props.className ? ` ${props.className}` : ""
+    )}
     color="facebook"
+    size="sm"
   >
     <i className="fa fa-facebook" />
   </Button>
@@ -21,8 +26,11 @@ export const TwitterButton = props => {
       href={`https://twitter.com/${props.link}`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`btn-just-icon ${props.className}`}
+      className={individualBtnProps.concat(
+        props.className ? ` ${props.className}` : ""
+      )}
       color="twitter"
+      size="sm"
     >
       <i className="fa fa-twitter" />
     </Button>
@@ -35,8 +43,11 @@ export const InstagramButton = props => {
       href={`https://www.instagram.com/${props.link}`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`btn-just-icon ${props.className}`}
+      className={individualBtnProps.concat(
+        props.className ? ` ${props.className}` : ""
+      )}
       color="instagram"
+      size="sm"
     >
       <i className="fa fa-instagram" />
     </Button>
@@ -53,6 +64,8 @@ const SocialButtons = props => {
       }
     }
   `)
+
+  const classNames = props
 
   return (
     <div className={props.className} style={props.style}>

@@ -15,6 +15,7 @@ import {
   Nav,
   Container,
 } from "reactstrap"
+import SecondaryLinks from "./secondary-links"
 
 const Navigation = () => {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent")
@@ -163,49 +164,10 @@ const Navigation = () => {
 
               <hr style={{ width: "100%" }} className="d-lg-none" />
 
-              <NavItem className="pr-0 d-lg-none">
-                <NavLink
-                  className="nav-link"
-                  to="/about/events"
-                  tag={Link}
-                  onClick={() => closeNav()}
-                >
-                  View Events
-                </NavLink>
-              </NavItem>
-
-              <NavItem className="pr-0 d-lg-none">
-                <NavLink
-                  className="nav-link"
-                  href="https://pathway-community-church.myshopify.com/collections/all"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => closeNav()}
-                >
-                  Buy Merch
-                </NavLink>
-              </NavItem>
-
-              <NavItem className="pr-0 d-lg-none">
-                <NavLink
-                  className="nav-link"
-                  href="https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
-                  onClick={() => closeNav()}
-                >
-                  Give Now
-                </NavLink>
-              </NavItem>
-
-              {/* <NavItem>
-                <Button
-                  className="btn-round"
-                  color="danger"
-                  href="https://www.creative-tim.com/product/paper-kit-pro-react?ref=pkpr-color-navbar"
-                  target="_blank"
-                >
-                  <i className="nc-icon nc-cart-simple" /> Buy Now
-                </Button>
-              </NavItem> */}
+              <SecondaryLinks
+                click={() => closeNav()}
+                className="pr-0 d-lg-none"
+              />
             </Nav>
             <div
               className="d-lg-none mt-auto"

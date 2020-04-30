@@ -78,13 +78,15 @@
       }
 
       a:not(.btn) {
-        color: $font-color;
+        color: $white-color;
         display: block;
+        opacity: 0.8;
         font-size: $font-size-h6;
         margin-bottom: 3px;
         &:hover,
         &:focus {
-          color: $default-states-color;
+          color: $white-color;
+          opacity: 1;
         }
       }
 
@@ -157,9 +159,13 @@
   }
 
   a:not(.btn) {
-    color: $primary-color;
+    color: $white-color;
+    opacity: 1;
+    padding: 0;
+    font-weight: bolder;
     &:hover {
-      color: $primary-states-color;
+      color: $white-color;
+      opacity: 0.75;
     }
   }
 
