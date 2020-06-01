@@ -34,8 +34,6 @@ const NotificationBar = () => {
     visible === false ? null : activeBar.clickthroughLink
   )
 
-  console.log(visible)
-
   return visible ? (
     <div className="position-relative d-flex align-items-center bg-warning">
       <Container fluid>

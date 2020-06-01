@@ -71,6 +71,8 @@ const Navigation = () => {
         <button
           className="btn-plain"
           id="bodyClick"
+          type="button"
+          aria-label="Close"
           onClick={() => closeNav()}
         />
       ) : null}
