@@ -157,6 +157,28 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
 			autoOff: Date @dateformat
       clickthroughLink: String
       updatedAt: Date
+    }
+    `,
+    `type ContentfulHelpMeUnderstandVideo implements Node {
+      contentful_id: String
+      title: String
+      url: String
+      tags: [String]
+      videoUserGuide: ContentfulAsset
+      videoDescription: contentfulHelpMeUnderstandVideoVideoDescriptionTextNode
+    }`,
+    `type ContentfulAsset implements Node {
+      file: ContentfulAssetFile
+    }`,
+    `type ContentfulAssetFile {
+      url: String
+      fileName: String
+    }`,
+    `type contentfulHelpMeUnderstandVideoVideoDescriptionTextNode implements Node {
+      childMdx: Mdx
+    }`,
+    `type Mdx implements Node {
+      body: String!
     }`,
     schema.buildObjectType({
       name: "ContentfulStreamingVideo",
