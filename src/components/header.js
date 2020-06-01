@@ -57,26 +57,30 @@ const Header = ({ title, subtitle, background, full, xs }) => {
   return (
     <>
       <div
-        className={
+        className={`bg-dark${
           full
-            ? "page-header"
+            ? " page-header"
             : xs
-            ? "page-header page-header-xs"
-            : "page-header page-header-small"
-        }
+            ? " page-header page-header-xs"
+            : " page-header page-header-small"
+        }`}
       >
-        <Image
-          fluid={background.fluid}
-          className={
-            full
-              ? "page-header"
-              : xs
-              ? "page-header page-header-xs"
-              : "page-header page-header-small"
-          }
-        />
+        {background !== "solid" && (
+          <>
+            <Image
+              fluid={background.fluid}
+              className={
+                full
+                  ? "page-header"
+                  : xs
+                  ? "page-header page-header-xs"
+                  : "page-header page-header-small"
+              }
+            />
+            <div className="filter" />
+          </>
+        )}
 
-        <div className="filter" />
         {title && (
           <>
             {/* {countdown === true ? ( */}

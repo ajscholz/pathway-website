@@ -1,13 +1,3 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
-
-// create a slug for each message series
-
 const path = require(`path`)
 
 const slugify = title => {
@@ -24,6 +14,7 @@ const slugify = title => {
 // create counters to increment for unnamed slugs in onCreateNode
 let unnamedSeriesCounter = 0
 let unnamedMessageCounter = 0
+let unnamedHelpMeUnderstandVideoCounter = 0
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
@@ -53,6 +44,17 @@ exports.onCreateNode = ({ node, actions }) => {
       value: slug,
     })
     // console.log(node.fields.slug)
+  } else if (node.internal.type === "ContentfulHelpMeUnderstandVideo") {
+    let slug = slugify(node.title)
+    if (slug === undefined) {
+      unnamedHelpMeUnderstandVideoCounter++
+      slug = `/unnamed-hmuv-${unnamedHelpMeUnderstandVideoCounter}`
+    }
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
   }
 }
 
@@ -83,6 +85,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 slug
               }
               contentful_id
+            }
+          }
+        }
+      }
+      videos: allContentfulHelpMeUnderstandVideo {
+        all: edges {
+          node {
+            fields {
+              slug
             }
           }
         }
@@ -125,6 +136,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       context: {
         slug: node.fields.slug,
         seriesId: node.messageSeries.contentful_id,
+      },
+    })
+  })
+
+  const videoPageTemplate = path.resolve(
+    "src/templates/help-me-understand-video-template.js"
+  )
+
+  result.data.videos.all.forEach(({ node }) => {
+    const path = `/resources/video${node.fields.slug}`
+    createPage({
+      path,
+      component: videoPageTemplate,
+      context: {
+        slug: node.fields.slug,
       },
     })
   })
