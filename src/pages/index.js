@@ -7,10 +7,24 @@ import ButtonCard from "../components/cards/button-card"
 
 import { Container, Col } from "reactstrap"
 
-const IndexPage = props => {
-  let { data } = props
-  const { banner, sections } = data.page
+const IndexPage = ({ data }) => {
+  const { page, videos } = data
+  const { banner, sections } = page
   const { heading, image } = banner
+
+  let d = new Date()
+
+  // get last Sunday's date
+  do {
+    d.setDate(d.getDate() - 1)
+  } while (d.getDay() !== 0)
+
+  const prevWeekLink = videos.all.find(video => {
+    const vidDate = new Date(video.dateTime)
+    return vidDate.toDateString() === d.toDateString()
+  })
+
+  sections[0].button.link = prevWeekLink.videoUrl
 
   // set background of first section
   let whiteSection = sections[0]
@@ -97,6 +111,15 @@ export const data = graphql`
             }
           }
         }
+      }
+    }
+    videos: allContentfulStreamingVideo(
+      sort: { fields: dateTime, order: DESC }
+      limit: 10
+    ) {
+      all: nodes {
+        dateTime
+        videoUrl
       }
     }
   }
