@@ -10,9 +10,15 @@ const SecondaryLinks = ({ click, className }) => {
           className="nav-link"
           to="/about/events"
           tag={Link}
-          onClick={() => click()}
+          // onClick={() => click()}
         >
-          View Events
+          Events
+        </NavLink>
+      </NavItem>
+
+      <NavItem className={className}>
+        <NavLink className="nav-link" href="/resources" onClick={() => click()}>
+          Resources
         </NavLink>
       </NavItem>
 
@@ -22,7 +28,7 @@ const SecondaryLinks = ({ click, className }) => {
           href="https://pathway-community-church.myshopify.com/collections/all"
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => click()}
+          // onClick={() => click()}
         >
           Buy Merch
         </NavLink>

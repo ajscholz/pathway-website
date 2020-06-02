@@ -52,7 +52,7 @@ const Footer = () => {
               className="d-flex flex-column align-items-center my-4 my-md-0"
             >
               <Nav navbar className="align-items-center">
-                <SecondaryLinks className="text-white" />
+                <SecondaryLinks className="text-white" click={() => {}} />
               </Nav>
             </Col>
 
