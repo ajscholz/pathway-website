@@ -1,15 +1,105 @@
 import React from "react"
 import SEO from "../components/seo"
 import Header from "../components/header"
+import { graphql } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { Container, Row, Col, Button } from "reactstrap"
+import VimeoPlayer from "react-player/lib/players/Vimeo"
 
-const HelpMeUnderstandVideoTemplate = () => {
+const HelpMeUnderstandVideoTemplate = ({ data }) => {
+  const { video } = data
   return (
     <>
       <SEO />
-      <Header title="test" xs={true} background="solid" />
-      <div>hello from video template</div>
+      <Header title={video.title} xs={true} background="solid" />
+      <div className="section">
+        <Container>
+          <Row
+            className="justify-content-md-center"
+            style={{ marginBottom: "40px" }}
+          >
+            <Col md="10">
+              {/* <h2 className="title">{`${video.title}`}</h2>
+
+              <Button
+                color="primary"
+                tag={Link}
+                to={`/resources`}
+                className="btn-link h6 p-0 ml-n1"
+              >
+                <i className="fa fa-caret-left" />
+                {`Back to Resources`}
+              </Button> */}
+
+              <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
+
+              <div
+                className="mt-5"
+                style={{
+                  position: "relative",
+                  paddingTop: "56.25%",
+                  width: "100%",
+                }}
+              >
+                <VimeoPlayer
+                  url={video.url}
+                  controls={true}
+                  light={true}
+                  config={{
+                    vimeo: {
+                      playerOptions: {
+                        // controls: true,/
+                        // title: true,
+                        // transparent: true,
+                      },
+                    },
+                  }}
+                  width="100%"
+                  height="100%"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                  }}
+                />
+              </div>
+            </Col>
+
+            <Button
+              className="btn-magnify btn-primary mt-5"
+              size="lg"
+              href={video.guide.file.url}
+              target="blank"
+              rel="noopener noreferrer"
+            >
+              <i className="nc-icon nc-cloud-download-93 mr-2" />
+              Download Guide
+            </Button>
+          </Row>
+        </Container>
+      </div>
     </>
   )
 }
 
 export default HelpMeUnderstandVideoTemplate
+
+export const data = graphql`
+  query($slug: String) {
+    video: contentfulHelpMeUnderstandVideo(fields: { slug: { eq: $slug } }) {
+      title
+      url
+      tags
+      guide: videoUserGuide {
+        file {
+          url
+        }
+      }
+      description: videoDescription {
+        childMdx {
+          body
+        }
+      }
+    }
+  }
+`

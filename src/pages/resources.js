@@ -52,7 +52,7 @@ const ResourcesPage = ({ data }) => {
                         </CardBody>
                       </Card>
                     </Link> */}
-                    <Link to={`/resources`}>
+                    <Link to={`/resources/video${video.fields.slug}`}>
                       <Card
                         className="info"
                         data-background="color"
@@ -116,6 +116,9 @@ export const data = graphql`
               title
               url
               tags
+              fields {
+                slug
+              }
               videoUserGuide {
                 file {
                   fileName
