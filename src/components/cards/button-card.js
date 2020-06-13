@@ -7,6 +7,13 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import { Card, CardBody, CardTitle, CardFooter, Button } from "reactstrap"
 
+const baseClass = `w-100 no-border card-plain py-5 px-4`
+const baseStyles = {
+  background: "transparent",
+  minHeight: "100%",
+  minWidth: "100%",
+}
+
 const ButtonCard = props => {
   const { title, subtitle, description, button, background } = props.sectionData
 
@@ -26,31 +33,31 @@ const ButtonCard = props => {
   const cardProps =
     background === "" || !background
       ? {
-          style: { background: "transparent" },
-          className: `no-border card-plain text-center py-5 ${
+          style: { ...baseStyles },
+          className: `${baseClass} text-center py-5 ${
             props.className ? props.className : ""
           }`,
         }
       : {
           "data-background": "image",
-          style: {
-            background: "transparent",
-          },
-          className: `no-border card-plain ${
-            props.className ? props.className : ""
-          }`,
+          style: { ...baseStyles },
+          className: `${baseClass} ${props.className ? props.className : ""}`,
         }
 
   return (
     <Card {...cardProps}>
       {background && (
         <Image
+          className="my-n5 mx-n4"
           fluid={background.fluid}
           style={{ position: "absolute", height: "100%", width: "100%" }}
           imgStyle={{ borderRadius: 0 }}
         />
       )}
-      <CardBody className="d-flex flex-column justify-content-center ">
+      <CardBody
+        className="h-auto h-xl-100 w-100 py-5 px-1 d-flex flex-column justify-content-center m-0"
+        style={{ minWidth: "100%", minHeight: "unset" }}
+      >
         <CardTitle tag="h3">{title}</CardTitle>
         {/* <div className="card-icon">
                       <i className="nc-icon nc-world-2" />
@@ -61,7 +68,7 @@ const ButtonCard = props => {
         >
           <MDXRenderer>{description.childMdx.body}</MDXRenderer>
         </div>
-        <CardFooter>
+        <CardFooter className="mt-xl-auto">
           <Button
             className={`${
               props.button === "solid" ? "btn" : "btn-outline-primary"

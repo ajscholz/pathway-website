@@ -26,9 +26,21 @@ const IndexPage = ({ data }) => {
 
   sections[0].button.link = prevWeekLink.videoUrl
 
-  // set background of first section
-  let whiteSection = sections[0]
-  whiteSection.background = ""
+  // set background of alternating sections to white
+
+  let counter = 0
+
+  while (counter < sections.length) {
+    if (counter % 2 === 0) {
+      sections[counter].background = ""
+    }
+    // if (counter === 0 || counter === 3) {
+    //   sections[counter].full = true
+    // } else {
+    //   sections[counter].full = false
+    // }
+    counter++
+  }
 
   return (
     <>
@@ -47,40 +59,21 @@ const IndexPage = ({ data }) => {
       <section>
         <Container fluid style={{ padding: "0", margin: "0" }}>
           <div className="row no-gutters">
-            <Col>
-              <ButtonCard
-                sectionData={sections[0]}
-                className="mb-0"
-                button="solid"
-                buttonSize="lg"
-              />
-            </Col>
-          </div>
-          <div className="row no-gutters">
-            <Col md="6">
-              <ButtonCard sectionData={sections[1]} className="mb-0" />
-            </Col>
-            <Col md="6">
-              <ButtonCard sectionData={sections[2]} className="mb-0" />
-            </Col>
-          </div>
-          <div className="row no-gutters">
-            <Col md={8} className="mx-auto">
-              <ButtonCard
-                sectionData={sections[3]}
-                className="mb-0"
-                button="solid"
-              />
-            </Col>
-          </div>
-          <div className="row no-gutters">
-            <Col md="12" className="mx-auto">
-              <ButtonCard
-                sectionData={sections[4]}
-                className="mb-0 card-plain no-border"
-                button="solid"
-              />
-            </Col>
+            {sections.map((section, i) => (
+              <Col
+                key={section.id}
+                sm={12}
+                xl={4}
+                // md={section.full === true ? 12 : 6}
+              >
+                <ButtonCard
+                  sectionData={sections[i]}
+                  className="mb-0"
+                  button={i === 0 && "solid"}
+                  buttonSize={i === 0 && "lg"}
+                />
+              </Col>
+            ))}
           </div>
         </Container>
       </section>
@@ -94,6 +87,7 @@ export const data = graphql`
       ...HeaderFragment
       sections {
         ... on ContentfulInformationSection {
+          id: contentful_id
           title
           subtitle
           description {
