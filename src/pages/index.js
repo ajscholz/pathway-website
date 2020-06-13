@@ -59,21 +59,30 @@ const IndexPage = ({ data }) => {
       <section>
         <Container fluid style={{ padding: "0", margin: "0" }}>
           <div className="row no-gutters">
-            {sections.map((section, i) => (
-              <Col
-                key={section.id}
-                sm={12}
-                xl={4}
-                // md={section.full === true ? 12 : 6}
-              >
-                <ButtonCard
-                  sectionData={sections[i]}
-                  className="mb-0"
-                  button={i === 0 && "solid"}
-                  buttonSize={i === 0 && "lg"}
-                />
-              </Col>
-            ))}
+            {sections.map((section, i) => {
+              return (
+                <Col
+                  key={section.id}
+                  sm={12}
+                  md={6}
+                  xl={4}
+                  className={
+                    i === 2
+                      ? "order-md-3 order-xl-2"
+                      : i === 3
+                      ? "order-md-2 order-xl-3"
+                      : `order-md-${i}`
+                  }
+                >
+                  <ButtonCard
+                    sectionData={sections[i]}
+                    className="mb-0"
+                    button={i === 0 && "solid"}
+                    buttonSize={i === 0 && "lg"}
+                  />
+                </Col>
+              )
+            })}
           </div>
         </Container>
       </section>
