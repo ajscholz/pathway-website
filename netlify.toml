@@ -15,8 +15,8 @@ publish = "public/"
 #   status = 302
 #   force = true
 
-# [[redirects]]
-#   from="https://messages.pathwaymarietta.com"
-#   to="https://pathwaymarietta.com/messages"
-#   status = 302
-#   force = true
+[[redirects]]
+  from="https://about.pathwaymarietta.com"
+  to="https://pathwaymarietta.com/about"
+  status = 302
+  force = true
