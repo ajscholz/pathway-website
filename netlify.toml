@@ -47,6 +47,6 @@ publish = "public/"
 
 [[redirects]]
   from = "https://events.pathwaymarietta.com"
-  to = "https://pathwaymarietta.com"
+  to = "https://pathwaymarietta.com/about/events"
   status = 302
   force = true
