@@ -38,3 +38,9 @@ publish = "public/"
   to = "https://pathway-community-church.myshopify.com/collections/all"
   status = 302
   force = true
+
+[[redirects]]
+  from = "https://about.pathwaymarietta.com"
+  to = "https://pathwaymarietta.com"
+  status = 302
+  force = true
