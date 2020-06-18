@@ -14,3 +14,9 @@ publish = "public/"
   to = "https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
   status = 302
   force = true
+
+[[redirects]]
+  from="https://messages.pathwaymarietta.com"
+  to="https://pathwaymarietta.com/messages"
+  status = 302
+  force = true
