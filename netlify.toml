@@ -20,3 +20,7 @@ publish = "public/"
   to="https://pathwaymarietta.com/about"
   status = 302
   force = true
+
+  [[redirects]]
+  from="https://test.pathwaymarietta.com"
+  to="https://pathwaymarietta.com/start"
