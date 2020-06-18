@@ -2,3 +2,39 @@
 functions = ".netlify/functions"
 command = "yarn run build"
 publish = "public/"
+
+[[redirects]]
+  from = "https://give.pathwaymarietta.com"
+  to = "https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "https://messages.pathwaymarietta.com"
+  to = "https://pathwaymarietta.com/messages"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "https://resources.pathwaymarietta.com"
+  to = "https://pathwaymarietta.com/resources"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "https://connect.pathwaymarietta.com"
+  to = "https://pathwaymarietta.churchcenter.com/people/forms/125762"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "https://groups.pathwaymarietta.com"
+  to = "https://pathwaymarietta.churchcenter.com/groups/connect-groups"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "https://merch.pathwaymarietta.com"
+  to = "https://pathway-community-church.myshopify.com/collections/all"
+  status = 302
+  force = true
