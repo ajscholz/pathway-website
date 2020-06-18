@@ -44,3 +44,9 @@ publish = "public/"
   to = "https://pathwaymarietta.com"
   status = 302
   force = true
+
+[[redirects]]
+  from = "https://events.pathwaymarietta.com"
+  to = "https://pathwaymarietta.com"
+  status = 302
+  force = true
