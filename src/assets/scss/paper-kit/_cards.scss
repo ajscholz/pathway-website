@@ -499,6 +499,10 @@
     background: $black-color;
     color: $white-color;
   }
+
+  &.bg-white {
+    background: $white-bg !important;
+  }
 }
 
 .btn-center {

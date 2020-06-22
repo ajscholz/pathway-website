@@ -9,7 +9,7 @@ import { Card, CardBody, CardTitle, CardFooter, Button } from "reactstrap"
 
 const baseClass = `w-100 no-border card-plain py-5 px-4`
 const baseStyles = {
-  background: "transparent",
+  // background: "transparent",
   minHeight: "100%",
   minWidth: "100%",
 }
@@ -34,7 +34,7 @@ const ButtonCard = props => {
     background === "" || !background
       ? {
           style: { ...baseStyles },
-          className: `${baseClass} text-center py-5 ${
+          className: `${baseClass} bg-white text-center py-5 ${
             props.className ? props.className : ""
           }`,
         }
