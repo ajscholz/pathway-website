@@ -35,7 +35,7 @@ const MessageSeriesTemplate = props => {
   return (
     <>
       <Header background={graphic} xs={true} />
-      <div className="section">
+      <div className="section section-gray">
         <Container>
           <Row className="justify-content-md-center">
             <Col md="10" className="px-0">

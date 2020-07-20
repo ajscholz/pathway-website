@@ -27,7 +27,7 @@ const EventsPage = props => {
         url="https://pathwaymarietta.com/about/events"
       />
       <Header title={heading} background={image} xs={true} />
-      <div className="section">
+      <div className="section section-gray">
         <Container>
           <Row>
             {activeItems.map((event, index) => (

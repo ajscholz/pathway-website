@@ -28,7 +28,10 @@ const MessagesPage = ({
         url="https://pathwaymarietta.com/messages"
       />
       <Header title={heading} subtitle={subHeading} background={image} />
-      <div className="section section-project cd-section" id="projects">
+      <div
+        className="section section-project cd-section section-gray"
+        id="projects"
+      >
         <Container>
           <Row>
             <Col className="ml-auto mr-auto text-center" md="8">

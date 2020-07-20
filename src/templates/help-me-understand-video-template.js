@@ -13,7 +13,7 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
     <>
       <SEO />
       <Header title={video.title} xs={true} background="solid" />
-      <div className="section">
+      <div className="section section-gray">
         <Container>
           <Row className="justify-content-md-center">
             <Col md="10" className="px-0">
