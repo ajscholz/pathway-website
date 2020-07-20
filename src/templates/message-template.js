@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Header from "components/header"
 
-import { Button, Container, Row, Col } from "reactstrap"
+import { Container, Row, Col } from "reactstrap"
 import YouTubePlayer from "react-player/lib/players/YouTube"
 import BreadcrumbSection from "../components/BreadcrumbSection"
 
