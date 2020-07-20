@@ -7,24 +7,29 @@ const SecondaryLinks = ({ click, className }) => {
     <>
       <NavItem className={className}>
         <NavLink
-          className="nav-link"
+          className="py-2"
           to="/about/events"
           tag={Link}
-          // onClick={() => click()}
+          onClick={() => click()}
         >
           Events
         </NavLink>
       </NavItem>
 
       <NavItem className={className}>
-        <NavLink className="nav-link" href="/resources" onClick={() => click()}>
+        <NavLink
+          className="py-2"
+          to="/resources"
+          tag={Link}
+          onClick={() => click()}
+        >
           Resources
         </NavLink>
       </NavItem>
 
       <NavItem className={className}>
         <NavLink
-          className="nav-link"
+          className="py-2"
           href="https://pathway-community-church.myshopify.com/collections/all"
           target="_blank"
           rel="noopener noreferrer"
@@ -36,7 +41,7 @@ const SecondaryLinks = ({ click, className }) => {
 
       <NavItem className={className}>
         <NavLink
-          className="nav-link"
+          className="py-2"
           href="https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
           onClick={() => click()}
         >

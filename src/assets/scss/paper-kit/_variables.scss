@@ -41,6 +41,7 @@ $default-states-color: #403d39 !default;
 
 $primary-color: #94cc4c !default;
 $primary-states-color: darken($primary-color, 10%) !default;
+$primary-light-color: lighten($primary-color, 10%) !default;
 
 $success-color: #6bd098 !default;
 $success-states-color: darken($success-color, 10%) !default;

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Image from "gatsby-image"
 // nodejs library that concatenates strings
@@ -17,13 +17,14 @@ import {
   Col,
 } from "reactstrap"
 import SecondaryLinks from "./secondary-links"
+import BodyClick from "./BodyClick"
 
 const Navigation = () => {
-  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent")
-  const [bodyClick, setBodyClick] = React.useState(false)
-  const [collapseOpen, setCollapseOpen] = React.useState(false)
+  const [navbarColor, setNavbarColor] = useState("navbar-transparent")
+  const [bodyClick, setBodyClick] = useState(false)
+  const [collapseOpen, setCollapseOpen] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     let headroom = new Headroom(document.getElementById("navbar-main"))
     // initialise
     headroom.init()
@@ -59,23 +60,24 @@ const Navigation = () => {
     }
   `)
 
+  const openNav = () => {
+    document.documentElement.classList.toggle("nav-open")
+    setBodyClick(true)
+    setCollapseOpen(true)
+  }
+
   const closeNav = () => {
     document.documentElement.classList.toggle("nav-open")
-    setBodyClick(false)
-    setCollapseOpen(false)
+    document.getElementById("bodyClick").classList.toggle("bodyClick-show")
+    setTimeout(() => {
+      setBodyClick(false)
+      setCollapseOpen(false)
+    }, 300)
   }
 
   return (
     <>
-      {bodyClick ? (
-        <button
-          className="btn-plain"
-          id="bodyClick"
-          type="button"
-          aria-label="Close"
-          onClick={() => closeNav()}
-        />
-      ) : null}
+      {bodyClick ? <BodyClick closeNav={closeNav} /> : null}
       <Navbar
         color="black-color"
         expand={false}
@@ -93,6 +95,11 @@ const Navigation = () => {
                 to="/"
                 tag={Link}
                 className="w-100"
+                onClick={() => {
+                  if (collapseOpen) {
+                    closeNav()
+                  }
+                }}
               >
                 <Image fluid={logo.fluid} alt="Pathway Community Church" />
               </NavbarBrand>
@@ -102,9 +109,11 @@ const Navigation = () => {
               id="navigation"
               type="button"
               onClick={() => {
-                document.documentElement.classList.toggle("nav-open")
-                setBodyClick(true)
-                setCollapseOpen(true)
+                if (collapseOpen) {
+                  closeNav()
+                } else {
+                  openNav()
+                }
               }}
               style={{ paddingRight: "15px" }}
             >
@@ -112,15 +121,16 @@ const Navigation = () => {
               <span className="navbar-toggler-bar bar2" />
               <span className="navbar-toggler-bar bar3" />
             </button>
-            <Collapse navbar isOpen={collapseOpen}>
+            <Collapse navbar isOpen={collapseOpen} className="pt-4">
               <button
                 color="black"
-                className="text-muted pr-0 mb-3"
+                className="text-muted pr-0 mb-0"
                 style={{
                   zIndex: "3",
                   marginRight: "-5px",
                   border: "none",
                   background: "transparent",
+                  fontSize: "24px",
                 }}
                 onClick={() => closeNav()}
               >
@@ -129,10 +139,10 @@ const Navigation = () => {
                   aria-label="close menu"
                 />
               </button>
-              <Nav navbar className="mx-0 ml-auto">
+              <Nav navbar className="mx-0 ml-auto mt-4">
                 <NavItem className="pr-0 ">
                   <NavLink
-                    className="nav-link"
+                    className="py-2"
                     to="/start"
                     tag={Link}
                     onClick={() => closeNav()}
@@ -143,7 +153,7 @@ const Navigation = () => {
 
                 <NavItem className="pr-0">
                   <NavLink
-                    className="nav-link"
+                    className="py-2"
                     to="/about"
                     tag={Link}
                     onClick={() => closeNav()}
@@ -154,7 +164,7 @@ const Navigation = () => {
 
                 <NavItem className="pr-0">
                   <NavLink
-                    className="nav-link"
+                    className="py-2"
                     to="/messages"
                     tag={Link}
                     onClick={() => closeNav()}
@@ -165,7 +175,10 @@ const Navigation = () => {
 
                 <hr style={{ width: "100%" }} />
 
-                <SecondaryLinks click={() => closeNav()} className="pr-0" />
+                <SecondaryLinks
+                  click={() => closeNav()}
+                  className="pr-0 secondary-nav"
+                />
               </Nav>
               <div
                 className="d-lg-none mt-auto"
