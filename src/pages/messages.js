@@ -1,16 +1,24 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 
 import SEO from "components/seo"
 import Header from "components/header"
 
-import { Container, Row, Col } from "reactstrap"
+import { Container, Row, Col, Button } from "reactstrap"
 import SeriesCard from "../components/cards/series-card"
 
-const MessagesPage = props => {
-  const { data } = props
-  const { page, messageSeries } = data
-  const { heading, subHeading, image } = page.banner
+const MessagesPage = ({
+  data: {
+    page: {
+      banner: { heading, subHeading, image },
+    },
+    messageSeries,
+  },
+}) => {
+  const [showFold, setShowFold] = useState(false)
+
+  const aboveFoldSeries = messageSeries.all.slice(0, 6)
+  const belowFoldSeries = messageSeries.all.slice(6)
 
   return (
     <>
@@ -28,7 +36,7 @@ const MessagesPage = props => {
             </Col>
           </Row>
           <Row className="mt-4">
-            {messageSeries.all.map(({ series }) => {
+            {aboveFoldSeries.map(({ series }) => {
               return (
                 <Col md="6" lg="4" key={series.id}>
                   <SeriesCard seriesData={series} className="border-1" />
@@ -36,6 +44,31 @@ const MessagesPage = props => {
               )
             })}
           </Row>
+
+          {showFold ? (
+            <Row className="mt-4">
+              {belowFoldSeries.map(({ series }) => {
+                return (
+                  <Col md="6" lg="4" key={series.id}>
+                    <SeriesCard seriesData={series} className="border-1" />
+                  </Col>
+                )
+              })}
+            </Row>
+          ) : (
+            <Row className="justify-content-center">
+              {/* <Col fluid> */}
+              <Button
+                color="primary"
+                size="lg"
+                onClick={() => setShowFold(true)}
+                className="mt-5"
+              >
+                View More Series
+              </Button>
+              {/* </Col> */}
+            </Row>
+          )}
         </Container>
       </div>
     </>
@@ -48,7 +81,6 @@ export const data = graphql`
       ...HeaderFragment
     }
     messageSeries: allContentfulMessageSeries(
-      limit: 6
       sort: { fields: seriesStartDate, order: DESC }
     ) {
       all: edges {
