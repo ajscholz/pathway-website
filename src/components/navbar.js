@@ -29,13 +29,13 @@ const Navigation = () => {
     headroom.init()
     const updateNavbarColor = () => {
       if (
-        document.documentElement.scrollTop > 499 ||
-        document.body.scrollTop > 499
+        document.documentElement.scrollTop > 299 ||
+        document.body.scrollTop > 299
       ) {
         setNavbarColor("")
       } else if (
-        document.documentElement.scrollTop < 500 ||
-        document.body.scrollTop < 500
+        document.documentElement.scrollTop < 300 ||
+        document.body.scrollTop < 300
       ) {
         setNavbarColor("navbar-transparent")
       }
@@ -124,7 +124,10 @@ const Navigation = () => {
                 }}
                 onClick={() => closeNav()}
               >
-                <i className="fa fa-times" aria-label="close menu" />
+                <i
+                  className="nc-icon nc-simple-remove"
+                  aria-label="close menu"
+                />
               </button>
               <Nav navbar className="mx-0 ml-auto">
                 <NavItem className="pr-0 ">
