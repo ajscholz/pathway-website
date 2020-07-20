@@ -4,6 +4,7 @@ import { graphql, Link } from "gatsby"
 
 import { Container, Row, Col, Card, CardBody } from "reactstrap"
 import Header from "../components/header"
+import BreadcrumbSection from "../components/BreadcrumbSection"
 
 const MessageSeriesTemplate = props => {
   const { data } = props
@@ -36,13 +37,23 @@ const MessageSeriesTemplate = props => {
       <Header background={graphic} xs={true} />
       <div className="section">
         <Container>
+          <Row className="justify-content-md-center">
+            <Col md="10" className="px-0">
+              <BreadcrumbSection
+                crumbs={[
+                  { name: "Messages", link: "/messages" },
+                  { name: `${title} Series`, link: "", active: true },
+                ]}
+              />
+            </Col>
+          </Row>
           <Row
             className="justify-content-md-center"
             style={{ marginBottom: "40px" }}
           >
             <Col md="10">
               <h2 className="title">{`${title} Message Series`}</h2>
-              <h6 className="p-0 text-muted">
+              <h6 className="p-0 text-primary">
                 {`${date}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
                 {`${length} Parts`}
               </h6>

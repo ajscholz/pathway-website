@@ -18,7 +18,7 @@ const BreadcrumbSection = ({ crumbs }) => {
                   {!crumb.active ? (
                     <Link to={crumb.link}>{crumb.name}</Link>
                   ) : (
-                    crumb.name
+                    <span className="text-muted">{crumb.name}</span>
                   )}
                 </BreadcrumbItem>
               ))}

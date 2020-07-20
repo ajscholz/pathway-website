@@ -4,15 +4,9 @@ import PropTypes from "prop-types"
 import { graphql, Link } from "gatsby"
 import Header from "components/header"
 
-import {
-  Button,
-  Container,
-  Row,
-  Col,
-  // Breadcrumb,
-  // BreadcrumbItem,
-} from "reactstrap"
+import { Button, Container, Row, Col } from "reactstrap"
 import YouTubePlayer from "react-player/lib/players/YouTube"
+import BreadcrumbSection from "../components/BreadcrumbSection"
 
 const MessageTemplate = props => {
   const { data } = props
@@ -23,41 +17,34 @@ const MessageTemplate = props => {
       <Header background={series.graphic} xs={true} />
       <div className="section">
         <Container>
-          {/* <Row>
-            <Breadcrumb style={{ background: "none" }}>
-              <BreadcrumbItem>
-                <Link to="/messages">Message Series</Link>
-              </BreadcrumbItem>
-              <BreadcrumbItem>
-                <Link to={`/messages/series${series.fields.slug}`}>
-                  {series.title}
-                </Link>
-              </BreadcrumbItem>
-              <BreadcrumbItem active>{message.title}</BreadcrumbItem>
-            </Breadcrumb>
-          </Row> */}
+          <Row className="justify-content-md-center">
+            <Col md={10} className="px-0">
+              <BreadcrumbSection
+                crumbs={[
+                  { name: "Messages", link: "/messages" },
+                  {
+                    name: `${series.title} Series`,
+                    link: `/messages/series${series.fields.slug}`,
+                  },
+                  { name: message.title, link: "", active: true },
+                ]}
+              />
+            </Col>
+          </Row>
           <Row
             className="justify-content-md-center"
             style={{ marginBottom: "40px" }}
           >
             <Col md="10">
               <h2 className="title">{message.title}</h2>
-              <Button
-                color="primary"
-                tag={Link}
-                to={`/messages/series${series.fields.slug}`}
-                className="btn-link h6 p-0 ml-n1"
-              >
-                <i className="fa fa-caret-left" />
-                {`${series.title} Message Series`}
-              </Button>
-              <p className="author">
-                {/* <a href="#pablo" onClick={e => e.preventDefault()}> */}
+              <h6 className="p-0 text-primary">
                 {`${message.communicator}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
                 {`${message.date}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
                 {`Part ${message.part} of ${series.length}`}
-                {/* </a> */}
-              </p>
+              </h6>
+
+              {/* <p className="author">{desc.desc}</p> */}
+
               <div
                 className="mt-5"
                 style={{
