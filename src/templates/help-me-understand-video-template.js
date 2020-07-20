@@ -6,7 +6,6 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Container, Row, Col, Button } from "reactstrap"
 import VimeoPlayer from "react-player/lib/players/Vimeo"
 import BreadcrumbSection from "../components/BreadcrumbSection"
-import { Link } from "gatsby"
 
 const HelpMeUnderstandVideoTemplate = ({ data }) => {
   const { video } = data
