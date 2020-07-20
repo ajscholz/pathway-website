@@ -1,9 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
-import SEO from "../components/seo"
-import Header from "../components/header"
+import SEO from "../../components/seo"
+import Header from "../../components/header"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
+import BreadcrumbSection from "../../components/BreadcrumbSection"
 
 import {
   Container,
@@ -13,15 +14,13 @@ import {
   CardBody,
   CardFooter,
   Badge,
-  Button,
 } from "reactstrap"
-import BreadcrumbSection from "../components/BreadcrumbSection"
 
-const ResourcesPage = ({ data }) => {
+const HelpMeUnderstandPage = ({ data }) => {
   const { banner, sections } = data.page
   const { heading, image } = banner
 
-  const videos = sections[0].linkedContent.slice(0, 3)
+  const videos = sections[0].linkedContent
 
   return (
     <>
@@ -32,10 +31,13 @@ const ResourcesPage = ({ data }) => {
       />
       <Header title={heading} background={image} xs={true} />
       <section className="blog-2 section section-gray">
+        <BreadcrumbSection
+          crumbs={[
+            { name: "Resources", link: "/resources" },
+            { name: "Help Me Understand Videos", link: "", active: true },
+          ]}
+        />
         <Container>
-          <BreadcrumbSection
-            crumbs={[{ name: "Resources", link: "/resources", active: true }]}
-          />
           <h2 className="title text-center">{sections[0].title}</h2>
           <Row className="justify-content-center">
             {videos.map(video => (
@@ -105,27 +107,17 @@ const ResourcesPage = ({ data }) => {
               </Col>
             ))}
           </Row>
-          <Row className="justify-content-center">
-            <Button
-              color="primary"
-              tag={Link}
-              to="/resources/help-me-understand"
-              className="mt-3"
-            >
-              View More
-            </Button>
-          </Row>
         </Container>
       </section>
     </>
   )
 }
 
-export default ResourcesPage
+export default HelpMeUnderstandPage
 
 export const data = graphql`
   {
-    page: contentfulPages(title: { eq: "Resources" }) {
+    page: contentfulPages(title: { eq: "Help Me Understand Videos" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulPageSection {

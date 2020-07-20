@@ -145,7 +145,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
 
   result.data.videos.all.forEach(({ node }) => {
-    const path = `/resources/video${node.fields.slug}`
+    const path = `/resources/help-me-understand${node.fields.slug}`
     createPage({
       path,
       component: videoPageTemplate,

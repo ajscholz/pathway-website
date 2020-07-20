@@ -5,6 +5,8 @@ import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Container, Row, Col, Button } from "reactstrap"
 import VimeoPlayer from "react-player/lib/players/Vimeo"
+import BreadcrumbSection from "../components/BreadcrumbSection"
+import { Link } from "gatsby"
 
 const HelpMeUnderstandVideoTemplate = ({ data }) => {
   const { video } = data
@@ -14,14 +16,28 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
       <Header title={video.title} xs={true} background="solid" />
       <div className="section">
         <Container>
+          <Row className="justify-content-md-center">
+            <Col md="10" className="px-0">
+              <BreadcrumbSection
+                crumbs={[
+                  { name: "Resources", link: "/resources" },
+                  {
+                    name: "Help Me Understand Videos",
+                    link: "/resources/help-me-understand",
+                  },
+                  { name: video.title, link: "", active: true },
+                ]}
+              />
+            </Col>
+          </Row>
           <Row
             className="justify-content-md-center"
             style={{ marginBottom: "40px" }}
           >
             <Col md="10">
-              {/* <h2 className="title">{`${video.title}`}</h2>
+              <h2 className="title">{`${video.title}`}</h2>
 
-              <Button
+              {/* <Button
                 color="primary"
                 tag={Link}
                 to={`/resources`}
