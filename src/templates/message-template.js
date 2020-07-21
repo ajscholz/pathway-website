@@ -1,20 +1,24 @@
 import React from "react"
-import PropTypes from "prop-types"
 
 import { graphql } from "gatsby"
-import Header from "components/header"
+import Header from "../components/header"
 
 import { Container, Row, Col } from "reactstrap"
 import YouTubePlayer from "react-player/lib/players/YouTube"
 import BreadcrumbSection from "../components/BreadcrumbSection"
+import MessageCard from "../components/cards/MessageCard"
 
-const MessageTemplate = props => {
-  const { data } = props
-  const { message, series } = data
-
+const MessageTemplate = ({
+  data: { message, series, otherMessages },
+  data,
+}) => {
+  console.log(data)
+  console.log(otherMessages)
   return (
     <>
-      <Header background={series.graphic} xs={true} />
+      {/* <Header background={series.graphic} xs={true} /> */}
+      <Header xxs={true} background="solid" />
+
       <div className="section section-gray">
         <Container>
           <Row className="justify-content-md-center">
@@ -22,8 +26,9 @@ const MessageTemplate = props => {
               <BreadcrumbSection
                 crumbs={[
                   { name: "Messages", link: "/messages" },
+                  { name: "Series", link: "/messages/series" },
                   {
-                    name: `${series.title} Series`,
+                    name: `${series.title}`,
                     link: `/messages/series${series.fields.slug}`,
                   },
                   { name: message.title, link: "", active: true },
@@ -36,7 +41,7 @@ const MessageTemplate = props => {
             style={{ marginBottom: "40px" }}
           >
             <Col md="10">
-              <h2 className="title">{message.title}</h2>
+              <h2 className="title text-capitalize">{message.title}</h2>
               <h6 className="p-0 text-primary">
                 {`${message.communicator}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
                 {`${message.date}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
@@ -76,24 +81,30 @@ const MessageTemplate = props => {
           </Row>
         </Container>
       </div>
+
+      {/* other messages */}
+      {otherMessages.all.length > 0 && (
+        <div className="section px-5">
+          <Container fluid className="px-5">
+            <Row className="justify-content-md-center">
+              <Col>
+                <h2 className="title">More From This Series</h2>
+              </Col>
+            </Row>
+            <Row className="justify-content-center mb-n4">
+              {otherMessages.all.map(message => {
+                return (
+                  <Col md="6" lg="4" xl="3" key={message.id} className="mb-4">
+                    <MessageCard messageData={message} />
+                  </Col>
+                )
+              })}
+            </Row>
+          </Container>
+        </div>
+      )}
     </>
   )
-}
-
-MessageTemplate.propTypes = {
-  data: {
-    message: {
-      date: PropTypes.string,
-    },
-  },
-}
-
-MessageTemplate.defaultProps = {
-  data: {
-    message: {
-      date: "1776-07-04",
-    },
-  },
 }
 
 export const data = graphql`
@@ -105,6 +116,7 @@ export const data = graphql`
       video: videoLink
       part: week
     }
+
     series: contentfulMessageSeries(contentful_id: { eq: $seriesId }) {
       title: seriesTitle
       length
@@ -115,6 +127,17 @@ export const data = graphql`
         fluid {
           ...GatsbyContentfulFluid
         }
+      }
+    }
+    otherMessages: allContentfulMessage(
+      filter: {
+        messageSeries: { contentful_id: { eq: $seriesId } }
+        fields: { slug: { ne: $slug } }
+      }
+      sort: { fields: messageDate, order: ASC }
+    ) {
+      all: nodes {
+        ...MessageCardFragment
       }
     }
   }

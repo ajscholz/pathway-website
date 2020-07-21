@@ -17,6 +17,10 @@
     min-height: 40vh !important;
     max-height: 500px;
   }
+  &.page-header-xxs {
+    min-height: 25vh !important;
+    max-height: 300px;
+  }
 
   .page-header-image {
     position: absolute;

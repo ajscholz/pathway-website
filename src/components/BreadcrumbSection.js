@@ -14,7 +14,7 @@ const BreadcrumbSection = ({ crumbs }) => {
                 <Link to="/">Home</Link>
               </BreadcrumbItem>
               {crumbs.map(crumb => (
-                <BreadcrumbItem key={crumb.name}>
+                <BreadcrumbItem key={crumb.name} className="text-capitalize">
                   {!crumb.active ? (
                     <Link to={crumb.link}>{crumb.name}</Link>
                   ) : (

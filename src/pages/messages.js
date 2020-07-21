@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { graphql } from "gatsby"
 
 import SEO from "components/seo"
@@ -6,6 +6,8 @@ import Header from "components/header"
 
 import { Container, Row, Col, Button } from "reactstrap"
 import SeriesCard from "../components/cards/series-card"
+import MessageCard from "../components/cards/MessageCard"
+import { Link } from "gatsby"
 
 const MessagesPage = ({
   data: {
@@ -13,13 +15,9 @@ const MessagesPage = ({
       banner: { heading, subHeading, image },
     },
     messageSeries,
+    messages,
   },
 }) => {
-  const [showFold, setShowFold] = useState(false)
-
-  const aboveFoldSeries = messageSeries.all.slice(0, 6)
-  const belowFoldSeries = messageSeries.all.slice(6)
-
   return (
     <>
       <SEO
@@ -33,45 +31,51 @@ const MessagesPage = ({
         id="projects"
       >
         <Container>
-          <Row>
-            <Col className="ml-auto mr-auto text-center" md="8">
-              <h2 className="title mb-4">Recent Message Series</h2>
-            </Col>
-          </Row>
-          <Row className="mt-4">
-            {aboveFoldSeries.map(({ series }) => {
+          <Row className="mt-4 justify-content-center">
+            {messages.all.map(message => {
               return (
-                <Col md="6" lg="4" key={series.id}>
-                  <SeriesCard seriesData={series} className="border-1" />
+                <Col
+                  lg="6"
+                  key={message.id}
+                  className="d-flex flex-column text-center"
+                >
+                  <h2 className="title mb-4">Latest Message</h2>
+                  <MessageCard messageData={message} />
+                  <Button
+                    color="primary"
+                    size="lg"
+                    tag={Link}
+                    to="/messages/message-archive"
+                    className="mt-3 mx-auto"
+                  >
+                    View More Messages
+                  </Button>
+                </Col>
+              )
+            })}
+
+            {messageSeries.all.map(series => {
+              return (
+                <Col
+                  lg="6"
+                  key={series.id}
+                  className="d-flex flex-column text-center mt-5 mt-lg-0"
+                >
+                  <h2 className="title mb-4">Latest Message Series</h2>
+                  <SeriesCard seriesData={series} className="border-1" noDesc />
+                  <Button
+                    color="primary"
+                    size="lg"
+                    tag={Link}
+                    to="/messages/series"
+                    className="mt-3 mx-auto"
+                  >
+                    View More Series
+                  </Button>
                 </Col>
               )
             })}
           </Row>
-
-          {showFold ? (
-            <Row className="mt-4">
-              {belowFoldSeries.map(({ series }) => {
-                return (
-                  <Col md="6" lg="4" key={series.id}>
-                    <SeriesCard seriesData={series} className="border-1" />
-                  </Col>
-                )
-              })}
-            </Row>
-          ) : (
-            <Row className="justify-content-center">
-              {/* <Col fluid> */}
-              <Button
-                color="primary"
-                size="lg"
-                onClick={() => setShowFold(true)}
-                className="mt-5"
-              >
-                View More Series
-              </Button>
-              {/* </Col> */}
-            </Row>
-          )}
         </Container>
       </div>
     </>
@@ -85,26 +89,18 @@ export const data = graphql`
     }
     messageSeries: allContentfulMessageSeries(
       sort: { fields: seriesStartDate, order: DESC }
+      limit: 1
     ) {
-      all: edges {
-        series: node {
-          id: contentful_id
-          title: seriesTitle
-          desc: seriesDescription {
-            desc: seriesDescription
-          }
-          start: seriesStartDate(formatString: "MMMM")
-          end: seriesEndDate(formatString: "MMMM")
-          year: seriesStartDate(formatString: "YYYY")
-          graphic: seriesGraphic {
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-          fields {
-            slug
-          }
-        }
+      all: nodes {
+        ...SeriesCardFragment
+      }
+    }
+    messages: allContentfulMessage(
+      sort: { fields: messageDate, order: DESC }
+      limit: 1
+    ) {
+      all: nodes {
+        ...MessageCardFragment
       }
     }
   }
