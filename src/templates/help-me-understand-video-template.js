@@ -12,7 +12,7 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
   return (
     <>
       <SEO />
-      <Header title={video.title} xs={true} background="solid" />
+      <Header xxs={true} background="solid" />
       <div className="section section-gray">
         <Container>
           <Row className="justify-content-md-center">
@@ -34,7 +34,7 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
             style={{ marginBottom: "40px" }}
           >
             <Col md="10">
-              <h2 className="title">{`${video.title}`}</h2>
+              <h1 className="title h2">{`${video.title}`}</h1>
 
               {/* <Button
                 color="primary"

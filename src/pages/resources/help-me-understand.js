@@ -18,7 +18,7 @@ import {
 
 const HelpMeUnderstandPage = ({ data }) => {
   const { banner, sections } = data.page
-  const { heading, image } = banner
+  const { image } = banner
 
   const videos = sections[0].linkedContent
 
@@ -29,7 +29,7 @@ const HelpMeUnderstandPage = ({ data }) => {
         image={image.file.url}
         url="https://pathwaymarietta.com/resources"
       />
-      <Header title={heading} background={image} xs={true} />
+      <Header background={image} xxs={true} />
       <section className="blog-2 section section-gray">
         <BreadcrumbSection
           crumbs={[
@@ -38,7 +38,7 @@ const HelpMeUnderstandPage = ({ data }) => {
           ]}
         />
         <Container>
-          <h2 className="title text-center">{sections[0].title}</h2>
+          <h1 className="h2 title text-center">{sections[0].title}</h1>
           <Row className="justify-content-center">
             {videos.map(video => (
               <Col md="6" lg="4" key={video.id}>

@@ -41,7 +41,7 @@ const MessageTemplate = ({
             style={{ marginBottom: "40px" }}
           >
             <Col md="10">
-              <h2 className="title text-capitalize">{message.title}</h2>
+              <h1 className="title text-capitalize h2">{message.title}</h1>
               <h6 className="p-0 text-primary">
                 {`${message.communicator}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
                 {`${message.date}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;

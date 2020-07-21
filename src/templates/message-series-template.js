@@ -71,7 +71,7 @@ const MessageSeriesTemplate = ({
             style={{ marginBottom: "40px" }}
           >
             <Col>
-              <h2 className="title">{`${title} Message Series`}</h2>
+              <h1 className="title h2">{`${title} Message Series`}</h1>
               <h6 className="p-0 text-primary">
                 {`${date}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
                 {`${length} ${length > 1 ? "Parts" : "Part"}`}
