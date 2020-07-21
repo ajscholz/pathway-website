@@ -39,8 +39,8 @@ const MessageTemplate = ({ data: { message, series, otherMessages } }) => {
             <Col md="10">
               <h1 className="title text-capitalize h2">{message.title}</h1>
               <Metadata>
-                {`${message.communicator}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
-                {`${message.date}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
+                {`${message.communicator}`}
+                {`${message.date}`}
                 {`Part ${message.part} of ${series.length}`}
               </Metadata>
 

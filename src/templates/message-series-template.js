@@ -7,6 +7,7 @@ import Header from "../components/header"
 import BreadcrumbSection from "../components/BreadcrumbSection"
 import SEO from "../components/seo"
 import MessageCard from "../components/cards/MessageCard"
+import Metadata from "../components/Metadata"
 
 const MessageSeriesTemplate = ({
   data: {
@@ -72,11 +73,11 @@ const MessageSeriesTemplate = ({
           >
             <Col>
               <h1 className="title h2">{`${title} Message Series`}</h1>
-              <h6 className="p-0 text-primary">
-                {`${date}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
+              <Metadata>
+                {`${date}`}
                 {`${length} ${length > 1 ? "Parts" : "Part"}`}
-              </h6>
-              <p className="author">{desc.desc}</p>
+              </Metadata>
+              <p className="author">{desc}</p>
             </Col>
           </Row>
 
