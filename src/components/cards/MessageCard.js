@@ -17,7 +17,6 @@ const MessageCard = ({ messageData }) => {
       fields: { seriesSlug },
     },
   } = messageData
-  console.log("Message data", messageData)
   return (
     <Link to={`/messages/series${seriesSlug}${slug}`}>
       <Card>

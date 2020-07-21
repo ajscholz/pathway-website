@@ -7,13 +7,9 @@ import { Container, Row, Col } from "reactstrap"
 import YouTubePlayer from "react-player/lib/players/YouTube"
 import BreadcrumbSection from "../components/BreadcrumbSection"
 import MessageCard from "../components/cards/MessageCard"
+import Metadata from "../components/Metadata"
 
-const MessageTemplate = ({
-  data: { message, series, otherMessages },
-  data,
-}) => {
-  console.log(data)
-  console.log(otherMessages)
+const MessageTemplate = ({ data: { message, series, otherMessages } }) => {
   return (
     <>
       {/* <Header background={series.graphic} xs={true} /> */}
@@ -42,11 +38,11 @@ const MessageTemplate = ({
           >
             <Col md="10">
               <h1 className="title text-capitalize h2">{message.title}</h1>
-              <h6 className="p-0 text-primary">
+              <Metadata>
                 {`${message.communicator}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
                 {`${message.date}`}&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
                 {`Part ${message.part} of ${series.length}`}
-              </h6>
+              </Metadata>
 
               {/* <p className="author">{desc.desc}</p> */}
 
