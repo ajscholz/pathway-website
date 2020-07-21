@@ -6,6 +6,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Container, Row, Col, Button } from "reactstrap"
 import VimeoPlayer from "react-player/lib/players/Vimeo"
 import BreadcrumbSection from "../components/BreadcrumbSection"
+import Metadata from "../components/Metadata"
 
 const HelpMeUnderstandVideoTemplate = ({ data }) => {
   const { video } = data
@@ -35,6 +36,7 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
           >
             <Col md="10">
               <h1 className="title h2">{`${video.title}`}</h1>
+              <Metadata>{video.tags.map(tag => tag)}</Metadata>
 
               {/* <Button
                 color="primary"
