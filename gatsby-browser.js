@@ -5,8 +5,11 @@
  */
 
 // You can delete this file if you're not using it
-
+const React = require("react")
 require("typeface-source-sans-pro")
+const { MDXProvider } = require("@mdx-js/react")
+const { Link } = require("gatsby")
+const { navigate } = require("@reach/router")
 
 exports.onServiceWorkerUpdateReady = () => {
   const answer = window.confirm(
@@ -58,3 +61,40 @@ exports.onClientEntry = () => {
     window.sessionStorage.setItem("nextSunday", sunday)
   }
 }
+
+// --------- CUSTOM MDX PROVIDER TO SET PROPER LINK TYPE ---------- //
+const MyLink = props => {
+  const onClick = (e, link) => {
+    e.preventDefault()
+    navigate(link, { state: { offset: -100 } })
+  }
+
+  const link = new URL(props.href)
+  if (link.host === "pathwaymarietta.com")
+    if (link.hash !== "")
+      return (
+        <a
+          href={link.href}
+          onClick={e => onClick(e, `${link.pathname}${link.hash}`)}
+        >
+          {props.children}
+        </a>
+      )
+    else return <Link to={link.pathname}>{props.children}</Link>
+  else
+    return (
+      <a href={link.href} target="_blank" rel="noopener noreferrer">
+        {props.children}
+      </a>
+    )
+}
+
+const components = {
+  a: MyLink,
+}
+
+exports.wrapRootElement = ({ element }) => (
+  <MDXProvider components={components}>{element}</MDXProvider>
+)
+
+// ---------------------------------------------------------------- //

@@ -1,52 +1,58 @@
 [build]
-functions = ".netlify/functions"
 command = "yarn run build"
+functions = ".netlify/functions"
 publish = "public/"
 
 [[redirects]]
-  from = "https://give.pathwaymarietta.com"
-  to = "https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
-  status = 302
-  force = true
+force = true
+from = "https://give.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.churchcenter.com/giving?open-in-church-center-modal=true"
 
 [[redirects]]
-  from = "https://messages.pathwaymarietta.com"
-  to = "https://pathwaymarietta.com/messages"
-  status = 302
-  force = true
+force = true
+from = "https://messages.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.com/messages"
 
 [[redirects]]
-  from = "https://resources.pathwaymarietta.com"
-  to = "https://pathwaymarietta.com/resources"
-  status = 302
-  force = true
+force = true
+from = "https://resources.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.com/resources"
 
 [[redirects]]
-  from = "https://connect.pathwaymarietta.com"
-  to = "https://pathwaymarietta.churchcenter.com/people/forms/125762"
-  status = 302
-  force = true
+force = true
+from = "https://connect.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.churchcenter.com/people/forms/125762"
 
 [[redirects]]
-  from = "https://groups.pathwaymarietta.com"
-  to = "https://pathwaymarietta.churchcenter.com/groups/connect-groups"
-  status = 302
-  force = true
+force = true
+from = "https://groups.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.churchcenter.com/groups/connect-groups"
 
 [[redirects]]
-  from = "https://merch.pathwaymarietta.com"
-  to = "https://pathway-community-church.myshopify.com/collections/all"
-  status = 302
-  force = true
+force = true
+from = "https://merch.pathwaymarietta.com"
+status = 302
+to = "https://pathway-community-church.myshopify.com/collections/all"
 
 [[redirects]]
-  from = "https://about.pathwaymarietta.com"
-  to = "https://pathwaymarietta.com"
-  status = 302
-  force = true
+force = true
+from = "https://about.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.com"
 
 [[redirects]]
-  from = "https://events.pathwaymarietta.com"
-  to = "https://pathwaymarietta.com/about/events"
-  status = 302
-  force = true
+force = true
+from = "https://events.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.com/about/events"
+
+[[redirects]]
+force = true
+from = "https://pathwaymarietta.com/start"
+status = 301
+to = "https://pathwaymarietta.com/take-a-step"

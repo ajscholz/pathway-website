@@ -18,6 +18,7 @@ import {
 } from "reactstrap"
 import SecondaryLinks from "./secondary-links"
 import BodyClick from "./BodyClick"
+import { mainNav } from "../utils/links"
 
 const Navigation = () => {
   const [navbarColor, setNavbarColor] = useState("navbar-transparent")
@@ -140,38 +141,9 @@ const Navigation = () => {
                 />
               </button>
               <Nav navbar className="mx-0 ml-auto mt-4">
-                <NavItem className="pr-0 ">
-                  <NavLink
-                    className="py-2"
-                    to="/start"
-                    tag={Link}
-                    onClick={() => closeNav()}
-                  >
-                    Start
-                  </NavLink>
-                </NavItem>
-
-                <NavItem className="pr-0">
-                  <NavLink
-                    className="py-2"
-                    to="/about"
-                    tag={Link}
-                    onClick={() => closeNav()}
-                  >
-                    About
-                  </NavLink>
-                </NavItem>
-
-                <NavItem className="pr-0">
-                  <NavLink
-                    className="py-2"
-                    to="/messages"
-                    tag={Link}
-                    onClick={() => closeNav()}
-                  >
-                    Messages
-                  </NavLink>
-                </NavItem>
+                {mainNav.map(link => (
+                  <DrawerLink link={link} click={closeNav} key={link.link} />
+                ))}
 
                 <hr style={{ width: "100%" }} />
 
@@ -180,6 +152,7 @@ const Navigation = () => {
                   className="pr-0 secondary-nav"
                 />
               </Nav>
+
               <div
                 className="d-lg-none mt-auto"
                 style={{
@@ -202,3 +175,11 @@ const Navigation = () => {
 }
 
 export default Navigation
+
+const DrawerLink = ({ link, click }) => (
+  <NavItem className="pr-0 ">
+    <NavLink className="py-2" to={link.link} tag={Link} onClick={() => click()}>
+      {link.title}
+    </NavLink>
+  </NavItem>
+)

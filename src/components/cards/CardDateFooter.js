@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { CardText } from "reactstrap"
 
 const CardDateFooter = ({ date }) => {
@@ -11,11 +10,6 @@ const CardDateFooter = ({ date }) => {
       </small>
     </CardText>
   )
-}
-
-CardDateFooter.propTypes = {
-  date: PropTypes.string.isRequired,
-  desc: PropTypes.bool.isRequired,
 }
 
 export default CardDateFooter

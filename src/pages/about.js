@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
@@ -10,9 +10,17 @@ import OurTeam from "../views/about/our-team"
 import UpcomingEventsSection from "../views/about/upcoming-events"
 
 const AboutPage = props => {
-  const { data } = props
+  const { data, location } = props
   const { page, storyData } = data
   const { heading, subHeading, image } = page.banner
+
+  useEffect(() => {
+    if (location.state.offset) {
+      if (typeof window !== "undefined") {
+        window.scrollBy(0, location.state.offset)
+      }
+    }
+  })
 
   return (
     <>
