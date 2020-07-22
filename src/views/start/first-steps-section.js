@@ -7,7 +7,9 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 const FirstStepsSection = () => {
   const { section } = useStaticQuery(graphql`
     {
-      section: contentfulPageSection(title: { eq: "First Steps" }) {
+      section: contentfulPageSection(
+        contentful_id: { eq: "prCAj3xtqPz4dPcrtd0H3" }
+      ) {
         title
         description {
           childMdx {
