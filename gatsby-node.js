@@ -218,41 +218,39 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       messageSeries: ContentfulMessageSeries
     }`,
 
-    schema.buildObjectType(
-      {
-        name: "ContentfulStreamingVideo",
-        fields: {
-          videoId: {
-            type: "String!",
-            resolve: source => source.videoId || "503812663636183",
-          },
-          dateTime: {
-            type: "Date!",
-            resolve: source => source.dateTime || new Date(2000, 0, 1),
-          },
-          length: {
-            type: "Int!",
-            resolve: source => source.length || 1,
-          },
-          videoUrl: {
-            type: "String!",
-            resolve: source =>
-              // `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${source.videoId}%2F&width=auto`,
-              `https://vimeo.com/${source.videoId}`,
-          },
+    schema.buildObjectType({
+      name: "ContentfulStreamingVideo",
+      fields: {
+        videoId: {
+          type: "String!",
+          resolve: source => source.videoId || "503812663636183",
         },
-        interfaces: ["Node"],
+        dateTime: {
+          type: "Date!",
+          resolve: source => source.dateTime || new Date(2000, 0, 1),
+        },
+        length: {
+          type: "Int!",
+          resolve: source => source.length || 1,
+        },
+        videoUrl: {
+          type: "String!",
+          resolve: source =>
+            // `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${source.videoId}%2F&width=auto`,
+            `https://vimeo.com/${source.videoId}`,
+        },
       },
-      {
-        name: "ContentfulMessageSeriesFields",
-        fields: {
-          slug: {
-            type: "String!",
-            resolve: source => source.slug || "unnamed-series-1",
-          },
+      interfaces: ["Node"],
+    }),
+    schema.buildObjectType({
+      name: "ContentfulMessageSeriesFields",
+      fields: {
+        slug: {
+          type: "String!",
+          resolve: source => source.slug || "unnamed-series-1",
         },
-      }
-    ),
+      },
+    }),
   ]
   createTypes(typeDefs)
 }
