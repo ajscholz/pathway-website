@@ -185,6 +185,9 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       updatedAt: Date
     }
     `,
+    `type ContentfulHelpMeUnderstandVideoFields {
+      slug: String
+    }`,
     `type ContentfulHelpMeUnderstandVideo implements Node {
       contentful_id: String
       title: String
@@ -192,6 +195,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       tags: [String]
       videoUserGuide: ContentfulAsset
       videoDescription: contentfulHelpMeUnderstandVideoVideoDescriptionTextNode
+      fields: ContentfulHelpMeUnderstandVideoFields
     }`,
     `type ContentfulAsset implements Node {
       file: ContentfulAssetFile
