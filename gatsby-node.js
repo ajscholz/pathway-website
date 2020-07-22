@@ -126,8 +126,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const messageTemplate = path.resolve(`src/templates/message-template.js`)
 
   result.data.messages.all.forEach(({ node }) => {
-    // const seriesSlug = node.messageSeries.fields.slug || "/unnamed-series-1"
-    const path = `/messages/series${seriesSlug}${node.fields.slug}`
+    const path = `/messages/series${node.messageSeries.fields.slug}${node.fields.slug}`
     createPage({
       path,
       component: messageTemplate,
