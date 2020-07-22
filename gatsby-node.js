@@ -30,9 +30,7 @@ exports.onCreateNode = ({ node, actions }) => {
       name: `slug`,
       value: slug,
     })
-    // console.log(node.fields.slug)
   } else if (node.internal.type === "ContentfulMessage") {
-    // console.log("in onCreateNode")
     let slug = slugify(node.messageTitle)
     if (slug === undefined) {
       unnamedMessageCounter++
@@ -43,7 +41,6 @@ exports.onCreateNode = ({ node, actions }) => {
       name: `slug`,
       value: slug,
     })
-    // console.log(node.fields.slug)
   } else if (node.internal.type === "ContentfulHelpMeUnderstandVideo") {
     let slug = slugify(node.title)
     if (slug === undefined) {
@@ -129,7 +126,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const messageTemplate = path.resolve(`src/templates/message-template.js`)
 
   result.data.messages.all.forEach(({ node }) => {
-    const seriesSlug = node.messageSeries.fields.slug || "/unnamed-series-1"
+    // const seriesSlug = node.messageSeries.fields.slug || "/unnamed-series-1"
     const path = `/messages/series${seriesSlug}${node.fields.slug}`
     createPage({
       path,
@@ -211,30 +208,51 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     `type Mdx implements Node {
       body: String!
     }`,
-    schema.buildObjectType({
-      name: "ContentfulStreamingVideo",
-      fields: {
-        videoId: {
-          type: "String!",
-          resolve: source => source.videoId || "503812663636183",
+    // `type ContentfulMessageSeriesFields {
+    //   slug: String
+    // }`,
+    `type ContentfulMessageSeries implements Node {
+      fields: ContentfulMessageSeriesFields
+    }`,
+    `type ContentfulMessage implements Node {
+      messageSeries: ContentfulMessageSeries
+    }`,
+
+    schema.buildObjectType(
+      {
+        name: "ContentfulStreamingVideo",
+        fields: {
+          videoId: {
+            type: "String!",
+            resolve: source => source.videoId || "503812663636183",
+          },
+          dateTime: {
+            type: "Date!",
+            resolve: source => source.dateTime || new Date(2000, 0, 1),
+          },
+          length: {
+            type: "Int!",
+            resolve: source => source.length || 1,
+          },
+          videoUrl: {
+            type: "String!",
+            resolve: source =>
+              // `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${source.videoId}%2F&width=auto`,
+              `https://vimeo.com/${source.videoId}`,
+          },
         },
-        dateTime: {
-          type: "Date!",
-          resolve: source => source.dateTime || new Date(2000, 0, 1),
-        },
-        length: {
-          type: "Int!",
-          resolve: source => source.length || 1,
-        },
-        videoUrl: {
-          type: "String!",
-          resolve: source =>
-            // `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpathwaymarietta%2Fvideos%2F${source.videoId}%2F&width=auto`,
-            `https://vimeo.com/${source.videoId}`,
-        },
+        interfaces: ["Node"],
       },
-      interfaces: ["Node"],
-    }),
+      {
+        name: "ContentfulMessageSeriesFields",
+        fields: {
+          slug: {
+            type: "String!",
+            resolve: source => source.slug || "unnamed-series-1",
+          },
+        },
+      }
+    ),
   ]
   createTypes(typeDefs)
 }
