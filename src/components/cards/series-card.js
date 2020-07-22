@@ -1,8 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Image from "gatsby-image"
 import PropTypes from "prop-types"
-import { Card, CardImg, CardBody, CardTitle, CardText } from "reactstrap"
 import CardBigRadius from "./CardBigRadius"
 
 import CardDescription from "./CardDescription"

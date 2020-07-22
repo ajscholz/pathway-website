@@ -1,10 +1,8 @@
 import React from "react"
-import { Card, CardBody, CardImg, CardTitle, CardText } from "reactstrap"
 import { graphql } from "gatsby"
 
 import { Link } from "gatsby"
 import CardBigRadius from "./CardBigRadius"
-import CardTopImage from "./CardTopImage"
 
 const MessageCard = ({ messageData }) => {
   const {

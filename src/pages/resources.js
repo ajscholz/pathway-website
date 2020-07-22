@@ -2,19 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import SEO from "../components/seo"
 import Header from "../components/header"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
 
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardFooter,
-  Badge,
-  Button,
-} from "reactstrap"
+import { Container, Row, Col, Button } from "reactstrap"
 import BreadcrumbSection from "../components/BreadcrumbSection"
 import HelpMeUnderstandVideoCard from "../components/cards/HelpMeUnderstandVideoCard"
 

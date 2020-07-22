@@ -1,10 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import { CardBody, CardTitle, CardText } from "reactstrap"
+import { CardText } from "reactstrap"
 import CardBigRadius from "./CardBigRadius"
-import CardTopImage from "./CardTopImage"
-import CardDateFooter from "./CardDateFooter"
 
 const EventCard = ({
   event: {
