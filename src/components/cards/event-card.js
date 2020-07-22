@@ -1,34 +1,28 @@
 import React from "react"
-import Image from "gatsby-image"
 import { graphql } from "gatsby"
 
-import { Card, CardBody, CardTitle, CardFooter, CardText } from "reactstrap"
+import { CardBody, CardTitle, CardText } from "reactstrap"
+import CardBigRadius from "./CardBigRadius"
+import CardTopImage from "./CardTopImage"
+import CardDateFooter from "./CardDateFooter"
 
-const EventCard = props => {
-  const { event } = props
-
+const EventCard = ({
+  event: {
+    image,
+    start,
+    title,
+    description: { description },
+  },
+}) => {
   return (
-    <Card className="no-transition">
-      <div className="card-image ">
-        {/* <a href="#pablo" onClick={e => e.preventDefault()}> */}
-        <Image imgClass="img" fluid={event.image.fluid} />
-        {/* </a> */}
-      </div>
-      <CardBody>
-        {/* <Badge color="warning" pill>
-          Travel
-        </Badge> */}
-        <CardTitle tag="h4" className="mb-2">
-          {event.title}
-        </CardTitle>
-        <CardText>{event.description.description}</CardText>
-        <hr />
-        <CardFooter>
-          <div className="author">{event.displayStart}</div>
-          {/* {event.callToActionButton && Link} */}
-        </CardFooter>
-      </CardBody>
-    </Card>
+    <CardBigRadius
+      className="no-transition"
+      title={title}
+      imgData={image}
+      footerData={start}
+    >
+      <CardText>{description}</CardText>
+    </CardBigRadius>
   )
 }
 

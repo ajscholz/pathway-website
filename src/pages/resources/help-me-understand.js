@@ -2,19 +2,12 @@ import React from "react"
 import { graphql } from "gatsby"
 import SEO from "../../components/seo"
 import Header from "../../components/header"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+
 import { Link } from "gatsby"
 import BreadcrumbSection from "../../components/BreadcrumbSection"
 
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardFooter,
-  Badge,
-} from "reactstrap"
+import { Container, Row, Col } from "reactstrap"
+import HelpMeUnderstandVideoCard from "../../components/cards/HelpMeUnderstandVideoCard"
 
 const HelpMeUnderstandPage = ({ data }) => {
   const { banner, sections } = data.page
@@ -41,68 +34,9 @@ const HelpMeUnderstandPage = ({ data }) => {
           <h1 className="h2 title text-center">{sections[0].title}</h1>
           <Row className="justify-content-center">
             {videos.map(video => (
-              <Col md="6" lg="4" key={video.id}>
-                {/* <Link to={`/resources`}>
-                      <Card
-                        className="info info-horizontal py-0"
-                        data-background="color"
-                        data-color="dark"
-                        style={{ maxWidth: "unset" }}
-                      >
-                        <CardBody>
-                          <h4 className="info-title ">{video.title}</h4>
-                          <h6 className="text-muted mb-3 mt-n2">
-                            {message.date}
-                          </h6>
-                        </CardBody>
-                      </Card>
-                    </Link> */}
+              <Col md="6" lg="4" key={video.id} className="mb-4">
                 <Link to={`/resources/help-me-understand${video.fields.slug}`}>
-                  <Card
-                    className="info text-left px-3 pb-0"
-                    // data-background="color"
-                    // data-color="dark"
-                  >
-                    <CardBody>
-                      <h4
-                        className="info-title text-primary mt-0"
-                        style={{ textTransform: "capitalize" }}
-                      >
-                        {video.title.replace("Help Me Understand ", "")}
-                      </h4>
-                      <div
-                        style={{
-                          overflow: "hidden",
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                        }}
-                      >
-                        <MDXRenderer className="card-description">
-                          {video.description.childMdx.body}
-                        </MDXRenderer>
-                      </div>
-
-                      <CardFooter className="mt-4 text-left">
-                        <div className="author">
-                          {video.tags.map(tag => (
-                            <Badge
-                              // onClick={e => e.preventDefault()}
-                              key={tag}
-                              style={{ marginRight: "6px", color: "#FFF" }}
-                              pill
-                              color="info"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                        {/* <div className="stats">
-                              <i className="fa fa-clock-o" /> 5 min read
-                            </div> */}
-                      </CardFooter>
-                    </CardBody>
-                  </Card>
+                  <HelpMeUnderstandVideoCard videoData={video} />
                 </Link>
               </Col>
             ))}
@@ -124,10 +58,8 @@ export const data = graphql`
           title
           linkedContent {
             ... on ContentfulHelpMeUnderstandVideo {
+              ...HelpMeUnderstandVideoCardFragment
               id: contentful_id
-              title
-              url
-              tags
               fields {
                 slug
               }
@@ -135,11 +67,6 @@ export const data = graphql`
                 file {
                   fileName
                   url
-                }
-              }
-              description: videoDescription {
-                childMdx {
-                  body
                 }
               }
             }

@@ -16,6 +16,7 @@ import {
   Button,
 } from "reactstrap"
 import BreadcrumbSection from "../components/BreadcrumbSection"
+import HelpMeUnderstandVideoCard from "../components/cards/HelpMeUnderstandVideoCard"
 
 const ResourcesPage = ({ data }) => {
   const { banner, sections } = data.page
@@ -56,51 +57,7 @@ const ResourcesPage = ({ data }) => {
                       </Card>
                     </Link> */}
                 <Link to={`/resources/help-me-understand${video.fields.slug}`}>
-                  <Card
-                    className="info text-left px-3 pb-0"
-                    // data-background="color"
-                    // data-color="dark"
-                  >
-                    <CardBody>
-                      <h4
-                        className="info-title text-primary mt-0"
-                        style={{ textTransform: "capitalize" }}
-                      >
-                        {video.title.replace("Help Me Understand ", "")}
-                      </h4>
-                      <div
-                        style={{
-                          overflow: "hidden",
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                        }}
-                      >
-                        <MDXRenderer className="card-description">
-                          {video.description.childMdx.body}
-                        </MDXRenderer>
-                      </div>
-
-                      <CardFooter className="mt-4 text-left">
-                        <div className="author">
-                          {video.tags.map(tag => (
-                            <Badge
-                              // onClick={e => e.preventDefault()}
-                              key={tag}
-                              style={{ marginRight: "6px", color: "#FFF" }}
-                              pill
-                              color="info"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                        {/* <div className="stats">
-                              <i className="fa fa-clock-o" /> 5 min read
-                            </div> */}
-                      </CardFooter>
-                    </CardBody>
-                  </Card>
+                  <HelpMeUnderstandVideoCard videoData={video} />
                 </Link>
               </Col>
             ))}
@@ -108,6 +65,7 @@ const ResourcesPage = ({ data }) => {
           <Row className="justify-content-center">
             <Button
               color="primary"
+              size="lg"
               tag={Link}
               to="/resources/help-me-understand"
               className="mt-3"
