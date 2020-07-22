@@ -10,7 +10,7 @@ import { Container, Col } from "reactstrap"
 const IndexPage = ({ data }) => {
   const { page, videos } = data
   const { banner, sections } = page
-  const { heading, image } = banner
+  const { heading, image, subHeading } = banner
 
   let d = new Date()
 
@@ -51,7 +51,7 @@ const IndexPage = ({ data }) => {
       />
       <Header
         title={heading}
-        subtitle={`Worship online beginning at 10:30am every Sunday`}
+        subtitle={subHeading}
         background={image}
         full={true}
         countdown={true}
