@@ -19,7 +19,7 @@ const MessageCard = ({ messageData }) => {
   } = messageData
   return (
     <Link to={`/messages/series${seriesSlug}${slug}`}>
-      <Card>
+      <Card className="border-1 border-radius-extreme overflow-hidden">
         <CardImg
           top
           tag="div"
@@ -36,7 +36,7 @@ const MessageCard = ({ messageData }) => {
             playIcon={PlayIcon}
             width="100%"
             height="100%"
-            style={{ position: "absolute", top: "0" }}
+            style={{ position: "absolute", top: "0", overflow: "hidden" }}
           />
         </CardImg>
         <CardBody>
