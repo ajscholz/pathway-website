@@ -207,9 +207,6 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     `type Mdx implements Node {
       body: String!
     }`,
-    // `type ContentfulMessageSeriesFields {
-    //   slug: String
-    // }`,
     `type ContentfulMessageSeries implements Node {
       fields: ContentfulMessageSeriesFields
     }`,

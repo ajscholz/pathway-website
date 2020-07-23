@@ -8,10 +8,17 @@ import YouTubePlayer from "react-player/lib/players/YouTube"
 import BreadcrumbSection from "../components/BreadcrumbSection"
 import MessageCard from "../components/cards/MessageCard"
 import Metadata from "../components/Metadata"
+import SEO from "../components/seo"
 
 const MessageTemplate = ({ data: { message, series, otherMessages } }) => {
   return (
     <>
+      <SEO
+        title={message.title}
+        description={`${message.title} is part ${message.part} of the series ${series.title}. It was given on ${message.date} by ${message.communicator} at Pathway Community Church in Marietta, Ohio.`}
+        image={series.graphic.file.url}
+        url={`https://pathwaymarietta.com/messages/series${series.fields.slug}${message.fields.slug}`}
+      />
       {/* <Header background={series.graphic} xs={true} /> */}
       <Header xxs={true} background="solid" />
 
@@ -120,8 +127,8 @@ export const data = graphql`
         slug
       }
       graphic: seriesGraphic {
-        fluid {
-          ...GatsbyContentfulFluid
+        file {
+          url
         }
       }
     }
