@@ -118,6 +118,9 @@ export const data = graphql`
       communicator: communicatorName
       video: videoLink
       part: week
+      fields {
+        slug
+      }
     }
 
     series: contentfulMessageSeries(contentful_id: { eq: $seriesId }) {

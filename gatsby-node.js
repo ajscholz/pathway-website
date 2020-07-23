@@ -126,15 +126,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const messageTemplate = path.resolve(`src/templates/message-template.js`)
 
   result.data.messages.all.forEach(({ node }) => {
-    const path = `/messages/series${node.messageSeries.fields.slug}${node.fields.slug}`
-    createPage({
-      path,
-      component: messageTemplate,
-      context: {
-        slug: node.fields.slug,
-        seriesId: node.messageSeries.contentful_id,
-      },
-    })
+    try {
+      const path = `/messages/series${node.messageSeries.fields.slug}${node.fields.slug}`
+      createPage({
+        path,
+        component: messageTemplate,
+        context: {
+          slug: node.fields.slug,
+          seriesId: node.messageSeries.contentful_id,
+        },
+      })
+    } catch (err) {
+      console.log(`Could not creat page for ${node.title}.`, err)
+    }
   })
 
   const videoPageTemplate = path.resolve(
@@ -207,11 +211,12 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     `type Mdx implements Node {
       body: String!
     }`,
-    `type ContentfulMessageSeries implements Node {
-      fields: ContentfulMessageSeriesFields
-    }`,
+    // `type ContentfulMessageSeries implements Node {
+    //   fields: ContentfulMessageSeriesFields
+    // }`,
     `type ContentfulMessage implements Node {
       messageSeries: ContentfulMessageSeries
+      fields: ContentfulMessageFields
     }`,
 
     schema.buildObjectType({
@@ -246,6 +251,15 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
           resolve: source => source.slug || "unnamed-series-1",
         },
       },
+    }),
+    schema.buildObjectType({
+      name: "ContentfulMessageSeries",
+      fields: {
+        fields: {
+          type: "ContentfulMessageSeriesFields",
+        },
+      },
+      interfaces: ["Node"],
     }),
   ]
   createTypes(typeDefs)
