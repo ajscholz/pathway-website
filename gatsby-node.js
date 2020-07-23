@@ -216,7 +216,6 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     // }`,
     `type ContentfulMessage implements Node {
       messageSeries: ContentfulMessageSeries
-      fields: ContentfulMessageFields
     }`,
 
     schema.buildObjectType({
