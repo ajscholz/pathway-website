@@ -10,7 +10,7 @@ const CardVideoThumbnail = ({ url }) => {
       url={url}
       light={true}
       controls={false}
-      playIcon={PlayIcon}
+      playIcon={<PlayIcon />}
       width="100%"
       height="100%"
       style={{ position: "absolute", top: "0", overflow: "hidden" }}

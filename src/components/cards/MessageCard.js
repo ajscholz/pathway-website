@@ -9,13 +9,11 @@ const MessageCard = ({ messageData }) => {
     title,
     date,
     videoLink,
-    fields: { slug },
-    messageSeries: {
-      fields: { seriesSlug },
-    },
+    slug,
+    messageSeries: { seriesSlug },
   } = messageData
   return (
-    <Link to={`/messages/series${seriesSlug}${slug}`}>
+    <Link to={`/messages/series/${seriesSlug}/${slug}`}>
       <CardBigRadius
         title={title}
         imgData={videoLink}
@@ -30,16 +28,12 @@ export default MessageCard
 export const query = graphql`
   fragment MessageCardFragment on ContentfulMessage {
     id: contentful_id
-    title: messageTitle
+    title
     date: messageDate(formatString: "MMM DD YYYY")
     videoLink
-    fields {
-      slug
-    }
+    slug
     messageSeries {
-      fields {
-        seriesSlug: slug
-      }
+      seriesSlug: slug
     }
   }
 `

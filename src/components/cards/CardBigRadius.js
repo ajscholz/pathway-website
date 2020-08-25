@@ -45,7 +45,7 @@ const CardBigRadius = ({ children, className, title, imgData, footerData }) => {
 }
 
 CardBigRadius.propTypes = {
-  children: PropTypes.array.isRequired,
+  // children: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
 }
 

@@ -20,7 +20,7 @@ const MessageSeriesTemplate = ({
       year,
       desc: { desc },
       graphic,
-      fields: { slug },
+      slug,
     },
   },
 }) => {
@@ -51,28 +51,26 @@ const MessageSeriesTemplate = ({
         title={title}
         description={desc}
         image={graphic.file.url}
-        url={`https://pathwaymarietta.com/messages/series${slug}`}
+        url={`https://pathwaymarietta.com/messages/series/${slug}`}
       />
       <Header background={graphic} xs={true} />
-      <div className="section section-gray">
+      <div className="section-gray">
+        <BreadcrumbSection
+          crumbs={[
+            { name: "Messages", link: "/messages" },
+            { name: "Series", link: "/messages/series" },
+            { name: `${title} Series`, link: "", active: true },
+          ]}
+        />
+      </div>
+      <section className="section section-gray">
         <Container>
-          <Row className="justify-content-md-center">
-            <Col className="px-0">
-              <BreadcrumbSection
-                crumbs={[
-                  { name: "Messages", link: "/messages" },
-                  { name: "Series", link: "/messages/series" },
-                  { name: `${title} Series`, link: "", active: true },
-                ]}
-              />
-            </Col>
-          </Row>
           <Row
             className="justify-content-md-center"
             style={{ marginBottom: "40px" }}
           >
             <Col>
-              <h1 className="title h2">{`${title} Message Series`}</h1>
+              <h1 className="title h2 mt-0">{`${title} Message Series`}</h1>
               <Metadata>
                 {`${date}`}
                 {`${length} ${length > 1 ? "Parts" : "Part"}`}
@@ -82,6 +80,9 @@ const MessageSeriesTemplate = ({
           </Row>
 
           <Row className="mb-n4">
+            <Col xs={12}>
+              <h2 className="h3 mb-3">Messages</h2>
+            </Col>
             {messages.all.map(message => {
               return (
                 <Col key={message.id} md="6" lg="4" className="mb-4">
@@ -90,20 +91,21 @@ const MessageSeriesTemplate = ({
               )
             })}
           </Row>
-        </Container>
-      </div>
+        </Container>{" "}
+      </section>
     </>
   )
 }
 
 export const data = graphql`
   query($slug: String) {
-    series: contentfulMessageSeries(fields: { slug: { eq: $slug } }) {
+    series: contentfulMessageSeries(slug: { eq: $slug }) {
       title: seriesTitle
       start: seriesStartDate(formatString: "MMMM")
       end: seriesEndDate(formatString: "MMMM")
       year: seriesStartDate(formatString: "YYYY")
       length
+      slug
       desc: seriesDescription {
         desc: seriesDescription
       }
@@ -115,12 +117,9 @@ export const data = graphql`
           url
         }
       }
-      fields {
-        slug
-      }
     }
     messages: allContentfulMessage(
-      filter: { messageSeries: { fields: { slug: { eq: $slug } } } }
+      filter: { messageSeries: { slug: { eq: $slug } } }
       sort: { fields: messageDate, order: ASC }
     ) {
       all: nodes {

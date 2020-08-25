@@ -5,11 +5,11 @@ import { Link } from "gatsby"
 
 const BreadcrumbSection = ({ crumbs }) => {
   return (
-    <Container className="mt-n5 mb-5">
+    <Container>
       <Row>
         <Col>
           <small>
-            <Breadcrumb className="mx-n3">
+            <Breadcrumb className="mx-n3 mt-3 mb-n3">
               <BreadcrumbItem>
                 <Link to="/">Home</Link>
               </BreadcrumbItem>

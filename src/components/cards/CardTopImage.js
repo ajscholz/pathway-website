@@ -1,10 +1,10 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { CardImg } from "reactstrap"
 import CardVideoThumbnail from "./CardVideoThumbnail"
 import Image from "gatsby-image"
 
 const CardTopImage = ({ imgData }) => {
+  console.log(imgData)
   return (
     <CardImg
       top
@@ -30,10 +30,6 @@ const CardTopImage = ({ imgData }) => {
       )}
     </CardImg>
   )
-}
-
-CardTopImage.propTypes = {
-  imgData: PropTypes.oneOf([PropTypes.string, PropTypes.object]).isRequired,
 }
 
 export default CardTopImage

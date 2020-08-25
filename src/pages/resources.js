@@ -21,13 +21,15 @@ const ResourcesPage = ({ data }) => {
         image={image.file.url}
         url="https://pathwaymarietta.com/resources"
       />
-      <Header title={heading} background={image} xs={true} />
-      <section className="blog-2 section section-gray">
+      <div className="section-gray">
+        <Header title={heading} background={image} xs={true} />
+        <BreadcrumbSection
+          crumbs={[{ name: "Resources", link: "/resources", active: true }]}
+        />
+      </div>
+      <section className="section section-gray">
         <Container>
-          <BreadcrumbSection
-            crumbs={[{ name: "Resources", link: "/resources", active: true }]}
-          />
-          <h2 className="title text-center">{sections[0].title}</h2>
+          <h2 className="title text-center mt-0">{sections[0].title}</h2>
           <Row className="justify-content-center">
             {videos.map(video => (
               <Col md="6" lg="4" key={video.id}>
@@ -46,7 +48,7 @@ const ResourcesPage = ({ data }) => {
                         </CardBody>
                       </Card>
                     </Link> */}
-                <Link to={`/resources/help-me-understand${video.fields.slug}`}>
+                <Link to={`/resources/help-me-understand/${video.slug}`}>
                   <HelpMeUnderstandVideoCard videoData={video} />
                 </Link>
               </Col>
@@ -84,9 +86,7 @@ export const data = graphql`
               title
               url
               tags
-              fields {
-                slug
-              }
+              slug
               videoUserGuide {
                 file {
                   fileName

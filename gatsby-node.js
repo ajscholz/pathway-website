@@ -1,60 +1,5 @@
 const path = require(`path`)
 
-const slugify = title => {
-  if (title === null || title === undefined) {
-    return undefined
-  }
-
-  return `/${title
-    .replace(/ /g, "-")
-    .replace(/[\#\?\'\"\&\*\$]+/g, "")
-    .toLowerCase()}`
-}
-
-// create counters to increment for unnamed slugs in onCreateNode
-let unnamedSeriesCounter = 0
-let unnamedMessageCounter = 0
-let unnamedHelpMeUnderstandVideoCounter = 0
-
-exports.onCreateNode = ({ node, actions }) => {
-  const { createNodeField } = actions
-
-  if (node.internal.type === "ContentfulMessageSeries") {
-    let slug = slugify(node.seriesTitle)
-    if (slug === undefined) {
-      unnamedSeriesCounter++
-      slug = `/unnamed-series-${unnamedSeriesCounter}`
-    }
-    createNodeField({
-      node,
-      name: `slug`,
-      value: slug,
-    })
-  } else if (node.internal.type === "ContentfulMessage") {
-    let slug = slugify(node.messageTitle)
-    if (slug === undefined) {
-      unnamedMessageCounter++
-      slug = `/unnamed-message-${unnamedMessageCounter}`
-    }
-    createNodeField({
-      node,
-      name: `slug`,
-      value: slug,
-    })
-  } else if (node.internal.type === "ContentfulHelpMeUnderstandVideo") {
-    let slug = slugify(node.title)
-    if (slug === undefined) {
-      unnamedHelpMeUnderstandVideoCounter++
-      slug = `/unnamed-hmuv-${unnamedHelpMeUnderstandVideoCounter}`
-    }
-    createNodeField({
-      node,
-      name: `slug`,
-      value: slug,
-    })
-  }
-}
-
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
 exports.createPages = async ({ graphql, actions, reporter }) => {
@@ -65,23 +10,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       series: allContentfulMessageSeries {
         all: edges {
           node {
-            fields {
-              slug
-            }
+            slug
           }
         }
       }
       messages: allContentfulMessage {
         all: edges {
           node {
-            fields {
-              slug
-            }
+            slug
             messageSeries {
-              fields {
-                slug
-              }
-              contentful_id
+              seriesTitle
+              slug
             }
           }
         }
@@ -89,9 +28,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       videos: allContentfulHelpMeUnderstandVideo {
         all: edges {
           node {
-            fields {
-              slug
-            }
+            slug
           }
         }
       }
@@ -112,12 +49,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
 
   result.data.series.all.forEach(({ node }) => {
-    const path = `/messages/series${node.fields.slug}`
+    const path = `/messages/series/${node.slug}`
     createPage({
       path,
       component: messageSeriesTemplate,
       context: {
-        slug: node.fields.slug,
+        slug: node.slug,
       },
     })
   })
@@ -127,13 +64,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   result.data.messages.all.forEach(({ node }) => {
     try {
-      const path = `/messages/series${node.messageSeries.fields.slug}${node.fields.slug}`
+      const path = `/messages/series/${node.messageSeries.slug}/${node.slug}`
       createPage({
         path,
         component: messageTemplate,
         context: {
-          slug: node.fields.slug,
-          seriesId: node.messageSeries.contentful_id,
+          slug: node.slug,
+          seriesTitle: node.messageSeries.seriesTitle,
         },
       })
     } catch (err) {
@@ -146,12 +83,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
 
   result.data.videos.all.forEach(({ node }) => {
-    const path = `/resources/help-me-understand${node.fields.slug}`
+    const path = `/resources/help-me-understand/${node.slug}`
     createPage({
       path,
       component: videoPageTemplate,
       context: {
-        slug: node.fields.slug,
+        slug: node.slug,
       },
     })
   })
@@ -186,17 +123,14 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       updatedAt: Date
     }
     `,
-    `type ContentfulHelpMeUnderstandVideoFields {
-      slug: String
-    }`,
     `type ContentfulHelpMeUnderstandVideo implements Node {
       contentful_id: String
       title: String
       url: String
+      slug: String
       tags: [String]
       videoUserGuide: ContentfulAsset
       videoDescription: contentfulHelpMeUnderstandVideoVideoDescriptionTextNode
-      fields: ContentfulHelpMeUnderstandVideoFields
     }`,
     `type ContentfulAsset implements Node {
       file: ContentfulAssetFile
@@ -211,9 +145,6 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     `type Mdx implements Node {
       body: String!
     }`,
-    // `type ContentfulMessageSeries implements Node {
-    //   fields: ContentfulMessageSeriesFields
-    // }`,
     `type ContentfulMessage implements Node {
       messageSeries: ContentfulMessageSeries
     }`,
@@ -243,19 +174,11 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       interfaces: ["Node"],
     }),
     schema.buildObjectType({
-      name: "ContentfulMessageSeriesFields",
+      name: "ContentfulMessageSeries",
       fields: {
         slug: {
           type: "String!",
           resolve: source => source.slug || "unnamed-series-1",
-        },
-      },
-    }),
-    schema.buildObjectType({
-      name: "ContentfulMessageSeries",
-      fields: {
-        fields: {
-          type: "ContentfulMessageSeriesFields",
         },
       },
       interfaces: ["Node"],

@@ -13,7 +13,7 @@ const SeriesCard = ({
     year,
     desc: { desc },
     graphic,
-    fields: { slug },
+    slug,
   },
   noDesc,
   className,
@@ -21,7 +21,7 @@ const SeriesCard = ({
   const date = start === end ? `${start} ${year}` : `${start}-${end} ${year}`
 
   return (
-    <Link to={`/messages/series${slug}`}>
+    <Link to={`/messages/series/${slug}`}>
       <CardBigRadius
         className={className}
         title={title}
@@ -44,9 +44,7 @@ SeriesCard.propTypes = {
       desc: PropTypes.string.isRequired,
     }).isRequired,
     graphic: PropTypes.object.isRequired,
-    fields: PropTypes.shape({
-      slug: PropTypes.string.isRequired,
-    }).isRequired,
+    slug: PropTypes.string.isRequired,
   }),
 }
 
@@ -67,8 +65,6 @@ export const query = graphql`
         ...GatsbyContentfulFluid
       }
     }
-    fields {
-      slug
-    }
+    slug
   }
 `

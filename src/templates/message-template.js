@@ -10,48 +10,49 @@ import MessageCard from "../components/cards/MessageCard"
 import Metadata from "../components/Metadata"
 import SEO from "../components/seo"
 
-const MessageTemplate = ({ data: { message, series, otherMessages } }) => {
+const MessageTemplate = ({ data, ...props }) => {
+  const { message } = data
+  const { series } = message
+  const messages = series.message.filter(message => {
+    return message.slug !== props.pageContext.slug
+  })
+
   return (
     <>
       <SEO
         title={message.title}
-        description={`${message.title} is part ${message.part} of the series ${series.title}. It was given on ${message.date} by ${message.communicator} at Pathway Community Church in Marietta, Ohio.`}
-        image={series.graphic.file.url}
-        url={`https://pathwaymarietta.com/messages/series${series.fields.slug}${message.fields.slug}`}
+        description={`${message.title} is part ${message.part} of the series ${message.series.title}. It was given on ${message.date} by ${message.communicator} at Pathway Community Church in Marietta, Ohio.`}
+        image={message.series.graphic.file.url}
+        url={`https://pathwaymarietta.com/messages/series/${message.series.slug}${message.slug}`}
       />
-      {/* <Header background={series.graphic} xs={true} /> */}
-      <Header xxs={true} background="solid" />
+      <Header xxs={true} background={message.series.graphic} />
 
-      <div className="section section-gray">
+      <div className="section-gray">
+        <BreadcrumbSection
+          crumbs={[
+            { name: "Messages", link: "/messages" },
+            { name: "Series", link: "/messages/series" },
+            {
+              name: `${message.series.title}`,
+              link: `/messages/series/${message.series.slug}`,
+            },
+            { name: message.title, link: "", active: true },
+          ]}
+        />
+      </div>
+      <section className="section section-gray">
         <Container>
-          <Row className="justify-content-md-center">
-            <Col md={10} className="px-0">
-              <BreadcrumbSection
-                crumbs={[
-                  { name: "Messages", link: "/messages" },
-                  { name: "Series", link: "/messages/series" },
-                  {
-                    name: `${series.title}`,
-                    link: `/messages/series${series.fields.slug}`,
-                  },
-                  { name: message.title, link: "", active: true },
-                ]}
-              />
-            </Col>
-          </Row>
           <Row
             className="justify-content-md-center"
             style={{ marginBottom: "40px" }}
           >
             <Col md="10">
-              <h1 className="title text-capitalize h2">{message.title}</h1>
+              <h1 className="title text-capitalize h2 mt-0">{message.title}</h1>
               <Metadata>
                 {`${message.communicator}`}
                 {`${message.date}`}
                 {`Part ${message.part} of ${series.length}`}
               </Metadata>
-
-              {/* <p className="author">{desc.desc}</p> */}
 
               <div
                 className="mt-5"
@@ -83,19 +84,18 @@ const MessageTemplate = ({ data: { message, series, otherMessages } }) => {
             </Col>
           </Row>
         </Container>
-      </div>
-
+      </section>
       {/* other messages */}
-      {otherMessages.all.length > 0 && (
-        <div className="section px-5">
+      {/* {messages.length > 0 && (
+        <section className="section section-dark px-5">
           <Container fluid className="px-5">
             <Row className="justify-content-md-center">
               <Col>
-                <h2 className="title">More From This Series</h2>
+                <h1 className="title h2">More From This Series</h1>
               </Col>
             </Row>
-            <Row className="justify-content-center mb-n4">
-              {otherMessages.all.map(message => {
+            <Row className="mb-n4">
+              {messages.map(message => {
                 return (
                   <Col md="6" lg="4" xl="3" key={message.id} className="mb-4">
                     <MessageCard messageData={message} />
@@ -104,46 +104,36 @@ const MessageTemplate = ({ data: { message, series, otherMessages } }) => {
               })}
             </Row>
           </Container>
-        </div>
-      )}
+        </section>
+      )} */}
     </>
   )
 }
 
 export const data = graphql`
-  query($slug: String, $seriesId: String) {
-    message: contentfulMessage(fields: { slug: { eq: $slug } }) {
-      title: messageTitle
+  query($slug: String!) {
+    message: contentfulMessage(slug: { eq: $slug }) {
+      title
       date: messageDate(formatString: "MMMM DD, YYYY")
       communicator: communicatorName
       video: videoLink
       part: week
-      fields {
+      slug
+      series: messageSeries {
+        title: seriesTitle
+        length
         slug
-      }
-    }
-
-    series: contentfulMessageSeries(contentful_id: { eq: $seriesId }) {
-      title: seriesTitle
-      length
-      fields {
-        slug
-      }
-      graphic: seriesGraphic {
-        file {
-          url
+        graphic: seriesGraphic {
+          fluid(maxWidth: 2000, quality: 80) {
+            ...GatsbyContentfulFluid_withWebp
+          }
+          file {
+            url
+          }
         }
-      }
-    }
-    otherMessages: allContentfulMessage(
-      filter: {
-        messageSeries: { contentful_id: { eq: $seriesId } }
-        fields: { slug: { ne: $slug } }
-      }
-      sort: { fields: messageDate, order: ASC }
-    ) {
-      all: nodes {
-        ...MessageCardFragment
+        message {
+          ...MessageCardFragment
+        }
       }
     }
   }

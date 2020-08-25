@@ -12,34 +12,48 @@ const ArchiveLayout = ({ items, itemType, children }) => {
   const belowFoldItems = items.slice(3)
 
   return (
-    <div className="section section-project cd-section section-gray">
-      <Container>
-        <Row>
-          <Col className="mx-n3">{children}</Col>
-        </Row>
-        <Row>
-          <Col>
-            <h3>{`Recent ${itemType}`}</h3>
-          </Col>
-        </Row>
-        <Row className="mt-4 justify-content-center">
-          {aboveFoldItems.map(item => {
-            return (
-              <Col md="6" lg="4" key={item.id}>
-                {itemType === "Series" ? (
-                  <SeriesCard seriesData={item} noDesc />
-                ) : (
-                  <MessageCard messageData={item} />
-                )}
-              </Col>
-            )
-          })}
-        </Row>
-        {showFold ? (
-          <>
+    <>
+      <div className="section-gray">{children}</div>
+      <section className="section section-gray">
+        <Container>
+          <Row>
+            <Col>
+              <h1 className="h2 mt-0">{`Recent ${itemType}`}</h1>
+            </Col>
+          </Row>
+          <Row className="mt-4 justify-content-center">
+            {aboveFoldItems.map(item => {
+              return (
+                <Col md="6" lg="4" key={item.id}>
+                  {itemType === "Series" ? (
+                    <SeriesCard seriesData={item} noDesc />
+                  ) : (
+                    <MessageCard messageData={item} />
+                  )}
+                </Col>
+              )
+            })}
+          </Row>
+          {!showFold && (
+            <Row className="justify-content-center">
+              <Button
+                color="primary"
+                size="lg"
+                onClick={() => setShowFold(true)}
+                className="mt-5"
+              >
+                Load More
+              </Button>
+            </Row>
+          )}
+        </Container>
+      </section>
+      {showFold && (
+        <section className="section section-dark">
+          <Container>
             <Row>
               <Col>
-                <h3>{`Older ${itemType}`}</h3>
+                <h1 className="h2 mt-0 text-light">{`Older ${itemType}`}</h1>
               </Col>
             </Row>
             <Row className="mt-4">
@@ -67,21 +81,10 @@ const ArchiveLayout = ({ items, itemType, children }) => {
                 )
               })}
             </Row>
-          </>
-        ) : (
-          <Row className="justify-content-center">
-            <Button
-              color="primary"
-              size="lg"
-              onClick={() => setShowFold(true)}
-              className="mt-5"
-            >
-              Load More
-            </Button>
-          </Row>
-        )}
-      </Container>
-    </div>
+          </Container>
+        </section>
+      )}
+    </>
   )
 }
 

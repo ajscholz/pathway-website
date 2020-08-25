@@ -103,7 +103,7 @@ export default HelpMeUnderstandVideoTemplate
 
 export const data = graphql`
   query($slug: String) {
-    video: contentfulHelpMeUnderstandVideo(fields: { slug: { eq: $slug } }) {
+    video: contentfulHelpMeUnderstandVideo(slug: { eq: $slug }) {
       title
       url
       tags
