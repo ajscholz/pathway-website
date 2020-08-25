@@ -4,7 +4,6 @@ import CardVideoThumbnail from "./CardVideoThumbnail"
 import Image from "gatsby-image"
 
 const CardTopImage = ({ imgData }) => {
-  console.log(imgData)
   return (
     <CardImg
       top
