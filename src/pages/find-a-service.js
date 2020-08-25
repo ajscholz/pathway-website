@@ -30,7 +30,7 @@ const FinaAService = ({
             <Container>
               <Row className="justify-content-center text-center">
                 <Col>
-                  <h2 className="title">{section.title}</h2>
+                  <h1 className="title h2 mt-0">{section.title}</h1>
                   <MDXRenderer>{section.description.childMdx.body}</MDXRenderer>
                 </Col>
               </Row>
