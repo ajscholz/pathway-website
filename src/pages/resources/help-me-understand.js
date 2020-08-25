@@ -20,7 +20,7 @@ const HelpMeUnderstandPage = ({ data }) => {
       <SEO
         title="Resources"
         image={image.file.url}
-        url="https://pathwaymarietta.com/resources"
+        url="https://pathwaymarietta.com/resources/help-me-understand"
       />
       <Header background={image} xxs={true} />
       <section className="blog-2 section section-gray">
