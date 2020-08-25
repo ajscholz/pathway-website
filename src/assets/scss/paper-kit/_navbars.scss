@@ -155,3 +155,11 @@
     }
   }
 }
+
+html {
+  &.nav-open {
+    body {
+      overflow-y: hidden;
+    }
+  }
+}
