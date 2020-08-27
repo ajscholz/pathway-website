@@ -134,6 +134,25 @@ const MBTI = ({ open, setOpen, className }) => {
                 Submitting and scoring your responses...
               </p>
             </ModalBody>
+<<<<<<< HEAD
+=======
+            {/* <ModalFooter className="p-4 d-flex justify-content-end">
+            <Button
+              type="button"
+              onClick={ () => dispatch({ type: "back to form" }) }
+            >
+              Cancel
+              </Button>
+            <Button
+              color="danger"
+              type="button"
+              // className="w-auto"
+              onClick={ () => dispatch({ type: "reset" }) }
+            >
+              Reset
+              </Button>
+          </ModalFooter> */}
+>>>>>>> f275833b7c800232e3c69856c393bb5a925ccf27
           </>
         )
       case "presenting":
@@ -157,6 +176,18 @@ const MBTI = ({ open, setOpen, className }) => {
               >
                 Exit
               </Button>
+<<<<<<< HEAD
+=======
+
+              {/* <Button
+              color="danger"
+              type="button"
+              // className="w-auto"
+              onClick={ () => dispatch({ type: "reset" }) }
+            >
+              Reset
+              </Button> */}
+>>>>>>> f275833b7c800232e3c69856c393bb5a925ccf27
             </ModalFooter>
           </>
         )
