@@ -103,7 +103,6 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
     dispatch({ type: { text: "present", value: counter } })
   }
 
-  console.log(finalData)
   const ModalContent = () => {
     switch (view) {
       case "resetting":

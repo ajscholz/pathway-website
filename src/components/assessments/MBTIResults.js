@@ -1,7 +1,6 @@
 import React from "react"
 
 const MBTIResults = ({ data }) => {
-  console.log(data)
   return (
     <div className="w-100">
       <Range
