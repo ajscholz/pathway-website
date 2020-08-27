@@ -5,6 +5,7 @@ import Header from "../../components/header"
 import { Container, Row, Col, Button } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import BreadcrumbSection from "../../components/BreadcrumbSection"
+import Controller from "../../components/assessments/Controller"
 
 const MyersBriggsPage = ({ data }) => {
   const { banner, sections } = data.page
@@ -36,13 +37,7 @@ const MyersBriggsPage = ({ data }) => {
             <Col className="d-flex flex-column">
               <h1 className="h2 title text-center mt-0">{sections[0].title}</h1>
               <MDXRenderer>{sections[0].description.childMdx.body}</MDXRenderer>
-              <Button
-                color="primary"
-                className="mt-3 mx-auto"
-                onClick={() => alert("opening assessment")}
-              >
-                Take Assessment
-              </Button>
+              <Controller type="mbti">Take Assessment</Controller>
             </Col>
           </Row>
         </Container>
