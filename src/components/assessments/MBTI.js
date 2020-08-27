@@ -134,25 +134,6 @@ const MBTI = ({ open, setOpen, className }) => {
                 Submitting and scoring your responses...
               </p>
             </ModalBody>
-<<<<<<< HEAD
-=======
-            {/* <ModalFooter className="p-4 d-flex justify-content-end">
-            <Button
-              type="button"
-              onClick={ () => dispatch({ type: "back to form" }) }
-            >
-              Cancel
-              </Button>
-            <Button
-              color="danger"
-              type="button"
-              // className="w-auto"
-              onClick={ () => dispatch({ type: "reset" }) }
-            >
-              Reset
-              </Button>
-          </ModalFooter> */}
->>>>>>> f275833b7c800232e3c69856c393bb5a925ccf27
           </>
         )
       case "presenting":
@@ -176,18 +157,6 @@ const MBTI = ({ open, setOpen, className }) => {
               >
                 Exit
               </Button>
-<<<<<<< HEAD
-=======
-
-              {/* <Button
-              color="danger"
-              type="button"
-              // className="w-auto"
-              onClick={ () => dispatch({ type: "reset" }) }
-            >
-              Reset
-              </Button> */}
->>>>>>> f275833b7c800232e3c69856c393bb5a925ccf27
             </ModalFooter>
           </>
         )
@@ -248,11 +217,6 @@ const MBTI = ({ open, setOpen, className }) => {
     }
   }
 
-  // const handleSubmit = e => {
-  //   e.preventDefault()
-  //   alert(`results: ${Object.entries(state.type)}`)
-  // }
-
   return (
     <Modal
       isOpen={open}
@@ -260,15 +224,6 @@ const MBTI = ({ open, setOpen, className }) => {
       contentClassName=""
       className={className}
     >
-      {/* <button
-        aria-label="Close"
-        className="close p-3 position-absolute"
-        type="button"
-        style={{ top: 0, right: 0, zIndex: 25 }}
-        onClick={() => setOpen(false)}
-      >
-        <span aria-hidden={true}>×</span>
-      </button> */}
       <ModalContent />
     </Modal>
   )
