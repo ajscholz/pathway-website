@@ -38,7 +38,7 @@ const SpiritualGiftsPage = ({ data }) => {
             <Col className="d-flex flex-column">
               <h1 className="h2 title text-center mt-0">{sections[0].title}</h1>
               <MDXRenderer>{sections[0].description.childMdx.body}</MDXRenderer>
-              <Controller>Take Assessment</Controller>
+              <Controller type="sg">Take Assessment</Controller>
             </Col>
           </Row>
         </Container>
