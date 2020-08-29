@@ -3,24 +3,15 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap"
 import { mbtiData } from "../../utils/data/assessments"
 import MBTIResults from "./MBTIResults"
 
-const data = mbtiData()
-
-const ResponseButton = ({ dispatch, data }) => {
-  return (
-    <Button
-      className="mt-2 text-white"
-      // color="info"
-      onClick={() => dispatch({ type: { text: data[0], value: data[1] } })}
-    >
-      {data[0]}
-    </Button>
-  )
-}
+// const data = mbtiData()
+const data2 = mbtiData()
+const data = [data2[0], data2[1]]
 
 const reducer = (state, action) => {
-  const { activeQ, questions, responses } = state
-  const { text, value } = action.type
-  switch (text) {
+  const { type, payload } = action
+  const { activeQ, questions, responses, currentVal } = state
+  const index = activeQ - 1
+  switch (type) {
     case "confirm reset":
       return { ...state, view: "resetting" }
     case "cancel":
@@ -28,18 +19,46 @@ const reducer = (state, action) => {
     case "reset":
       return initialState
     case "submit":
-      return { ...state, view: "submitting" }
-    case "present":
-      return { ...state, view: "presenting", finalData: value }
-    case "reject":
-      return { ...state, view: "error" }
-    default:
       return {
         ...state,
-        view: activeQ === questions.length ? "submitting" : "assessing",
-        activeQ: activeQ === questions.length ? activeQ : activeQ + 1,
-        responses: [...responses, value],
+        responses: [...responses, [currentVal]],
+        view: "submitting",
       }
+    case "present":
+      return { ...state, view: "presenting", finalData: payload }
+    case "reject":
+      return { ...state, view: "error" }
+    case "next":
+      return {
+        view: activeQ === questions.length ? "submitting" : "assessing",
+        ...state,
+        activeQ: activeQ === questions.length ? activeQ : activeQ + 1,
+        responses: [...responses, [currentVal]],
+      }
+    case "answer":
+      // BUILD IN CASE FOR CHANGE
+      const newQuestions = [...questions]
+      const options = newQuestions[index].options.map(option => [
+        option[0],
+        option[1],
+        false,
+      ])
+
+      newQuestions[index] = {
+        ...questions[index],
+        options: [...options],
+        answered: true,
+      }
+      newQuestions[index].options[payload[3]] = [payload[0], payload[1], true]
+
+      return {
+        ...state,
+        questions: newQuestions,
+        currentVal: payload[1],
+      }
+
+    default:
+      return state
   }
 }
 
@@ -51,10 +70,11 @@ const initialState = {
     options: question.type.map((type, tIndex) => [
       question.options[tIndex],
       type,
+      false,
     ]),
     answered: false,
-    answeredIndex: 0,
   })),
+  currentVal: null,
   responses: [],
   finalData: {},
 }
@@ -94,7 +114,20 @@ const MBTI = ({ open, setOpen, className }) => {
       counter[response] = counter[response] + 1
     })
 
-    dispatch({ type: { text: "present", value: counter } })
+    dispatch({ type: "present", payload: counter })
+  }
+
+  const ResponseButton = ({ dispatch, data }) => {
+    return (
+      <Button
+        color={`${data[2] === true && "primary"}`}
+        className="mt-2 text-white"
+        // color="info"
+        onClick={() => dispatch({ type: "answer", payload: data })}
+      >
+        {data[0]}
+      </Button>
+    )
   }
 
   const ModalContent = () => {
@@ -112,14 +145,14 @@ const MBTI = ({ open, setOpen, className }) => {
                 color="danger"
                 type="button"
                 className="text-white"
-                onClick={() => dispatch({ type: { text: "reset" } })}
+                onClick={() => dispatch({ type: "reset" })}
               >
                 Reset
               </Button>
               <Button
                 type="button"
                 className="text-white"
-                onClick={() => dispatch({ type: { text: "cancel" } })}
+                onClick={() => dispatch({ type: "cancel" })}
               >
                 Cancel
               </Button>
@@ -151,7 +184,7 @@ const MBTI = ({ open, setOpen, className }) => {
                 onClick={() => {
                   setOpen(false)
                   setTimeout(() => {
-                    dispatch({ type: { text: "reset" } })
+                    dispatch({ type: "reset" })
                   }, 1000)
                 }}
               >
@@ -169,7 +202,7 @@ const MBTI = ({ open, setOpen, className }) => {
             <ModalFooter className="p-4 d-flex justify-content-end">
               <Button
                 type="button"
-                onClick={() => dispatch({ type: { text: "submit" } })}
+                onClick={() => dispatch({ type: "submit" })}
               >
                 Try again
               </Button>
@@ -198,18 +231,31 @@ const MBTI = ({ open, setOpen, className }) => {
                 color="danger"
                 type="button"
                 className="w-auto text-white"
-                onClick={() => dispatch({ type: { text: "confirm reset" } })}
+                onClick={() => dispatch({ type: "confirm reset" })}
                 disabled={activeQ === 1}
               >
                 Reset
               </Button>
-              <Button
+              {/* <Button
                 // color="primary"
                 className="text-white"
                 type="button"
                 onClick={() => setOpen(false)}
               >
                 Exit
+              </Button> */}
+              <Button
+                color="primary"
+                // className="text-white"
+                disabled={!question.answered}
+                type="button"
+                onClick={() =>
+                  dispatch({
+                    type: activeQ === questions.length ? "submit" : "next",
+                  })
+                }
+              >
+                {activeQ === questions.length ? "Submit" : "Next"}
               </Button>
             </ModalFooter>
           </>
@@ -224,6 +270,15 @@ const MBTI = ({ open, setOpen, className }) => {
       contentClassName=""
       className={className}
     >
+      <button
+        aria-label="Close"
+        className="close p-3 position-absolute"
+        type="button"
+        style={{ top: 0, right: 0, zIndex: 25 }}
+        onClick={() => setOpen(false)}
+      >
+        <span aria-hidden={true}>×</span>
+      </button>
       <ModalContent />
     </Modal>
   )
