@@ -232,7 +232,7 @@ const MBTI = ({ open, setOpen, className }) => {
                 type="button"
                 className="w-auto text-white"
                 onClick={() => dispatch({ type: "confirm reset" })}
-                disabled={activeQ === 1}
+                disabled={questions[activeQ - 1].answered === false}
               >
                 Reset
               </Button>
