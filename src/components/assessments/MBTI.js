@@ -1,8 +1,9 @@
 import React, { useReducer } from "react"
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap"
+import { Modal } from "reactstrap"
 import { mbtiData } from "../../utils/data/assessments"
-import MBTIResults from "./MBTIResults"
 import CloseButton from "./Buttons/CloseButton"
+import ModalContent from "./ModalContent"
+import MBTIResults from "./MBTIResults"
 
 // const data = mbtiData()
 const data2 = mbtiData()
@@ -118,152 +119,6 @@ const MBTI = ({ open, setOpen, className }) => {
     dispatch({ type: "present", payload: counter })
   }
 
-  const ResponseButton = ({ dispatch, data }) => {
-    return (
-      <Button
-        color={`${data[2] === true && "primary"}`}
-        className="mt-2 text-white"
-        // color="info"
-        onClick={() => dispatch({ type: "answer", payload: data })}
-      >
-        {data[0]}
-      </Button>
-    )
-  }
-
-  const ModalContent = () => {
-    switch (view) {
-      case "resetting":
-        return (
-          <>
-            <ModalBody className="d-flex flex-column align-items-center p-5">
-              <p className="lead mb-1">
-                Are you sure you want to reset the assessment?
-              </p>
-            </ModalBody>
-            <ModalFooter className="p-4 d-flex justify-content-end">
-              <Button
-                color="danger"
-                type="button"
-                className="text-white"
-                onClick={() => dispatch({ type: "reset" })}
-              >
-                Reset
-              </Button>
-              <Button
-                type="button"
-                className="text-white"
-                onClick={() => dispatch({ type: "cancel" })}
-              >
-                Cancel
-              </Button>
-            </ModalFooter>
-          </>
-        )
-      case "submitting":
-        return (
-          <>
-            <ModalBody className="d-flex flex-column align-items-center p-5">
-              <p className="lead mb-1">
-                Submitting and scoring your responses...
-              </p>
-            </ModalBody>
-          </>
-        )
-      case "presenting":
-        return (
-          <>
-            <ModalBody className="d-flex flex-column align-items-center p-5">
-              <p className="lead mb-1">Here are your results!</p>
-              <MBTIResults data={finalData} />
-            </ModalBody>
-            <ModalFooter className="p-4 d-flex justify-content-end">
-              <Button
-                type="button"
-                className="text-white"
-                // color="primary"
-                onClick={() => {
-                  setOpen(false)
-                  setTimeout(() => {
-                    dispatch({ type: "reset" })
-                  }, 1000)
-                }}
-              >
-                Exit
-              </Button>
-            </ModalFooter>
-          </>
-        )
-      case "error":
-        return (
-          <>
-            <ModalBody className="d-flex flex-column align-items-center p-5">
-              <p className="lead mb-1">So sorry, there's been an error</p>
-            </ModalBody>
-            <ModalFooter className="p-4 d-flex justify-content-end">
-              <Button
-                type="button"
-                onClick={() => dispatch({ type: "submit" })}
-              >
-                Try again
-              </Button>
-            </ModalFooter>
-          </>
-        )
-      case "assessing":
-      default:
-        return (
-          <>
-            <ModalBody className="d-flex flex-column align-items-center p-5">
-              <p className="lead mb-3">{question.text}</p>
-              {question.options.map((option, index) => (
-                <ResponseButton
-                  key={option[0]}
-                  dispatch={dispatch}
-                  data={[...option, index]}
-                />
-              ))}
-            </ModalBody>
-            <ModalFooter className="p-4 d-flex justify-content-between">
-              <p className="mr-auto ml-3">
-                {activeQ} of {questions.length}
-              </p>
-              <Button
-                color="danger"
-                type="button"
-                className="w-auto text-white"
-                onClick={() => dispatch({ type: "confirm reset" })}
-                disabled={questions[activeQ - 1].answered === false}
-              >
-                Reset
-              </Button>
-              {/* <Button
-                // color="primary"
-                className="text-white"
-                type="button"
-                onClick={() => setOpen(false)}
-              >
-                Exit
-              </Button> */}
-              <Button
-                color="primary"
-                // className="text-white"
-                disabled={!question.answered}
-                type="button"
-                onClick={() =>
-                  dispatch({
-                    type: activeQ === questions.length ? "submit" : "next",
-                  })
-                }
-              >
-                {activeQ === questions.length ? "Submit" : "Next"}
-              </Button>
-            </ModalFooter>
-          </>
-        )
-    }
-  }
-
   return (
     <Modal
       isOpen={open}
@@ -272,7 +127,14 @@ const MBTI = ({ open, setOpen, className }) => {
       className={className}
     >
       <CloseButton setOpen={setOpen} />
-      <ModalContent />
+      <ModalContent
+        dispatch={dispatch}
+        state={state}
+        setOpen={setOpen}
+        question={question}
+      >
+        <MBTIResults data={finalData} />
+      </ModalContent>
     </Modal>
   )
 }
