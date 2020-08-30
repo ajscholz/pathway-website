@@ -2,6 +2,7 @@ import React, { useReducer } from "react"
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import { spiritualGiftsQuestions } from "../../utils/data/assessments"
 import SGResults from "./SGResults"
+import CloseButton from "./Buttons/CloseButton"
 
 const responseOptions = ["Almost Never", "Sometimes", "Almost Always"]
 
@@ -232,6 +233,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
       contentClassName=""
       className={className}
     >
+      <CloseButton setOpen={setOpen} />
       <ModalContent />
     </Modal>
   )

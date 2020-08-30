@@ -2,6 +2,7 @@ import React, { useReducer } from "react"
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap"
 import { mbtiData } from "../../utils/data/assessments"
 import MBTIResults from "./MBTIResults"
+import CloseButton from "./Buttons/CloseButton"
 
 // const data = mbtiData()
 const data2 = mbtiData()
@@ -270,15 +271,7 @@ const MBTI = ({ open, setOpen, className }) => {
       contentClassName=""
       className={className}
     >
-      <button
-        aria-label="Close"
-        className="close p-3 position-absolute"
-        type="button"
-        style={{ top: 0, right: 0, zIndex: 25 }}
-        onClick={() => setOpen(false)}
-      >
-        <span aria-hidden={true}>×</span>
-      </button>
+      <CloseButton setOpen={setOpen} />
       <ModalContent />
     </Modal>
   )
