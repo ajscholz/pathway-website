@@ -3,8 +3,11 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import { spiritualGiftsQuestions } from "../../utils/data/assessments"
 import SGResults from "./SGResults"
 import CloseButton from "./Buttons/CloseButton"
+import RadioButtons from "./Buttons/RadioButtons"
 
-const responseOptions = ["Almost Never", "Sometimes", "Almost Always"]
+// const spiritualGiftsQuestions = [questions[0], questions[1], questions[2]]
+
+const responseOptions = ["Never", "Rarely", "Sometimes", "Usually", "Always"]
 
 const gifts = [
   "Administration",
@@ -191,13 +194,14 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
           <>
             <ModalBody className="d-flex flex-column align-items-center p-5">
               <p className="lead mb-3">{question.text}</p>
-              {question.options.map((option, index) => (
+              {/* {question.options.map((option, index) => (
                 <ResponseButton
                   key={option[0]}
                   dispatch={dispatch}
                   data={[...option, index]}
                 />
-              ))}
+                ))} */}
+              <RadioButtons />
             </ModalBody>
             <ModalFooter className="p-4 d-flex justify-content-between">
               <p className="mr-auto ml-3">
