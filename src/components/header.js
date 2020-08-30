@@ -6,15 +6,21 @@ import Image from "gatsby-image"
 import SundayVideo from "./sunday-video"
 
 const Header = ({ title, subtitle, background, full, xs, xxs }) => {
-  const { streams } = useStaticQuery(graphql`
+  const { stream } = useStaticQuery(graphql`
+    # {
+    #   streams: allContentfulStreamingVideo(
+    #     sort: { fields: dateTime, order: ASC }
+    #   ) {
+    #     all: nodes {
+    #       videoUrl
+    #       dateTime
+    #     }
+    #   }
+    # }
     {
-      streams: allContentfulStreamingVideo(
-        sort: { fields: dateTime, order: ASC }
-      ) {
-        all: nodes {
-          videoUrl
-          dateTime
-        }
+      stream: contentfulStreamingVideo {
+        videoUrl
+        dateTime
       }
     }
   `)
@@ -42,14 +48,16 @@ const Header = ({ title, subtitle, background, full, xs, xxs }) => {
   }, [])
 
   // get the stream from graphql that is today, or give me an empty object if there isn't one
-  let index = -1
-  if (showVideo === true) {
-    const today = new Date().toDateString()
-    index = streams.all.findIndex(stream =>
-      new Date(stream.dateTime).toDateString() === today ? true : false
-    )
-  }
-  const stream = index === -1 ? {} : streams.all[index]
+  // let index = -1
+  // if (showVideo === true) {
+  //   const today = new Date().toDateString()
+  //   index = streams.all.findIndex(stream =>
+  //     new Date(stream.dateTime).toDateString() === today ? true : false
+  //   )
+  // }
+  // const stream = index === -1 ? {} : streams.all[index]
+
+  console.log("stream", stream)
 
   return (
     <>
