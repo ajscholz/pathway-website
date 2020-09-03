@@ -52,7 +52,7 @@ export const data = graphql`
         id: contentful_id
         title: eventName
         start(formatString: "dddd MMMM D, YYYY")
-        displayStart: start(formatString: "dddd, MMM DD")
+        displayStart: start(formatString: "dddd MMM D")
         end
         image {
           file {
@@ -65,7 +65,7 @@ export const data = graphql`
         description {
           description
         }
-        callToActionButton {
+        action: callToActionButton {
           link
           text
         }
