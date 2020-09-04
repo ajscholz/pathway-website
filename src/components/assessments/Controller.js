@@ -30,7 +30,7 @@ const Controller = ({ children, type }) => {
 
       <Button
         color="primary"
-        className="mt-3 mx-auto"
+        className="mt-4 mx-auto"
         onClick={() => setOpen(true)}
       >
         {children}

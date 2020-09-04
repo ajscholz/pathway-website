@@ -22,10 +22,11 @@
     content: " ";
     width: 20px;
     height: 20px;
-    border-radius: 50%;
+    // border-radius: 50%;
     border: 1px solid #aaa7a4;
     display: inline-block;
     position: absolute;
+    border-radius: 4px;
     left: 3px;
     top: 3px;
     padding: 1px;
@@ -40,13 +41,32 @@
     transition: opacity 0.3s linear;
   }
   .form-check-sign::after {
-    width: 4px;
-    height: 4px;
-    background-color: #555;
+    width: 11px;
+    height: 5px;
+    transform: rotate(-45deg);
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
     border-color: #555;
-    top: 11px;
-    left: 11px;
+    border-radius: 0;
+    // border-bottom-left-radius: 1px;
+    border-top: none;
+    border-right: none;
+    top: 9px;
+    left: 8px;
     opacity: 0;
+
+    &:focus {
+      border-color: #333;
+    }
+
+    //  THIS WAS THE STYLING FOR THE LITTLE TICK BOX
+    // width: 4px;
+    // height: 4px;
+    // background-color: #555;
+    // border-color: #555;
+    // top: 11px;
+    // left: 11px;
+    // opacity: 0;
   }
   &.disabled {
     .form-check-label {
@@ -111,7 +131,11 @@
 }
 
 .form-check-label input[type="checkbox"]:checked + .form-check-sign:before {
-  background-color: #66615b;
+  // background-color: $primary-light-color;
+}
+.form-check-label input[type="checkbox"]:checked + .form-check-sign:after {
+  // border-color: $primary-states-color;
+  // border-width: 2px;
 }
 
 .form-check-radio input[type="radio"] + .form-check-sign:after,
