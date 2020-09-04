@@ -36,17 +36,17 @@ const gifts = [
   "Wisdom",
 ]
 
-const ResponseButton = ({ dispatch, data }) => {
-  return (
-    <Button
-      className="mt-2 text-white"
-      // color="info"
-      onClick={() => dispatch({ type: { text: data[0], value: data[1] } })}
-    >
-      {data[0]}
-    </Button>
-  )
-}
+// const ResponseButton = ({ dispatch, data }) => {
+//   return (
+//     <Button
+//       className="mt-2 text-white"
+//       // color="info"
+//       onClick={() => dispatch({ type: { text: data[0], value: data[1] } })}
+//     >
+//       {data[0]}
+//     </Button>
+//   )
+// }
 
 const reducer = (state, action) => {
   const { activeQ, questions, responses } = state

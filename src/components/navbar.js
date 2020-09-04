@@ -63,7 +63,7 @@ const Navigation = () => {
 
   const openNav = () => {
     document.documentElement.classList.toggle("nav-open")
-    const body = document.getElementsByName("body")
+    // const body = document.getElementsByName("body")
     setBodyClick(true)
     setCollapseOpen(true)
   }

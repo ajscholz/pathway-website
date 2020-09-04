@@ -20,12 +20,13 @@ export const mbtiData = () => {
         case 6:
           type = ["j", "p"]
           break
+        default:
       }
-      return new Object({
+      return {
         question: questions[index],
         options: [optCopy.shift(), optCopy.shift()],
         type: type,
-      })
+      }
     })
 
     // const obj = Object.fromEntries(processed)

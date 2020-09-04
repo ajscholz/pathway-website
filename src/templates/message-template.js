@@ -6,16 +6,16 @@ import Header from "../components/header"
 import { Container, Row, Col } from "reactstrap"
 import YouTubePlayer from "react-player/lib/players/YouTube"
 import BreadcrumbSection from "../components/BreadcrumbSection"
-import MessageCard from "../components/cards/MessageCard"
+// import MessageCard from "../components/cards/MessageCard"
 import Metadata from "../components/Metadata"
 import SEO from "../components/seo"
 
 const MessageTemplate = ({ data, ...props }) => {
   const { message } = data
   const { series } = message
-  const messages = series.message.filter(message => {
-    return message.slug !== props.pageContext.slug
-  })
+  // const messages = series.message.filter(message => {
+  //   return message.slug !== props.pageContext.slug
+  // })
 
   return (
     <>
