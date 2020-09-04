@@ -5,7 +5,7 @@ import Image from "gatsby-image"
 // import Countdown from "./countdown"
 import SundayVideo from "./sunday-video"
 
-const Header = ({ title, subtitle, background, full, xs, xxs }) => {
+const Header = ({ title, subtitle, background, full, xs, xxs, ...props }) => {
   const { stream } = useStaticQuery(graphql`
     # {
     #   streams: allContentfulStreamingVideo(
@@ -75,6 +75,7 @@ const Header = ({ title, subtitle, background, full, xs, xxs }) => {
         {background !== "solid" && (
           <>
             <Image
+              {...props}
               fluid={background.fluid}
               className={
                 full
