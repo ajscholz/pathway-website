@@ -143,7 +143,7 @@ const Enneagram = ({ open, setOpen, className }) => {
         return (
           <>
             <ModalBody className="assessment">
-              <h1 className="mb-2 h3 mt-0">{`Type ${question.type}`}</h1>
+              <p className="mb-2 h3 mt-0">{`Type ${question.type}`}</p>
               <p className="mb-4 text-muted">Please check all that apply...</p>
               <div className="d-block text-left">
                 {question.questions.map(q => {

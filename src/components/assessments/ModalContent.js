@@ -41,10 +41,7 @@ const ModalContent = ({ state, dispatch, setOpen, question, children }) => {
     case "presenting":
       return (
         <>
-          <ModalBody className="d-flex flex-column align-items-center p-5">
-            <p className="lead mb-1">Here are your results!</p>
-            {children}
-          </ModalBody>
+          <ModalBody className="assessment my-auto">{children}</ModalBody>
           <AssessmentFooter>
             <ExitButton setOpen={setOpen} dispatch={dispatch} />
           </AssessmentFooter>
@@ -67,8 +64,8 @@ const ModalContent = ({ state, dispatch, setOpen, question, children }) => {
     default:
       return (
         <>
-          <ModalBody className="d-flex flex-column align-items-center p-5">
-            <p className="lead mb-3">{question.text}</p>
+          <ModalBody className="assessment mbti">
+            <p className="mb-4 h3 mt-0 text-center">{question.text}</p>
             {question.options.map((option, index) => (
               <ResponseButton
                 key={option[0]}

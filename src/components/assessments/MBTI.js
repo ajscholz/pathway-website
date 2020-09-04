@@ -5,10 +5,9 @@ import CloseButton from "./Buttons/CloseButton"
 import ModalContent from "./ModalContent"
 import MBTIResults from "./MBTIResults"
 
-// const data = mbtiData()
-const data2 = mbtiData()
-const data = [data2[0], data2[1]]
-
+const data = mbtiData()
+// const data2 = mbtiData()
+// const data = data2.slice(0, 10)
 const reducer = (state, action) => {
   const { type, payload } = action
   const { activeQ, questions, responses, currentVal } = state
