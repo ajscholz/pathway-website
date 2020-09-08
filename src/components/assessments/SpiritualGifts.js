@@ -4,6 +4,7 @@ import { spiritualGiftsQuestions } from "../../utils/data/assessments"
 import SGResults from "./SGResults"
 import CloseButton from "./Buttons/CloseButton"
 import RadioButtons from "./Buttons/RadioButtons"
+import Slider from "./Slider"
 
 // const spiritualGiftsQuestions = [questions[0], questions[1], questions[2]]
 
@@ -192,8 +193,8 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
       default:
         return (
           <>
-            <ModalBody className="d-flex flex-column align-items-center p-5">
-              <p className="lead mb-3">{question.text}</p>
+            <ModalBody className="assessment">
+              <p className="mb-4 h3 mt-5 text-center">{question.text}</p>
               {/* {question.options.map((option, index) => (
                 <ResponseButton
                   key={option[0]}
@@ -201,7 +202,10 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
                   data={[...option, index]}
                 />
                 ))} */}
+
               <RadioButtons />
+              <div className="my-5" />
+              <Slider />
             </ModalBody>
             <ModalFooter className="p-4 d-flex justify-content-between">
               <p className="mr-auto ml-3">

@@ -58,15 +58,6 @@
     &:focus {
       border-color: #333;
     }
-
-    //  THIS WAS THE STYLING FOR THE LITTLE TICK BOX
-    // width: 4px;
-    // height: 4px;
-    // background-color: #555;
-    // border-color: #555;
-    // top: 11px;
-    // left: 11px;
-    // opacity: 0;
   }
   &.disabled {
     .form-check-label {
@@ -87,6 +78,14 @@
   position: absolute;
   visibility: hidden;
 }
+
+// .form-check input[type="radio"] {
+//   color: yellow;
+//   & > .form-check-sign::before {
+//     left: 0;
+//   }
+// }
+
 .form-check input[type="checkbox"]:checked + .form-check-sign::after {
   opacity: 1;
 }
@@ -119,15 +118,40 @@
   }
 }
 
-.form-check-radio .form-check-sign.vertical::before {
-  left: -80%;
-  top: unset;
-  bottom: 100%;
+.form-check-radio .form-check-sign.vertical {
+  align-items: center;
+  // justify-content: center;
+
+  &::before,
+  &::after {
+    position: unset;
+    border-radius: 50%;
+    background-color: transparent;
+    @include transition-opacity-background(0.3s, linear);
+  }
+
+  &::before {
+    margin-bottom: 4px;
+  }
+
+  &::after {
+    position: absolute;
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    margin-top: 8px;
+    width: 4px;
+    height: 4px;
+    background-color: #555;
+    border-color: #555;
+    opacity: 0;
+    content: "";
+    display: block;
+  }
 }
 .form-check-radio .form-check-sign.vertical::after {
-  top: unset;
-  bottom: 130%;
-  left: 19%;
+  margin-bottom: 4px;
 }
 
 .form-check-label input[type="checkbox"]:checked + .form-check-sign:before {
@@ -138,13 +162,11 @@
   // border-width: 2px;
 }
 
-.form-check-radio input[type="radio"] + .form-check-sign:after,
-.form-check-radio input[type="radio"] {
-  opacity: 0;
-  @include transition-opacity(0.3s, linear);
-  content: " ";
-  display: block;
-}
+// .form-check-radio input[type="radio"] + .form-check-sign:after,
+// .form-check-radio input[type="radio"] {
+//   opacity: 0;
+
+// }
 
 // .form-check-radio input[type="radio"]:checked + .form-check-sign::after {
 //   font-family: "FontAwesome";
@@ -157,7 +179,10 @@
 // }
 
 .form-check-radio input[type="radio"]:checked + .form-check-sign::after {
-  opacity: 1;
+  // opacity: 1;
+}
+.form-check-radio input[type="radio"]:checked + .form-check-sign::before {
+  background-color: $primary-color;
 }
 
 .form-check-radio input[type="radio"]:disabled + .form-check-sign::before,
@@ -172,6 +197,6 @@
   margin-right: 10px;
 }
 
-.form-check-inline.vertical {
-  margin-right: 0px;
-}
+// .form-check-inline.vertical {
+//   margin-right: 0px;
+// }

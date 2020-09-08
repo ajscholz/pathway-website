@@ -1,44 +1,39 @@
 import React from "react"
 import { FormGroup, Label, Input } from "reactstrap"
 
+const options = ["Never", "Rarely", "Sometimes", "Often", "Always"]
+
 const RadioButtons = () => {
   return (
-    <div id="inputs">
-      <FormGroup check className="form-check-radio vertical" inline>
-        <Label check className="vertical">
-          <Input
-            defaultValue="option1"
-            id="exampleRadios1"
-            name="exampleRadios"
-            type="radio"
-          ></Input>
-          <span className="form-check-sign vertical"></span>1
-        </Label>
-      </FormGroup>
-      <FormGroup check className="form-check-radio vertical" inline>
-        <Label check className="vertical">
-          <Input
-            defaultChecked
-            defaultValue="option2"
-            id="exampleRadios2"
-            name="exampleRadios"
-            type="radio"
-          ></Input>
-          <span className="form-check-sign vertical"></span>2
-        </Label>
-      </FormGroup>
-      <FormGroup check className="form-check-radio vertical" inline>
-        <Label check className="vertical">
-          <Input
-            defaultValue="option1"
-            disabled
-            id="exampleRadios1"
-            name="exampleRadios1"
-            type="radio"
-          ></Input>
-          <span className="form-check-sign vertical"></span>3
-        </Label>
-      </FormGroup>
+    <div
+      className="w-100"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(5, 53px)",
+        justifyContent: "space-between",
+      }}
+    >
+      {options.map((option, index) => (
+        <FormGroup
+          check
+          className="form-check-radio vertical d-flex justify-content-center mr-0"
+          inline
+          key={option}
+        >
+          <Label check className="vertical mx-0 mt-0">
+            <Input
+              defaultValue={option}
+              id={`sgOptions${index + 1}`}
+              name={`sg-options`}
+              type="radio"
+            ></Input>
+
+            <span className="form-check-sign vertical d-flex flex-column">
+              <small>{option}</small>
+            </span>
+          </Label>
+        </FormGroup>
+      ))}
     </div>
   )
 }
