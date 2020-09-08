@@ -1,5 +1,5 @@
 import React, { useReducer, useRef } from "react"
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap"
 import { enneagramQuestions } from "../../utils/data/assessments"
 import CloseButton from "./Buttons/CloseButton"
 import EnneagramResults from "./EnneagramResults"
