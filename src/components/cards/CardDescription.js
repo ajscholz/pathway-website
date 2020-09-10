@@ -1,5 +1,4 @@
 import React from "react"
-import propTypes from "prop-types"
 import { CardText } from "reactstrap"
 
 const CardDescription = ({ desc }) => {
@@ -14,6 +13,7 @@ const CardDescription = ({ desc }) => {
       }}
     >
       <CardText
+        tag="div"
         className="mt-2 pb-0 text-left"
         // style={{ maxHeight: "100%", overflow: "hidden" }}
       >
@@ -21,10 +21,6 @@ const CardDescription = ({ desc }) => {
       </CardText>
     </div>
   )
-}
-
-CardDescription.propTypes = {
-  desc: propTypes.string.isRequired,
 }
 
 export default CardDescription

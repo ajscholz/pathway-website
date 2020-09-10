@@ -105,6 +105,7 @@ export const data = graphql`
   query($slug: String) {
     video: contentfulResourceVideo(slug: { eq: $slug }) {
       title
+      type
       url
       tags
       guide: videoUserGuide {

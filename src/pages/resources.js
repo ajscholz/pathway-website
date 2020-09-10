@@ -12,7 +12,7 @@ const ResourcesPage = ({ data }) => {
   const { banner, sections } = data.page
   const { heading, image } = banner
 
-  const videos = [...sections[0].linkedContent].slice(0, 3)
+  // const videos = [...sections[0].linkedContent].slice(0, 3)
 
   return (
     <>
@@ -27,46 +27,47 @@ const ResourcesPage = ({ data }) => {
           crumbs={[{ name: "Resources", link: "/resources", active: true }]}
         />
       </div>
-      <section className="section section-gray">
-        <Container>
-          <h2 className="title text-center mt-0">{sections[0].title}</h2>
-          <Row className="justify-content-center">
-            {videos.map(video => (
-              <Col md="6" lg="4" key={video.id}>
-                {/* <Link to={`/resources`}>
-                      <Card
-                        className="info info-horizontal py-0"
-                        data-background="color"
-                        data-color="dark"
-                        style={{ maxWidth: "unset" }}
-                      >
-                        <CardBody>
-                          <h4 className="info-title ">{video.title}</h4>
-                          <h6 className="text-muted mb-3 mt-n2">
-                            {message.date}
-                          </h6>
-                        </CardBody>
-                      </Card>
-                    </Link> */}
-                <Link to={`/resources/help-me-understand/${video.slug}`}>
-                  <HelpMeUnderstandVideoCard videoData={video} />
-                </Link>
-              </Col>
-            ))}
-          </Row>
-          <Row className="justify-content-center">
-            <Button
-              color="primary"
-              size="lg"
-              tag={Link}
-              to="/resources/help-me-understand"
-              className="mt-3"
-            >
-              View More
-            </Button>
-          </Row>
-        </Container>
-      </section>
+
+      {sections.map((section, index) => (
+        <section
+          className={`section section-${index % 2 === 0 ? "gray" : "dark"}`}
+          key={section.title}
+        >
+          <Container>
+            <h2 className="title text-center mt-0">{section.title}</h2>
+            {section.linkedContent !== null && (
+              <Row className="justify-content-center">
+                {[...section.linkedContent].slice(0, 3).map(video => (
+                  <Col md="6" lg="4" key={video.id}>
+                    <Link to={`/resources/help-me-understand/${video.slug}`}>
+                      <HelpMeUnderstandVideoCard videoData={video} />
+                    </Link>
+                  </Col>
+                ))}
+              </Row>
+            )}
+            <Row className="justify-content-center">
+              <Button
+                color="primary"
+                size="lg"
+                tag={Link}
+                to={`/resources/${
+                  section.title.includes("Help Me")
+                    ? "help-me-understand"
+                    : section.title.includes("Enneagram")
+                    ? "enneagram"
+                    : section.title.includes("Myers")
+                    ? "mbti"
+                    : "spiritual-gifts"
+                }`}
+                className="mt-3"
+              >
+                More Resources
+              </Button>
+            </Row>
+          </Container>
+        </section>
+      ))}
     </>
   )
 }

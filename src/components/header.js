@@ -57,8 +57,6 @@ const Header = ({ title, subtitle, background, full, xs, xxs, ...props }) => {
   // }
   // const stream = index === -1 ? {} : streams.all[index]
 
-  console.log("stream", stream)
-
   return (
     <>
       <div

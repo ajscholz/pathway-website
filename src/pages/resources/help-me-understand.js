@@ -13,7 +13,7 @@ const HelpMeUnderstandPage = ({ data }) => {
   const { banner, sections } = data.page
   const { image } = banner
 
-  const videos = sections[0].linkedContent
+  const videos = [...sections[0].linkedContent]
 
   return (
     <>

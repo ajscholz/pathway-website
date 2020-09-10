@@ -6,10 +6,14 @@ import { Container, Row, Col } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import BreadcrumbSection from "../../components/BreadcrumbSection"
 import Controller from "../../components/assessments/Controller"
+import HelpMeUnderstandVideoCard from "../../components/cards/HelpMeUnderstandVideoCard"
+import VideoModal from "../../components/VideoModal"
 
 const MyersBriggsPage = ({ data }) => {
   const { banner, sections } = data.page
   const { image } = banner
+
+  const videos = [...sections[1].linkedContent]
 
   return (
     <>
@@ -48,13 +52,15 @@ const MyersBriggsPage = ({ data }) => {
             <Col>
               <h1 className="h2 title text-center mt-0">{sections[1].title}</h1>
             </Col>
-            {/* {videos.map(video => (
+          </Row>
+          <Row>
+            {videos.map(video => (
               <Col md="6" lg="4" key={video.id} className="mb-4">
-                <Link to={`/resources/help-me-understand${video.fields.slug}`}>
+                <VideoModal video={video}>
                   <HelpMeUnderstandVideoCard videoData={video} />
-                </Link>
+                </VideoModal>
               </Col>
-            ))} */}
+            ))}
           </Row>
         </Container>
       </section>
@@ -79,6 +85,11 @@ export const data = graphql`
         }
         ... on ContentfulPageSection {
           title
+          linkedContent {
+            ... on ContentfulResourceVideo {
+              ...HelpMeUnderstandVideoCardFragment
+            }
+          }
         }
       }
     }

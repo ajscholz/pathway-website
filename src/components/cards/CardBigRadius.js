@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Card, CardTitle, CardBody, Badge, CardFooter } from "reactstrap"
 import CardDateFooter from "./CardDateFooter"
 import CardTopImage from "./CardTopImage"
@@ -17,7 +16,9 @@ const CardBigRadius = ({ children, className, title, imgData, footerData }) => {
           {title}
         </CardTitle>
         {children}
-        {typeof footerData === "string" ? (
+        {typeof (footerData === null) ? null : typeof (
+            footerData === "string"
+          ) ? (
           <CardDateFooter date={footerData} />
         ) : (
           <CardFooter className="mt-4 text-left">
@@ -42,11 +43,6 @@ const CardBigRadius = ({ children, className, title, imgData, footerData }) => {
       </CardBody>
     </Card>
   )
-}
-
-CardBigRadius.propTypes = {
-  // children: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
 }
 
 export default CardBigRadius

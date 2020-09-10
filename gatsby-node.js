@@ -29,6 +29,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         all: edges {
           node {
             slug
+            type
           }
         }
       }
@@ -83,14 +84,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
 
   result.data.videos.all.forEach(({ node }) => {
-    const path = `/resources/help-me-understand/${node.slug}`
-    createPage({
-      path,
-      component: videoPageTemplate,
-      context: {
-        slug: node.slug,
-      },
-    })
+    if (node.type === "Help Me Understand") {
+      const path = `/resources/help-me-understand/${node.slug}`
+      createPage({
+        path,
+        component: videoPageTemplate,
+        context: {
+          slug: node.slug,
+        },
+      })
+    }
   })
 }
 
