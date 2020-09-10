@@ -59,16 +59,8 @@ export const data = graphql`
         ... on ContentfulPageSection {
           title
           linkedContent {
-            ... on ContentfulHelpMeUnderstandVideo {
+            ... on ContentfulResourceVideo {
               ...HelpMeUnderstandVideoCardFragment
-              id: contentful_id
-              slug
-              videoUserGuide {
-                file {
-                  fileName
-                  url
-                }
-              }
             }
           }
         }

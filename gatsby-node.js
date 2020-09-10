@@ -25,7 +25,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      videos: allContentfulHelpMeUnderstandVideo {
+      videos: allContentfulResourceVideo {
         all: edges {
           node {
             slug
@@ -123,14 +123,14 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       updatedAt: Date
     }
     `,
-    `type ContentfulHelpMeUnderstandVideo implements Node {
+    `type ContentfulResourceVideo implements Node {
       contentful_id: String
       title: String
       url: String
       slug: String
       tags: [String]
       videoUserGuide: ContentfulAsset
-      videoDescription: contentfulHelpMeUnderstandVideoVideoDescriptionTextNode
+      description: contentfulResourceVideoDescriptionTextNode
     }`,
     `type ContentfulAsset implements Node {
       file: ContentfulAssetFile
@@ -139,7 +139,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       url: String
       fileName: String
     }`,
-    `type contentfulHelpMeUnderstandVideoVideoDescriptionTextNode implements Node {
+    `type contentfulResourceVideoDescriptionTextNode implements Node {
       childMdx: Mdx
     }`,
     `type Mdx implements Node {
