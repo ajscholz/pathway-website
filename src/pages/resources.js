@@ -12,7 +12,7 @@ const ResourcesPage = ({ data }) => {
   const { banner, sections } = data.page
   const { heading, image } = banner
 
-  const videos = sections[0].linkedContent.slice(0, 3)
+  const videos = [...sections[0].linkedContent].slice(0, 3)
 
   return (
     <>
@@ -81,23 +81,8 @@ export const data = graphql`
         ... on ContentfulPageSection {
           title
           linkedContent {
-            ... on ContentfulHelpMeUnderstandVideo {
-              id: contentful_id
-              title
-              url
-              tags
-              slug
-              videoUserGuide {
-                file {
-                  fileName
-                  url
-                }
-              }
-              description: videoDescription {
-                childMdx {
-                  body
-                }
-              }
+            ... on ContentfulResourceVideo {
+              ...HelpMeUnderstandVideoCardFragment
             }
           }
         }

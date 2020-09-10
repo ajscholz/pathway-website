@@ -2,30 +2,33 @@ import React from "react"
 import { graphql } from "gatsby"
 import SEO from "../../components/seo"
 import Header from "../../components/header"
-import BreadcrumbSection from "../../components/BreadcrumbSection"
 import { Container, Row, Col } from "reactstrap"
-// import HelpMeUnderstandVideoCard from "../../components/cards/HelpMeUnderstandVideoCard"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import BreadcrumbSection from "../../components/BreadcrumbSection"
 import Controller from "../../components/assessments/Controller"
 
-const SpiritualGiftsPage = ({ data }) => {
+const EnneagramPage = ({ data }) => {
   const { banner, sections } = data.page
   const { image } = banner
 
   return (
     <>
       <SEO
-        title="Spiritual Gifts Resources"
+        title="Enneagram Resources"
         image={image.file.url}
-        url="https://pathwaymarietta.com/resources/spiritual-gifts"
+        url="https://pathwaymarietta.com/resources/enneagram"
       />
-      <Header background={image} xxs={true} />
+      <Header
+        background={image}
+        xxs={true}
+        imgStyle={{ objectPosition: "50% 75%" }}
+      />
       <div className="section-gray">
         <BreadcrumbSection
           crumbs={[
             { name: "Resources", link: "/resources" },
             {
-              name: "Spiritual Gifts",
+              name: "Enneagram",
               link: "",
               active: true,
             },
@@ -38,7 +41,7 @@ const SpiritualGiftsPage = ({ data }) => {
             <Col className="d-flex flex-column">
               <h1 className="h2 title text-center mt-0">{sections[0].title}</h1>
               <MDXRenderer>{sections[0].description.childMdx.body}</MDXRenderer>
-              <Controller type="sg">Take Assessment</Controller>
+              <Controller type="enneagram">Take Assessment</Controller>
             </Col>
           </Row>
         </Container>
@@ -63,12 +66,11 @@ const SpiritualGiftsPage = ({ data }) => {
   )
 }
 
-export default SpiritualGiftsPage
+export default EnneagramPage
 
 export const data = graphql`
-  query MyQuery {
-    page: contentfulPages(title: { eq: "Spiritual Gifts" }) {
-      title
+  {
+    page: contentfulPages(title: { eq: "Enneagram" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulInformationSection {

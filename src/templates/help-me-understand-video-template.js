@@ -103,7 +103,7 @@ export default HelpMeUnderstandVideoTemplate
 
 export const data = graphql`
   query($slug: String) {
-    video: contentfulHelpMeUnderstandVideo(slug: { eq: $slug }) {
+    video: contentfulResourceVideo(slug: { eq: $slug }) {
       title
       url
       tags
@@ -112,7 +112,7 @@ export const data = graphql`
           url
         }
       }
-      description: videoDescription {
+      description {
         childMdx {
           body
         }

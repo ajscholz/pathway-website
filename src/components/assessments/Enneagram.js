@@ -1,40 +1,13 @@
 import React, { useReducer, useRef } from "react"
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap"
-import { spiritualGiftsQuestions } from "../../utils/data/assessments"
+import { enneagramQuestions } from "../../utils/data/assessments"
 import CloseButton from "./Buttons/CloseButton"
-import RadioButtons from "./Buttons/RadioButtons"
-import SpiritualGiftsResults from "./SpiritualGiftsResults"
-
-const gifts = [
-  { name: "Administration", score: 0 },
-  { name: "Apostleship", score: 0 },
-  { name: "Craftsmanship", score: 0 },
-  { name: "Discernment", score: 0 },
-  { name: "Evangelism", score: 0 },
-  { name: "Exhortation", score: 0 },
-  { name: "Faith", score: 0 },
-  { name: "Giving", score: 0 },
-  { name: "Healing", score: 0 },
-  { name: "Helps", score: 0 },
-  { name: "Hospitality", score: 0 },
-  { name: "Intercession", score: 0 },
-  { name: "Knowledge", score: 0 },
-  { name: "Leadership", score: 0 },
-  { name: "Mercy", score: 0 },
-  { name: "Miracles", score: 0 },
-  { name: "Missionary", score: 0 },
-  { name: "Music/Worship", score: 0 },
-  { name: "Pastor/Shepherd", score: 0 },
-  { name: "Prophecy", score: 0 },
-  { name: "Service", score: 0 },
-  { name: "Teaching", score: 0 },
-  { name: "Tongues", score: 0 },
-  { name: "Wisdom", score: 0 },
-]
+import EnneagramResults from "./EnneagramResults"
+import Checkbox from "./Checkbox"
 
 const reducer = (state, action) => {
-  const { activeQ } = state
   const { type } = action
+  const { activeQ } = state
 
   switch (type) {
     case "confirm reset":
@@ -49,12 +22,10 @@ const reducer = (state, action) => {
       return {
         ...state,
         view:
-          activeQ === spiritualGiftsQuestions.length
-            ? "submitting"
-            : "assessing",
-        activeQ:
-          activeQ === spiritualGiftsQuestions.length ? activeQ : activeQ + 1,
+          activeQ === enneagramQuestions.length ? "submitting" : "assessing",
+        activeQ: activeQ === enneagramQuestions.length ? activeQ : activeQ + 1,
       }
+
     default:
       return state
   }
@@ -65,39 +36,29 @@ const initialState = {
   activeQ: 1,
 }
 
-const SpiritualGifts = ({ open, setOpen, className }) => {
+const Enneagram = ({ open, setOpen, className }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-
-  // destructure state to make it easier to access
+  // destructure state
   const { view, activeQ } = state
 
   // this is used to tally the question results & to minimize re-renders by not holding values in state
-  const tally = useRef([...gifts])
-  const currentSelection = useRef()
+  const tally = useRef([0, 0, 0, 0, 0, 0, 0, 0, 0])
+  // this is used to store the index(es) of the highest values (which then gives my type numbers)
+  const typeIndex = useRef()
 
-  // set current selection on each render (as opposed to the first only in the useRef hook)
-  currentSelection.current = 2
+  // set variables for easier access
+  const questions = [...enneagramQuestions]
+  const question = questions[activeQ - 1]
 
   // if we render and we're on the first question reset the tally counter
   if (activeQ === 1) {
-    tally.current = [...gifts]
-  }
-
-  // get current question for easy access
-  const questions = [...spiritualGiftsQuestions]
-  const question = questions[activeQ - 1]
-
-  const score = () => {
-    const giftIndex = (activeQ - 1) % gifts.length
-    const score = tally.current[giftIndex].score
-    tally.current[giftIndex].score = score + currentSelection.current
+    tally.current = [0, 0, 0, 0, 0, 0, 0, 0, 0]
   }
 
   // helper function to handle next vs submit logic
   const handleNext = () => {
-    score()
     if (activeQ === questions.length) {
-      getResults()
+      score()
       dispatch({
         type: "present",
       })
@@ -105,8 +66,24 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
   }
 
   // helper function to score the assessment
-  const getResults = () => {
-    tally.current.sort((a, b) => a.score - b.score).reverse()
+  const score = () => {
+    let highIndex = [0]
+
+    for (let [i, val] of tally.current.entries()) {
+      const highVal = tally.current[highIndex[0]]
+
+      if (i === 0 || val < highVal) {
+        continue
+      }
+      if (val === highVal) {
+        highIndex.push(i)
+        continue
+      }
+      if (val > highVal) {
+        highIndex = [i]
+      }
+    }
+    typeIndex.current = highIndex
   }
 
   const ModalContent = () => {
@@ -142,7 +119,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
         return (
           <>
             <ModalBody className="assessment my-auto">
-              <SpiritualGiftsResults tally={tally.current} />
+              <EnneagramResults highIndex={typeIndex.current} />
             </ModalBody>
             <ModalFooter className="p-4 d-flex justify-content-end">
               <Button
@@ -165,11 +142,18 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
       default:
         return (
           <>
-            <ModalBody className="assessment flex-grow-1 pb-4 pt-5 mt-0 pb-md-5">
-              <p className="h3 mt-5 text-center" style={{ height: "120px" }}>
-                {question}
-              </p>
-              <RadioButtons currentSelection={currentSelection} />
+            <ModalBody className="assessment">
+              <p className="mb-2 h3 mt-0">{`Type ${question.type}`}</p>
+              <p className="mb-4 text-muted">Please check all that apply...</p>
+              <div className="d-block text-left">
+                {question.questions.map(q => {
+                  return (
+                    <Checkbox key={q} type={question.type} tally={tally}>
+                      {q}
+                    </Checkbox>
+                  )
+                })}
+              </div>
             </ModalBody>
             <ModalFooter className="p-4 d-flex justify-content-between">
               <p className="mr-auto ml-3">
@@ -197,12 +181,11 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
         )
     }
   }
-
   return (
     <Modal
       isOpen={open}
       toggle={() => setOpen(false)}
-      contentClassName=""
+      // contentClassName="mt-4 mb-auto d-fixed mt-0 d-md-block mt-md-3"
       className={className}
     >
       <CloseButton setOpen={setOpen} />
@@ -211,4 +194,4 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
   )
 }
 
-export default SpiritualGifts
+export default Enneagram

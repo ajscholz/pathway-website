@@ -6,6 +6,7 @@ import Header from "../components/header"
 import { Container, Row, Col } from "reactstrap"
 import YouTubePlayer from "react-player/lib/players/YouTube"
 import BreadcrumbSection from "../components/BreadcrumbSection"
+// import MessageCard from "../components/cards/MessageCard"
 import Metadata from "../components/Metadata"
 import SEO from "../components/seo"
 
