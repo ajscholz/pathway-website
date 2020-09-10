@@ -183,6 +183,7 @@
 }
 .form-check-radio input[type="radio"]:checked + .form-check-sign::before {
   background-color: $primary-color;
+  border-color: $primary-states-color;
 }
 
 .form-check-radio input[type="radio"]:disabled + .form-check-sign::before,

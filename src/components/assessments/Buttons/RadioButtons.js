@@ -3,17 +3,20 @@ import { FormGroup, Label, Input } from "reactstrap"
 
 const options = ["Never", "Rarely", "Sometimes", "Often", "Always"]
 
-const RadioButtons = () => {
+const RadioButtons = ({ currentSelection }) => {
+  // currentSelection.current = Math.floor(Math.random() * 5) + 1 - 1 // FOR TESTING ONLY
+
   return (
     <div
-      className="w-100"
+      className="mt-auto w-100"
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(5, 53px)",
         justifyContent: "space-between",
+        maxWidth: "360px",
       }}
     >
-      {options.map((option, index) => (
+      {options.map((option, i) => (
         <FormGroup
           check
           className="form-check-radio vertical d-flex justify-content-center mr-0"
@@ -22,13 +25,17 @@ const RadioButtons = () => {
         >
           <Label check className="vertical mx-0 mt-0">
             <Input
+              defaultChecked={i === currentSelection.current}
               defaultValue={option}
-              id={`sgOptions${index + 1}`}
+              id={`sgOptions${i + 1}`}
               name={`sg-options`}
               type="radio"
-            ></Input>
+              onClick={() => {
+                currentSelection.current = i
+              }}
+            />
 
-            <span className="form-check-sign vertical d-flex flex-column">
+            <span className="form-check-sign vertical d-flex flex-column text-muted">
               <small>{option}</small>
             </span>
           </Label>
@@ -38,4 +45,4 @@ const RadioButtons = () => {
   )
 }
 
-export default RadioButtons
+export default React.memo(RadioButtons)
