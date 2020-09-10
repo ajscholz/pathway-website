@@ -24,7 +24,6 @@ const SpiritualGiftsResults = ({ tally }) => {
   if (display[2].score === six[0].score) {
     display = display.concat(four, five, six)
   } else if (four[0].score === six[0].score) {
-    display = display = display
   } else if (five[0].score === six[0].score) {
     display = display.concat(four)
   } else {
