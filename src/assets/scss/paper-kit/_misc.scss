@@ -217,3 +217,16 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 .hr-primary {
   border: 1px solid $primary-light-color;
 }
+
+.assessment-submit-form {
+  opacity: 1;
+  @include transition-opacity(0.3s, linear);
+
+  &.hide {
+    opacity: 0;
+  }
+
+  &.show {
+    opacity: 1;
+  }
+}

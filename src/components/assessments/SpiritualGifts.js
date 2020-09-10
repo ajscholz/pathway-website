@@ -4,6 +4,7 @@ import { spiritualGiftsQuestions } from "../../utils/data/assessments"
 import CloseButton from "./Buttons/CloseButton"
 import RadioButtons from "./Buttons/RadioButtons"
 import SpiritualGiftsResults from "./SpiritualGiftsResults"
+import SubmitResults from "./SubmitResults"
 
 const gifts = [
   { name: "Administration", score: 0 },
@@ -34,7 +35,7 @@ const gifts = [
 
 const reducer = (state, action) => {
   const { activeQ } = state
-  const { type } = action
+  const { type, payload } = action
 
   switch (type) {
     case "confirm reset":
@@ -45,6 +46,11 @@ const reducer = (state, action) => {
       return initialState
     case "present":
       return { ...state, view: "presenting" }
+    case "submit":
+      return {
+        ...state,
+        view: payload.length > 5 ? "presenting" : "submitting",
+      }
     case "next":
       return {
         ...state,
@@ -63,6 +69,7 @@ const reducer = (state, action) => {
 const initialState = {
   view: "assessing",
   activeQ: 1,
+  // activeQ: spiritualGiftsQuestions.length - 4,
 }
 
 const SpiritualGifts = ({ open, setOpen, className }) => {
@@ -93,13 +100,39 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
     tally.current[giftIndex].score = score + currentSelection.current
   }
 
+  const getFinalScores = () => {
+    const scores = [...tally.current]
+    let display = []
+
+    for (let x = 0; x < 3; x++) {
+      display.push(scores.shift())
+    }
+
+    const four = [scores.shift()]
+    const five = [scores.shift()]
+    const six = [scores.shift()]
+
+    if (display[2].score === six[0].score) {
+      display = display.concat(four, five, six)
+    } else if (four[0].score === six[0].score) {
+    } else if (five[0].score === six[0].score) {
+      display = display.concat(four)
+    } else {
+      display = display.concat(four, five)
+    }
+
+    display = [...display].map(item => item.name).sort()
+    tally.current = [...display]
+  }
+
   // helper function to handle next vs submit logic
   const handleNext = () => {
     score()
     if (activeQ === questions.length) {
       getResults()
       dispatch({
-        type: "present",
+        type: "submit",
+        payload: tally.current,
       })
     } else dispatch({ type: "next" })
   }
@@ -107,6 +140,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
   // helper function to score the assessment
   const getResults = () => {
     tally.current.sort((a, b) => a.score - b.score).reverse()
+    getFinalScores()
   }
 
   const ModalContent = () => {
@@ -138,11 +172,19 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
             </ModalFooter>
           </>
         )
+      case "submitting":
+        return (
+          <SubmitResults
+            dispatch={dispatch}
+            type="Spiritual Gifts"
+            results={tally.current}
+          />
+        )
       case "presenting":
         return (
           <>
             <ModalBody className="assessment my-auto">
-              <SpiritualGiftsResults tally={tally.current} />
+              <SpiritualGiftsResults display={tally.current} />
             </ModalBody>
             <ModalFooter className="p-4 d-flex justify-content-end">
               <Button

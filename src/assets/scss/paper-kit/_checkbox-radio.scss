@@ -178,6 +178,10 @@
 //   font-size: 22px;
 // }
 
+.form-check-radio input[type="radio"] + .form-check-sign::before {
+  border-radius: 50%;
+  @include transition-opacity-background(0.3s, linear);
+}
 .form-check-radio input[type="radio"]:checked + .form-check-sign::after {
   // opacity: 1;
 }

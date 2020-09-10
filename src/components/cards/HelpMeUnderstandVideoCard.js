@@ -13,15 +13,13 @@ const HelpMeUnderstandVideoCard = ({
       footerData={tags ? tags : null}
       imgData={url}
     >
-      {description && (
-        <CardDescription
-          desc={
-            <MDXRenderer className="card-description">
-              {description.childMdx.body}
-            </MDXRenderer>
-          }
-        />
-      )}
+      <CardDescription
+        desc={
+          <MDXRenderer className="card-description">
+            {description.childMdx.body}
+          </MDXRenderer>
+        }
+      />
     </CardBigRadius>
   )
 }
