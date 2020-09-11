@@ -5,11 +5,9 @@ import CloseButton from "./Buttons/CloseButton"
 import MBTIResults from "./MBTIResults"
 import SubmitResults from "./SubmitResults"
 
-// const mbtiQuestions = mbtiData()
-const data2 = mbtiData()
-const mbtiQuestions = [...data2].slice(0, 6)
-
-console.log(mbtiQuestions)
+const mbtiQuestions = mbtiData()
+// const data2 = mbtiData()
+// const mbtiQuestions = [...data2].slice(0, 6)
 
 const pairs = [
   { type: "E/I", scores: [0, 0] },
@@ -217,39 +215,6 @@ const MBTI = ({ open, setOpen, className }) => {
         )
     }
   }
-
-  // let possibles = []
-  // if (view === "submitting") {
-  //   // get all the possible options for scoring
-  //   let allPossibles = []
-  //   questions.forEach(question => {
-  //     const options = question.options.map(option => option[1])
-
-  //     if (!allPossibles.toString().includes(options.toString()))
-  //       allPossibles.push(options)
-  //   })
-
-  //   const reducedPossibles = new Set(allPossibles)
-  //   possibles = [...reducedPossibles]
-
-  //   // create counting object to tally scores
-  //   const counter = Object.fromEntries(
-  //     possibles
-  //       .toString()
-  //       .split(",")
-  //       .map(possible => [possible, 0])
-  //   )
-
-  //   // tally responses to each letter
-  //   responses.forEach(response => {
-  //     counter[response] = counter[response] + 1
-  //   })
-
-  //   dispatch({
-  //     type: "present",
-  //     payload: counter,
-  //   })
-  // }
 
   return (
     <Modal

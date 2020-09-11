@@ -1,13 +1,14 @@
 import React from "react"
-import { useSprings, useSpring, animated, config } from "react-spring"
+import { useSprings, animated, config } from "react-spring"
 
-const MBTIResults = ({}) => {
-  const results = [
-    { type: "E/I", scores: [48, 52], types: ["E", "I"], win: "I", winIndex: 1 },
-    { type: "S/N", scores: [27, 73], types: ["S", "N"], win: "N", winIndex: 1 },
-    { type: "T/F", scores: [32, 68], types: ["T", "F"], win: "F", winIndex: 1 },
-    { type: "J/P", scores: [8, 92], types: ["J", "P"], win: "P", winIndex: 1 },
-  ]
+const MBTIResults = ({ results }) => {
+  // FOR EASY TESTING
+  // const results = [
+  //   { type: "E/I", scores: [48, 52], types: ["E", "I"], win: "I", winIndex: 1 },
+  //   { type: "S/N", scores: [27, 73], types: ["S", "N"], win: "N", winIndex: 1 },
+  //   { type: "T/F", scores: [32, 68], types: ["T", "F"], win: "F", winIndex: 1 },
+  //   { type: "J/P", scores: [8, 92], types: ["J", "P"], win: "P", winIndex: 1 },
+  // ]
   const dispResult = results
     .map(result => result.win)
     .toString()
@@ -78,9 +79,6 @@ const MBTIResults = ({}) => {
                     {`${pair.scores[pair.winIndex]}%`}
                   </span>
                 </animated.div>
-                {/* <Bar winIndex={pair.winIndex} perc={pair.scores[pair.winIndex]}>
-                  {`${pair.scores[pair.winIndex]}%`}
-                </Bar> */}
               </div>
             </div>
           )
@@ -91,29 +89,3 @@ const MBTIResults = ({}) => {
 }
 
 export default MBTIResults
-
-// const Range = ({ letters }) => {
-//   return (
-
-//     // <div className="d-flex justify-content-center position-relative mt-3">
-//     //   <P data={left} />
-//     //   {/* {leftPercent} */}
-//     //   <div className="w-100 d-flex" style={{ height: "30px" }}>
-//     //     <div
-//     //       className={`${
-//     //         style === "left" ? "mr-auto" : "ml-auto"
-//     //       } `}
-//     //       style={{ width: `${style === "left" ? leftPercent : rightPercent}%` }}
-//     //     >
-//     //       <p
-//     //         className={`mb-0 mx-2 ${style === "left" ? "ml-auto" : "mr-auto"}`}
-//     //       >
-//     //         {style === "left" ? leftPercent.toFixed() : rightPercent.toFixed()}%
-//     //       </p>
-//     //     </div>
-//     //   </div>
-//     //   {/* {rightPercent} */}
-//     //   <P data={right} justify="end" />
-//     // </div>
-//   )
-// }
