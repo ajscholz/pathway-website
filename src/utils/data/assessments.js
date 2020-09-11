@@ -553,6 +553,7 @@ const enneagramQuestionsRaw = [
       "Being outdoors is very soothing for me.",
       "I am often quietly stubborn when people put demands on me.",
       "It would feel selfish to spend a whole day doing whatever I want to do.",
+      "People seem to want me to be more decisive.",
     ],
   },
 ]
