@@ -4,9 +4,10 @@ import { enneagramQuestions } from "../../utils/data/assessments"
 import CloseButton from "./Buttons/CloseButton"
 import EnneagramResults from "./EnneagramResults"
 import Checkbox from "./Checkbox"
+import SubmitResults from "./SubmitResults"
 
 const reducer = (state, action) => {
-  const { type } = action
+  const { type, payload } = action
   const { activeQ } = state
 
   switch (type) {
@@ -18,9 +19,13 @@ const reducer = (state, action) => {
       return initialState
     case "present":
       return { ...state, view: "presenting" }
-    case "next":
+    case "submit":
       return {
         ...state,
+        view: payload.length > 2 ? "presenting" : "submitting",
+      }
+    case "next":
+      return {
         view:
           activeQ === enneagramQuestions.length ? "submitting" : "assessing",
         activeQ: activeQ === enneagramQuestions.length ? activeQ : activeQ + 1,
@@ -60,7 +65,8 @@ const Enneagram = ({ open, setOpen, className }) => {
     if (activeQ === questions.length) {
       score()
       dispatch({
-        type: "present",
+        type: "submit",
+        payload: typeIndex.current,
       })
     } else dispatch({ type: "next" })
   }
@@ -138,6 +144,14 @@ const Enneagram = ({ open, setOpen, className }) => {
             </ModalFooter>
           </>
         )
+      case "submitting":
+        return (
+          <SubmitResults
+            dispatch={dispatch}
+            type="Enneagram"
+            results={typeIndex.current}
+          />
+        )
       case "assessing":
       default:
         return (
@@ -186,6 +200,7 @@ const Enneagram = ({ open, setOpen, className }) => {
       isOpen={open}
       toggle={() => setOpen(false)}
       // contentClassName="mt-4 mb-auto d-fixed mt-0 d-md-block mt-md-3"
+
       className={className}
     >
       <CloseButton setOpen={setOpen} />

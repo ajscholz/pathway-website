@@ -34,7 +34,10 @@ const SubmitResults = ({ dispatch, type, results }) => {
   const [info, setInfo] = useState({ name: "", email: "" })
 
   const handleClick = () => {
-    if (part === true) submitForm({ ...info, type: type, results: results })
+    if (part === true)
+      submitForm({ ...info, to: "pathway", type: type, results: results })
+    if (emailMe === true)
+      submitForm({ ...info, to: "person", type: type, results: results })
     dispatch({ type: "present" })
   }
 
@@ -189,7 +192,6 @@ SubmitResults.propTypes = {
   dispatch: PropTypes.func.isRequired,
   type: PropTypes.oneOf(["Enneagram", "Spiritual Gifts", "Myers-Briggs"])
     .isRequired,
-  results: PropTypes.isRequired,
 }
 
 export default SubmitResults

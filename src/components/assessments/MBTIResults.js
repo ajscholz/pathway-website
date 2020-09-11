@@ -52,6 +52,7 @@ const MBTIResults = ({ results }) => {
             >
               {pair.types.map((letter, i) => (
                 <animated.div
+                  key={letter}
                   className={`h5 mb-0 mt-0 ${i === 0 ? "mr-2" : "ml-2"}${
                     pair.winIndex !== i ? " text-very-muted" : ""
                   }`}

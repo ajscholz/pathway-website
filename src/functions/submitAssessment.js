@@ -7,7 +7,10 @@ exports.handler = async event => {
   const OAuth2 = google.auth.OAuth2
 
   const { body } = event
-  let data = JSON.parse(body)
+  const data = JSON.parse(body)
+  const { name, email, to, type, results } = data
+
+  console.log(body)
 
   // ------------- Google OAuth2 authorization -------------
   const oauth2Client = new OAuth2(
@@ -32,6 +35,58 @@ exports.handler = async event => {
   //   },
   // })
 
+  const options = { year: "numeric", month: "long", day: "numeric" }
+  const date = new Intl.DateTimeFormat("en-US", options).format(new Date())
+
+  const processSgAssessment = items =>
+    `<ol>
+      ${items
+        .map(item => `<li>${item}</li>`)
+        .toString()
+        .replace(/,/g, "")}
+    </ol>`
+
+  const processEnneagramAssessment = items =>
+    items.length === 1
+      ? `Type ${items[0] + 1}`
+      : `Type ${items[0] + 1} or Type ${items[1] + 1}`
+
+  const processMbtiAssessment = items => {
+    const type = items
+      .map(item => item.win)
+      .toString()
+      .replace(/,/g, "")
+    return `${type}
+    </p>
+    <p>
+      ${items
+        .map(item => `<ul>${item.win} - ${item.scores[item.winIndex]}%</ul>`)
+        .toString()
+        .replace(/,/g, "")}`
+  }
+
+  const formattedResults = `
+    <p>
+      <span>${
+        type === "Spiritual Gifts"
+          ? "Top Spiritual Gifts"
+          : type === "Enneagram"
+          ? "Enneagram Type"
+          : "Myers-Briggs Type"
+      }
+      </span>
+      ${
+        type === "Spiritual Gifts"
+          ? processSgAssessment(results)
+          : type === "Enneagram"
+          ? processEnneagramAssessment(results)
+          : processMbtiAssessment(results)
+      }
+    </p>
+  `
+
+  //`
+
   const transporter = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
     port: 2525,
@@ -43,15 +98,29 @@ exports.handler = async event => {
 
   const message = {
     from: {
-      name: "AJSolutions",
-      address: "andrew@citynorth.church",
+      name: to === "pathway" ? "AJSolutions" : "Pathway Community Church",
+      address:
+        to === "pathway"
+          ? "andrew@citynorth.church"
+          : "pathwaycommunity@gmail.com",
     },
-    replyTo: `${data.name} <${data.email}>`,
-    to: `Pathway Community Church <pathwaycommunity@gmail.com>`,
-    bcc: `Andrew Scholz <andrew@citynorth.church>`,
-    subject: `New ${data.type} Assessment Submission`,
+    replyTo:
+      to === "pathway"
+        ? `${name} <${email}>`
+        : `Pathway Community Church <pathwaycommunity@gmail.com>`,
+    to:
+      to === "pathway"
+        ? `Pathway Community Church <pathwaycommunity@gmail.com>`
+        : `${name} <${email}>`,
+    // bcc: `Andrew Scholz <andrew@citynorth.church>`,
+    subject:
+      to === "pathway"
+        ? `New ${type} Assessment Submission`
+        : `Your ${type} Assessment Results From pathwaymarietta.com`,
     generateTextFromHTML: true,
-    html: `
+    html:
+      to === "pathway"
+        ? `
     <html>
       <style>
         span {
@@ -59,36 +128,55 @@ exports.handler = async event => {
         }
       </style>
       <h1>
-        You've received a new ${data.type} Assessment.
+        You've received a new ${type} Assessment.
       </h1>
       <hr>
+      <br>
+      <p>
+        <span>Date Submitted: </span>
+        ${date}
+      </p>
       <p>
         <span>Name: </span>
-        ${data.name}
+        ${name}
       </p>
       <p>
         <span>Email: </span>
-        <a href="mailto: ${data.email}">${data.email}</a>
+        <a href="mailto: ${email}">${email}</a>
       </p>
-      <p>
-        <span>${
-          data.type === "Spiritual Gifts"
-            ? "Top Spiritual Gifts"
-            : data.type === "Enneagram"
-            ? "Most Likely Enneagram Type"
-            : "Myers Briggs Type"
-        } </span>
-        ${data.results
-          .map(item => `<div>${item}</div>`)
-          .toString()
-          .replace(/,/g, "")}
-      </p>
+        ${formattedResults}
       <br>
       <hr>
       <h4>
         To reply to your message simply reply to this email directly.
       </h4>
-    </html>`,
+    </html>`
+        : `<html>
+      <style>
+        span {
+          font-weight: 700;
+        }
+      </style>
+      <h1>
+        Your ${type} Assessment Results
+      </h1>
+      <hr>
+      <p>
+        <span>Date Submitted: </span>
+        ${date}
+      </p>
+        ${formattedResults}
+      <br>
+      <hr>
+      <p>Please <a href="mailto: pathwaycommunity@gmail.com">contact Pathway</a> with any questions about your results.</p>
+      <p>Or you can always <a href="https://pathwaymarietta.com/resources/${
+        type === "Spiritual Gifts"
+          ? "spiritual-gifts"
+          : type === "Enneagram"
+          ? "enneagram"
+          : "mbti"
+      }" target="_blank" rel="noopener noreferrer">check out the training resources on our website</a> anytime you'd like.
+    </html`,
   }
 
   try {

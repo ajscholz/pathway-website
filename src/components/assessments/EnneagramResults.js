@@ -4,7 +4,14 @@ const EnneagramResults = ({ highIndex }) => {
   return (
     <div className="d-flex align-items-center justify-content-center text-center h-100">
       {highIndex.length > 2 ? (
-        <h1>More than 2</h1>
+        <div>
+          <p className="h3 ">Your scores show three or more primary types</p>
+          <hr className="w-50 mx-auto my-4" />
+          <p className="text-muted">
+            Please take the assessment again, trying to be a bit more selective
+            with the way you answer each question.
+          </p>
+        </div>
       ) : (
         <div className="d-flex flex-column align-items-center justify-content-center">
           {highIndex.map((index, i) => (
