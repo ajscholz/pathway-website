@@ -30,6 +30,7 @@ const submitForm = async values => {
 
 const SubmitResults = ({ dispatch, type, results }) => {
   const [part, setPart] = useState(true)
+  const [emailMe, setEmailMe] = useState(true)
   const [info, setInfo] = useState({ name: "", email: "" })
 
   const handleClick = () => {
@@ -39,14 +40,17 @@ const SubmitResults = ({ dispatch, type, results }) => {
 
   return (
     <>
-      <ModalBody className="assessment text-center justify-content-center mt-0">
-        <p className="h3 mb-4">Are you part of Pathway Community Church?</p>
+      <ModalBody className="assessment text-center py-5 mt-0 justify-content-center flex-grow-1">
+        <p className="h3 mb-4 mt-2">Getting your results...</p>
         <div className="align-self-start w-100">
           <form>
-            <div className="d-flex align-items-center justify-content-center">
+            <Label for="part-of-pathway" className="mr-3 w-100 text-left">
+              Are you part of Pathway?
+            </Label>
+            <div className="d-flex align-items-center justify-content-start mb-2">
               <FormGroup
                 check
-                className="form-check-radio d-flex justify-content-center mr-4"
+                className="form-check-radio d-flex justify-content-center ml-4"
                 inline
               >
                 <Label check className="mx-0 mt-0">
@@ -84,12 +88,52 @@ const SubmitResults = ({ dispatch, type, results }) => {
                 </Label>
               </FormGroup>
             </div>
-            <div
-              className={`mt-4 assessment-submit-form${
-                part === false ? " hide" : " show"
-              }`}
-            >
-              <FormGroup>
+            <Label for="email-my-results" className="mr-3 w-100 text-left">
+              Would you like your results emailed to you?
+            </Label>
+            <div className="d-flex align-items-center justify-content-start ">
+              <FormGroup
+                check
+                className="form-check-radio d-flex justify-content-center ml-4"
+                inline
+              >
+                <Label check className="mx-0 mt-0">
+                  <Input
+                    defaultChecked={true}
+                    defaultValue={true}
+                    id="email-my-results-yes"
+                    name="email-my-results"
+                    type="radio"
+                    onClick={() => setEmailMe(true)}
+                  />
+
+                  <span className="form-check-sign d-flex flex-column text-muted">
+                    Yes
+                  </span>
+                </Label>
+              </FormGroup>
+              <FormGroup
+                check
+                className="form-check-radio d-flex justify-content-center mr-0"
+                inline
+              >
+                <Label check className="mx-0 mt-0">
+                  <Input
+                    defaultValue={false}
+                    id="email-my-results-no"
+                    name="email-my-results"
+                    type="radio"
+                    onClick={() => setEmailMe(false)}
+                  />
+
+                  <span className="form-check-sign d-flex flex-column text-muted">
+                    No
+                  </span>
+                </Label>
+              </FormGroup>
+            </div>
+            <div className="assessment-submit-form">
+              <FormGroup className="mb-0 mt-3">
                 <div className="d-flex align-items-baseline">
                   <Label for="name" className="mr-3">
                     Name:
@@ -104,7 +148,7 @@ const SubmitResults = ({ dispatch, type, results }) => {
                   />
                 </div>
               </FormGroup>
-              <FormGroup>
+              <FormGroup className="mb-0 mt-3">
                 <div className="d-flex align-items-baseline">
                   <Label for="email" className="mr-3">
                     Email:
@@ -129,7 +173,10 @@ const SubmitResults = ({ dispatch, type, results }) => {
           className="text-white w-100"
           color="primary"
           onClick={() => handleClick()}
-          disabled={part === true && (info.name === "" || info.email === "")}
+          disabled={
+            (part === true && (info.name === "" || info.email === "")) ||
+            (emailMe === true && (info.name === "" || info.email === ""))
+          }
         >
           Get My Results
         </Button>
