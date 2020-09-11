@@ -6,19 +6,19 @@ export const mbtiData = () => {
       let type
       switch (index % 7) {
         case 0:
-          type = ["e", "i"]
+          type = "E/I"
           break
         case 1:
         case 2:
-          type = ["s", "n"]
+          type = "S/N"
           break
         case 3:
         case 4:
-          type = ["t", "f"]
+          type = "T/F"
           break
         case 5:
         case 6:
-          type = ["j", "p"]
+          type = "J/P"
           break
         default:
       }

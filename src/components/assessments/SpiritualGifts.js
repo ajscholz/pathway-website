@@ -53,7 +53,6 @@ const reducer = (state, action) => {
       }
     case "next":
       return {
-        ...state,
         view:
           activeQ === spiritualGiftsQuestions.length
             ? "submitting"
@@ -94,7 +93,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
   const questions = [...spiritualGiftsQuestions]
   const question = questions[activeQ - 1]
 
-  const score = () => {
+  const tallyQuestion = () => {
     const giftIndex = (activeQ - 1) % gifts.length
     const score = tally.current[giftIndex].score
     tally.current[giftIndex].score = score + currentSelection.current
@@ -127,7 +126,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
 
   // helper function to handle next vs submit logic
   const handleNext = () => {
-    score()
+    tallyQuestion()
     if (activeQ === questions.length) {
       getResults()
       dispatch({

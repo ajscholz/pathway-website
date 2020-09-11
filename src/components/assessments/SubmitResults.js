@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
 import {
   ModalBody,
   ModalFooter,
@@ -30,6 +31,11 @@ const submitForm = async values => {
 const SubmitResults = ({ dispatch, type, results }) => {
   const [part, setPart] = useState(true)
   const [info, setInfo] = useState({ name: "", email: "" })
+
+  const handleClick = () => {
+    if (part === true) submitForm({ ...info, type: type, results: results })
+    dispatch({ type: "present" })
+  }
 
   return (
     <>
@@ -122,17 +128,21 @@ const SubmitResults = ({ dispatch, type, results }) => {
           type="button"
           className="text-white w-100"
           color="primary"
-          onClick={() => {
-            submitForm({ ...info, type: type, results: results })
-            dispatch({ type: "present" })
-          }}
-          disabled={info.name === "" || info.email === ""}
+          onClick={() => handleClick()}
+          disabled={part === true && (info.name === "" || info.email === "")}
         >
           Get My Results
         </Button>
       </ModalFooter>
     </>
   )
+}
+
+SubmitResults.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(["Enneagram", "Spiritual Gifts", "Myers-Briggs"])
+    .isRequired,
+  results: PropTypes.isRequired,
 }
 
 export default SubmitResults
