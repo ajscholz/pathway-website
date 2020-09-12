@@ -41,7 +41,7 @@ exports.handler = async event => {
   const processSgAssessment = items =>
     `<ol>
       ${items
-        .map(item => `<li>${item}</li>`)
+        .map(item => `<li>${item.gift}: ${item.perc}</li>`)
         .toString()
         .replace(/,/g, "")}
     </ol>`

@@ -15,8 +15,8 @@ const SpiritualGiftsResults = ({ display }) => (
       <div className="d-flex flex-column align-items-center justify-content-center">
         <p className="h2 mb-4">Your top gifts:</p>
         {display.map(gift => (
-          <p key={gift} className="h5">
-            {gift}
+          <p key={gift.gift} className="h5">
+            {gift.gift}: {gift.perc}
           </p>
         ))}
       </div>

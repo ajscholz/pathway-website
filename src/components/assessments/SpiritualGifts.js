@@ -126,7 +126,10 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
       display = display.concat(four, five)
     }
 
-    display = [...display].map(item => item.name).sort()
+    display = [...display].map(item => ({
+      gift: item.name,
+      perc: `${Math.ceil((item.score / 12) * 100)}%`,
+    }))
     tally.current = [...display]
   }
 
