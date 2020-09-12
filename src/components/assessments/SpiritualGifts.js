@@ -5,6 +5,9 @@ import CloseButton from "./Buttons/CloseButton"
 import RadioButtons from "./Buttons/RadioButtons"
 import SpiritualGiftsResults from "./SpiritualGiftsResults"
 import SubmitResults from "./SubmitResults"
+import { randomizeArray } from "../../utils/functions"
+
+const questions = randomizeArray([...spiritualGiftsQuestions])
 
 const gifts = [
   { name: "Administration", score: 0 },
@@ -32,6 +35,10 @@ const gifts = [
   { name: "Tongues", score: 0 },
   { name: "Wisdom", score: 0 },
 ]
+
+const initialize = () => {
+  return gifts.map(gift => ({ name: gift.name, score: 0 }))
+}
 
 const reducer = (state, action) => {
   const { activeQ } = state
@@ -86,15 +93,14 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
 
   // if we render and we're on the first question reset the tally counter
   if (activeQ === 1) {
-    tally.current = [...gifts]
+    tally.current = initialize()
   }
 
   // get current question for easy access
-  const questions = [...spiritualGiftsQuestions]
   const question = questions[activeQ - 1]
 
   const tallyQuestion = () => {
-    const giftIndex = (activeQ - 1) % gifts.length
+    const giftIndex = gifts.findIndex(gift => gift.name === question.type)
     const score = tally.current[giftIndex].score
     tally.current[giftIndex].score = score + currentSelection.current
   }
@@ -208,7 +214,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
           <>
             <ModalBody className="assessment flex-grow-1 pb-4 pt-5 mt-0 pb-md-5">
               <p className="h3 mt-5 text-center" style={{ height: "120px" }}>
-                {question}
+                {question.question}
               </p>
               <RadioButtons currentSelection={currentSelection} />
             </ModalBody>

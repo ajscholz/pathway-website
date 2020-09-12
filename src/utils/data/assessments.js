@@ -383,7 +383,7 @@ export const mbtiQuestions = [
   },
 ]
 
-export const spiritualGiftsQuestions = [
+const giftsQuestions = [
   "I like organizing services and events.",
   "I am interested in starting new churches.",
   "I enjoy working with my hands.",
@@ -457,6 +457,38 @@ export const spiritualGiftsQuestions = [
   "Praying in tongues is encouraging and important to me.",
   "When faced with difficulty, I tend  to make wise decisions.",
 ]
+
+const gifts = [
+  "Administration",
+  "Apostleship",
+  "Craftsmanship",
+  "Discernment",
+  "Evangelism",
+  "Exhortation",
+  "Faith",
+  "Giving",
+  "Healing",
+  "Helps",
+  "Hospitality",
+  "Intercession",
+  "Knowledge",
+  "Leadership",
+  "Mercy",
+  "Miracles",
+  "Missionary",
+  "Music/Worship",
+  "Pastor/Shepherd",
+  "Prophecy",
+  "Service",
+  "Teaching",
+  "Tongues",
+  "Wisdom",
+]
+
+export const spiritualGiftsQuestions = giftsQuestions.map((q, i) => ({
+  question: q,
+  type: gifts[i % gifts.length],
+}))
 
 const enneagramQuestionsRaw = [
   {
