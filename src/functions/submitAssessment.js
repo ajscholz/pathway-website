@@ -2,6 +2,7 @@
 
 const nodemailer = require("nodemailer")
 const { google } = require("googleapis")
+const { config } = require("@fortawesome/fontawesome-svg-core")
 
 exports.handler = async event => {
   const OAuth2 = google.auth.OAuth2
@@ -9,8 +10,6 @@ exports.handler = async event => {
   const { body } = event
   const data = JSON.parse(body)
   const { name, email, to, type, results } = data
-
-  console.log(body)
 
   // ------------- Google OAuth2 authorization -------------
   const oauth2Client = new OAuth2(
@@ -23,15 +22,24 @@ exports.handler = async event => {
   const accessToken = oauth2Client.getAccessToken() // Original article had deprecated access token method
   // ------------- End Google OAuth2 authorization -------------
 
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user: "andrew@citynorth.church",
+      clientId: process.env.GMAIL_CLIENT_ID,
+      clientSecret: process.env.GMAIL_CLIENT_SECRET,
+      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+      accessToken: accessToken,
+    },
+  })
+
   // const transporter = nodemailer.createTransport({
-  //   service: "gmail",
+  //   host: "smtp.mailtrap.io",
+  //   port: 2525,
   //   auth: {
-  //     type: "OAuth2",
-  //     user: "andrew@citynorth.church",
-  //     clientId: process.env.GMAIL_CLIENT_ID,
-  //     clientSecret: process.env.GMAIL_CLIENT_SECRET,
-  //     refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-  //     accessToken: accessToken,
+  //     user: "a949c930869b32",
+  //     pass: "00f4db531864a8",
   //   },
   // })
 
@@ -39,11 +47,10 @@ exports.handler = async event => {
   const date = new Intl.DateTimeFormat("en-US", options).format(new Date())
 
   const processSgAssessment = items =>
-    `<ol>
-      ${items
-        .map(item => `<li>${item.gift}: ${item.perc}</li>`)
-        .toString()
-        .replace(/,/g, "")}
+    `<ol>${items
+      .map(item => `<li>${item.gift}: ${item.perc}</li>`)
+      .toString()
+      .replace(/,/g, "")}
     </ol>`
 
   const processEnneagramAssessment = items =>
@@ -71,8 +78,8 @@ exports.handler = async event => {
         type === "Spiritual Gifts"
           ? "Top Spiritual Gifts"
           : type === "Enneagram"
-          ? "Enneagram Type"
-          : "Myers-Briggs Type"
+          ? "Enneagram Type: "
+          : "Myers-Briggs Type: "
       }
       </span>
       ${
@@ -86,15 +93,6 @@ exports.handler = async event => {
   `
 
   //`
-
-  const transporter = nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
-    auth: {
-      user: "a949c930869b32",
-      pass: "00f4db531864a8",
-    },
-  })
 
   const message = {
     from: {
