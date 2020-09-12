@@ -1,13 +1,12 @@
 import React, { useReducer, useRef } from "react"
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap"
-import { mbtiData } from "../../utils/data/assessments"
+import { mbtiQuestions } from "../../utils/data/assessments"
 import CloseButton from "./Buttons/CloseButton"
 import MBTIResults from "./MBTIResults"
 import SubmitResults from "./SubmitResults"
+import { randomizeArray } from "../../utils/functions"
 
-const mbtiQuestions = mbtiData()
-// const data2 = mbtiData()
-// const mbtiQuestions = [...data2].slice(0, 6)
+const questions = randomizeArray([...mbtiQuestions])
 
 const pairs = [
   { type: "E/I", scores: [0, 0] },
@@ -35,8 +34,8 @@ const reducer = (state, action) => {
     case "next":
       return {
         ...state,
-        view: activeQ === mbtiQuestions.length ? "submitting" : "assessing",
-        activeQ: activeQ === mbtiQuestions.length ? activeQ : activeQ + 1,
+        view: activeQ === questions.length ? "submitting" : "assessing",
+        activeQ: activeQ === questions.length ? activeQ : activeQ + 1,
         selected: null,
       }
 
@@ -66,7 +65,7 @@ const MBTI = ({ open, setOpen, className }) => {
   }
 
   // get current question for easy access
-  const questions = [...mbtiQuestions]
+  // const questions = [...mbtiQuestions]
   const question = questions[activeQ - 1]
 
   const tallyQuestion = () => {
