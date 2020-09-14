@@ -40,7 +40,7 @@ const ResourcesPage = ({ data }) => {
                 {[...section.linkedContent].slice(0, 3).map(video => (
                   <Col md="6" lg="4" key={video.id}>
                     <Link to={`/resources/help-me-understand/${video.slug}`}>
-                      <HelpMeUnderstandVideoCard videoData={video} />
+                      <HelpMeUnderstandVideoCard videoData={video} image />
                     </Link>
                   </Col>
                 ))}
