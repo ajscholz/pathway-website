@@ -16,9 +16,7 @@ const CardBigRadius = ({ children, className, title, imgData, footerData }) => {
           {title}
         </CardTitle>
         {children}
-        {typeof (footerData === null) ? null : typeof (
-            footerData === "string"
-          ) ? (
+        {footerData === null ? null : typeof footerData === "string" ? (
           <CardDateFooter date={footerData} />
         ) : (
           <CardFooter className="mt-4 text-left">

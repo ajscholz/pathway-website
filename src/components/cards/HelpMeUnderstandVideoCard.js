@@ -8,12 +8,11 @@ const HelpMeUnderstandVideoCard = ({
   videoData: { title, tags, url, description, thumbnail },
   image,
 }) => {
-  console.log("image", image)
-  console.log("thumbnail", thumbnail)
+  // console.log(tags)
   return (
     <CardBigRadius
       title={title.replace("Help Me Understand ", "")}
-      footerData={tags ? tags : null}
+      footerData={tags}
       imgData={image ? thumbnail.image : url}
     >
       <CardDescription
