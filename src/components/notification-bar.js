@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useStaticQuery } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { Alert, Container, Row, Col } from "reactstrap"
 

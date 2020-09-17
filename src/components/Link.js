@@ -3,7 +3,6 @@ import { Link as GatsbyLink } from "gatsby"
 
 const Link = ({ to, children, ...props }) => {
   const url = new URL(to)
-  console.log(to.concat("?open-in-church-center-modal=true"))
 
   return url.host === "pathwaymarietta.churchcenter.com" ? (
     <a
