@@ -100,15 +100,15 @@ exports.handler = async event => {
       address:
         to === "pathway"
           ? "andrew@citynorth.church"
-          : "pathwaycommunity@gmail.com",
+          : "pathwaymarietta@gmail.com",
     },
     replyTo:
       to === "pathway"
         ? `${name} <${email}>`
-        : `Pathway Community Church <pathwaycommunity@gmail.com>`,
+        : `Pathway Community Church <pathwaymarietta@gmail.com>`,
     to:
       to === "pathway"
-        ? `Pathway Community Church <pathwaycommunity@gmail.com>`
+        ? `Pathway Community Church <pathwaymarietta@gmail.com>`
         : `${name} <${email}>`,
     // bcc: `Andrew Scholz <andrew@citynorth.church>`,
     subject:
