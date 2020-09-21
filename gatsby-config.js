@@ -112,8 +112,7 @@ module.exports = {
       options: {
         name: `Pathway Community Church`,
         short_name: `Pathway`,
-        // start_url: `https://pathwaymarietta.com/pwa-index?utm_source=pwa`,
-        start_url: `/`,
+        start_url: `https://pathwaymarietta.com/?utm_source=pwa`,
         background_color: `#f8f8ff`,
         theme_color: `#f8f8ff`,
         display: `standalone`,
