@@ -53,6 +53,24 @@ to = "https://pathwaymarietta.com/about/events"
 
 [[redirects]]
 force = true
+from = "https://sg.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.com/resources/spiritual-gifts"
+
+[[redirects]]
+force = true
+from = "https://mb.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.com/resources/mbti"
+
+[[redirects]]
+force = true
+from = "https://eg.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.com/resources/enneagram"
+
+[[redirects]]
+force = true
 from = "https://pathwaymarietta.com/start"
 status = 301
 to = "https://pathwaymarietta.com/take-a-step"
