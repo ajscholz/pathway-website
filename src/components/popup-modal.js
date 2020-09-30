@@ -53,8 +53,8 @@ const PopupModal = props => {
     if (activePopup !== undefined) {
       setTimeout(() => {
         setModalState(true)
-        // }, 5000)
-      }, 0)
+      }, 5000)
+      // }, 0)
     }
   }, [activePopup])
 
