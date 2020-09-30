@@ -7129,6 +7129,13 @@ gatsby-remark-external-links@^0.0.4:
     unist-util-find "^1.0.1"
     unist-util-visit "^1.1.3"
 
+gatsby-remark-line-breaks@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-line-breaks/-/gatsby-remark-line-breaks-1.0.0.tgz#60f838433acc24ddf425f4d135e12cea634bc7a3"
+  integrity sha512-chLmEttxDDLGy18nhOlfPFDmzt8EhLEnj1RSxvdtskpIS8F0M3vIhRN9J1MFB5s+19OeLzscubrjT+kK4gKrgw==
+  dependencies:
+    remark-breaks "^1.0.5"
+
 gatsby-source-contentful@^2.1.69:
   version "2.3.46"
   resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-2.3.46.tgz#972b54f6e683551dff36a8af4d8af89c0a22e74f"
@@ -13316,6 +13323,11 @@ regjsparser@^0.6.4:
   integrity sha512-64O87/dPDgfk8/RQqC4gkZoGyyWFIEUTTh80CU6CWuK5vkCGyekIx+oKcEIYtP/RAxSQltCZHCNu/mdd7fqlJw==
   dependencies:
     jsesc "~0.5.0"
+
+remark-breaks@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/remark-breaks/-/remark-breaks-1.0.5.tgz#e9785f8b174f45c05af542fbeb18354b766e1139"
+  integrity sha512-lr8+TlJI273NjEqL27eUthPYPTCgXEj4NaLbnazS3bQaQL2FySlsbtgo52gE36fE1gWeQgkn1VdmWsoT+uA7FA==
 
 remark-footnotes@1.0.0:
   version "1.0.0"

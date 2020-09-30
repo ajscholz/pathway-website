@@ -77,6 +77,7 @@ module.exports = {
               developmentLocation: `http://localhost:8000`, //optional, defaults to http://localhost:8000
             },
           },
+          `gatsby-remark-line-breaks`,
         ],
       },
     },

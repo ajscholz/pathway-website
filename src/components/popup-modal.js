@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 // reactstrap components
-import { Modal } from "reactstrap"
+import { Modal, ModalFooter } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { setLinkType } from "../utils/functions"
 
 const PopupModal = props => {
   const { popups } = useStaticQuery(graphql`
@@ -13,6 +14,10 @@ const PopupModal = props => {
       ) {
         nodes {
           heading
+          callToAction {
+            text
+            link
+          }
           bodyText {
             childMdx {
               body
@@ -27,6 +32,11 @@ const PopupModal = props => {
   const now = new Date().toISOString()
 
   const activePopup = popups.nodes.find(popup => popup.autoOff > now)
+
+  // activePopup.callToAction.push({
+  //   text: "Test Button",
+  //   link: "https://www.google.com",
+  // })
 
   const [modalState, setModalState] = useState(false)
 
@@ -43,20 +53,16 @@ const PopupModal = props => {
     if (activePopup !== undefined) {
       setTimeout(() => {
         setModalState(true)
-      }, 5000)
-      // }
+        // }, 5000)
+      }, 0)
     }
   }, [activePopup])
 
   return activePopup === undefined ? null : (
     <>
-      {/* <Button color="primary" type="button" onClick={() => setLiveDemo(true)}>
-        Launch demo modal
-      </Button> */}
       <Modal isOpen={modalState} toggle={() => setModalState(false)}>
         <div className="modal-header">
-          <h3>{activePopup.heading}</h3>
-          {activePopup.subHeading && <h6>We're Renovating</h6>}
+          <h1 className="h3">{activePopup.heading}</h1>
           <button
             aria-label="Close"
             className="close"
@@ -75,6 +81,15 @@ const PopupModal = props => {
         <div className="modal-body">
           <MDXRenderer>{activePopup.bodyText.childMdx.body}</MDXRenderer>
         </div>
+        {activePopup.callToAction.length !== 0 && (
+          <ModalFooter className="p-3 flex-row-reverse justify-content-start">
+            {activePopup.callToAction.map((cta, i) => {
+              const props =
+                i === 0 ? { color: "primary" } : { className: "text-white" }
+              return setLinkType(cta, props)
+            })}
+          </ModalFooter>
+        )}
       </Modal>
     </>
   )
