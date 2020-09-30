@@ -29,12 +29,11 @@ const HelpMeUnderstandVideoCard = ({
 export default HelpMeUnderstandVideoCard
 
 export const query = graphql`
-  fragment HelpMeUnderstandVideoCardFragment on ContentfulResourceVideo {
+  fragment HelpMeUnderstandVideoCardFragment on ContentfulHelpMeUnderstandVideo {
     id: contentful_id
     title
     url
     tags
-    type
     thumbnail: thumbnailImg {
       image: childImageSharp {
         fluid {

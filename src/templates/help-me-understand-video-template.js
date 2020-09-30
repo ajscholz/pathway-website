@@ -103,9 +103,8 @@ export default HelpMeUnderstandVideoTemplate
 
 export const data = graphql`
   query($slug: String) {
-    video: contentfulResourceVideo(slug: { eq: $slug }) {
+    video: contentfulHelpMeUnderstandVideo(slug: { eq: $slug }) {
       title
-      type
       url
       tags
       guide: videoUserGuide {

@@ -10,7 +10,10 @@ exports.onCreateNode = async ({
   cache,
   createNodeId,
 }) => {
-  if (node.internal.type === "ContentfulResourceVideo") {
+  if (
+    node.internal.type === "ContentfulHelpMeUnderstandVideo" ||
+    node.internal.type === "ContentfulMyersBriggsVideo"
+  ) {
     const result = await axios.get(
       `https://vimeo.com/api/oembed.json?url=${node.url}&width=1920&height=1080`
     )
@@ -61,11 +64,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      videos: allContentfulResourceVideo {
+      hmuVideos: allContentfulHelpMeUnderstandVideo {
         all: edges {
           node {
             slug
-            type
           }
         }
       }
@@ -119,17 +121,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     "src/templates/help-me-understand-video-template.js"
   )
 
-  result.data.videos.all.forEach(({ node }) => {
-    if (node.type === "Help Me Understand") {
-      const path = `/resources/help-me-understand/${node.slug}`
-      createPage({
-        path,
-        component: videoPageTemplate,
-        context: {
-          slug: node.slug,
-        },
-      })
-    }
+  result.data.hmuVideos.all.forEach(({ node }) => {
+    const path = `/resources/help-me-understand/${node.slug}`
+    createPage({
+      path,
+      component: videoPageTemplate,
+      context: {
+        slug: node.slug,
+      },
+    })
   })
 }
 
@@ -162,14 +162,14 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       updatedAt: Date
     }
     `,
-    `type ContentfulResourceVideo implements Node {
+    `type ContentfulHelpMeUnderstandVideo implements Node {
       contentful_id: String
       title: String
       url: String
       slug: String
       tags: [String]
       videoUserGuide: ContentfulAsset
-      description: contentfulResourceVideoDescriptionTextNode
+      description: contentfulHelpMeUnderstandVideoDescriptionTextNode
     }`,
     `type ContentfulAsset implements Node {
       file: ContentfulAssetFile
@@ -178,7 +178,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       url: String
       fileName: String
     }`,
-    `type contentfulResourceVideoDescriptionTextNode implements Node {
+    `type contentfulHelpMeUnderstandVideoDescriptionTextNode implements Node {
       childMdx: Mdx
     }`,
     `type Mdx implements Node {

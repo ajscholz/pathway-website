@@ -82,7 +82,7 @@ export const data = graphql`
         ... on ContentfulPageSection {
           title
           linkedContent {
-            ... on ContentfulResourceVideo {
+            ... on ContentfulHelpMeUnderstandVideo {
               ...HelpMeUnderstandVideoCardFragment
             }
           }

@@ -86,8 +86,23 @@ export const data = graphql`
         ... on ContentfulPageSection {
           title
           linkedContent {
-            ... on ContentfulResourceVideo {
-              ...HelpMeUnderstandVideoCardFragment
+            ... on ContentfulMyersBriggsVideo {
+              id: contentful_id
+              title
+              url
+              thumbnail: thumbnailImg {
+                image: childImageSharp {
+                  fluid {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+              slug
+              description {
+                childMdx {
+                  body
+                }
+              }
             }
           }
         }
