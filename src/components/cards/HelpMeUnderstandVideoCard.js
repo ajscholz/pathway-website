@@ -3,6 +3,7 @@ import CardBigRadius from "./CardBigRadius"
 import CardDescription from "./CardDescription"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql } from "gatsby"
+import { Badge, CardFooter } from "reactstrap"
 
 const HelpMeUnderstandVideoCard = ({
   videoData: { title, tags, url, description, thumbnail },
@@ -12,7 +13,6 @@ const HelpMeUnderstandVideoCard = ({
   return (
     <CardBigRadius
       title={title.replace("Help Me Understand ", "")}
-      footerData={tags}
       imgData={image ? thumbnail.image : url}
     >
       <CardDescription
@@ -22,6 +22,21 @@ const HelpMeUnderstandVideoCard = ({
           </MDXRenderer>
         }
       />
+      <CardFooter className="mt-4 text-left">
+        <div className="author">
+          {tags.map(tag => (
+            <Badge
+              // onClick={e => e.preventDefault()}
+              key={tag}
+              style={{ marginRight: "6px", color: "#FFF" }}
+              pill
+              color="info"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      </CardFooter>
     </CardBigRadius>
   )
 }

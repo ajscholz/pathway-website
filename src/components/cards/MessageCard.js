@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import { Link } from "gatsby"
 import CardBigRadius from "./CardBigRadius"
+import CardDateFooter from "./CardDateFooter"
 
 const MessageCard = ({ messageData }) => {
   const {
@@ -14,11 +15,9 @@ const MessageCard = ({ messageData }) => {
   } = messageData
   return (
     <Link to={`/messages/series/${seriesSlug}/${slug}`}>
-      <CardBigRadius
-        title={title}
-        imgData={videoLink}
-        footerData={date}
-      ></CardBigRadius>
+      <CardBigRadius title={title} imgData={videoLink}>
+        <CardDateFooter date={date} />
+      </CardBigRadius>
     </Link>
   )
 }

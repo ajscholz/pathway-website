@@ -7,6 +7,7 @@ import { Link } from "gatsby"
 import { Container, Row, Col, Button } from "reactstrap"
 import BreadcrumbSection from "../components/BreadcrumbSection"
 import HelpMeUnderstandVideoCard from "../components/cards/HelpMeUnderstandVideoCard"
+import MBTICard from "../components/cards/MBTICard"
 
 const ResourcesPage = ({ data }) => {
   const { banner, sections } = data.page
@@ -35,12 +36,26 @@ const ResourcesPage = ({ data }) => {
         >
           <Container>
             <h2 className="title text-center mt-0">{section.title}</h2>
-            {section.linkedContent !== null && (
+            {section.videos !== null && (
               <Row className="justify-content-center">
-                {[...section.linkedContent].slice(0, 3).map(video => (
+                {[...section.videos].slice(0, 3).map(video => (
                   <Col md="6" lg="4" key={video.id}>
-                    <Link to={`/resources/help-me-understand/${video.slug}`}>
-                      <HelpMeUnderstandVideoCard videoData={video} image />
+                    <Link
+                      to={`/resources/${
+                        section.title === "Help Me Understand Videos"
+                          ? "help-me-understand"
+                          : section.title === "Myers Briggs Resources"
+                          ? "mbti"
+                          : section.title === "Spiritual Gifts Resources"
+                          ? "spiritual-gifts"
+                          : "enneagram"
+                      }/${video.slug}`}
+                    >
+                      {section.title === "Help Me Understand Videos" ? (
+                        <HelpMeUnderstandVideoCard videoData={video} image />
+                      ) : (
+                        <MBTICard videoData={video} />
+                      )}
                     </Link>
                   </Col>
                 ))}
@@ -81,9 +96,12 @@ export const data = graphql`
       sections {
         ... on ContentfulPageSection {
           title
-          linkedContent {
+          videos: linkedContent {
             ... on ContentfulHelpMeUnderstandVideo {
               ...HelpMeUnderstandVideoCardFragment
+            }
+            ... on ContentfulMyersBriggsVideo {
+              ...MBTICardFragment
             }
           }
         }

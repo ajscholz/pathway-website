@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 import CardBigRadius from "./CardBigRadius"
 
 import CardDescription from "./CardDescription"
+import CardDateFooter from "./CardDateFooter"
 
 const SeriesCard = ({
   seriesData: {
@@ -22,13 +23,9 @@ const SeriesCard = ({
 
   return (
     <Link to={`/messages/series/${slug}`}>
-      <CardBigRadius
-        className={className}
-        title={title}
-        footerData={date}
-        imgData={graphic}
-      >
+      <CardBigRadius className={className} title={title} imgData={graphic}>
         {!noDesc && <CardDescription desc={desc} />}
+        <CardDateFooter date={date} />
       </CardBigRadius>
     </Link>
   )

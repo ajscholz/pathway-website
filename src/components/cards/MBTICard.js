@@ -1,16 +1,17 @@
 import React from "react"
 import CardBigRadius from "./CardBigRadius"
+// import CardDescription from "./CardDescription"
+// import { MDXRenderer } from "gatsby-plugin-mdx"
+import { graphql } from "gatsby"
 import CardDescription from "./CardDescription"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { graphql } from "gatsby"
 
-const MBTICard = ({ videoData: { title, tags, url, description } }) => {
+const MBTICard = ({
+  videoData: { title, url, description, thumbnail },
+  image,
+}) => {
   return (
-    <CardBigRadius
-      title={title.replace("Help Me Understand ", "")}
-      footerData={tags ? tags : null}
-      imgData={url}
-    >
+    <CardBigRadius title={title} imgData={image ? thumbnail.image : url}>
       <CardDescription
         desc={
           <MDXRenderer className="card-description">
@@ -25,13 +26,18 @@ const MBTICard = ({ videoData: { title, tags, url, description } }) => {
 export default MBTICard
 
 export const query = graphql`
-  fragment MBTICardFragment on ContentfulResourceVideo {
+  fragment MBTICardFragment on ContentfulMyersBriggsVideo {
     id: contentful_id
     title
     url
-    tags
-    type
-    # slug
+    thumbnail: thumbnailImg {
+      image: childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    slug
     description {
       childMdx {
         body

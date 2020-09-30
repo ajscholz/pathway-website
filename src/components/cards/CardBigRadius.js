@@ -1,9 +1,8 @@
 import React from "react"
-import { Card, CardTitle, CardBody, Badge, CardFooter } from "reactstrap"
-import CardDateFooter from "./CardDateFooter"
+import { Card, CardTitle, CardBody } from "reactstrap"
 import CardTopImage from "./CardTopImage"
 
-const CardBigRadius = ({ children, className, title, imgData, footerData }) => {
+const CardBigRadius = ({ children, className, title, imgData }) => {
   return (
     <Card
       className={`border-1 border-radius-extreme overflow-hidden${
@@ -16,28 +15,6 @@ const CardBigRadius = ({ children, className, title, imgData, footerData }) => {
           {title}
         </CardTitle>
         {children}
-        {footerData === null ? null : typeof footerData === "string" ? (
-          <CardDateFooter date={footerData} />
-        ) : (
-          <CardFooter className="mt-4 text-left">
-            <div className="author">
-              {footerData.map(tag => (
-                <Badge
-                  // onClick={e => e.preventDefault()}
-                  key={tag}
-                  style={{ marginRight: "6px", color: "#FFF" }}
-                  pill
-                  color="info"
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-            {/* <div className="stats">
-                              <i className="fa fa-clock-o" /> 5 min read
-                            </div> */}
-          </CardFooter>
-        )}
       </CardBody>
     </Card>
   )

@@ -6,14 +6,15 @@ import { Container, Row, Col } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import BreadcrumbSection from "../../components/BreadcrumbSection"
 import Controller from "../../components/assessments/Controller"
-import HelpMeUnderstandVideoCard from "../../components/cards/HelpMeUnderstandVideoCard"
 import VideoModal from "../../components/VideoModal"
+import MBTICard from "../../components/cards/MBTICard"
 
 const MyersBriggsPage = ({ data }) => {
   const { banner, sections } = data.page
   const { image } = banner
 
-  const videos = [...sections[1].linkedContent]
+  const videos1 = [...sections[1].linkedContent]
+  const videos2 = [...sections[2].linkedContent]
 
   return (
     <>
@@ -54,10 +55,28 @@ const MyersBriggsPage = ({ data }) => {
             </Col>
           </Row>
           <Row>
-            {videos.map(video => (
+            {videos1.map(video => (
               <Col md="6" lg="4" key={video.id} className="mb-4">
                 <VideoModal video={video}>
-                  <HelpMeUnderstandVideoCard videoData={video} />
+                  <MBTICard videoData={video} />
+                </VideoModal>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+      <section className="section">
+        <Container>
+          <Row>
+            <Col>
+              <h1 className="h2 title text-center mt-0">{sections[2].title}</h1>
+            </Col>
+          </Row>
+          <Row>
+            {videos2.map(video => (
+              <Col md="6" lg="4" key={video.id} className="mb-4">
+                <VideoModal video={video}>
+                  <MBTICard videoData={video} />
                 </VideoModal>
               </Col>
             ))}
@@ -87,22 +106,7 @@ export const data = graphql`
           title
           linkedContent {
             ... on ContentfulMyersBriggsVideo {
-              id: contentful_id
-              title
-              url
-              thumbnail: thumbnailImg {
-                image: childImageSharp {
-                  fluid {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-              slug
-              description {
-                childMdx {
-                  body
-                }
-              }
+              ...MBTICardFragment
             }
           }
         }
