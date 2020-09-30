@@ -103,7 +103,11 @@ const Navigation = () => {
                   }
                 }}
               >
-                <Image fluid={logo.fluid} alt="Pathway Community Church" />
+                <Image
+                  fluid={logo.fluid}
+                  imgStyle={{ height: "90%", width: "90%" }}
+                  alt="Pathway Community Church"
+                />
               </NavbarBrand>
             </Col>
             <button
