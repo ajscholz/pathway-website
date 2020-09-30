@@ -1,12 +1,12 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import SEO from "../../components/seo"
 import Header from "../../components/header"
 import { Container, Row, Col } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import BreadcrumbSection from "../../components/BreadcrumbSection"
 import Controller from "../../components/assessments/Controller"
-import VideoModal from "../../components/VideoModal"
+// import VideoModal from "../../components/VideoModal"
 import MBTICard from "../../components/cards/MBTICard"
 
 const MyersBriggsPage = ({ data }) => {
@@ -57,9 +57,11 @@ const MyersBriggsPage = ({ data }) => {
           <Row>
             {videos1.map(video => (
               <Col md="6" lg="4" key={video.id} className="mb-4">
-                <VideoModal video={video}>
+                {/* <VideoModal video={video}> */}
+                <Link to={`/resources/mbti/${video.slug}`}>
                   <MBTICard videoData={video} />
-                </VideoModal>
+                </Link>
+                {/* </VideoModal> */}
               </Col>
             ))}
           </Row>
@@ -75,9 +77,11 @@ const MyersBriggsPage = ({ data }) => {
           <Row>
             {videos2.map(video => (
               <Col md="6" lg="4" key={video.id} className="mb-4">
-                <VideoModal video={video}>
+                {/* <VideoModal video={video}> */}
+                <Link to={`/resources/mbti/${video.slug}`}>
                   <MBTICard videoData={video} />
-                </VideoModal>
+                </Link>
+                {/* </VideoModal> */}
               </Col>
             ))}
           </Row>

@@ -43,22 +43,22 @@ const SpiritualGiftsPage = ({ data }) => {
           </Row>
         </Container>
       </section>
-      <section className="section section-dark">
+      {/* <section className="section section-dark">
         <Container>
           <Row>
             <Col>
               <h1 className="h2 title text-center mt-0">{sections[1].title}</h1>
             </Col>
-            {/* {videos.map(video => (
+            {videos.map(video => (
               <Col md="6" lg="4" key={video.id} className="mb-4">
                 <Link to={`/resources/help-me-understand${video.fields.slug}`}>
                   <HelpMeUnderstandVideoCard videoData={video} />
                 </Link>
               </Col>
-            ))} */}
+            ))}
           </Row>
         </Container>
-      </section>
+      </section> */}
     </>
   )
 }
@@ -81,6 +81,7 @@ export const data = graphql`
         }
         ... on ContentfulPageSection {
           title
+          # linkedContent }
         }
       }
     }

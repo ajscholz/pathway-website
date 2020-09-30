@@ -23,7 +23,7 @@ const ResourcesPage = ({ data }) => {
         url="https://pathwaymarietta.com/resources"
       />
       <div className="section-gray">
-        <Header title={heading} background={image} xs={true} />
+        <Header title={heading} background={image} xxs={true} />
         <BreadcrumbSection
           crumbs={[{ name: "Resources", link: "/resources", active: true }]}
         />

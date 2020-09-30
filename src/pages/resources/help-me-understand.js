@@ -18,7 +18,7 @@ const HelpMeUnderstandPage = ({ data }) => {
   return (
     <>
       <SEO
-        title="Resources"
+        title="Help Me Understand Videos"
         image={image.file.url}
         url="https://pathwaymarietta.com/resources/help-me-understand"
       />

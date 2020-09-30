@@ -12,7 +12,9 @@ exports.onCreateNode = async ({
 }) => {
   if (
     node.internal.type === "ContentfulHelpMeUnderstandVideo" ||
-    node.internal.type === "ContentfulMyersBriggsVideo"
+    node.internal.type === "ContentfulMyersBriggsVideo" ||
+    node.internal.type === "ContentfulSpiritualGiftsVideo" ||
+    node.internal.type === "ContentfulEnneagramVideo"
   ) {
     const result = await axios.get(
       `https://vimeo.com/api/oembed.json?url=${node.url}&width=1920&height=1080`
@@ -71,6 +73,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      mbtiVideos: allContentfulMyersBriggsVideo {
+        all: edges {
+          node {
+            slug
+          }
+        }
+      }
+      sgVideos: allContentfulSpiritualGiftsVideo {
+        all: edges {
+          node {
+            slug
+          }
+        }
+      }
     }
   `)
 
@@ -117,7 +133,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   })
 
-  const videoPageTemplate = path.resolve(
+  const hmuVideoPageTemplate = path.resolve(
     "src/templates/help-me-understand-video-template.js"
   )
 
@@ -125,7 +141,33 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const path = `/resources/help-me-understand/${node.slug}`
     createPage({
       path,
-      component: videoPageTemplate,
+      component: hmuVideoPageTemplate,
+      context: {
+        slug: node.slug,
+      },
+    })
+  })
+
+  const mbtiVideoPageTemplate = path.resolve(
+    "src/templates/mbti-video-template.js"
+  )
+  result.data.mbtiVideos.all.forEach(({ node }) => {
+    const path = `/resources/mbti/${node.slug}`
+    createPage({
+      path,
+      component: mbtiVideoPageTemplate,
+      context: {
+        slug: node.slug,
+      },
+    })
+  })
+
+  const sgVideoPageTemplate = path.resolve("src/templates/sg-video-template.js")
+  result.data.sgVideos.all.forEach(({ node }) => {
+    const path = `/resources/spiritual-gifts/${node.slug}`
+    createPage({
+      path,
+      component: sgVideoPageTemplate,
       context: {
         slug: node.slug,
       },
@@ -153,6 +195,10 @@ exports.onCreatePage = ({ page, actions }) => {
 exports.createSchemaCustomization = ({ actions, schema }) => {
   const { createTypes } = actions
   const typeDefs = [
+    `type File implements Node {
+      url: String
+    }
+    `,
     `type ContentfulNotificationBar implements Node {
       title: String
       showBar: Boolean
@@ -170,6 +216,31 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       tags: [String]
       videoUserGuide: ContentfulAsset
       description: contentfulHelpMeUnderstandVideoDescriptionTextNode
+      thumbnailImg: File
+    }`,
+    `type ContentfulMyersBriggsVideo implements Node {
+      contentful_id: String
+      title: String
+      url: String
+      slug: String
+      description: contentfulMyersBriggsVideoDescriptionTextNode
+      thumbnailImg: File
+    }`,
+    `type ContentfulSpiritualGiftsVideo implements Node {
+      contentful_id: String
+      title: String
+      url: String
+      slug: String
+      description: contentfulSpiritualGiftsVideoDescriptionTextNode
+      thumbnailImg: File
+    }`,
+    `type ContentfulEnneagramVideo implements Node {
+      contentful_id: String
+      title: String
+      url: String
+      slug: String
+      description: contentfulEnneagramVideoDescriptionTextNode
+      thumbnailImg: File
     }`,
     `type ContentfulAsset implements Node {
       file: ContentfulAssetFile
@@ -179,6 +250,15 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       fileName: String
     }`,
     `type contentfulHelpMeUnderstandVideoDescriptionTextNode implements Node {
+      childMdx: Mdx
+    }`,
+    `type contentfulMyersBriggsVideoDescriptionTextNode implements Node {
+      childMdx: Mdx
+    }`,
+    `type contentfulSpiritualGiftsVideoDescriptionTextNode implements Node {
+      childMdx: Mdx
+    }`,
+    `type contentfulEnneagramVideoDescriptionTextNode implements Node {
       childMdx: Mdx
     }`,
     `type Mdx implements Node {

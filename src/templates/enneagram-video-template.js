@@ -3,12 +3,11 @@ import SEO from "../components/seo"
 import Header from "../components/header"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { Container, Row, Col, Button } from "reactstrap"
+import { Container, Row, Col } from "reactstrap"
 import VimeoPlayer from "react-player/lib/players/Vimeo"
 import BreadcrumbSection from "../components/BreadcrumbSection"
-import Metadata from "../components/Metadata"
 
-const HelpMeUnderstandVideoTemplate = ({ data }) => {
+const EnneagramVideoTemplate = ({ data }) => {
   const { video } = data
   return (
     <>
@@ -19,8 +18,8 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
           crumbs={[
             { name: "Resources", link: "/resources" },
             {
-              name: "Help Me Understand Videos",
-              link: "/resources/help-me-understand",
+              name: "Enneagram Resources",
+              link: "/resources/enneagram",
             },
             { name: video.title, link: "", active: true },
           ]}
@@ -34,7 +33,6 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
           >
             <Col md="10">
               <h1 className="title h2">{`${video.title}`}</h1>
-              <Metadata>{video.tags.map(tag => tag)}</Metadata>
 
               {/* <Button
                 color="primary"
@@ -79,17 +77,6 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
                 />
               </div>
             </Col>
-
-            <Button
-              className="btn-magnify btn-primary mt-5"
-              size="lg"
-              href={video.guide.file.url}
-              target="blank"
-              rel="noopener noreferrer"
-            >
-              <i className="nc-icon nc-cloud-download-93 mr-2" />
-              Download Guide
-            </Button>
           </Row>
         </Container>
       </div>
@@ -97,21 +84,15 @@ const HelpMeUnderstandVideoTemplate = ({ data }) => {
   )
 }
 
-export default HelpMeUnderstandVideoTemplate
+export default EnneagramVideoTemplate
 
 export const data = graphql`
   query($slug: String) {
-    video: contentfulHelpMeUnderstandVideo(slug: { eq: $slug }) {
+    video: contentfulEnneagramVideo(slug: { eq: $slug }) {
       title
       url
-      tags
       thumbnailImg {
         url
-      }
-      guide: videoUserGuide {
-        file {
-          url
-        }
       }
       description {
         childMdx {
