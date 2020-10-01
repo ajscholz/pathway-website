@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import SEO from "../../components/seo"
 import Header from "../../components/header"
 import BreadcrumbSection from "../../components/BreadcrumbSection"
@@ -7,10 +7,17 @@ import { Container, Row, Col } from "reactstrap"
 // import HelpMeUnderstandVideoCard from "../../components/cards/HelpMeUnderstandVideoCard"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Controller from "../../components/assessments/Controller"
+import SpiritualGiftsCard from "../../components/cards/SpiritualGiftsCard"
 
 const SpiritualGiftsPage = ({ data }) => {
   const { banner, sections } = data.page
   const { image } = banner
+
+  const videos = [...sections[1].linkedContent].sort((a, b) => {
+    if (a.slug > b.slug) return 1
+    if (a.slug < b.slug) return -1
+    return 0
+  })
 
   return (
     <>
@@ -43,22 +50,26 @@ const SpiritualGiftsPage = ({ data }) => {
           </Row>
         </Container>
       </section>
-      {/* <section className="section section-dark">
+      <section className="section section-dark">
         <Container>
           <Row>
             <Col>
               <h1 className="h2 title text-center mt-0">{sections[1].title}</h1>
             </Col>
+          </Row>
+          <Row>
             {videos.map(video => (
               <Col md="6" lg="4" key={video.id} className="mb-4">
-                <Link to={`/resources/help-me-understand${video.fields.slug}`}>
-                  <HelpMeUnderstandVideoCard videoData={video} />
+                {/* <VideoModal video={video}> */}
+                <Link to={`/resources/spiritual-gifts/${video.slug}`}>
+                  <SpiritualGiftsCard videoData={video} />
                 </Link>
+                {/* </VideoModal> */}
               </Col>
             ))}
           </Row>
         </Container>
-      </section> */}
+      </section>
     </>
   )
 }
@@ -81,7 +92,11 @@ export const data = graphql`
         }
         ... on ContentfulPageSection {
           title
-          # linkedContent }
+          linkedContent {
+            ... on ContentfulSpiritualGiftsVideo {
+              ...SpiritualGiftsCardFragment
+            }
+          }
         }
       }
     }

@@ -8,6 +8,7 @@ import { Container, Row, Col, Button } from "reactstrap"
 import BreadcrumbSection from "../components/BreadcrumbSection"
 import HelpMeUnderstandVideoCard from "../components/cards/HelpMeUnderstandVideoCard"
 import MBTICard from "../components/cards/MBTICard"
+import SpiritualGiftsCard from "../components/cards/SpiritualGiftsCard"
 
 const ResourcesPage = ({ data }) => {
   const { banner, sections } = data.page
@@ -53,8 +54,10 @@ const ResourcesPage = ({ data }) => {
                     >
                       {section.title === "Help Me Understand Videos" ? (
                         <HelpMeUnderstandVideoCard videoData={video} image />
-                      ) : (
+                      ) : section.title === "Myers Briggs Resources" ? (
                         <MBTICard videoData={video} />
+                      ) : (
+                        <SpiritualGiftsCard videoData={video} />
                       )}
                     </Link>
                   </Col>
@@ -102,6 +105,9 @@ export const data = graphql`
             }
             ... on ContentfulMyersBriggsVideo {
               ...MBTICardFragment
+            }
+            ... on ContentfulSpiritualGiftsVideo {
+              ...SpiritualGiftsCardFragment
             }
           }
         }

@@ -11,7 +11,7 @@ const CardBigRadius = ({ children, className, title, imgData }) => {
     >
       <CardTopImage imgData={imgData} />
       <CardBody>
-        <CardTitle tag="h5" className="text-left text-capitalize">
+        <CardTitle tag="h5" className="text-left text-capitalize text-truncate">
           {title}
         </CardTitle>
         {children}
