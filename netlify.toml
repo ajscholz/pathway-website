@@ -74,3 +74,9 @@ force = true
 from = "https://pathwaymarietta.com/start"
 status = 301
 to = "https://pathwaymarietta.com/take-a-step"
+
+[[redirects]]
+force = true
+from = "https://serve.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.churchcenter.com/people/forms/175342"
