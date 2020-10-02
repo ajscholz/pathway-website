@@ -9,35 +9,313 @@ import { randomizeArray } from "../../utils/functions"
 
 const questions = randomizeArray([...spiritualGiftsQuestions])
 
+// FOR TESTING
+// const gifts = [
+//   {
+//     name: "Administration",
+//     score: 5,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-administration",
+//   },
+//   {
+//     name: "Apostleship",
+//     score: 7,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-apostleship",
+//   },
+//   {
+//     name: "Craftsmanship",
+//     score: 4,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-craftsmanship",
+//   },
+//   {
+//     name: "Discernment",
+//     score: 2,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-discerning-spirits",
+//   },
+//   {
+//     name: "Evangelism",
+//     score: 9,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-evangelism",
+//   },
+//   {
+//     name: "Exhortation",
+//     score: 5,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-exhortation",
+//   },
+//   {
+//     name: "Faith",
+//     score: 7,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-faith",
+//   },
+//   {
+//     name: "Giving",
+//     score: 3,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-giving",
+//   },
+//   {
+//     name: "Healing",
+//     score: 10,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-healing",
+//   },
+//   {
+//     name: "Helps",
+//     score: 12,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-helps",
+//   },
+//   {
+//     name: "Hospitality",
+//     score: 14,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-hospitality",
+//   },
+//   {
+//     name: "Intercession",
+//     score: 5,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-intercession",
+//   },
+//   {
+//     name: "Knowledge",
+//     score: 3,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-knowledge",
+//   },
+//   {
+//     name: "Leadership",
+//     score: 2,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-leadership",
+//   },
+//   {
+//     name: "Mercy",
+//     score: 5,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-mercy",
+//   },
+//   {
+//     name: "Miracles",
+//     score: 7,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-miracles",
+//   },
+//   {
+//     name: "Missionary",
+//     score: 1,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-missionary",
+//   },
+//   {
+//     name: "Music/Worship",
+//     score: 14,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-music",
+//   },
+//   {
+//     name: "Pastor/Shepherd",
+//     score: 15,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-pastor-shepherd",
+//   },
+//   {
+//     name: "Prophecy",
+//     score: 5,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-prophecy",
+//   },
+//   {
+//     name: "Service",
+//     score: 5,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-service",
+//   },
+//   {
+//     name: "Teaching",
+//     score: 7,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-teaching",
+//   },
+//   {
+//     name: "Tongues",
+//     score: 7,
+//     link:
+//       "/resources/spiritual-gifts/the-gift-of-tongues-and-its-interpretation",
+//   },
+//   {
+//     name: "Wisdom",
+//     score: 5,
+//     link:
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-wisdom",
+//   },
+// ]
+// const initialState = {
+//   view: "assessing",
+//   activeQ: spiritualGiftsQuestions.length,
+// }
+
+// FOR PRODUCTION
 const gifts = [
-  { name: "Administration", score: 0 },
-  { name: "Apostleship", score: 0 },
-  { name: "Craftsmanship", score: 0 },
-  { name: "Discernment", score: 0 },
-  { name: "Evangelism", score: 0 },
-  { name: "Exhortation", score: 0 },
-  { name: "Faith", score: 0 },
-  { name: "Giving", score: 0 },
-  { name: "Healing", score: 0 },
-  { name: "Helps", score: 0 },
-  { name: "Hospitality", score: 0 },
-  { name: "Intercession", score: 0 },
-  { name: "Knowledge", score: 0 },
-  { name: "Leadership", score: 0 },
-  { name: "Mercy", score: 0 },
-  { name: "Miracles", score: 0 },
-  { name: "Missionary", score: 0 },
-  { name: "Music/Worship", score: 0 },
-  { name: "Pastor/Shepherd", score: 0 },
-  { name: "Prophecy", score: 0 },
-  { name: "Service", score: 0 },
-  { name: "Teaching", score: 0 },
-  { name: "Tongues", score: 0 },
-  { name: "Wisdom", score: 0 },
+  {
+    name: "Administration",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-administration",
+  },
+  {
+    name: "Apostleship",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-apostleship",
+  },
+  {
+    name: "Craftsmanship",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-craftsmanship",
+  },
+  {
+    name: "Discernment",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-discerning-spirits",
+  },
+  {
+    name: "Evangelism",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-evangelism",
+  },
+  {
+    name: "Exhortation",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-exhortation",
+  },
+  {
+    name: "Faith",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-faith",
+  },
+  {
+    name: "Giving",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-giving",
+  },
+  {
+    name: "Healing",
+    score: 10,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-healing",
+  },
+  {
+    name: "Helps",
+    score: 10,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-helps",
+  },
+  {
+    name: "Hospitality",
+    score: 10,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-hospitality",
+  },
+  {
+    name: "Intercession",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-intercession",
+  },
+  {
+    name: "Knowledge",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-knowledge",
+  },
+  {
+    name: "Leadership",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-leadership",
+  },
+  {
+    name: "Mercy",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-mercy",
+  },
+  {
+    name: "Miracles",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-miracles",
+  },
+  {
+    name: "Missionary",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-missionary",
+  },
+  {
+    name: "Music/Worship",
+    score: 10,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-music",
+  },
+  {
+    name: "Pastor/Shepherd",
+    score: 10,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-pastor-shepherd",
+  },
+  {
+    name: "Prophecy",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-prophecy",
+  },
+  {
+    name: "Service",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-service",
+  },
+  {
+    name: "Teaching",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-teaching",
+  },
+  {
+    name: "Tongues",
+    score: 0,
+    link:
+      "/resources/spiritual-gifts/the-gift-of-tongues-and-its-interpretation",
+  },
+  {
+    name: "Wisdom",
+    score: 0,
+    link:
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-wisdom",
+  },
 ]
+const initialState = {
+  view: "assessing",
+  activeQ: 1,
+  // activeQ: spiritualGiftsQuestions.length - 4,
+}
 
 const initialize = () => {
-  return gifts.map(gift => ({ name: gift.name, score: 0 }))
+  return gifts.map(gift => ({ ...gift, score: 0 }))
 }
 
 const reducer = (state, action) => {
@@ -70,12 +348,6 @@ const reducer = (state, action) => {
     default:
       return state
   }
-}
-
-const initialState = {
-  view: "assessing",
-  activeQ: 1,
-  // activeQ: spiritualGiftsQuestions.length - 4,
 }
 
 const SpiritualGifts = ({ open, setOpen, className }) => {
@@ -128,7 +400,8 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
 
     display = [...display].map(item => ({
       gift: item.name,
-      perc: `${Math.ceil((item.score / 12) * 100)}%`,
+      perc: `${Math.ceil((item.score / 15) * 100)}%`,
+      link: item.link,
     }))
     tally.current = [...display]
   }
@@ -193,6 +466,9 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
           <>
             <ModalBody className="assessment my-auto">
               <SpiritualGiftsResults display={tally.current} />
+              <p className="text-muted mb-2 font-italic">
+                ** Click any of the gifts to view resources **
+              </p>
             </ModalBody>
             <ModalFooter className="p-4 d-flex justify-content-end">
               <Button

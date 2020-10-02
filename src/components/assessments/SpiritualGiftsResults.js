@@ -16,7 +16,10 @@ const SpiritualGiftsResults = ({ display }) => (
         <p className="h2 mb-4">Your top gifts:</p>
         {display.map(gift => (
           <p key={gift.gift} className="h5">
-            {gift.gift}: {gift.perc}
+            <a href={`${gift.link}`} target="_blank" rel="noopener noreferrer">
+              {gift.gift}
+            </a>
+            : {gift.perc}
           </p>
         ))}
       </div>

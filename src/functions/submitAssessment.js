@@ -51,11 +51,15 @@ exports.handler = async event => {
   }
 
   const processSgAssessment = items =>
-    `<ol>${items
-      .map(item => `<li>${item.gift}: ${item.perc}</li>`)
+    `</p><ol>${items
+      .map(
+        item =>
+          `<li><a href=${item.link} target="_blank" rel="noopener noreferrer"><${item.gift}</a>: ${item.perc}</li>`
+      )
       .toString()
       .replace(/,/g, "")}
-    </ol>`
+    </ol>
+    <p>Click on any of the gifts above to view resources for that gift.`
 
   const processEnneagramAssessment = items =>
     items.length === 1
