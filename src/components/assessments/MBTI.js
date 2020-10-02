@@ -5,8 +5,29 @@ import CloseButton from "./Buttons/CloseButton"
 import MBTIResults from "./MBTIResults"
 import SubmitResults from "./SubmitResults"
 import { randomizeArray } from "../../utils/functions"
+import { Link } from "gatsby"
 
 const questions = randomizeArray([...mbtiQuestions])
+
+// FOR TESTING
+// const pairs = [
+//   { type: "E/I", scores: [48, 52], types: ["E", "I"], win: "I", winIndex: 1 },
+//   { type: "S/N", scores: [27, 73], types: ["S", "N"], win: "N", winIndex: 1 },
+//   { type: "T/F", scores: [32, 68], types: ["T", "F"], win: "F", winIndex: 1 },
+//   { type: "J/P", scores: [8, 92], types: ["J", "P"], win: "P", winIndex: 1 },
+// ]
+// const initialState = {
+//   view: "presenting",
+//   activeQ: mbtiQuestions.length,
+//   selected: null,
+// }
+
+// FOR DEPLOYING
+const initialState = {
+  view: "assessing",
+  activeQ: 1,
+  selected: null,
+}
 
 const pairs = [
   { type: "E/I", scores: [0, 0] },
@@ -42,12 +63,6 @@ const reducer = (state, action) => {
     default:
       return state
   }
-}
-
-const initialState = {
-  view: "assessing",
-  activeQ: 1,
-  selected: null,
 }
 
 const MBTI = ({ open, setOpen, className }) => {
@@ -146,6 +161,30 @@ const MBTI = ({ open, setOpen, className }) => {
           />
         )
       case "presenting":
+        const results = tally.current
+        console.log("results", results)
+        const dispResult = results
+          .map(result => result.win)
+          .toString()
+          .replace(/,/g, "")
+
+        // get core results based on dispResult string
+        let core
+        if (dispResult.charAt(1) === "N") {
+          core = "N".concat(dispResult.charAt(2) === "T" ? "T" : "F")
+        } else {
+          core = "S".concat(dispResult.charAt(3) === "J" ? "J" : "P")
+        }
+
+        const corePage =
+          core === "NF"
+            ? "/resources/mbti/nf-idealists"
+            : core === "NT"
+            ? "/resources/mbti/nt-rationals"
+            : core === "SJ"
+            ? "/resources/mbti/sj-guardians"
+            : "/resources/mbti/sp-artisans"
+
         return (
           <>
             <ModalBody className="assessment mt-0 py-5 justify-content-center">
@@ -164,6 +203,14 @@ const MBTI = ({ open, setOpen, className }) => {
                 }}
               >
                 Exit
+              </Button>
+              <Button
+                tag={Link}
+                className="text-white"
+                color="primary"
+                to={corePage}
+              >
+                Learn About My Type
               </Button>
             </ModalFooter>
           </>

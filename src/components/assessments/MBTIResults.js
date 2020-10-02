@@ -2,19 +2,12 @@ import React from "react"
 import { useSprings, animated, config } from "react-spring"
 
 const MBTIResults = ({ results }) => {
-  // FOR EASY TESTING
-  // const results = [
-  //   { type: "E/I", scores: [48, 52], types: ["E", "I"], win: "I", winIndex: 1 },
-  //   { type: "S/N", scores: [27, 73], types: ["S", "N"], win: "N", winIndex: 1 },
-  //   { type: "T/F", scores: [32, 68], types: ["T", "F"], win: "F", winIndex: 1 },
-  //   { type: "J/P", scores: [8, 92], types: ["J", "P"], win: "P", winIndex: 1 },
-  // ]
   const dispResult = results
     .map(result => result.win)
     .toString()
     .replace(/,/g, "")
 
-  const delay = i => i * 700 + 200
+  const delay = i => i * 600 + 200
   const fadeIn = useSprings(
     results.length,
     results.map((result, i) => ({

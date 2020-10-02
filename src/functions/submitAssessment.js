@@ -46,6 +46,10 @@ exports.handler = async event => {
   const options = { year: "numeric", month: "long", day: "numeric" }
   const date = new Intl.DateTimeFormat("en-US", options).format(new Date())
 
+  let core = ""
+  if (type === "Myers-Briggs") {
+  }
+
   const processSgAssessment = items =>
     `<ol>${items
       .map(item => `<li>${item.gift}: ${item.perc}</li>`)
@@ -63,13 +67,31 @@ exports.handler = async event => {
       .map(item => item.win)
       .toString()
       .replace(/,/g, "")
+    // get core results based on dispResult string
+    let core
+    if (type.charAt(1) === "N") {
+      core = "N".concat(type.charAt(2) === "T" ? "T" : "F")
+    } else {
+      core = "S".concat(type.charAt(3) === "J" ? "J" : "P")
+    }
+    const corePage =
+      core === "NF"
+        ? "https://pathwaymarietta.com/resources/mbti/nf-idealists"
+        : core === "NT"
+        ? "https://pathwaymarietta.com/resources/mbti/nt-rationals"
+        : core === "SJ"
+        ? "https://pathwaymarietta.com/resources/mbti/sj-guardians"
+        : "https://pathwaymarietta.com/resources/mbti/sp-artisans"
+
     return `${type}
     </p>
     <p>
       ${items
         .map(item => `<ul>${item.win} - ${item.scores[item.winIndex]}%</ul>`)
         .toString()
-        .replace(/,/g, "")}`
+        .replace(/,/g, "")}
+    </p>
+    <p><a href="${corePage}" target="_blank" rel="noopener noreferrer">More info about your MBTI core</a>`
   }
 
   const formattedResults = `
