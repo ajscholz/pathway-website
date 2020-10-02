@@ -22,9 +22,6 @@ const ResourcesPage = ({ data }) => {
   const { banner, sections } = data.page
   const { heading, image } = banner
 
-  console.log(sections)
-  // const videos = [...sections[0].linkedContent].slice(0, 3)
-
   return (
     <>
       <SEO

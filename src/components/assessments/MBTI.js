@@ -162,7 +162,6 @@ const MBTI = ({ open, setOpen, className }) => {
         )
       case "presenting":
         const results = tally.current
-        console.log("results", results)
         const dispResult = results
           .map(result => result.win)
           .toString()

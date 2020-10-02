@@ -142,9 +142,6 @@ const Countdown = () => {
     // nextWeek = new Date(nextWeek.setDate(nextWeekDate))
     // console.log(nextWeek)
     // nextWeek.setDate()
-    console.log("end of current stream", endOfStream.current)
-    console.log("browserDate", browserDate)
-    console.log("nextStreamDate", nextStreamDate.current)
   }
 
   useEffect(() => {
