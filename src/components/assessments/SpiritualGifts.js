@@ -147,7 +147,7 @@ const questions = randomizeArray([...spiritualGiftsQuestions])
 //     name: "Tongues",
 //     score: 7,
 //     link:
-//       "/resources/spiritual-gifts/the-gift-of-tongues-and-its-interpretation",
+//       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-tongues-and-its-interpretation",
 //   },
 //   {
 //     name: "Wisdom",
@@ -299,7 +299,7 @@ const gifts = [
     name: "Tongues",
     score: 0,
     link:
-      "/resources/spiritual-gifts/the-gift-of-tongues-and-its-interpretation",
+      "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-tongues-and-its-interpretation",
   },
   {
     name: "Wisdom",
@@ -334,7 +334,7 @@ const reducer = (state, action) => {
     case "submit":
       return {
         ...state,
-        view: payload.length > 5 ? "presenting" : "submitting",
+        view: "submitting",
       }
     case "next":
       return {

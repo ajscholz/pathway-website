@@ -52,14 +52,22 @@ exports.handler = async event => {
 
   const processSgAssessment = items =>
     `</p><ol>${items
-      .map(
-        item =>
-          `<li><a href=${item.link} target="_blank" rel="noopener noreferrer"><${item.gift}</a>: ${item.perc}</li>`
-      )
+      .map(item => `<li>${item.gift}: ${item.perc}</li>`)
       .toString()
       .replace(/,/g, "")}
     </ol>
-    <p>Click on any of the gifts above to view resources for that gift.`
+    <a href=${item.link} target="_blank" rel="noopener noreferrer">${
+      item.gift
+    }</a>
+    <h2>Pastor Ryan's Spiritual Gifts Talks</h2>
+    ${items
+      .map(
+        item =>
+          `<div><a href=${item.link} target="_blank" rel="noopener noreferrer">${item.gift}</a></div>`
+      )
+      .toString()
+      .replace(/,/g, "")}
+    <p>`
 
   const processEnneagramAssessment = items =>
     items.length === 1
@@ -95,7 +103,10 @@ exports.handler = async event => {
         .toString()
         .replace(/,/g, "")}
     </p>
-    <p><a href="${corePage}" target="_blank" rel="noopener noreferrer">More info about your MBTI core</a>`
+    <h2>Pastor Ryan's Myers Briggs Talks</h2>
+    <p>
+    <a href="https://pathwaymarietta.com/resources/mbti/myers-briggs-overview" target="_blank" rel="noopener noreferrer">Myers Briggs Overview Video</a>
+    <a href="${corePage}" target="_blank" rel="noopener noreferrer">${core} Core Video</a>`
   }
 
   const formattedResults = `
