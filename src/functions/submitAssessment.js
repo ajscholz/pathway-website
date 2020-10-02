@@ -52,7 +52,7 @@ exports.handler = async event => {
       .toString()
       .replace(/,/g, "")}
     </ol>
-    <h2>Pastor Ryan's Spiritual Gifts Talks</h2>
+    <h3>Pastor Ryan's Spiritual Gifts Talks</h3>
     ${items
       .map(
         item =>
@@ -99,7 +99,7 @@ exports.handler = async event => {
     </ul>
     ${to !== "pathway" &&
       `
-    <h2>Pastor Ryan's Myers Briggs Talks</h2>
+    <h3>Pastor Ryan's Myers Briggs Talks</h3>
     <div>
       <a href="https://pathwaymarietta.com/resources/mbti/myers-briggs-overview" target="_blank" rel="noopener noreferrer">Myers Briggs Overview Video</a>
     </div>
@@ -110,16 +110,14 @@ exports.handler = async event => {
   }
 
   const formattedResults = `
-    <p>
-      <span>${
-        type === "Spiritual Gifts"
-          ? "Top Spiritual Gifts"
-          : type === "Enneagram"
-          ? "Enneagram Type: "
-          : "Myers-Briggs Type: "
-      }
-      </span>
-    </p>
+    <h3>${
+      type === "Spiritual Gifts"
+        ? "Top Spiritual Gifts"
+        : type === "Enneagram"
+        ? "Enneagram Type: "
+        : "Myers-Briggs Type: "
+    }
+    </h3>
       ${
         type === "Spiritual Gifts"
           ? processSgAssessment(results)
@@ -167,10 +165,6 @@ exports.handler = async event => {
       <hr>
       <br>
       <p>
-        <span>Date Submitted: </span>
-        ${date}
-      </p>
-      <p>
         <span>Name: </span>
         ${name}
       </p>
@@ -178,6 +172,11 @@ exports.handler = async event => {
         <span>Email: </span>
         <a href="mailto: ${email}">${email}</a>
       </p>
+      <p>
+        <span>Date Submitted: </span>
+        ${date}
+      </p>
+      <br>
         ${formattedResults}
       <br>
       <hr>
@@ -185,7 +184,8 @@ exports.handler = async event => {
         To reply to your message simply reply to this email directly.
       </h4>
     </html>`
-        : `<html>
+        : `
+    <html>
       <style>
         span {
           font-weight: 700;
@@ -195,11 +195,12 @@ exports.handler = async event => {
         Your ${type} Assessment Results
       </h1>
       <hr>
+        ${formattedResults}
+      <br>
       <p>
         <span>Date Submitted: </span>
         ${date}
       </p>
-        ${formattedResults}
       <br>
       <hr>
       <p>Please <a href="mailto: pathwaycommunity@gmail.com">contact Pathway</a> with any questions about your results.</p>
@@ -210,7 +211,7 @@ exports.handler = async event => {
           ? "enneagram"
           : "mbti"
       }" target="_blank" rel="noopener noreferrer">check out the training resources on our website</a> anytime you'd like.
-    </html`,
+    </html>`,
   }
 
   try {

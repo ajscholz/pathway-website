@@ -13,31 +13,31 @@ const questions = randomizeArray([...spiritualGiftsQuestions])
 // const gifts = [
 //   {
 //     name: "Administration",
-//     score: 5,
+//     score: 4,
 //     link:
 //       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-administration",
 //   },
 //   {
 //     name: "Apostleship",
-//     score: 7,
+//     score: 3,
 //     link:
 //       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-apostleship",
 //   },
 //   {
 //     name: "Craftsmanship",
-//     score: 4,
+//     score: 14,
 //     link:
 //       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-craftsmanship",
 //   },
 //   {
 //     name: "Discernment",
-//     score: 2,
+//     score: 9,
 //     link:
 //       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-discerning-spirits",
 //   },
 //   {
 //     name: "Evangelism",
-//     score: 9,
+//     score: 5,
 //     link:
 //       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-evangelism",
 //   },
@@ -49,7 +49,7 @@ const questions = randomizeArray([...spiritualGiftsQuestions])
 //   },
 //   {
 //     name: "Faith",
-//     score: 7,
+//     score: 0,
 //     link:
 //       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-faith",
 //   },
@@ -103,7 +103,7 @@ const questions = randomizeArray([...spiritualGiftsQuestions])
 //   },
 //   {
 //     name: "Miracles",
-//     score: 7,
+//     score: 6,
 //     link:
 //       "https://pathwaymarietta.com/resources/spiritual-gifts/the-gift-of-miracles",
 //   },
@@ -311,7 +311,6 @@ const gifts = [
 const initialState = {
   view: "assessing",
   activeQ: 1,
-  // activeQ: spiritualGiftsQuestions.length - 4,
 }
 
 const initialize = () => {
@@ -377,33 +376,69 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
     tally.current[giftIndex].score = score + currentSelection.current
   }
 
-  const getFinalScores = () => {
-    const scores = [...tally.current]
-    let display = []
+  const getResults = () => {
+    const giftScores = [...tally.current]
 
-    for (let x = 0; x < 3; x++) {
-      display.push(scores.shift())
-    }
+    // create a new array that is the length of the possible scores (15 in this case).
+    // this array will be filled with an array holding each question that scored that number.
+    // I can then sort these, which is just better UX, but it will also allow me to more easily get the display results.
+    let scoreArray = new Array(16).fill([])
 
-    const four = [scores.shift()]
-    const five = [scores.shift()]
-    const six = [scores.shift()]
+    // iterate through the gifts and push the gifts into the array based on its score
+    giftScores.forEach(gift => {
+      scoreArray[gift.score] = scoreArray[gift.score].concat([gift])
+    })
 
-    if (display[2].score === six[0].score) {
-      display = display.concat(four, five, six)
-    } else if (four[0].score === six[0].score) {
-    } else if (five[0].score === six[0].score) {
-      display = display.concat(four)
-    } else {
-      display = display.concat(four, five)
-    }
+    // sort each score group by name, simply for UX
+    scoreArray.forEach(score =>
+      score.sort((a, b) => {
+        if (a.name > b.name) return 1
+        if (a.name < b.name) return -1
+      })
+    )
 
-    display = [...display].map(item => ({
+    // reverse the array so the highest scores are first
+    scoreArray = scoreArray.reverse()
+
+    // set some variables to be use by the do...while loop
+    let finalScoreArray = []
+    let loopIndex = 0
+    let haveGifts = false
+
+    // loop gets the "correct" number of gifts by adding items to the finalScoreArray until it has 3-5
+    do {
+      // add the current set of scores to the array
+      finalScoreArray = finalScoreArray.concat([...scoreArray[loopIndex]])
+
+      // get the length of the array now
+      const len = finalScoreArray.length
+
+      // check how many "top scores" there are
+      if (len < 3) {
+        // if not enough increment and run again
+        loopIndex++
+      } else if (len > 5) {
+        // if too many
+        haveGifts = true
+      } else {
+        // in the sweet spot between 3 and 5
+        const nextLen = scoreArray[loopIndex + 1].length
+        // find out if I get one more grouping that will be too many
+        if (len + nextLen > 5) {
+          // if it will be too many we'll jump out
+          haveGifts = true
+        } else {
+          // if I can add and stay between 3 and 5 increment and run the loop again
+          loopIndex++
+        }
+      }
+    } while (haveGifts === false)
+
+    tally.current = finalScoreArray.map(item => ({
       gift: item.name,
       perc: `${Math.ceil((item.score / 15) * 100)}%`,
       link: item.link,
     }))
-    tally.current = [...display]
   }
 
   // helper function to handle next vs submit logic
@@ -416,12 +451,6 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
         payload: tally.current,
       })
     } else dispatch({ type: "next" })
-  }
-
-  // helper function to score the assessment
-  const getResults = () => {
-    tally.current.sort((a, b) => a.score - b.score).reverse()
-    getFinalScores()
   }
 
   const ModalContent = () => {
