@@ -1,7 +1,10 @@
 export const mbtiQuestions = [
   {
-    question: "When the phone rings do you:",
-    options: ["hurry to get it first", "hope someone else will answer"],
+    question: "When a friend calls you:",
+    options: [
+      "you're eager to answer it and talk",
+      "you wish you didn't have a phone at all",
+    ],
     type: "E/I",
   },
   {

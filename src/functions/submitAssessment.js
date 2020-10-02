@@ -2,7 +2,6 @@
 
 const nodemailer = require("nodemailer")
 const { google } = require("googleapis")
-const { config } = require("@fortawesome/fontawesome-svg-core")
 
 exports.handler = async event => {
   const OAuth2 = google.auth.OAuth2
@@ -46,28 +45,24 @@ exports.handler = async event => {
   const options = { year: "numeric", month: "long", day: "numeric" }
   const date = new Intl.DateTimeFormat("en-US", options).format(new Date())
 
-  let core = ""
-  if (type === "Myers-Briggs") {
-  }
-
   const processSgAssessment = items =>
-    `</p><ol>${items
+    `
+    <ol>${items
       .map(item => `<li>${item.gift}: ${item.perc}</li>`)
       .toString()
       .replace(/,/g, "")}
     </ol>
-    <a href=${item.link} target="_blank" rel="noopener noreferrer">${
-      item.gift
-    }</a>
     <h2>Pastor Ryan's Spiritual Gifts Talks</h2>
     ${items
       .map(
         item =>
-          `<div><a href=${item.link} target="_blank" rel="noopener noreferrer">${item.gift}</a></div>`
+          `<div>
+            <a href=${item.link} target="_blank" rel="noopener noreferrer">${item.gift}</a>
+          </div>`
       )
       .toString()
       .replace(/,/g, "")}
-    <p>`
+    `
 
   const processEnneagramAssessment = items =>
     items.length === 1
@@ -96,17 +91,22 @@ exports.handler = async event => {
         : "https://pathwaymarietta.com/resources/mbti/sp-artisans"
 
     return `${type}
-    </p>
-    <p>
+    <ul>
       ${items
-        .map(item => `<ul>${item.win} - ${item.scores[item.winIndex]}%</ul>`)
+        .map(item => `<li>${item.win} - ${item.scores[item.winIndex]}%</li>`)
         .toString()
         .replace(/,/g, "")}
-    </p>
+    </ul>
+    ${to !== "pathway" &&
+      `
     <h2>Pastor Ryan's Myers Briggs Talks</h2>
-    <p>
-    <a href="https://pathwaymarietta.com/resources/mbti/myers-briggs-overview" target="_blank" rel="noopener noreferrer">Myers Briggs Overview Video</a>
-    <a href="${corePage}" target="_blank" rel="noopener noreferrer">${core} Core Video</a>`
+    <div>
+      <a href="https://pathwaymarietta.com/resources/mbti/myers-briggs-overview" target="_blank" rel="noopener noreferrer">Myers Briggs Overview Video</a>
+    </div>
+    <div>
+      <a href="${corePage}" target="_blank" rel="noopener noreferrer">${core} Core Video</a>
+    </div>`}
+    `
   }
 
   const formattedResults = `
@@ -119,6 +119,7 @@ exports.handler = async event => {
           : "Myers-Briggs Type: "
       }
       </span>
+    </p>
       ${
         type === "Spiritual Gifts"
           ? processSgAssessment(results)
@@ -126,10 +127,8 @@ exports.handler = async event => {
           ? processEnneagramAssessment(results)
           : processMbtiAssessment(results)
       }
-    </p>
+    
   `
-
-  //`
 
   const message = {
     from: {
