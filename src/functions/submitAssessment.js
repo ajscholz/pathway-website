@@ -162,6 +162,11 @@ exports.handler = async event => {
       <h1>
         You've received a new ${type} Assessment.
       </h1>
+      <p>
+        Date:
+        ${date}
+      </p>
+      <br>
       <hr>
       <br>
       <p>
@@ -171,10 +176,6 @@ exports.handler = async event => {
       <p>
         <span>Email: </span>
         <a href="mailto: ${email}">${email}</a>
-      </p>
-      <p>
-        <span>Date Submitted: </span>
-        ${date}
       </p>
       <br>
         ${formattedResults}
@@ -194,13 +195,13 @@ exports.handler = async event => {
       <h1>
         Your ${type} Assessment Results
       </h1>
-      <hr>
-        ${formattedResults}
-      <br>
       <p>
-        <span>Date Submitted: </span>
+        Date:
         ${date}
       </p>
+      <br>
+      <hr>
+        ${formattedResults}
       <br>
       <hr>
       <p>Please <a href="mailto: pathwaycommunity@gmail.com">contact Pathway</a> with any questions about your results.</p>
