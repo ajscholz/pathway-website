@@ -8,6 +8,7 @@ import BreadcrumbSection from "../../components/BreadcrumbSection"
 import Controller from "../../components/assessments/Controller"
 // import VideoModal from "../../components/VideoModal"
 import MBTICard from "../../components/cards/MBTICard"
+import VimeoPlayer from "react-player/lib/players/Vimeo"
 
 const MyersBriggsPage = ({ data }) => {
   const { banner, sections } = data.page
@@ -56,11 +57,48 @@ const MyersBriggsPage = ({ data }) => {
           </Row>
           <Row>
             {videos1.map(video => (
-              <Col md="6" lg="4" key={video.id} className="mb-4">
+              <Col
+                md="10"
+                lg="8"
+                key={video.id}
+                className="mb-4 mx-auto text-center text-light"
+              >
+                <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
+
+                <div
+                  className="mt-5"
+                  style={{
+                    position: "relative",
+                    paddingTop: "56.25%",
+                    width: "100%",
+                  }}
+                >
+                  <VimeoPlayer
+                    url={video.url}
+                    controls={true}
+                    light={true}
+                    config={{
+                      vimeo: {
+                        playerOptions: {
+                          // controls: true,/
+                          // title: true,
+                          // transparent: true,
+                        },
+                      },
+                    }}
+                    width="100%"
+                    height="100%"
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                    }}
+                  />
+                </div>
                 {/* <VideoModal video={video}> */}
-                <Link to={`/resources/mbti/${video.slug}`}>
+                {/* <Link to={`/resources/mbti/${video.slug}`}>
                   <MBTICard videoData={video} />
-                </Link>
+                </Link> */}
                 {/* </VideoModal> */}
               </Col>
             ))}

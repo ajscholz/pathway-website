@@ -152,14 +152,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     "src/templates/mbti-video-template.js"
   )
   result.data.mbtiVideos.all.forEach(({ node }) => {
-    const path = `/resources/mbti/${node.slug}`
-    createPage({
-      path,
-      component: mbtiVideoPageTemplate,
-      context: {
-        slug: node.slug,
-      },
-    })
+    if (node.slug !== "myers-briggs-overview") {
+      const path = `/resources/mbti/${node.slug}`
+      createPage({
+        path,
+        component: mbtiVideoPageTemplate,
+        context: {
+          slug: node.slug,
+        },
+      })
+    }
   })
 
   const sgVideoPageTemplate = path.resolve("src/templates/sg-video-template.js")
