@@ -24,10 +24,11 @@ const IndexPage = ({ data }) => {
     return vidDate.toDateString() === d.toDateString()
   })
 
-  sections[0].button.link = prevWeekLink.videoUrl
+  // make sure there is a previous weeks' video -- if not then just grab the last existing video
+  sections[0].button.link =
+    prevWeekLink === undefined ? videos.all[0].videoUrl : prevWeekLink.videoUrl
 
   // set background of alternating sections to white
-
   let counter = 0
 
   while (counter < sections.length) {
