@@ -80,3 +80,9 @@ force = true
 from = "https://serve.pathwaymarietta.com"
 status = 302
 to = "https://pathwaymarietta.churchcenter.com/people/forms/175342"
+
+[[redirects]]
+force = true
+from = "https://checkin.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.churchcenter.com/people/forms/125762"
