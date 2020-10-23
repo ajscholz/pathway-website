@@ -114,7 +114,16 @@ const Header = ({ title, subtitle, background, full, xs, xxs, ...props }) => {
 Header.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  full: PropTypes.bool.isRequired,
+  xs: PropTypes.bool.isRequired,
+  xxs: PropTypes.bool.isRequired,
   // background: PropTypes.object.isRequired,
+}
+
+Header.defaultPropts = {
+  full: false,
+  xs: false,
+  xxs: false,
 }
 
 export default Header
