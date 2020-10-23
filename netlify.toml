@@ -86,3 +86,9 @@ force = true
 from = "https://checkin.pathwaymarietta.com"
 status = 302
 to = "https://pathwaymarietta.churchcenter.com/people/forms/122952"
+
+[[redirects]]
+force = true
+from = "https://ask.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.com/ask"
