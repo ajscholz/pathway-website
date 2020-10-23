@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useReducer } from "react"
 import SEO from "../components/seo"
 import Header from "../components/header"
 import { graphql } from "gatsby"
@@ -13,6 +13,37 @@ import {
   Label,
 } from "reactstrap"
 
+const initialState = {
+  contact: false,
+  valid: false,
+  accepted: false,
+  submitting: false,
+  data: { question: "", name: "", email: "", phone: "" },
+}
+
+const reducer = (state, action) => {
+  const { data } = state
+  switch (action.type) {
+    case "accepted":
+      return initialState
+    case "invalid":
+      return { ...state, valid: false }
+    case "valid":
+      return { ...state, valid: true }
+    case "switchContact":
+      return { ...state, contact: !state.contact }
+    case "updateEmail":
+      return { ...state, data: { ...data, email: action.payload } }
+    case "updateName":
+      return { ...state, data: { ...data, name: action.payload } }
+    case "updatePhone":
+      return { ...state, data: { ...data, phone: action.payload } }
+
+    default:
+      return { ...state, data: { ...data, question: action.payload } }
+  }
+}
+
 const AskPage = ({ data }) => {
   const {
     page: {
@@ -20,8 +51,35 @@ const AskPage = ({ data }) => {
     },
   } = data
 
-  const [contact, setContact] = useState(false)
-  const [valid, isValid] = useState(false)
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  // const [contact, setContact] = useState(false)
+  // const [valid, isValid] = useState(false)
+  // const [formData, setFormData] = useState(initialformData)
+  // const [accepted, setAccepted] = useState(false)
+  // console.log(formData)
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      const response = await fetch("/.netlify/functions/submitAskQuestion", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(state.data),
+      })
+      const data = await response.json()
+
+      if (response.ok) {
+        dispatch({ type: "accepted" })
+      } else {
+        throw data.msg
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <>
       <SEO
@@ -44,13 +102,14 @@ const AskPage = ({ data }) => {
                     type="textarea"
                     rows="5"
                     onChange={e => {
-                      console.log(e.currentTarget.value)
-                      if (valid && e.currentTarget.value === "") {
-                        isValid(false)
+                      if (state.valid && e.currentTarget.value === "") {
+                        dispatch({ type: "invalid" })
                       } else {
-                        if (!valid) isValid(true)
+                        if (!state.valid) dispatch({ type: "valid" })
                       }
+                      dispatch({ payload: e.currentTarget.value })
                     }}
+                    value={state.data.question}
                   />
                 </FormGroup>
 
@@ -59,7 +118,8 @@ const AskPage = ({ data }) => {
                     <Input
                       defaultValue=""
                       type="checkbox"
-                      onClick={() => setContact(!contact)}
+                      onClick={() => dispatch({ type: "switchContact" })}
+                      checked={state.contact}
                     />
                     I would like someone from Pathway to contact me regarding my
                     question
@@ -67,7 +127,7 @@ const AskPage = ({ data }) => {
                   </Label>
                 </FormGroup>
 
-                {contact && (
+                {state.contact && (
                   <>
                     <h6
                       style={{ textAlign: "center" }}
@@ -78,30 +138,54 @@ const AskPage = ({ data }) => {
                         someone from Pathway to contact you. **
                       </span>
                     </h6>
-                    <FormGroup>
-                      <label htmlFor="askName">Name</label>
-                      <Input
-                        id="askName"
-                        // placeholder="Enter email"
-                        type="text"
-                      />
-                    </FormGroup>
+                    <Row form>
+                      <Col md={6}>
+                        <FormGroup>
+                          <label htmlFor="askName">Name</label>
+                          <Input
+                            id="askName"
+                            // placeholder="Enter email"
+                            type="text"
+                            onChange={e => {
+                              dispatch({
+                                type: "updateName",
+                                payload: e.currentTarget.value,
+                              })
+                            }}
+                            value={state.data.name}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md={6}>
+                        <FormGroup>
+                          <label htmlFor="askPhone">Phone</label>
+                          <Input
+                            id="askPhone"
+                            type="phone"
+                            onChange={e => {
+                              dispatch({
+                                type: "updatePhone",
+                                payload: e.currentTarget.value,
+                              })
+                            }}
+                            value={state.data.phone}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
                     <FormGroup>
                       <label htmlFor="askEmail">Email</label>
                       <Input
-                        // aria-describedby="emailHelp"
                         id="askEmail"
-                        // placeholder="Enter email"
                         type="email"
+                        onChange={e =>
+                          dispatch({
+                            type: "updateEmail",
+                            payload: e.currentTarget.value,
+                          })
+                        }
+                        value={state.data.email}
                       />
-                    </FormGroup>
-                    <FormGroup>
-                      <label htmlFor="askPhone">Phone</label>
-                      <Input
-                        id="askPhone"
-                        // placeholder="Phone"
-                        type="phone"
-                      ></Input>
                     </FormGroup>
                   </>
                 )}
@@ -109,8 +193,9 @@ const AskPage = ({ data }) => {
                 <Button
                   color="primary"
                   type="submit"
+                  onClick={e => handleSubmit(e)}
                   className="mt-2 w-100"
-                  disabled={!valid}
+                  disabled={!state.valid}
                 >
                   Submit Question
                   <i className="nc-icon nc-send ml-2" />

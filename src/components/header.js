@@ -120,7 +120,7 @@ Header.propTypes = {
   // background: PropTypes.object.isRequired,
 }
 
-Header.defaultPropts = {
+Header.defaultProps = {
   full: false,
   xs: false,
   xxs: false,
