@@ -57,7 +57,7 @@ const IndexPage = ({ data }) => {
         full={true}
         countdown={true}
       >
-        <div>hello</div>
+        {/* <div>Services at</div> */}
       </Header>
       <section>
         <Container fluid style={{ padding: "0", margin: "0" }}>
