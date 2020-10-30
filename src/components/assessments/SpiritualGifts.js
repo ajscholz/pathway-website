@@ -319,7 +319,7 @@ const initialize = () => {
 
 const reducer = (state, action) => {
   const { activeQ } = state
-  const { type, payload } = action
+  const { type } = action
 
   switch (type) {
     case "confirm reset":
@@ -393,7 +393,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
     scoreArray.forEach(score =>
       score.sort((a, b) => {
         if (a.name > b.name) return 1
-        if (a.name < b.name) return -1
+        return -1
       })
     )
 
