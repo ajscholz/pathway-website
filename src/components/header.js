@@ -1,62 +1,20 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Image from "gatsby-image"
 // import Countdown from "./countdown"
-import SundayVideo from "./sunday-video"
+// import SundayVideo from "./sunday-video"
 
-const Header = ({ title, subtitle, background, full, xs, xxs, ...props }) => {
-  const { stream } = useStaticQuery(graphql`
-    # {
-    #   streams: allContentfulStreamingVideo(
-    #     sort: { fields: dateTime, order: ASC }
-    #   ) {
-    #     all: nodes {
-    #       videoUrl
-    #       dateTime
-    #     }
-    #   }
-    # }
-    {
-      stream: contentfulStreamingVideo {
-        videoUrl
-        dateTime
-      }
-    }
-  `)
-
-  const [showVideo, setShowVideo] = useState(false)
-
-  // sets up an interval to minimize re-rendering
-  useEffect(() => {
-    // set start time to 6am in minutes
-    const minutesStart = 6 * 60
-    const interval = setInterval(() => {
-      let d = new Date()
-      const minutesNow = d.getHours() * 60 + d.getMinutes()
-
-      // check if it's Sunday and after 6a
-      if (d.getDay() === 0 && minutesNow >= minutesStart) {
-        // if yes, update state and clear the interval
-        setShowVideo(true)
-        clearInterval(interval)
-      }
-    }, 1000)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
-
-  // get the stream from graphql that is today, or give me an empty object if there isn't one
-  // let index = -1
-  // if (showVideo === true) {
-  //   const today = new Date().toDateString()
-  //   index = streams.all.findIndex(stream =>
-  //     new Date(stream.dateTime).toDateString() === today ? true : false
-  //   )
-  // }
-  // const stream = index === -1 ? {} : streams.all[index]
-
+const Header = ({
+  title,
+  subtitle,
+  background,
+  full,
+  xs,
+  xxs,
+  children,
+  ...props
+}) => {
   return (
     <>
       <div
@@ -89,21 +47,13 @@ const Header = ({ title, subtitle, background, full, xs, xxs, ...props }) => {
 
         {title && (
           <>
-            {/* {countdown === true ? ( */}
-            {/* <Countdown /> */}
-            {/* ) : ( */}
-
-            {showVideo === true ? (
-              <SundayVideo stream={stream} />
-            ) : (
-              <div className="content-center">
-                <div className="motto">
-                  <h1 className="text-center">{title}</h1>
-                  <h3 className="text-center">{subtitle}</h3>
-                </div>
+            <div className="content-center">
+              <div className="motto">
+                <h1 className="text-center">{title}</h1>
+                <h3 className="text-center">{subtitle}</h3>
+                {children}
               </div>
-            )}
-            {/* )} */}
+            </div>
           </>
         )}
       </div>

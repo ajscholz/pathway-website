@@ -56,7 +56,9 @@ const IndexPage = ({ data }) => {
         background={image}
         full={true}
         countdown={true}
-      />
+      >
+        <div>hello</div>
+      </Header>
       <section>
         <Container fluid style={{ padding: "0", margin: "0" }}>
           <div className="row no-gutters">
