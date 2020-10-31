@@ -57,9 +57,9 @@ const IndexPage = ({ data }) => {
         full={true}
         countdown={true}
       >
-        {/* <div className="border-top border-primary"> */}
-        <h3>Sunday Services</h3>
-        <h5 className="text-primary">{`9am & 10:30am`}</h5>
+        {/* <div className="text-primary"> */}
+        <h3>{`Sundays, 9am & 10:30am`}</h3>
+        <h5 className="text-primary">{`113 Ellsworth Ave., Marietta, OH`}</h5>
         {/* </div> */}
       </Header>
       <section>

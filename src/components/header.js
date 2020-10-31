@@ -49,7 +49,7 @@ const Header = ({
           <>
             <div className="content-center">
               <div className="motto">
-                <h1 className="text-center">{title}</h1>
+                <h1 className="text-center display-2">{title}</h1>
                 <h3 className="text-center">{subtitle}</h3>
                 {children}
               </div>
