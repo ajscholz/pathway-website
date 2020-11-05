@@ -1,11 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Container, Col, Button } from "reactstrap"
 
 import SEO from "../components/seo"
 import Header from "../components/header"
 import ButtonCard from "../components/cards/button-card"
-
-import { Container, Col } from "reactstrap"
+import CountdownTimer from "../components/CountdownTimer"
 
 const IndexPage = ({ data }) => {
   const { page, videos } = data
@@ -45,6 +45,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <>
+      <CountdownTimer />
       <SEO
         title="Home"
         image={image.file.url}
@@ -60,6 +61,17 @@ const IndexPage = ({ data }) => {
         {/* <div className="text-primary"> */}
         <h3>{`Sundays, 9am & 10:30am`}</h3>
         <h5 className="text-primary">{`113 Ellsworth Ave., Marietta, OH`}</h5>
+        <Button
+          size="lg"
+          color="danger"
+          className="mt-4"
+          href="https://pathwaymarietta.online.church"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="mr-2 nc-icon nc-tap-01" />
+          Watch Live
+        </Button>
         {/* </div> */}
       </Header>
       <section>
