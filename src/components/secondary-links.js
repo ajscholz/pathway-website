@@ -27,7 +27,7 @@ const SecondaryLinks = ({ click, className }) => {
         </NavLink>
       </NavItem>
 
-      <NavItem className={className}>
+      {/* <NavItem className={className}>
         <NavLink
           className="py-2"
           href="https://pathway-community-church.myshopify.com/collections/all"
@@ -37,7 +37,7 @@ const SecondaryLinks = ({ click, className }) => {
         >
           Buy Merch
         </NavLink>
-      </NavItem>
+      </NavItem> */}
 
       <NavItem className={className}>
         <NavLink
