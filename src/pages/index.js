@@ -8,7 +8,7 @@ import ButtonCard from "../components/cards/button-card"
 import CountdownTimer from "../components/CountdownTimer"
 
 const IndexPage = ({ data }) => {
-  const { page, videos } = data
+  const { page, messages } = data
   const { banner, sections } = page
   const { heading, image, subHeading } = banner
 
@@ -29,8 +29,7 @@ const IndexPage = ({ data }) => {
   // console.log(sections[0])
 
   // // make sure there is a previous weeks' video -- if not then just grab the last existing video
-  // sections[0].button.link =
-  //   prevWeekLink === undefined ? videos.all[0].videoUrl : prevWeekLink.videoUrl
+  sections[0].button.link = messages.all[0].fullServiceVideoLink
 
   // set background of alternating sections to white
   let counter = 0
@@ -138,13 +137,12 @@ export const data = graphql`
         }
       }
     }
-    videos: allContentfulStreamingVideo(
-      sort: { fields: dateTime, order: DESC }
-      limit: 10
+    messages: allContentfulMessage(
+      limit: 1
+      sort: { fields: messageDate, order: DESC }
     ) {
       all: nodes {
-        dateTime
-        videoUrl
+        fullServiceVideoLink
       }
     }
   }
