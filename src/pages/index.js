@@ -12,21 +12,25 @@ const IndexPage = ({ data }) => {
   const { banner, sections } = page
   const { heading, image, subHeading } = banner
 
-  let d = new Date()
+  // console.log(sections)
 
-  // get last Sunday's date
-  do {
-    d.setDate(d.getDate() - 1)
-  } while (d.getDay() !== 0)
+  // let d = new Date()
 
-  const prevWeekLink = videos.all.find(video => {
-    const vidDate = new Date(video.dateTime)
-    return vidDate.toDateString() === d.toDateString()
-  })
+  // // get last Sunday's date
+  // do {
+  //   d.setDate(d.getDate() - 1)
+  // } while (d.getDay() !== 0)
 
-  // make sure there is a previous weeks' video -- if not then just grab the last existing video
-  sections[0].button.link =
-    prevWeekLink === undefined ? videos.all[0].videoUrl : prevWeekLink.videoUrl
+  // const prevWeekLink = videos.all.find(video => {
+  //   const vidDate = new Date(video.dateTime)
+  //   return vidDate.toDateString() === d.toDateString()
+  // })
+
+  // console.log(sections[0])
+
+  // // make sure there is a previous weeks' video -- if not then just grab the last existing video
+  // sections[0].button.link =
+  //   prevWeekLink === undefined ? videos.all[0].videoUrl : prevWeekLink.videoUrl
 
   // set background of alternating sections to white
   let counter = 0
