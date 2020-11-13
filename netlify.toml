@@ -92,3 +92,9 @@ force = true
 from = "https://ask.pathwaymarietta.com"
 status = 302
 to = "https://pathwaymarietta.com/ask"
+
+[[redirects]]
+force = true
+from = "https://movies.pathwaymarietta.com"
+status = 302
+to = "https://https://pathwaymarietta.online.church/"
