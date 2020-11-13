@@ -20,6 +20,7 @@ const Footer = () => {
         city
         state
         zip
+        phone
       }
     }
   `)
@@ -42,6 +43,10 @@ const Footer = () => {
                   {info.street}
                   <br />
                   {info.city} {info.state} {info.zip}
+                  <br />
+                  <a href={`tel:${info.phone}`} className="font-weight-normal">
+                    {info.phone}
+                  </a>
                 </small>
               </p>
             </Col>
