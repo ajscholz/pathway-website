@@ -29,6 +29,8 @@ const PopupModal = props => {
     }
   `)
 
+  console.log(popups)
+
   const now = new Date().toISOString()
 
   const activePopup = popups.nodes.find(popup => popup.autoOff > now)
@@ -38,6 +40,7 @@ const PopupModal = props => {
   //   link: "https://www.google.com",
   // })
 
+  console.log(activePopup)
   const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
@@ -81,7 +84,7 @@ const PopupModal = props => {
         <div className="modal-body">
           <MDXRenderer>{activePopup.bodyText.childMdx.body}</MDXRenderer>
         </div>
-        {activePopup.callToAction.length !== 0 && (
+        {activePopup.callToAction && (
           <ModalFooter className="p-3 flex-row-reverse justify-content-start">
             {activePopup.callToAction.map((cta, i) => {
               const props =
