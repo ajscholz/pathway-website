@@ -16,7 +16,7 @@
     "@types/googlemaps": "^3.0.0",
     "@types/markerclustererplus": "^2.1.29",
     "@types/react": "^15.0.0",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "classnames": "2.2.6",
     "gatsby": "^2.18.8",
     "gatsby-image": "^2.2.34",
