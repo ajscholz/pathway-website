@@ -39,49 +39,56 @@ const ThePathPage = ({ data }) => {
             className="border-dark my-5 w-25 position-relative"
             style={{ top: "1.75em", opacity: ".5" }}
           />
-          {sections[0].linkedContent.map(video => (
-            <Row key={video.id} className="pt-5 mb-5">
-              <Col md="4" lg="5" className="mb-0">
-                <div style={{ width: "100%", paddingTop: "56.25%" }}>
-                  <ReactPlayer
-                    url={video.Url}
-                    width="100%"
-                    height="100%"
-                    light={true}
-                    style={{ position: "absolute", top: 0, left: 0 }}
-                    playing={false}
-                    controls={true}
-                    className="mb-0"
-                  />
-                </div>
-              </Col>
-              <Col
-                md={{ size: 8, offset: 0 }}
-                lg={{ size: 7, offset: 0 }}
-                className="text-left height-full"
-              >
-                <div>
-                  <h2 className="h3 title mt-2 mb-2">{video.title}</h2>
-                  <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
-                </div>
-                <div className="mt-3">
-                  {!video.formUrl ? null : (
-                    <Link className="mr-3" to={video.formUrl}>
-                      Open Form
-                    </Link>
-                  )}
-                  {!video.participantGuide ? null : (
-                    <VidButton
-                      href={video.participantGuide.file.url}
-                      target="_blank"
-                    >
-                      Download Guide
-                    </VidButton>
-                  )}
-                </div>
-              </Col>
-            </Row>
-          ))}
+          {sections[0].linkedContent.map(video => {
+            console.log(video)
+            return (
+              <Row key={video.id} className="pt-5 mb-5">
+                <Col
+                  md={{ size: 10, offset: 1 }}
+                  lg={{ size: 5, offset: 0 }}
+                  className="mb-0"
+                >
+                  <div style={{ width: "100%", paddingTop: "56.25%" }}>
+                    <ReactPlayer
+                      url={video.Url}
+                      width="100%"
+                      height="100%"
+                      light={video.thumbnailImage.fluid.src}
+                      style={{ position: "absolute", top: 0, left: 0 }}
+                      playing={false}
+                      controls={true}
+                      className="mb-0"
+                    />
+                  </div>
+                </Col>
+                <Col
+                  md={{ size: 10, offset: 1 }}
+                  lg={{ size: 6, offset: 1 }}
+                  className="text-left height-full"
+                >
+                  <div>
+                    <h2 className="h3 title mt-1 mb-2">{video.title}</h2>
+                    <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
+                  </div>
+                  <div className="mt-3">
+                    {!video.formUrl ? null : (
+                      <Link className="mr-3" to={video.formUrl}>
+                        Open Form
+                      </Link>
+                    )}
+                    {!video.participantGuide ? null : (
+                      <VidButton
+                        href={video.participantGuide.file.url}
+                        target="_blank"
+                      >
+                        Download Guide
+                      </VidButton>
+                    )}
+                  </div>
+                </Col>
+              </Row>
+            )
+          })}
         </Container>
       </section>
     </>
@@ -114,6 +121,11 @@ export const data = graphql`
               id: contentful_id
               title
               Url
+              thumbnailImage {
+                fluid(maxWidth: 600, quality: 60) {
+                  src
+                }
+              }
               participantGuide {
                 file {
                   url
