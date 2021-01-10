@@ -26,12 +26,11 @@ const ThePathPage = ({ data }) => {
         background={image}
         xs={true}
         style={{ backgroundPosition: "bottom-center" }}
-        title={sections[0].title}
       />
 
       <section className="blog-2 section section-gray">
         <Container className="text-center">
-          {/* <h1 className="h2 title text-center mt-0">{sections[0].title}</h1> */}
+          <h1 className="h1 title text-center mt-0">{sections[0].title}</h1>
           <MDXRenderer className="text-center pb-3">
             {sections[0].description.childMdx.body}
           </MDXRenderer>
