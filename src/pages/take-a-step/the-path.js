@@ -71,14 +71,18 @@ const ThePathPage = ({ data }) => {
                   </div>
                   <div className="mt-3">
                     {!video.formUrl ? null : (
-                      <Link className="mr-3" to={video.formUrl}>
-                        Open Form
+                      <Link
+                        className="btn btn-primary btn-sm mr-3 text-white"
+                        to={video.formUrl}
+                      >
+                        Join Pathway
                       </Link>
                     )}
                     {!video.participantGuide ? null : (
                       <VidButton
                         href={video.participantGuide.file.url}
                         target="_blank"
+                        className="text-white"
                       >
                         Download Guide
                       </VidButton>
@@ -125,6 +129,7 @@ export const data = graphql`
                   src
                 }
               }
+              formUrl
               participantGuide {
                 file {
                   url

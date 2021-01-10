@@ -10,6 +10,7 @@ import {
   Container,
   Row,
   Col,
+  Button,
   // DropdownToggle,
   // DropdownMenu,
   // DropdownItem,
@@ -162,6 +163,16 @@ const AttendThePathSection = () => {
                 </React.Fragment>
               )
             })}
+          </Row>
+          <Row>
+            <Button
+              color="primary"
+              href="/take-a-step/the-path"
+              size="lg"
+              className="mx-auto mt-5 text-white"
+            >
+              Start My Path
+            </Button>
           </Row>
         </Container>
       </div>

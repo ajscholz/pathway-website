@@ -6,6 +6,7 @@ import Image from "gatsby-image"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import { Card, CardBody, CardTitle, CardFooter, Button } from "reactstrap"
+import LinkButton from "../buttons/link-button"
 
 const baseClass = `w-100 no-border card-plain py-5 px-4`
 const baseStyles = {
