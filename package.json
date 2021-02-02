@@ -80,7 +80,7 @@
     "build:lambda": "netlify-lambda build src/functions",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "run-p start:**",
+    "start": "run-p start:app start:lambda",
     "start:app": "gatsby develop",
     "start:lambda": "netlify-lambda serve src/functions",
     "serve": "gatsby serve",
