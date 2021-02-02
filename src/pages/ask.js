@@ -1,4 +1,4 @@
-import React, { useReducer } from "react"
+import React, { useReducer, useRef } from "react"
 import SEO from "../components/seo"
 import Header from "../components/header"
 import { graphql } from "gatsby"
@@ -14,11 +14,10 @@ import {
 } from "reactstrap"
 
 const initialState = {
-  contact: false,
   valid: false,
   accepted: false,
   submitting: false,
-  data: { question: "", name: "", email: "", phone: "" },
+  data: { question: "", name: "", email: "" },
 }
 
 const reducer = (state, action) => {
@@ -30,14 +29,10 @@ const reducer = (state, action) => {
       return { ...state, valid: false }
     case "valid":
       return { ...state, valid: true }
-    case "switchContact":
-      return { ...state, contact: !state.contact }
     case "updateEmail":
       return { ...state, data: { ...data, email: action.payload } }
     case "updateName":
       return { ...state, data: { ...data, name: action.payload } }
-    case "updatePhone":
-      return { ...state, data: { ...data, phone: action.payload } }
 
     default:
       return { ...state, data: { ...data, question: action.payload } }
@@ -51,13 +46,12 @@ const AskPage = ({ data }) => {
     },
   } = data
 
+  const emailRef = useRef(null)
+
+  // console.log(emailRef.current.validity.valid)
+
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  // const [contact, setContact] = useState(false)
-  // const [valid, isValid] = useState(false)
-  // const [formData, setFormData] = useState(initialformData)
-  // const [accepted, setAccepted] = useState(false)
-  // console.log(formData)
   const handleSubmit = async e => {
     e.preventDefault()
     try {
@@ -96,7 +90,11 @@ const AskPage = ({ data }) => {
             <Col className="ml-auto mr-auto" md="8">
               <Form>
                 <FormGroup>
-                  <label htmlFor="questionArea">Question</label>
+                  <div className="d-flex justify-content-between">
+                    <label htmlFor="questionArea">Question</label>
+                    <span>* required</span>
+                  </div>
+
                   <Input
                     id="questionArea"
                     type="textarea"
@@ -105,7 +103,13 @@ const AskPage = ({ data }) => {
                       if (state.valid && e.currentTarget.value === "") {
                         dispatch({ type: "invalid" })
                       } else {
-                        if (!state.valid) dispatch({ type: "valid" })
+                        if (!state.valid && emailRef !== null) {
+                          console.log(emailRef.current.validity)
+                          if (emailRef.current.validity.valid)
+                            dispatch({
+                              type: "valid",
+                            })
+                        }
                       }
                       dispatch({ payload: e.currentTarget.value })
                     }}
@@ -113,82 +117,54 @@ const AskPage = ({ data }) => {
                   />
                 </FormGroup>
 
-                <FormGroup check>
-                  <Label check>
-                    <Input
-                      defaultValue=""
-                      type="checkbox"
-                      onClick={() => dispatch({ type: "switchContact" })}
-                      checked={state.contact}
-                    />
-                    I would like someone from Pathway to contact me regarding my
-                    question
-                    <span className="form-check-sign"></span>
-                  </Label>
-                </FormGroup>
-
-                {state.contact && (
-                  <>
-                    <h6
-                      style={{ textAlign: "center" }}
-                      className="mt-4 text-info"
-                    >
-                      <span style={{ fontStyle: "italic" }}>
-                        ** These questions are only necessary if you would like
-                        someone from Pathway to contact you. **
-                      </span>
-                    </h6>
-                    <Row form>
-                      <Col md={6}>
-                        <FormGroup>
-                          <label htmlFor="askName">Name</label>
-                          <Input
-                            id="askName"
-                            // placeholder="Enter email"
-                            type="text"
-                            onChange={e => {
-                              dispatch({
-                                type: "updateName",
-                                payload: e.currentTarget.value,
-                              })
-                            }}
-                            value={state.data.name}
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col md={6}>
-                        <FormGroup>
-                          <label htmlFor="askPhone">Phone</label>
-                          <Input
-                            id="askPhone"
-                            type="phone"
-                            onChange={e => {
-                              dispatch({
-                                type: "updatePhone",
-                                payload: e.currentTarget.value,
-                              })
-                            }}
-                            value={state.data.phone}
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
+                <Row form>
+                  <Col>
                     <FormGroup>
-                      <label htmlFor="askEmail">Email</label>
+                      <label htmlFor="askName">Name</label>
                       <Input
-                        id="askEmail"
-                        type="email"
-                        onChange={e =>
+                        id="askName"
+                        // placeholder="Enter email"
+                        type="text"
+                        onChange={e => {
                           dispatch({
-                            type: "updateEmail",
+                            type: "updateName",
                             payload: e.currentTarget.value,
                           })
-                        }
-                        value={state.data.email}
+                        }}
+                        value={state.data.name}
                       />
                     </FormGroup>
-                  </>
-                )}
+                  </Col>
+                </Row>
+
+                <FormGroup>
+                  <div className="d-flex justify-content-between">
+                    <label htmlFor="askEmail">Email</label>
+                    <span>* required</span>
+                  </div>
+
+                  <Input
+                    innerRef={emailRef}
+                    id="askEmail"
+                    type="email"
+                    required
+                    onChange={e => {
+                      dispatch({
+                        type: "updateEmail",
+                        payload: e.currentTarget.value,
+                      })
+                      if (
+                        emailRef.current.validity.valid &&
+                        state.data.question !== ""
+                      ) {
+                        dispatch({ type: "valid" })
+                      } else if (!emailRef.current.validity.valid) {
+                        dispatch({ type: "invalid" })
+                      }
+                    }}
+                    value={state.data.email}
+                  />
+                </FormGroup>
 
                 <Button
                   color="primary"

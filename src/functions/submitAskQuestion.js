@@ -92,16 +92,6 @@ exports.handler = async event => {
       </p>
       `
           : ""
-      )
-      .concat(
-        data.phone !== ""
-          ? `
-      <p>
-        <span>Phone: </span>
-        <a href="tel: ${data.phone}">${data.phone}</a>
-      </p>
-      `
-          : ``
       ).concat(`
       <hr>
       <h4>
