@@ -9363,7 +9363,7 @@ fsevents@~2.3.1:
     gatsby-transformer-sharp: ^2.3.7
     googleapis: ^46.0.0
     headroom.js: 0.10.3
-    http-proxy-middleware: ^0.20.0
+    http-proxy-middleware: ^1.0.6
     joi: ^17.3.0
     moment: 2.24.0
     netlify-lambda: ^1.6.3
@@ -10921,15 +10921,16 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"http-proxy-middleware@npm:^0.20.0":
-  version: 0.20.0
-  resolution: "http-proxy-middleware@npm:0.20.0"
+"http-proxy-middleware@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "http-proxy-middleware@npm:1.0.6"
   dependencies:
-    http-proxy: ^1.17.0
+    "@types/http-proxy": ^1.17.4
+    http-proxy: ^1.18.1
     is-glob: ^4.0.1
-    lodash: ^4.17.14
+    lodash: ^4.17.20
     micromatch: ^4.0.2
-  checksum: 235d970865ce9c5dafa982e0e600bf0dce6ce987fb4e6a64236e7098fc89278419b8589f9b41f98b161dcccf8899d5a9eb4eedca56525325e34d2d546993d60d
+  checksum: 46385b03f1a2c5895e6ed054ebb966ac6e8929405bbe8690db78dce460ec19f4cd892fcb12f99f869a047ef888409d0fe7db703d936d853c2c22ea17dddba27b
   languageName: node
   linkType: hard
 
