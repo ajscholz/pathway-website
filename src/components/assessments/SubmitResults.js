@@ -60,7 +60,7 @@ const SubmitResults = ({ dispatch, type, results, sgScores, ennScores }) => {
         sgScores: sgScores,
         ennScores: ennScores,
       })
-      // submitForm({ ...info, to: "pathway", type: type, results: results })
+      submitForm({ ...info, to: "pathway", type: type, results: results })
     }
     if (emailMe === true)
       submitForm({ ...info, to: "person", type: type, results: results })
