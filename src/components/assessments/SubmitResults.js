@@ -56,6 +56,7 @@ const SubmitResults = ({ dispatch, type, results, sgScores, ennScores }) => {
     if (part === true) {
       pushToPco({
         ...info,
+        type: type,
         results: results,
         sgScores: sgScores,
         ennScores: ennScores,
