@@ -357,6 +357,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
 
   // this is used to tally the question results & to minimize re-renders by not holding values in state
   const tally = useRef([...gifts])
+  const tallyCopy = useRef()
   const currentSelection = useRef()
 
   // set current selection on each render (as opposed to the first only in the useRef hook)
@@ -377,6 +378,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
   }
 
   const getResults = () => {
+    tallyCopy.current = [...tally.current]
     const giftScores = [...tally.current]
 
     // create a new array that is the length of the possible scores (15 in this case).
@@ -488,6 +490,7 @@ const SpiritualGifts = ({ open, setOpen, className }) => {
             dispatch={dispatch}
             type="Spiritual Gifts"
             results={tally.current}
+            sgScores={tallyCopy.current}
           />
         )
       case "presenting":

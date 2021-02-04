@@ -150,6 +150,7 @@ const Enneagram = ({ open, setOpen, className }) => {
             dispatch={dispatch}
             type="Enneagram"
             results={typeIndex.current}
+            ennScores={tally.current}
           />
         )
       case "assessing":

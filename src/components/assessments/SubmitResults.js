@@ -28,14 +28,40 @@ const submitForm = async values => {
   }
 }
 
-const SubmitResults = ({ dispatch, type, results }) => {
+const pushToPco = async values => {
+  try {
+    const response = await fetch("/.netlify/functions/sendAssesmentToPco", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw data.msg
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const SubmitResults = ({ dispatch, type, results, sgScores, ennScores }) => {
   const [part, setPart] = useState(true)
   const [emailMe, setEmailMe] = useState(true)
   const [info, setInfo] = useState({ name: "", email: "" })
 
   const handleClick = () => {
-    if (part === true)
-      submitForm({ ...info, to: "pathway", type: type, results: results })
+    if (part === true) {
+      pushToPco({
+        ...info,
+        results: results,
+        sgScores: sgScores,
+        ennScores: ennScores,
+      })
+      // submitForm({ ...info, to: "pathway", type: type, results: results })
+    }
     if (emailMe === true)
       submitForm({ ...info, to: "person", type: type, results: results })
     dispatch({ type: "present" })

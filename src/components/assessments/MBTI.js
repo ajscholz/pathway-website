@@ -17,7 +17,7 @@ const questions = randomizeArray([...mbtiQuestions])
 //   { type: "J/P", scores: [8, 92], types: ["J", "P"], win: "P", winIndex: 1 },
 // ]
 // const initialState = {
-//   view: "presenting",
+//   view: "assessing",
 //   activeQ: mbtiQuestions.length,
 //   selected: null,
 // }
