@@ -98,3 +98,15 @@ force = true
 from = "https://movies.pathwaymarietta.com"
 status = 302
 to = "https://pathwaymarietta.online.church/"
+
+[[redirects]]
+force = true
+from = "https://women.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.churchcenter.com/people/forms/213414"
+
+[[redirects]]
+force = true
+from = "https://kids.pathwaymarietta.com"
+status = 302
+to = "https://pathwaymarietta.churchcenter.com/people/forms/214358"
