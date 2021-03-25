@@ -39,7 +39,7 @@ const ThePathPage = ({ data }) => {
             style={{ top: "1.75em", opacity: ".5" }}
           />
           {sections[0].linkedContent.map(video => {
-            console.log(video)
+            // console.log(video)
             return (
               <Row key={video.id} className="pt-5 mb-5">
                 <Col

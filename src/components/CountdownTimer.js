@@ -33,9 +33,9 @@ const getServices = async () => {
 const CountdownTimer = () => {
   const [nextService, setNextService] = useState(null)
 
-  useEffect(() => {
-    getServices().then(response => console.log(response))
-  }, [])
+  // useEffect(() => {
+  //   getServices().then(response => console.log(response))
+  // }, [])
   // async function startCountdown() {
   //   // Fetch the current or next service data
 

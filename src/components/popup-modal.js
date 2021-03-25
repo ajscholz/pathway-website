@@ -29,7 +29,7 @@ const PopupModal = props => {
     }
   `)
 
-  console.log(popups)
+  // console.log(popups)
 
   const now = new Date().toISOString()
 
@@ -40,7 +40,7 @@ const PopupModal = props => {
   //   link: "https://www.google.com",
   // })
 
-  console.log(activePopup)
+  // console.log(activePopup)
   const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
