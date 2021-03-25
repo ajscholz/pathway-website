@@ -70,19 +70,19 @@ const ThePathPage = ({ data }) => {
                     <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
                   </div>
                   <div className="mt-3">
-                    {!video.formUrl ? null : (
+                    {!video.button ? null : (
                       <Link
                         className="btn btn-primary btn-sm mr-3 text-white"
-                        to={video.formUrl}
+                        to={video.button.link}
                       >
-                        Join Pathway
+                        {video.button.text}
                       </Link>
                     )}
                     {!video.participantGuide ? null : (
                       <VidButton
                         href={video.participantGuide.file.url}
                         target="_blank"
-                        className="text-white"
+                        className="btn-info text-white"
                       >
                         Download Guide
                       </VidButton>
@@ -129,7 +129,11 @@ export const data = graphql`
                   src
                 }
               }
-              formUrl
+              button {
+                text
+                link
+                contentful_id
+              }
               participantGuide {
                 file {
                   url
