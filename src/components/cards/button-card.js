@@ -1,11 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
 import Image from "gatsby-image"
 
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import { Card, CardBody, CardTitle, CardFooter, Button } from "reactstrap"
+import { Card, CardBody, CardTitle, CardFooter } from "reactstrap"
 import LinkButton from "../buttons/link-button"
 
 const baseClass = `w-100 no-border card-plain py-5 px-4`
@@ -17,19 +16,6 @@ const baseStyles = {
 
 const ButtonCard = props => {
   const { title, subtitle, description, button, background } = props.sectionData
-
-  // set button props for a Gatsby link or a normal a link
-  const buttonProps =
-    button.link.charAt(0) === "/"
-      ? {
-          to: button.link,
-          tag: Link,
-        }
-      : {
-          href: button.link,
-          target: "_blank",
-          rel: "noopener noreferrer",
-        }
 
   const cardProps =
     background === "" || !background
@@ -70,17 +56,17 @@ const ButtonCard = props => {
           <MDXRenderer>{description.childMdx.body}</MDXRenderer>
         </div>
         <CardFooter className="mt-xl-auto">
-          <Button
+          <LinkButton
+            button={button}
             className={`${
               props.button === "solid" ? "btn" : "btn-outline-primary"
             } mt-2`}
             color="primary"
-            size={props.buttonSize}
-            {...buttonProps}
+            size={props.buttonSize ? props.buttonSize : null}
           >
             {/* <i className="fa fa-plus mr-1" /> */}
             {button.text}
-          </Button>
+          </LinkButton>
         </CardFooter>
       </CardBody>
     </Card>

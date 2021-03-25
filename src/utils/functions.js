@@ -28,6 +28,7 @@ export const setLinkType = (link, props) => {
   } else {
     return (
       <Button
+        key={url.href}
         tag="a"
         href={`${url.href}${
           url.host === "pathwaymarietta.churchcenter.com"

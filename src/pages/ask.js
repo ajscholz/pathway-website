@@ -2,16 +2,7 @@ import React, { useReducer, useRef } from "react"
 import SEO from "../components/seo"
 import Header from "../components/header"
 import { graphql } from "gatsby"
-import {
-  Button,
-  FormGroup,
-  Form,
-  Input,
-  Row,
-  Col,
-  Container,
-  Label,
-} from "reactstrap"
+import { Button, FormGroup, Form, Input, Row, Col, Container } from "reactstrap"
 
 const initialState = {
   valid: false,

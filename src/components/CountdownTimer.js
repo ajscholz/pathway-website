@@ -1,37 +1,41 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
-const CURRENT_SERVICE_QUERY = `
-query CurrentService {
-  currentService(onEmpty: LOAD_NEXT) {
-    id
-    startTime
-    endTime
-    content {
-      title
-    }
-  }
-}
-`
+// const CURRENT_SERVICE_QUERY = `
+// query CurrentService {
+//   currentService(onEmpty: LOAD_NEXT) {
+//     id
+//     startTime
+//     endTime
+//     content {
+//       title
+//     }
+//   }
+// }
+// `
 
-const getServices = async () => {
-  const service = await fetch("https://lifechurch.online.church/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      query: CURRENT_SERVICE_QUERY,
-      operationName: "CurrentService",
-    }),
-  })
-    .then(response => response.json())
-    .catch(error => console.error(error))
-  return service
-}
+// const getServices = async () => {
+//   const service = await fetch("https://lifechurch.online.church/graphql", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Accept: "application/json",
+//     },
+//     body: JSON.stringify({
+//       query: CURRENT_SERVICE_QUERY,
+//       operationName: "CurrentService",
+//     }),
+//   })
+//     .then(response => response.json())
+//     .catch(error => console.error(error))
+//   return service
+// }
 
 const CountdownTimer = () => {
+  const activate = false
   const [nextService, setNextService] = useState(null)
+  if (activate === true) {
+    setNextService(true)
+  }
 
   // useEffect(() => {
   //   getServices().then(response => console.log(response))

@@ -40,7 +40,6 @@ const PopupModal = props => {
   //   link: "https://www.google.com",
   // })
 
-  // console.log(activePopup)
   const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
