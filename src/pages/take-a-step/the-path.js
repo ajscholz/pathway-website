@@ -45,7 +45,7 @@ const ThePathPage = ({ data }) => {
                 <Col
                   md={{ size: 10, offset: 1 }}
                   lg={{ size: 5, offset: 0 }}
-                  className="mb-0"
+                  className="mb-0 mx-3"
                 >
                   <div style={{ width: "100%", paddingTop: "56.25%" }}>
                     <ReactPlayer
@@ -69,12 +69,12 @@ const ThePathPage = ({ data }) => {
                     <h2 className="h3 title mt-1 mb-2">{video.title}</h2>
                     <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
                   </div>
-                  <div className="mt-3">
+                  <div>
                     {!video.buttons
                       ? null
                       : video.buttons.map(button => (
                           <Link
-                            className="btn btn-primary btn-sm mr-3 text-white"
+                            className={`btn btn-primary btn-sm mr-3 text-white mt-3`}
                             to={button.link}
                             key={button.id}
                           >
@@ -85,7 +85,7 @@ const ThePathPage = ({ data }) => {
                       <VidButton
                         href={video.participantGuide.file.url}
                         target="_blank"
-                        className="btn-info text-white"
+                        className="btn btn-info text-white mt-3"
                       >
                         Download Guide
                       </VidButton>

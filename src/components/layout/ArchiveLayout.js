@@ -5,7 +5,7 @@ import { Container, Row, Col, Button } from "reactstrap"
 import SeriesCard from "../cards/series-card"
 import MessageCard from "../cards/MessageCard"
 
-const ArchiveLayout = ({ items, itemType, children }) => {
+const ArchiveLayout = ({ items, itemType, heading, children }) => {
   const [showFold, setShowFold] = useState(false)
 
   const aboveFoldItems = items.slice(0, 3)
@@ -15,10 +15,15 @@ const ArchiveLayout = ({ items, itemType, children }) => {
     <>
       <div className="section-gray">{children}</div>
       <section className="section section-gray">
+        <Container className="text-center">
+          <h1 className="h2 title text-center mt-n3">{heading}</h1>
+        </Container>
         <Container>
           <Row>
             <Col>
-              <h1 className="h2 mt-0">{`Recent ${itemType}`}</h1>
+              <h2 className="mt-0">
+                <small>{`Recent ${itemType}`}</small>
+              </h2>
             </Col>
           </Row>
           <Row className="mt-4 justify-content-center">
@@ -53,7 +58,9 @@ const ArchiveLayout = ({ items, itemType, children }) => {
           <Container>
             <Row>
               <Col>
-                <h1 className="h2 mt-0 text-light">{`Older ${itemType}`}</h1>
+                <h2 className="mt-0 text-light">
+                  <small>{`Older ${itemType}`}</small>
+                </h2>
               </Col>
             </Row>
             <Row className="mt-4">

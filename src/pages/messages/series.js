@@ -22,8 +22,12 @@ const SeriesArchive = ({
         image={image.file.url}
         url="https://pathwaymarietta.com/messages/series"
       />
-      <Header title={heading} subtitle={subHeading} background={image} xs />
-      <ArchiveLayout items={messageSeries.all} itemType="Series">
+      <Header background={image} xs />
+      <ArchiveLayout
+        items={messageSeries.all}
+        itemType="Series"
+        heading={heading}
+      >
         <BreadcrumbSection
           crumbs={[
             { name: "Messages", link: "/messages" },

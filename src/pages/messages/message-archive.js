@@ -10,7 +10,7 @@ import BreadcrumbSection from "../../components/BreadcrumbSection"
 const MessageArchive = ({
   data: {
     page: {
-      banner: { heading, subHeading, image },
+      banner: { heading, image },
     },
     messages,
   },
@@ -23,13 +23,8 @@ const MessageArchive = ({
         image={image.file.url}
         url="https://pathwaymarietta.com/messages/message-archive"
       />
-      <Header
-        title={heading}
-        subtitle={subHeading}
-        background={image}
-        xs={true}
-      />
-      <ArchiveLayout items={messages.all} itemType="Messages">
+      <Header background={image} xs={true} />
+      <ArchiveLayout items={messages.all} itemType="Messages" heading={heading}>
         <BreadcrumbSection
           crumbs={[
             { name: "Messages", link: "/messages" },
