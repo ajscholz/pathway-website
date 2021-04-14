@@ -70,14 +70,17 @@ const ThePathPage = ({ data }) => {
                     <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
                   </div>
                   <div className="mt-3">
-                    {!video.button ? null : (
-                      <Link
-                        className="btn btn-primary btn-sm mr-3 text-white"
-                        to={video.button.link}
-                      >
-                        {video.button.text}
-                      </Link>
-                    )}
+                    {!video.buttons
+                      ? null
+                      : video.buttons.map(button => (
+                          <Link
+                            className="btn btn-primary btn-sm mr-3 text-white"
+                            to={button.link}
+                            key={button.id}
+                          >
+                            {button.text}
+                          </Link>
+                        ))}
                     {!video.participantGuide ? null : (
                       <VidButton
                         href={video.participantGuide.file.url}
@@ -129,10 +132,10 @@ export const data = graphql`
                   src
                 }
               }
-              button {
+              buttons {
                 text
                 link
-                contentful_id
+                id: contentful_id
               }
               participantGuide {
                 file {
