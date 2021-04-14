@@ -45,7 +45,7 @@ const ThePathPage = ({ data }) => {
                 <Col
                   md={{ size: 10, offset: 1 }}
                   lg={{ size: 5, offset: 0 }}
-                  className="mb-0 mx-3"
+                  className="mb-0 mx-3 mx-md-auto"
                 >
                   <div style={{ width: "100%", paddingTop: "56.25%" }}>
                     <ReactPlayer
@@ -66,7 +66,9 @@ const ThePathPage = ({ data }) => {
                   className="text-left height-full"
                 >
                   <div>
-                    <h2 className="h3 title mt-1 mb-2">{video.title}</h2>
+                    <h2 className="h3 title mt-1 mt-lg-n2 mb-2">
+                      {video.title}
+                    </h2>
                     <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
                   </div>
                   <div>
