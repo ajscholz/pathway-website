@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
 import { Button } from "reactstrap"
+import { isRef } from "joi"
 
 export const useCenterColumns = arr => {
   const length = arr.length
@@ -54,8 +55,11 @@ export const useSetLinkType = (link, props) => {
     return (
       <Button
         tag="a"
-        href={`${url.href}${url.host === "pathwaymarietta.churchcenter.com" &&
-          "?open-in-church-center-modal=true"}`}
+        href={`${url.href}${
+          url.host === "pathwaymarietta.churchcenter.com"
+            ? "?open-in-church-center-modal=true"
+            : ""
+        }`}
         rel="noopener noreferrer"
         target="_blank"
         {...props}
