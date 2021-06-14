@@ -38,7 +38,7 @@ const ThePathPage = ({ data }) => {
             className="border-dark my-5 w-25 position-relative"
             style={{ top: "1.75em", opacity: ".5" }}
           />
-          {sections[0].linkedContent.map(video => {
+          {/* {sections[0].linkedContent.map(video => {
             // console.log(video)
             return (
               <Row key={video.id} className="pt-5 mb-5">
@@ -96,7 +96,7 @@ const ThePathPage = ({ data }) => {
                 </Col>
               </Row>
             )
-          })}
+          })} */}
         </Container>
       </section>
     </>
@@ -124,33 +124,33 @@ export const data = graphql`
               body
             }
           }
-          linkedContent {
-            ... on ContentfulThePathVideo {
-              id: contentful_id
-              title
-              Url
-              thumbnailImage {
-                fluid(maxWidth: 600, quality: 60) {
-                  src
-                }
-              }
-              buttons {
-                text
-                link
-                id: contentful_id
-              }
-              participantGuide {
-                file {
-                  url
-                }
-              }
-              description {
-                childMdx {
-                  body
-                }
-              }
-            }
-          }
+          # linkedContent {
+          # ... on ContentfulThePathVideo {
+          #   id: contentful_id
+          #   title
+          #   Url
+          #   thumbnailImage {
+          #     fluid(maxWidth: 600, quality: 60) {
+          #       src
+          #     }
+          #   }
+          #   buttons {
+          #     text
+          #     link
+          #     id: contentful_id
+          #   }
+          #   participantGuide {
+          #     file {
+          #       url
+          #     }
+          #   }
+          #   description {
+          #     childMdx {
+          #       body
+          #     }
+          #   }
+          # }
+          # }
         }
       }
     }

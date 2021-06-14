@@ -267,6 +267,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     `type ContentfulMessage implements Node {
       messageSeries: ContentfulMessageSeries
     }`,
+    `type ContentfulThePathVideo implements Node`,
 
     schema.buildObjectType({
       name: "ContentfulStreamingVideo",
