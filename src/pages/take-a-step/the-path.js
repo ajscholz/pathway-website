@@ -1,12 +1,12 @@
 import React from "react"
-// import { graphql } from "gatsby"
+import { graphql } from "gatsby"
 import SEO from "../../components/seo"
 import Header from "../../components/header"
 
-import { Container, Row, Col, Button } from "reactstrap"
+import { Container, Button } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import ReactPlayer from "react-player"
-import Link from "../../components/Link"
+// import ReactPlayer from "react-player"
+// import Link from "../../components/Link"
 
 const ThePathPage = ({ data }) => {
   const { banner, sections } = data.page

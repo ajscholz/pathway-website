@@ -1,6 +1,7 @@
 const path = require(`path`)
 const axios = require("axios")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const { NonceProvider } = require("react-select")
 
 // process vimeo thumbnails to be used by Gatsby Image
 exports.onCreateNode = async ({
@@ -38,7 +39,7 @@ exports.onCreateNode = async ({
     if (fileNode) {
       node.thumbnailImg___NODE = fileNode.id
     }
-  }
+  } else if (node.internal.type === "ContentfulMessage") console.log(node)
 }
 
 // Implement the Gatsby API “createPages”. This is called once the
@@ -223,7 +224,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       title: String
       url: String
       slug: String
-      description: description: contentfulMyersBriggsVideoDescriptionTextNode @link(by: "id", from: "description___NODE")
+      description: contentfulMyersBriggsVideoDescriptionTextNode @link(by: "id", from: "description___NODE")
       thumbnailImg: File @link(by: "id", from: "thumbnailImg___NODE")
     }`,
     `type ContentfulSpiritualGiftsVideo implements Node {
@@ -231,9 +232,8 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       title: String
       url: String
       slug: String
-      description: contentfulSpiritualGiftsVideoDescriptionTextNode @link(by: "id", from:
-"description___NODE")
-      thumbnailImg: thumbnailImg: File @link(by: "id", from: "thumbnailImg___NODE")
+      description: contentfulSpiritualGiftsVideoDescriptionTextNode @link(by: "id", from: "description___NODE")
+      thumbnailImg: File @link(by: "id", from: "thumbnailImg___NODE")
     }`,
     `type ContentfulEnneagramVideo implements Node {
       contentful_id: String
