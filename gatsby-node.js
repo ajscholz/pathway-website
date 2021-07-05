@@ -214,25 +214,26 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       url: String
       slug: String
       tags: [String]
-      videoUserGuide: ContentfulAsset
-      description: contentfulHelpMeUnderstandVideoDescriptionTextNode
-      thumbnailImg: File
+      videoUserGuide: ContentfulAsset @link(by: "id", from: "videoUserGuide___NODE")
+      description: contentfulHelpMeUnderstandVideoDescriptionTextNode @link(by: "id", from: "description___NODE")
+      thumbnailImg: File @link(by: "id", from: "thumbnailImg___NODE")
     }`,
     `type ContentfulMyersBriggsVideo implements Node {
       contentful_id: String
       title: String
       url: String
       slug: String
-      description: contentfulMyersBriggsVideoDescriptionTextNode
-      thumbnailImg: File
+      description: description: contentfulMyersBriggsVideoDescriptionTextNode @link(by: "id", from: "description___NODE")
+      thumbnailImg: File @link(by: "id", from: "thumbnailImg___NODE")
     }`,
     `type ContentfulSpiritualGiftsVideo implements Node {
       contentful_id: String
       title: String
       url: String
       slug: String
-      description: contentfulSpiritualGiftsVideoDescriptionTextNode
-      thumbnailImg: File
+      description: contentfulSpiritualGiftsVideoDescriptionTextNode @link(by: "id", from:
+"description___NODE")
+      thumbnailImg: thumbnailImg: File @link(by: "id", from: "thumbnailImg___NODE")
     }`,
     `type ContentfulEnneagramVideo implements Node {
       contentful_id: String
@@ -265,7 +266,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       body: String!
     }`,
     `type ContentfulMessage implements Node {
-      messageSeries: ContentfulMessageSeries
+      messageSeries: ContentfulMessageSeries @link(by: "id", from: "messageSeries___NODE")
     }`,
     `type ContentfulThePathVideo implements Node`,
 
