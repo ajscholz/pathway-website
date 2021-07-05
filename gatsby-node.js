@@ -39,7 +39,7 @@ exports.onCreateNode = async ({
     if (fileNode) {
       node.thumbnailImg___NODE = fileNode.id
     }
-  } else if (node.internal.type === "ContentfulMessage") console.log(node)
+  }
 }
 
 // Implement the Gatsby API “createPages”. This is called once the
