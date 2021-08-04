@@ -3,6 +3,9 @@ command = "yarn run build"
 functions = ".netlify/functions"
 publish = "public/"
 
+[context.production]
+environment = {NODE_VERSION = "16"}
+
 [[redirects]]
 force = true
 from = "https://give.pathwaymarietta.com"
