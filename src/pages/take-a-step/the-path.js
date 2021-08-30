@@ -113,7 +113,7 @@ const VidButton = ({ children, ...rest }) => (
 
 export const data = graphql`
   {
-    page: contentfulPages(title: { eq: "The Path" }) {
+    page: contentfulPages(slug: { eq: "the-path" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulPageSection {

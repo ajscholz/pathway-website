@@ -58,7 +58,7 @@ const AboutPage = props => {
 
 export const data = graphql`
   {
-    page: contentfulPages(title: { eq: "About" }) {
+    page: contentfulPages(slug: { eq: "about" }) {
       ...HeaderFragment
     }
     storyData: contentfulPageSection(

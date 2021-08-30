@@ -180,7 +180,7 @@ export default AskPage
 
 export const data = graphql`
   {
-    page: contentfulPages(title: { eq: "Ask" }) {
+    page: contentfulPages(slug: { eq: "ask" }) {
       ...HeaderFragment
     }
   }

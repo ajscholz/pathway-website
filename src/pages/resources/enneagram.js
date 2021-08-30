@@ -70,7 +70,7 @@ export default EnneagramPage
 
 export const data = graphql`
   {
-    page: contentfulPages(title: { eq: "Enneagram" }) {
+    page: contentfulPages(slug: { eq: "enneagram" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulInformationSection {

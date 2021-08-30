@@ -78,7 +78,7 @@ export default SpiritualGiftsPage
 
 export const data = graphql`
   query MyQuery {
-    page: contentfulPages(title: { eq: "Spiritual Gifts" }) {
+    page: contentfulPages(slug: { eq: "spiritual-gifts" }) {
       title
       ...HeaderFragment
       sections {

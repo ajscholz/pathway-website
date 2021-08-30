@@ -113,7 +113,7 @@ const IndexPage = ({ data }) => {
 
 export const data = graphql`
   {
-    page: contentfulPages(title: { eq: "Index" }) {
+    page: contentfulPages(slug: { eq: "index" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulInformationSection {

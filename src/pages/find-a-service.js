@@ -5,18 +5,21 @@ import { graphql } from "gatsby"
 import { Container, Row, Col } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-const FinaAService = ({
-  data: {
-    page: { banner, sections },
-  },
-}) => {
+const FinaAService = ({ data }) => {
+  const { banner, sections } = data.page
+  const { image } = banner
+
   return (
     <>
-      <SEO />
+      <SEO
+        title="Find A Service"
+        image={image.file.url}
+        url="https://pathwaymarietta.com/about/events"
+      />
       <Header
         title={banner.heading}
         subtitle={banner.subHeading}
-        background={banner.image}
+        background={image}
       />
       {sections.map((section, i) => {
         const odd = i % 2 === 1
@@ -46,7 +49,7 @@ export default FinaAService
 
 export const query = graphql`
   {
-    page: contentfulPages(contentful_id: { eq: "4OsXLHz92p8mwBB3KG9QMh" }) {
+    page: contentfulPages(slug: { eq: "find-a-service" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulPageSection {

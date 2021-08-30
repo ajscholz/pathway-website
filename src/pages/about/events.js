@@ -44,7 +44,7 @@ const EventsPage = props => {
 
 export const data = graphql`
   {
-    page: contentfulPages(title: { eq: "Events" }) {
+    page: contentfulPages(slug: { eq: "events" }) {
       ...HeaderFragment
     }
     events: allContentfulEvent(sort: { fields: start, order: ASC }) {
