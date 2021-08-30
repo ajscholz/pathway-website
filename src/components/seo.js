@@ -10,7 +10,16 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ description, lang, meta, title, image, url, type, children }) => {
+const SEO = ({
+  description,
+  lang,
+  meta,
+  title,
+  image,
+  url,
+  type,
+  children,
+}) => {
   const { site, index } = useStaticQuery(graphql`
     {
       site {
@@ -20,7 +29,7 @@ const SEO = ({ description, lang, meta, title, image, url, type, children }) => 
           siteUrl: url
         }
       }
-      index: contentfulPages(title: { eq: "Index" }) {
+      index: contentfulPages(slug: { eq: "index" }) {
         banner {
           image {
             file {
