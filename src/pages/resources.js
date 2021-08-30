@@ -263,7 +263,7 @@ export default ResourcesPage
 
 export const data = graphql`
   {
-    page: contentfulPages(slug: { eq: "resources" }) {
+    page: contentfulPage(slug: { eq: "resources" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulPageSection {

@@ -133,7 +133,7 @@ export default MyersBriggsPage
 
 export const data = graphql`
   {
-    page: contentfulPages(slug: { eq: "mbti" }) {
+    page: contentfulPage(slug: { eq: "mbti" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulInformationSection {

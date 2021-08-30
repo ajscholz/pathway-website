@@ -49,7 +49,7 @@ export default FinaAService
 
 export const query = graphql`
   {
-    page: contentfulPages(slug: { eq: "find-a-service" }) {
+    page: contentfulPage(slug: { eq: "find-a-service" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulPageSection {

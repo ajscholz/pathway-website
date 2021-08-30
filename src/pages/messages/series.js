@@ -41,7 +41,7 @@ const SeriesArchive = ({
 
 export const data = graphql`
   {
-    page: contentfulPages(slug: { eq: "series" }) {
+    page: contentfulPage(slug: { eq: "series" }) {
       ...HeaderFragment
     }
     messageSeries: allContentfulMessageSeries(

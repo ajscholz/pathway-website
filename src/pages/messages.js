@@ -84,7 +84,7 @@ const MessagesPage = ({
 
 export const data = graphql`
   {
-    page: contentfulPages(slug: { eq: "messages" }) {
+    page: contentfulPage(slug: { eq: "messages" }) {
       ...HeaderFragment
     }
     messageSeries: allContentfulMessageSeries(

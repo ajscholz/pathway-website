@@ -28,7 +28,7 @@ const TakeAStepPage = props => {
 
 export const data = graphql`
   {
-    page: contentfulPages(slug: { eq: "take-a-step" }) {
+    page: contentfulPage(slug: { eq: "take-a-step" }) {
       ...HeaderFragment
     }
   }

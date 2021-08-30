@@ -53,7 +53,7 @@ export default HelpMeUnderstandPage
 
 export const data = graphql`
   {
-    page: contentfulPages(slug: { eq: "help-me-understand" }) {
+    page: contentfulPage(slug: { eq: "help-me-understand" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulPageSection {

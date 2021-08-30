@@ -79,7 +79,7 @@ Header.defaultProps = {
 export default Header
 
 export const query = graphql`
-  fragment HeaderFragment on ContentfulPages {
+  fragment HeaderFragment on ContentfulPage {
     banner {
       heading
       subHeading

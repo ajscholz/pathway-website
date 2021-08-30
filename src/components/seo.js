@@ -29,7 +29,7 @@ const SEO = ({
           siteUrl: url
         }
       }
-      index: contentfulPages(slug: { eq: "index" }) {
+      index: contentfulPage(slug: { eq: "index" }) {
         banner {
           image {
             file {

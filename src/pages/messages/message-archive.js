@@ -38,7 +38,7 @@ const MessageArchive = ({
 
 export const data = graphql`
   {
-    page: contentfulPages(slug: { eq: "message-archive" }) {
+    page: contentfulPage(slug: { eq: "message-archive" }) {
       ...HeaderFragment
     }
     messages: allContentfulMessage(sort: { fields: messageDate, order: DESC }) {
