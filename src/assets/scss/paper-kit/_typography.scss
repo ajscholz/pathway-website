@@ -145,6 +145,9 @@ blockquote small {
 .text-primary:hover {
   color: $primary-color !important;
 }
+.text-primary-light {
+  color: lighten($primary-color, 20%) !important;
+}
 .text-info,
 .text-info:hover {
   color: $info-color !important;
