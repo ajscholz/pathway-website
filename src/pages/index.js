@@ -12,7 +12,9 @@ const IndexPage = ({ data }) => {
   const { banner, sections } = page
   const { heading, image, subHeading } = banner
 
-  // console.log(sections)
+  const pageSections = sections.filter(
+    section => section.__typename === "ContentfulInformationSection"
+  )
 
   // let d = new Date()
 
@@ -84,7 +86,7 @@ const IndexPage = ({ data }) => {
       <section>
         <Container fluid style={{ padding: "0", margin: "0" }}>
           <div className="row no-gutters">
-            {sections.map((section, i) => {
+            {pageSections.map((section, i) => {
               return (
                 <Col
                   key={section.id}
@@ -121,6 +123,7 @@ export const data = graphql`
       ...HeaderFragment
       sections {
         ... on ContentfulInformationSection {
+          __typename
           id: contentful_id
           title
           subtitle

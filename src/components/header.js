@@ -47,9 +47,9 @@ const Header = ({
 
         {title && (
           <>
-            <div className="content-center">
+            <div className="content-center px-2 md:px-6 lg:px-12">
               <div className="motto font-weight-bold">
-                <h1 className="text-center display-2 sm-display-4 font-weight-normal">
+                <h1 className="text-center display-3 sm-display-2 font-weight-normal">
                   {title}
                 </h1>
                 <h3 className="text-center font-weight-normal">{subtitle}</h3>

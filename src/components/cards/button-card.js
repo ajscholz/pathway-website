@@ -15,6 +15,7 @@ const baseStyles = {
 }
 
 const ButtonCard = props => {
+  console.log("sectionData", props.sectionData)
   const { title, subtitle, description, button, background } = props.sectionData
 
   const cardProps =
@@ -30,6 +31,17 @@ const ButtonCard = props => {
           style: { ...baseStyles },
           className: `${baseClass} ${props.className ? props.className : ""}`,
         }
+
+  if (!description?.childMdx?.body) {
+    console.log(
+      `
+          
+          BAD CARD
+          
+          `,
+      title
+    )
+  }
 
   return (
     <Card {...cardProps}>
