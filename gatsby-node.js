@@ -196,6 +196,13 @@ exports.onCreatePage = ({ page, actions }) => {
 exports.createSchemaCustomization = ({ actions, schema }) => {
   const { createTypes } = actions
   const typeDefs = [
+    `type contentfulPopupTextTextNode implements Node {
+      childMdx: Mdx
+    }`,
+    `type ContentfulPopup implements Node {
+      heading: String
+      text: contentfulPopupTextTextNode @link(by: "id", from: "text___NODE")
+    }`,
     `type File implements Node {
       url: String
     }

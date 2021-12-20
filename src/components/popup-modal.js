@@ -8,63 +8,45 @@ import { setLinkType } from "../utils/functions"
 const PopupModal = props => {
   const { popups } = useStaticQuery(graphql`
     {
-      popups: allContentfulPopupBanner(
-        filter: { active: { eq: true } }
-        sort: { fields: autoOff, order: DESC }
-      ) {
-        nodes {
+      popups: allContentfulPopup(limit: 1) {
+        all: nodes {
           heading
-          callToAction {
-            text
-            link
-          }
-          bodyText {
+          text {
             childMdx {
               body
             }
           }
-          autoOff
         }
       }
     }
   `)
 
-  // console.log(popups)
-
-  const now = new Date().toISOString()
-
-  const activePopup = popups.nodes.find(popup => popup.autoOff > now)
-
-  // activePopup.callToAction.push({
-  //   text: "Test Button",
-  //   link: "https://www.google.com",
-  // })
-
   const [modalState, setModalState] = useState(false)
+  const popup = popups.all[0]
 
   useEffect(() => {
     // const visited = localStorage["visitedDate"]
 
-    const now = new Date()
-    let threeDaysAgo = new Date(now)
-    threeDaysAgo.setDate(now.getDate() - 3)
+    // const now = new Date()
+    // let threeDaysAgo = new Date(now)
+    // threeDaysAgo.setDate(now.getDate() - 3)
 
     // if (visited === undefined || new Date(visited) < threeDaysAgo) {
     //   localStorage.visitedDate = new Date()
 
-    if (activePopup !== undefined) {
+    if (popup) {
       setTimeout(() => {
         setModalState(true)
       }, 5000)
       // }, 0)
     }
-  }, [activePopup])
+  }, [])
 
-  return activePopup === undefined ? null : (
+  return popup ? (
     <>
       <Modal isOpen={modalState} toggle={() => setModalState(false)}>
         <div className="modal-header">
-          <h1 className="h3">{activePopup.heading}</h1>
+          <h1 className="h3">{popup.heading}</h1>
           <button
             aria-label="Close"
             className="close"
@@ -81,11 +63,11 @@ const PopupModal = props => {
           </button>
         </div>
         <div className="modal-body">
-          <MDXRenderer>{activePopup.bodyText.childMdx.body}</MDXRenderer>
+          <MDXRenderer>{popup.text.childMdx.body}</MDXRenderer>
         </div>
-        {activePopup.callToAction && (
+        {popup.callToAction && (
           <ModalFooter className="p-3 flex-row-reverse justify-content-start">
-            {activePopup.callToAction.map((cta, i) => {
+            {popup.callToAction.map((cta, i) => {
               const props =
                 i === 0 ? { color: "primary" } : { className: "text-white" }
               return setLinkType(cta, props)
@@ -94,7 +76,7 @@ const PopupModal = props => {
         )}
       </Modal>
     </>
-  )
+  ) : null
 }
 
 export default PopupModal

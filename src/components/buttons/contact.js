@@ -10,16 +10,6 @@ const ContactButton = props => {
   const [message, setMessage] = useState("")
   const [isSubmitting, setSubmitting] = useState(false)
   const [accepted, setAccepted] = useState(null)
-  const { popup } = useStaticQuery(graphql`
-    {
-      popup: contentfulPopup(contentful_id: { eq: "7LYuVKc638vWKMP1ABg2pk" }) {
-        heading
-        text {
-          text
-        }
-      }
-    }
-  `)
 
   const resetForm = () => {
     setName("")
@@ -79,8 +69,8 @@ const ContactButton = props => {
             </button>
           )}
           {/* <h6 className="text-muted">Welcome</h6> */}
-          <h3 className="modal-title text-center mb-2">{popup.heading}</h3>
-          <p>{popup.text.text}</p>
+          <h3 className="modal-title text-center mb-2">{`Contact Us`}</h3>
+          <p>{`We'd love to hear from you. Take a moment to let us know how we can help and a team member will get back to you as soon as possible!`}</p>
         </div>
         <div className="modal-body">
           <FormGroup>
