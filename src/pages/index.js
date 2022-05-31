@@ -65,8 +65,8 @@ const IndexPage = ({ data }) => {
       >
         {/* <div className="text-primary"> */}
         <h3>
-          {`Saturdays, 6pm`}
-          <br />
+          {/* {`Saturdays, 6pm`}
+          <br /> */}
           {`Sundays, 9 & 10:30am`}
         </h3>
         <h5 className="text-primary">{`113 Ellsworth Ave., Marietta, OH`}</h5>
