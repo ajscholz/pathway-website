@@ -39,11 +39,23 @@ export const useRemovePastItems = arr => {
 }
 
 export const useSetLinkType = (link, props) => {
-  if (link === null) {
-    return null
+  const url = tryUrl(link.link)
+
+  // make sure url is valid
+  function tryUrl(url) {
+    try {
+      var website = new URL(url)
+      return website
+    } catch (error) {
+      if (error) {
+        return null
+      } //just to check if TypeError, probably not necessary for your use
+    }
   }
 
-  const url = new URL(link.link)
+  if (url === null) {
+    return null
+  }
 
   if (url.host === "pathwaymarietta.com") {
     return (

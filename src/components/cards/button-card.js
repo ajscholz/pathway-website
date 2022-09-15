@@ -15,7 +15,7 @@ const baseStyles = {
 }
 
 const ButtonCard = props => {
-  console.log("sectionData", props.sectionData)
+  // console.log("sectionData", props.sectionData)
   const { title, subtitle, description, button, background } = props.sectionData
 
   const cardProps =

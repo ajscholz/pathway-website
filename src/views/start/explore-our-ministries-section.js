@@ -55,6 +55,7 @@ const ExploreOurMinistriesSection = () => {
   const students = section.linkedContent[0]
   const kids = section.linkedContent[1]
   const groups = section.linkedContent[2]
+
   return (
     <section className="section section-project cd-section section section-dark">
       {/* <div className="projects-2 "> */}
@@ -134,6 +135,7 @@ const ExploreOurMinistriesSection = () => {
                 <div className="card-description">
                   <MDXRenderer>{kids.description.childMdx.body}</MDXRenderer>
                 </div>
+                {}
                 <LinkButton
                   button={kids.callToAction}
                   color="primary"
