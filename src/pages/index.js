@@ -33,12 +33,6 @@ const IndexPage = ({ data }) => {
   // // make sure there is a previous weeks' video -- if not then just grab the last existing video
   sections[0].button.link = messages.all[0].fullServiceVideoLink
 
-  console.log("sections[0].button.link", sections[0].button.link)
-  console.log(
-    "messages.all[0].fullServiceVideoLink",
-    messages.all[0].fullServiceVideoLink
-  )
-
   // set background of alternating sections to white
   let counter = 0
 
