@@ -67,7 +67,7 @@ const IndexPage = ({ data }) => {
         <h3>
           {/* {`Saturdays, 6pm`}
           <br /> */}
-          {`Sundays, 9 & 10:30am`}
+          {`Sundays, 8:15, 9:30 & 11:00am`}
         </h3>
         <h5 className="text-primary">{`113 Ellsworth Ave., Marietta, OH`}</h5>
         <Button
