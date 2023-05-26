@@ -1,3 +1,4 @@
+import { graphql } from "gatsby"
 import React from "react"
 import { useSetLinkType } from "../../utils/scripts/custom-hooks"
 
@@ -9,3 +10,14 @@ const LinkButton = props => {
 }
 
 export default LinkButton
+
+export const data = graphql`
+  fragment LinkButtonFragment on ContentfulButton {
+    id
+    link
+    text
+    internal {
+      type
+    }
+  }
+`
