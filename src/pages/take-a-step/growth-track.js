@@ -3,8 +3,9 @@ import { graphql } from "gatsby"
 import SEO from "../../components/seo"
 import Header from "../../components/header"
 
-import { Container, Button } from "reactstrap"
+import { Container, Button, Row, Col } from "reactstrap"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import LinkButton from "../../components/buttons/link-button"
 // import ReactPlayer from "react-player"
 // import Link from "../../components/Link"
 
@@ -15,11 +16,10 @@ const ThePathPage = ({ data }) => {
   return (
     <>
       <SEO
-        title="The Path"
         image={image.file.url}
         url="https://pathwaymarietta.com/take-a-step/growth-track"
         description={
-          "God created you on purpose and with a purpose. In The Path we'll help you discover God's unique gifting and wiring in your life and help you begin to figure out what that God-given purpose is, and how you can use it both in your life and at Pathway to make a different all throughout Marietta."
+          "Are you interested in learning how to take your next steps at Pathway? Find out how to with Growth Track!"
         }
       />
       <Header
@@ -27,89 +27,41 @@ const ThePathPage = ({ data }) => {
         xs={true}
         style={{ backgroundPosition: "bottom-center" }}
       />
+      {sections.map(section => {
+        return (
+          <section className="blog-2 section section-gray">
+            <Container className="text-center">
+              <h1 className="h1 title text-center mt-0">{section.title}</h1>
+              <MDXRenderer className="text-center pb-3">
+                {section.description.childMdx.body}
+              </MDXRenderer>
+              <hr
+                className="border-dark my-5 w-25 position-relative"
+                style={{ top: "1.75em", opacity: ".5" }}
+              />
 
-      <section className="blog-2 section section-gray">
-        <Container className="text-center">
-          <h1 className="h1 title text-center mt-0">{sections[0].title}</h1>
-          <MDXRenderer className="text-center pb-3">
-            {sections[0].description.childMdx.body}
-          </MDXRenderer>
-          <hr
-            className="border-dark my-5 w-25 position-relative"
-            style={{ top: "1.75em", opacity: ".5" }}
-          />
-          {/* {sections[0].linkedContent.map(video => {
-            // console.log(video)
-            return (
-              <Row key={video.id} className="pt-5 mb-5">
-                <Col
-                  md={{ size: 10, offset: 1 }}
-                  lg={{ size: 5, offset: 0 }}
-                  className="mb-0 mx-3 mx-md-auto"
-                >
-                  <div style={{ width: "100%", paddingTop: "56.25%" }}>
-                    <ReactPlayer
-                      url={video.Url}
-                      width="100%"
-                      height="100%"
-                      light={video.thumbnailImage.fluid.src}
-                      style={{ position: "absolute", top: 0, left: 0 }}
-                      playing={false}
-                      controls={true}
-                      className="mb-0"
-                    />
-                  </div>
-                </Col>
-                <Col
-                  md={{ size: 10, offset: 1 }}
-                  lg={{ size: 6, offset: 1 }}
-                  className="text-left height-full"
-                >
-                  <div>
-                    <h2 className="h3 title mt-1 mt-lg-n2 mb-2">
-                      {video.title}
-                    </h2>
-                    <MDXRenderer>{video.description.childMdx.body}</MDXRenderer>
-                  </div>
-                  <div>
-                    {!video.buttons
-                      ? null
-                      : video.buttons.map(button => (
-                          <Link
-                            className={`btn btn-primary btn-sm mr-3 text-white mt-3`}
-                            to={button.link}
-                            key={button.id}
-                          >
-                            {button.text}
-                          </Link>
-                        ))}
-                    {!video.participantGuide ? null : (
-                      <VidButton
-                        href={video.participantGuide.file.url}
-                        target="_blank"
-                        className="btn btn-info text-white mt-3"
-                      >
-                        Download Guide
-                      </VidButton>
-                    )}
-                  </div>
-                </Col>
-              </Row>
-            )
-          })} */}
-        </Container>
-      </section>
+              {section.linkedContent.map(content => {
+                if (content.internal.type === "ContentfulButton") {
+                  return (
+                    <Row key={content.id} className="pt-5 mb-5">
+                      <Col className="mb-0 mx-3 mx-md-auto">
+                        <LinkButton size="lg" color="primary" button={content}>
+                          {content.text}
+                        </LinkButton>
+                      </Col>
+                    </Row>
+                  )
+                } else return null
+              })}
+            </Container>
+          </section>
+        )
+      })}
     </>
   )
 }
 
 export default ThePathPage
-
-const VidButton = ({ children, ...rest }) => (
-  <Button color="primary" size="sm" {...rest}>
-    {children}
-  </Button>
-)
 
 export const data = graphql`
   {
@@ -124,33 +76,11 @@ export const data = graphql`
               body
             }
           }
-          # linkedContent {
-          # ... on ContentfulThePathVideo {
-          #   id: contentful_id
-          #   title
-          #   Url
-          #   thumbnailImage {
-          #     fluid(maxWidth: 600, quality: 60) {
-          #       src
-          #     }
-          #   }
-          #   buttons {
-          #     text
-          #     link
-          #     id: contentful_id
-          #   }
-          #   participantGuide {
-          #     file {
-          #       url
-          #     }
-          #   }
-          #   description {
-          #     childMdx {
-          #       body
-          #     }
-          #   }
-          # }
-          # }
+          linkedContent {
+            ... on ContentfulButton {
+              ...LinkButtonFragment
+            }
+          }
         }
       }
     }

@@ -113,3 +113,9 @@ force = true
 from = "https://kids.pathwaymarietta.com"
 status = 302
 to = "https://pathwaymarietta.churchcenter.com/people/forms/214358"
+
+[[redirects]]
+force = true
+from = "take-a-step/the-path"
+status = 301
+to = "/take-a-step/growth-track"
