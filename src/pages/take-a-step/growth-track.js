@@ -17,7 +17,7 @@ const ThePathPage = ({ data }) => {
       <SEO
         title="The Path"
         image={image.file.url}
-        url="https://pathwaymarietta.com/take-a-step/the-path"
+        url="https://pathwaymarietta.com/take-a-step/growth-track"
         description={
           "God created you on purpose and with a purpose. In The Path we'll help you discover God's unique gifting and wiring in your life and help you begin to figure out what that God-given purpose is, and how you can use it both in your life and at Pathway to make a different all throughout Marietta."
         }
@@ -113,7 +113,7 @@ const VidButton = ({ children, ...rest }) => (
 
 export const data = graphql`
   {
-    page: contentfulPage(slug: { eq: "the-path" }) {
+    page: contentfulPage(slug: { eq: "growth-track" }) {
       ...HeaderFragment
       sections {
         ... on ContentfulPageSection {

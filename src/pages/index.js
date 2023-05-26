@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import { Container, Col, Button } from "reactstrap"
 
 import SEO from "../components/seo"
@@ -8,7 +8,7 @@ import ButtonCard from "../components/cards/button-card"
 import CountdownTimer from "../components/CountdownTimer"
 
 const IndexPage = ({ data }) => {
-  const { page, messages } = data
+  const { page, messages, times } = data
   const { banner, sections } = page
   const { heading, image, subHeading } = banner
 
@@ -67,7 +67,7 @@ const IndexPage = ({ data }) => {
         <h3>
           {/* {`Saturdays, 6pm`}
           <br /> */}
-          {`Sundays, 8:15, 9:30 & 11:00am`}
+          {`Sundays  |  ${times.serviceTimes.join(", ")}am`}
         </h3>
         <h5 className="text-primary">{`113 Ellsworth Ave., Marietta, OH`}</h5>
         <Button
@@ -151,6 +151,9 @@ export const data = graphql`
       all: nodes {
         fullServiceVideoLink
       }
+    }
+    times: contentfulChurchInformation {
+      serviceTimes
     }
   }
 `

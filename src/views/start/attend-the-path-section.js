@@ -167,11 +167,11 @@ const AttendThePathSection = () => {
           <Row>
             <Button
               color="primary"
-              href="/take-a-step/the-path"
+              href="/take-a-step/growth-track"
               size="lg"
               className="mx-auto mt-5 text-white"
             >
-              Start My Path
+              Growth Track
             </Button>
           </Row>
         </Container>

@@ -2,7 +2,7 @@ export const mbtiQuestions = [
   {
     question: "When a friend calls you:",
     options: [
-      "you're eager to answer it and talk",
+      "you're eager to answer the phone and talk",
       "you wish you didn't have a phone at all",
     ],
     type: "E/I",
